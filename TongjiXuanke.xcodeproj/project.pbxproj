@@ -71,6 +71,10 @@
 		E4379031162B6147008A85DF /* UILabel+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Addition.m"; sourceTree = "<group>"; };
 		E4379033162B6233008A85DF /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		E4379034162B6233008A85DF /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		E4379041162B6777008A85DF /* NSString+MD5Addition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		E4379042162B6777008A85DF /* NSString+MD5Addition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		E4379043162B6777008A85DF /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		E4379044162B6777008A85DF /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
+				E437903F162B6768008A85DF /* FakeUUID */,
 				E437902F162B60EA008A85DF /* catagory */,
 				E4379003162B38A6008A85DF /* Resource */,
 				E4378FD41628D620008A85DF /* TongjiXuanke */,
@@ -183,6 +188,17 @@
 				E4379031162B6147008A85DF /* UILabel+Addition.m */,
 			);
 			name = catagory;
+			sourceTree = "<group>";
+		};
+		E437903F162B6768008A85DF /* FakeUUID */ = {
+			isa = PBXGroup;
+			children = (
+				E4379041162B6777008A85DF /* NSString+MD5Addition.h */,
+				E4379042162B6777008A85DF /* NSString+MD5Addition.m */,
+				E4379043162B6777008A85DF /* UIDevice+IdentifierAddition.h */,
+				E4379044162B6777008A85DF /* UIDevice+IdentifierAddition.m */,
+			);
+			name = FakeUUID;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +400,7 @@
 				E4378FF01628D620008A85DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

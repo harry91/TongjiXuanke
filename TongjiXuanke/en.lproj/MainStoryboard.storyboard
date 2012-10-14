@@ -36,6 +36,9 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WhT-Ce-A4J">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="455" id="zUs-bz-9DJ"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsCell" rowHeight="80" id="3jy-1b-ztH" customClass="NewsCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
@@ -132,11 +135,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WhT-Ce-A4J" firstAttribute="top" secondItem="Zbx-A8-htj" secondAttribute="top" constant="-1" id="4W1-BJ-KU8"/>
                             <constraint firstItem="Hbw-AT-FIi" firstAttribute="top" secondItem="Zbx-A8-htj" secondAttribute="top" type="default" id="ArK-rk-p2H"/>
-                            <constraint firstItem="WhT-Ce-A4J" firstAttribute="bottom" secondItem="Zbx-A8-htj" secondAttribute="bottom" type="default" id="EfN-fb-6Nr"/>
                             <constraint firstItem="WhT-Ce-A4J" firstAttribute="leading" secondItem="Zbx-A8-htj" secondAttribute="leading" type="default" id="O1s-ys-oQI"/>
                             <constraint firstItem="WhT-Ce-A4J" firstAttribute="trailing" secondItem="Zbx-A8-htj" secondAttribute="trailing" type="default" id="TWK-RG-JUa"/>
-                            <constraint firstItem="WhT-Ce-A4J" firstAttribute="top" secondItem="Zbx-A8-htj" secondAttribute="top" type="default" id="bR7-pn-jmf"/>
                             <constraint firstItem="Hbw-AT-FIi" firstAttribute="leading" secondItem="Zbx-A8-htj" secondAttribute="leading" type="default" id="h2U-rm-CE3"/>
                         </constraints>
                     </view>
@@ -153,7 +155,7 @@
         <scene sceneID="1XJ-82-e2z">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="YcT-Mx-81Q" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5jp-70-uWf">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -170,7 +172,6 @@
         <!--Table View Controller-->
         <scene sceneID="s9z-1W-oUB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3dq-ZM-GRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="" id="cdj-HV-3BZ" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="G2S-aF-MPF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -274,6 +275,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3dq-ZM-GRk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-522" y="-888"/>
         </scene>
