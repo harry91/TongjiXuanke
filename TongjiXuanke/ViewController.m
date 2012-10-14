@@ -17,6 +17,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //UINavigationController *navigation = [[UINavigationController alloc] init];
+    
+    
+    
+    //[self.view addSubview: navigation.view];
+    
+    
+    //NewsListViewController *newList = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsList"];
+    
+    //[self.view addSubview: newList.view];
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
