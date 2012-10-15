@@ -168,7 +168,7 @@
 	NSLog(@"Received Push Badge: %@", badge);
 	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
     
-    UIAlertView *alertWindow =   [[UIAlertView alloc] initWithTitle: @"新通知" message: alert delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+    UIAlertView *alertWindow =   [[UIAlertView alloc] initWithTitle: @"新通知" message: alert delegate: self cancelButtonTitle: @"知道了" otherButtonTitles: nil];
     [alertWindow show];
 #endif
 }
