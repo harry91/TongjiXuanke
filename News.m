@@ -7,15 +7,18 @@
 //
 
 #import "News.h"
+#import "Category.h"
 
 
 @implementation News
 
+@dynamic briefcontent;
+@dynamic content;
+@dynamic date;
 @dynamic title;
 @dynamic url;
-@dynamic briefcontent;
-@dynamic date;
-@dynamic content;
+@dynamic favorated;
+@dynamic haveread;
 @dynamic category;
 
 @end

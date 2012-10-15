@@ -10,13 +10,16 @@
 #import <CoreData/CoreData.h>
 
 @class Category;
+
 @interface News : NSManagedObject
 
+@property (nonatomic, retain) NSString * briefcontent;
+@property (nonatomic, retain) NSString * content;
+@property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSString * briefcontent;
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * content;
+@property (nonatomic, retain) NSNumber * favorated;
+@property (nonatomic, retain) NSNumber * haveread;
 @property (nonatomic, retain) Category *category;
 
 @end

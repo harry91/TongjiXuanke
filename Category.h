@@ -14,6 +14,14 @@
 @interface Category : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) News *news;
+@property (nonatomic, retain) NSSet *news;
+@end
+
+@interface Category (CoreDataGeneratedAccessors)
+
+- (void)addNewsObject:(News *)value;
+- (void)removeNewsObject:(News *)value;
+- (void)addNews:(NSSet *)values;
+- (void)removeNews:(NSSet *)values;
 
 @end

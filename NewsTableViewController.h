@@ -7,13 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+
 #import "XuankeModel.h"
 #import "NewsLoaderProtocal.h"
+#import "MyDataStorage.h"
 
-@interface NewsTableViewController : UIViewController<NewsLoaderProtocal>
+@class MyDataStorage;
+
+@interface NewsTableViewController : UIViewController<NewsLoaderProtocal,NSFetchedResultsControllerDelegate>
 {
     XuankeModel *xuankeModel;
+    MyDataStorage *dataStorage;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end

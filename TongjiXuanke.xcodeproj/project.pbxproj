@@ -52,9 +52,11 @@
 		E4379088162B77F5008A85DF /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379042162B6777008A85DF /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E4379089162B77F5008A85DF /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379044162B6777008A85DF /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E4379095162C3047008A85DF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4379093162C3047008A85DF /* Model.xcdatamodeld */; };
-		E437909A162C3765008A85DF /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379099162C3765008A85DF /* News.m */; };
-		E437909D162C3766008A85DF /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E437909C162C3766008A85DF /* Category.m */; };
 		E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43790A6162C6796008A85DF /* CoreData.framework */; };
+		E43790C1162C75DE008A85DF /* MyDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = E43790BF162C75B4008A85DF /* MyDataStorage.m */; };
+		E43790C4162C7D75008A85DF /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E43790C3162C7D75008A85DF /* Category.m */; };
+		E43790C7162C7D75008A85DF /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = E43790C6162C7D75008A85DF /* News.m */; };
+		E43790CA162C82FD008A85DF /* NSString+TimeConvertion.m in Sources */ = {isa = PBXBuildFile; fileRef = E43790C9162C82FD008A85DF /* NSString+TimeConvertion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,11 +119,15 @@
 		E4379084162B7597008A85DF /* selectedIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedIndicator@2x.png"; sourceTree = "<group>"; };
 		E4379085162B7597008A85DF /* selectedIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedIndicator.png; sourceTree = "<group>"; };
 		E4379094162C3047008A85DF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		E4379098162C3765008A85DF /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
-		E4379099162C3765008A85DF /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
-		E437909B162C3766008A85DF /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
-		E437909C162C3766008A85DF /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		E43790A6162C6796008A85DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E43790BE162C75B4008A85DF /* MyDataStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDataStorage.h; sourceTree = "<group>"; };
+		E43790BF162C75B4008A85DF /* MyDataStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDataStorage.m; sourceTree = "<group>"; };
+		E43790C2162C7D75008A85DF /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		E43790C3162C7D75008A85DF /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		E43790C5162C7D75008A85DF /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		E43790C6162C7D75008A85DF /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		E43790C8162C82FD008A85DF /* NSString+TimeConvertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+TimeConvertion.h"; path = "TongjiXuanke/NSString+TimeConvertion.h"; sourceTree = "<group>"; };
+		E43790C9162C82FD008A85DF /* NSString+TimeConvertion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+TimeConvertion.m"; path = "TongjiXuanke/NSString+TimeConvertion.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,8 +249,8 @@
 			children = (
 				E4379026162B58BB008A85DF /* NewsFeedProtocal.h */,
 				E4379027162B58C7008A85DF /* NewsLoaderProtocal.h */,
-				E4379028162B58C7008A85DF /* XuankeModel.h */,
 				E4379029162B58C7008A85DF /* XuankeModel.m */,
+				E4379028162B58C7008A85DF /* XuankeModel.h */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -254,6 +260,8 @@
 			children = (
 				E4379030162B6147008A85DF /* UILabel+Addition.h */,
 				E4379031162B6147008A85DF /* UILabel+Addition.m */,
+				E43790C8162C82FD008A85DF /* NSString+TimeConvertion.h */,
+				E43790C9162C82FD008A85DF /* NSString+TimeConvertion.m */,
 			);
 			name = catagory;
 			sourceTree = "<group>";
@@ -272,13 +280,23 @@
 		E4379097162C3746008A85DF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				E4379093162C3047008A85DF /* Model.xcdatamodeld */,
-				E437909B162C3766008A85DF /* Category.h */,
-				E437909C162C3766008A85DF /* Category.m */,
-				E4379098162C3765008A85DF /* News.h */,
-				E4379099162C3765008A85DF /* News.m */,
+				E43790C0162C75BE008A85DF /* model */,
+				E43790BE162C75B4008A85DF /* MyDataStorage.h */,
+				E43790BF162C75B4008A85DF /* MyDataStorage.m */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		E43790C0162C75BE008A85DF /* model */ = {
+			isa = PBXGroup;
+			children = (
+				E4379093162C3047008A85DF /* Model.xcdatamodeld */,
+				E43790C2162C7D75008A85DF /* Category.h */,
+				E43790C3162C7D75008A85DF /* Category.m */,
+				E43790C5162C7D75008A85DF /* News.h */,
+				E43790C6162C7D75008A85DF /* News.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43790C1162C75DE008A85DF /* MyDataStorage.m in Sources */,
 				E4379088162B77F5008A85DF /* NSString+MD5Addition.m in Sources */,
 				E4379089162B77F5008A85DF /* UIDevice+IdentifierAddition.m in Sources */,
 				E437902A162B5C70008A85DF /* XuankeModel.m in Sources */,
@@ -384,8 +403,9 @@
 				E4379032162B6147008A85DF /* UILabel+Addition.m in Sources */,
 				E4379047162B68FC008A85DF /* MyTabBarController.m in Sources */,
 				E4379095162C3047008A85DF /* Model.xcdatamodeld in Sources */,
-				E437909A162C3765008A85DF /* News.m in Sources */,
-				E437909D162C3766008A85DF /* Category.m in Sources */,
+				E43790C4162C7D75008A85DF /* Category.m in Sources */,
+				E43790C7162C7D75008A85DF /* News.m in Sources */,
+				E43790CA162C82FD008A85DF /* NSString+TimeConvertion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,9 @@
 //
 
 #import "XuankeModel.h"
+#import "MyDataStorage.h"
+#import "News.h"
+#import "Category.h"
 
 @implementation XuankeModel
 
@@ -21,6 +24,7 @@
         self.password = @"";
         dict = [@[] mutableCopy];
         self.userName = @"";
+        detailGetting = NO;
     }
     return self;
 }
@@ -28,7 +32,6 @@
 -(void)setDelegate:(id<NewsLoaderProtocal>)delegate
 {
     _delegate = delegate;
-    [self login];
 }
 
 - (void)loadWebPageWithString:(NSString*)urlString
@@ -43,6 +46,7 @@
 {
     [self loadWebPageWithString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login?goto=http%3A%2F%2Fxuanke.tongji.edu.cn%2Fpass.jsp"];
     loginInState = 0;
+    detailGetting = NO;
 }
 
 
@@ -82,6 +86,174 @@
 }
 
 
+-(Category*)myCategory
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"Category" inManagedObjectContext:context]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(name == %@)", [self catagoryForNews]]];
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    if(matching.count > 0)
+    {
+        return [matching lastObject];
+    }
+
+    Category *category = [NSEntityDescription
+              insertNewObjectForEntityForName:@"Category"
+              inManagedObjectContext:context];
+    category.name = [self catagoryForNews];
+    [[MyDataStorage instance] saveContext];
+    return category;
+}
+
+-(BOOL)retreiveDetailForUrl:(NSString*)url
+{
+    if(loginInState < 100 || detailGetting == YES)
+    {
+        return NO;
+    }
+    detailGetting = YES;
+    
+    NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
+    urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
+    
+    [self loadWebPageWithString:urlToGo];
+    
+    while(detailGetting);
+    
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", url]];
+    
+    // make sure the results are sorted as well
+    
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    News *news;
+    if(matching.count > 0)
+    {
+        for(News *item in matching)
+        {
+            if([item.category.name isEqualToString:[self catagoryForNews]])
+            {
+                news = item;
+                break;
+            }
+        }
+    }
+    news.content = tempContent;
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
+    tempBriefContent =  [tempBriefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
+    news.briefcontent = tempBriefContent;
+    NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
+    [[MyDataStorage instance] saveContext];
+    detailGetting = NO;
+    return YES;
+}
+
+-(void)retreiveDetails
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    //[fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(category == %@)", [self catagoryForNews]]];
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    dispatch_async(kBgQueue, ^{
+        for(News* item in matching)
+        {
+            if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
+            {
+                [self retreiveDetailForUrl:item.url];
+            }
+        }
+        //[self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+    });
+
+}
+
+
+-(void)shallowSave
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    for(int i = 0; i <[self totalNewsCount]; i++)
+    {
+        // Create the fetch request
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:
+         [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", [self idForNewsIndex:i]]];
+        
+        
+        // make sure the results are sorted as well
+         
+        NSError *error;
+        NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+        
+        if(!matching)
+        {
+            NSLog(@"Error: %@",[error description]);
+        }
+        if(matching.count > 0)
+        {
+            BOOL found = NO;
+            for(News *item in matching)
+            {
+                if([item.category.name isEqualToString:[self catagoryForNews]])
+                {
+                    found = YES;
+                    break;
+                }
+            }
+            if(found)
+                continue;
+        }
+        
+        News *news = [NSEntityDescription
+                      insertNewObjectForEntityForName:@"News"
+                      inManagedObjectContext:context];
+        news.category = [self myCategory];
+        news.title = [self titleForNewsIndex:i];
+        news.briefcontent = nil;
+        news.content = nil;
+        news.date = [self timeForNewsIndex:i];
+        news.favorated = NO;
+        news.haveread = NO;
+        news.url = [self idForNewsIndex:i];
+    }
+    [[MyDataStorage instance] saveContext];
+    [self retreiveDetails];
+}
+
 #pragma mark UIWebView delegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
@@ -94,65 +266,79 @@
     
     NSLog(@"Finish loading: %@",currentURL);
     NSLog(@"state: %d",loginInState);
+    NSLog(@"Detail getting: %c",detailGetting);
     
-    if(loginInState == 1 && [currentURL isEqualToString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login"])
+    if(!detailGetting)
     {
-        NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
-        [self.delegate errorLoading:error];
-    }
-    else if(loginInState == 0)
-    {
-        NSString *fillUserName = @"document.frm1.IDToken1.value='USERNAME';";
-        NSString *fillPwd = @"document.frm2.IDToken2.value='PASSWORD';";
-        fillUserName = [fillUserName stringByReplacingOccurrencesOfString:@"USERNAME" withString:self.userName];
-        fillPwd = [fillPwd stringByReplacingOccurrencesOfString:@"PASSWORD" withString:self.password];
-        
-        [_webView stringByEvaluatingJavaScriptFromString:fillUserName];
-        [_webView stringByEvaluatingJavaScriptFromString:fillPwd];
-        [_webView stringByEvaluatingJavaScriptFromString:@"LoginSubmit('登录')"];
-        loginInState ++;
-    }
-    else if(loginInState > 3 && loginInState < 100)
-    {
-        [self loadWebPageWithString:@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp"];
-        loginInState = 100;
-    }
-    else if(loginInState == 100)
-    {
-        _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-        NSLog(@"content: %@",_content);
-        loginInState = 101;
-        
-    }
-    else if(loginInState == 101)
-    {
-        _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-        NSLog(@"content: %@",_content);
-        loginInState = 102;
-        if([self parseResult:_content])
+        if(loginInState == 1 && [currentURL isEqualToString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login"])
         {
-            [self.delegate finishedLoading];
-            tryTime = 0;
+            NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
+            [self.delegate errorLoading:error];
         }
-        else
+        else if(loginInState == 0)
         {
-            if(tryTime < 3)
+            NSString *fillUserName = @"document.frm1.IDToken1.value='USERNAME';";
+            NSString *fillPwd = @"document.frm2.IDToken2.value='PASSWORD';";
+            fillUserName = [fillUserName stringByReplacingOccurrencesOfString:@"USERNAME" withString:self.userName];
+            fillPwd = [fillPwd stringByReplacingOccurrencesOfString:@"PASSWORD" withString:self.password];
+            
+            [_webView stringByEvaluatingJavaScriptFromString:fillUserName];
+            [_webView stringByEvaluatingJavaScriptFromString:fillPwd];
+            [_webView stringByEvaluatingJavaScriptFromString:@"LoginSubmit('登录')"];
+            loginInState ++;
+        }
+        else if(loginInState > 3 && loginInState < 100)
+        {
+            [self loadWebPageWithString:@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp"];
+            loginInState = 100;
+        }
+        else if(loginInState == 100)
+        {
+            _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
+            NSLog(@"content: %@",_content);
+            loginInState = 101;
+            
+        }
+        else if(loginInState == 101)
+        {
+            _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
+            NSLog(@"content: %@",_content);
+            loginInState = 102;
+            if([self parseResult:_content])
             {
-                [self login];
+                [self.delegate finishedLoading];
+                [self shallowSave];
+                tryTime = 0;
             }
             else
             {
-                NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
-                [self.delegate errorLoading:error];
+                if(tryTime < 3)
+                {
+                    [self login];
+                }
+                else
+                {
+                    NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
+                    [self.delegate errorLoading:error];
+                }
+                tryTime++;
+                ///TODO error error type
             }
-            tryTime++;
-            ///TODO error error type
         }
+        else
+        {
+            loginInState ++;
+        }
+
     }
     else
     {
-        loginInState ++;
+        tempContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+        tempBriefContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
+        detailGetting = NO;
     }
+    
+    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -163,6 +349,10 @@
 
 #pragma mark NewsFeedProtocal delegate
 
+-(void)start
+{
+    [self login];
+}
 
 -(int)totalNewsCount
 {
@@ -185,7 +375,8 @@
     return dict[index][@"ID"];
 }
 
--(NSString*)timeForNewsIndex:(int)index
+
+-(NSDate*)timeForNewsIndex:(int)index
 {
     NSString *dateStr = dict[index][@"ID"];
     dateStr = [dateStr substringWithRange:NSMakeRange(0,8)];
@@ -194,34 +385,10 @@
     [df setDateFormat:@"yyyyMMdd"];
     NSDate *myDate = [df dateFromString: dateStr];
     
-    
-    // Your dates:
-    NSDate * today = [NSDate date];
-    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400]; //86400 is the seconds in a day
-    NSDate * refDate = myDate; // your reference date
-    
-    // 10 first characters of description is the calendar date:
-    NSString * todayString = [[today description] substringToIndex:10];
-    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
-    NSString * refDateString = [[refDate description] substringToIndex:10];
-    
-    NSString* result;
-    
-    if ([refDateString isEqualToString:todayString])
-    {
-        result =  @"今天";
-    } else if ([refDateString isEqualToString:yesterdayString])
-    {
-        result =  @"昨天";
-    } else 
-    {
-        result =  refDateString;
-    }
-    
-    return result;
+    return myDate;
 }
 
--(NSString*)catagoryForNewsIndex:(int)index
+-(NSString*)catagoryForNews
 {
     return @"选课网通知";
 }

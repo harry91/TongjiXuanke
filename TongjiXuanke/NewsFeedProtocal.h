@@ -10,12 +10,15 @@
 
 @protocol NewsFeedProtocal <NSObject>
 
+
+-(void)start;
+
 -(int)totalNewsCount;
 
 -(NSString*)titleForNewsIndex:(int)index;
 -(NSString*)contentForNewsIndex:(int)index;
 -(NSString*)idForNewsIndex:(int)index;
--(NSString*)timeForNewsIndex:(int)index;
--(NSString*)catagoryForNewsIndex:(int)index;
+-(NSDate*)timeForNewsIndex:(int)index;
+-(NSString*)catagoryForNews;
 
 @end
