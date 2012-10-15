@@ -12,6 +12,8 @@
 
 
 -(void)start;
+-(void)retreiveDetails;
+-(BOOL)retreiveDetailForUrl:(NSString*)url;
 
 -(int)totalNewsCount;
 

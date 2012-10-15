@@ -13,6 +13,7 @@
 #import "News.h"
 #import "Category.h"
 #import "NSString+TimeConvertion.h"
+#import "NewsDetailViewController.h"
 
 @interface NewsTableViewController ()
 
@@ -174,6 +175,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
+    News *news = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [vc configureWithNews:news];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -274,6 +282,7 @@
 -(void)finishedLoading
 {
     //[self.tableView reloadData];
+    [xuankeModel retreiveDetails];
 }
 
 -(void)errorLoading:(NSError*)error

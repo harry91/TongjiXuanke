@@ -237,6 +237,104 @@
             </objects>
             <point key="canvasLocation" x="430" y="-714"/>
         </scene>
+        <!--News Detail View Controller-->
+        <scene sceneID="wNe-Vg-jDk">
+            <objects>
+                <viewController storyboardIdentifier="DetailView" hidesBottomBarWhenPushed="YES" id="5gv-Z3-dwC" customClass="NewsDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WcS-zW-u3n">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="rAs-WT-sT4">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="499" id="3Mm-uY-wDH"/>
+                                </constraints>
+                            </imageView>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60W-Vp-B3L">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0q-EL-hry">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detailTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="xHq-ur-vYJ">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="iKf-gG-vZf"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ie-NYA">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="106" id="AZW-p5-f75"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5em-zD-0m6">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="ZPV-gl-KMN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OW-TR-NPS">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="T5A-3f-RNJ"/>
+                                            <constraint firstAttribute="width" constant="96" id="ny3-kd-ule"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dgG-Ie-NYA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="0Eb-Ci-IBC"/>
+                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="-1" id="9ea-cO-HHg"/>
+                                    <constraint firstAttribute="trailing" secondItem="5em-zD-0m6" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CCQ-tx-8P2"/>
+                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="top" secondItem="dgG-Ie-NYA" secondAttribute="top" type="default" id="Ixk-by-IVU"/>
+                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="baseline" secondItem="dgG-Ie-NYA" secondAttribute="baseline" type="default" id="NWx-en-q1W"/>
+                                    <constraint firstItem="5em-zD-0m6" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="QRv-PK-3C2"/>
+                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Wg1-74-6aC"/>
+                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="centerY" secondItem="Z0q-EL-hry" secondAttribute="centerY" type="default" id="Zyb-35-JaJ"/>
+                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" type="default" id="h1X-So-s4p"/>
+                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="8" id="i6b-lb-FUc"/>
+                                    <constraint firstItem="5em-zD-0m6" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="26" id="oQ5-50-FXV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z0q-EL-hry" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" type="user" id="0jn-Fm-2WB"/>
+                            <constraint firstItem="rAs-WT-sT4" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="VTc-DJ-KVc"/>
+                            <constraint firstItem="Z0q-EL-hry" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" type="user" id="Wq2-4E-d9Q"/>
+                            <constraint firstItem="60W-Vp-B3L" firstAttribute="trailing" secondItem="WcS-zW-u3n" secondAttribute="trailing" type="default" id="ZCr-wd-JSp"/>
+                            <constraint firstItem="Z0q-EL-hry" firstAttribute="trailing" secondItem="WcS-zW-u3n" secondAttribute="trailing" type="default" id="e4c-Ca-90l"/>
+                            <constraint firstItem="rAs-WT-sT4" firstAttribute="bottom" secondItem="WcS-zW-u3n" secondAttribute="bottom" type="default" id="f7t-uR-99q"/>
+                            <constraint firstAttribute="bottom" secondItem="60W-Vp-B3L" secondAttribute="bottom" type="user" id="ifc-w8-55B"/>
+                            <constraint firstItem="60W-Vp-B3L" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="jgk-dL-hUB"/>
+                            <constraint firstItem="Z0q-EL-hry" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="kdt-gv-Cj0"/>
+                            <constraint firstItem="60W-Vp-B3L" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" constant="57" type="user" id="mXg-UJ-39i"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="categoryLabel" destination="3OW-TR-NPS" id="ZFq-Ar-rI8"/>
+                        <outlet property="dateLabel" destination="dgG-Ie-NYA" id="i3Y-dR-pQH"/>
+                        <outlet property="titleLabel" destination="5em-zD-0m6" id="mLy-l4-qYl"/>
+                        <outlet property="webview" destination="60W-Vp-B3L" id="fiV-SU-hGQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uGF-gE-3UX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="-714"/>
+        </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="1XJ-82-e2z">
             <objects>
@@ -373,6 +471,7 @@
         <image name="cellAccessory.png" width="8" height="11"/>
         <image name="cellBG.png" width="320" height="80"/>
         <image name="cellUnread.png" width="13" height="13"/>
+        <image name="detailTitle.png" width="320" height="58"/>
     </resources>
     <classes>
         <class className="MyTabBarController" superclassName="UITabBarController">
@@ -390,6 +489,15 @@
                 <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="title" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NewsDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="webview" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="NewsTableViewController" superclassName="UIViewController">
