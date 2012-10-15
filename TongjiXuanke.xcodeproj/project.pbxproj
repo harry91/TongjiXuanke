@@ -49,6 +49,12 @@
 		E4379083162B74D0008A85DF /* item2_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = E437907F162B74D0008A85DF /* item2_unselected.png */; };
 		E4379086162B7597008A85DF /* selectedIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379084162B7597008A85DF /* selectedIndicator@2x.png */; };
 		E4379087162B7597008A85DF /* selectedIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379085162B7597008A85DF /* selectedIndicator.png */; };
+		E4379088162B77F5008A85DF /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379042162B6777008A85DF /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E4379089162B77F5008A85DF /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379044162B6777008A85DF /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E4379095162C3047008A85DF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4379093162C3047008A85DF /* Model.xcdatamodeld */; };
+		E437909A162C3765008A85DF /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379099162C3765008A85DF /* News.m */; };
+		E437909D162C3766008A85DF /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = E437909C162C3766008A85DF /* Category.m */; };
+		E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43790A6162C6796008A85DF /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +116,12 @@
 		E437907F162B74D0008A85DF /* item2_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item2_unselected.png; sourceTree = "<group>"; };
 		E4379084162B7597008A85DF /* selectedIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectedIndicator@2x.png"; sourceTree = "<group>"; };
 		E4379085162B7597008A85DF /* selectedIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedIndicator.png; sourceTree = "<group>"; };
+		E4379094162C3047008A85DF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E4379098162C3765008A85DF /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		E4379099162C3765008A85DF /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		E437909B162C3766008A85DF /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		E437909C162C3766008A85DF /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		E43790A6162C6796008A85DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */,
 				E4378FCF1628D620008A85DF /* UIKit.framework in Frameworks */,
 				E4378FD11628D620008A85DF /* Foundation.framework in Frameworks */,
 				E4378FD31628D620008A85DF /* CoreGraphics.framework in Frameworks */,
@@ -129,6 +142,7 @@
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
+				E4379097162C3746008A85DF /* CoreData */,
 				E437903F162B6768008A85DF /* FakeUUID */,
 				E437902F162B60EA008A85DF /* catagory */,
 				E4379003162B38A6008A85DF /* Resource */,
@@ -149,6 +163,7 @@
 		E4378FCD1628D620008A85DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E43790A6162C6796008A85DF /* CoreData.framework */,
 				E4378FCE1628D620008A85DF /* UIKit.framework */,
 				E4378FD01628D620008A85DF /* Foundation.framework */,
 				E4378FD21628D620008A85DF /* CoreGraphics.framework */,
@@ -254,6 +269,18 @@
 			name = FakeUUID;
 			sourceTree = "<group>";
 		};
+		E4379097162C3746008A85DF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E4379093162C3047008A85DF /* Model.xcdatamodeld */,
+				E437909B162C3766008A85DF /* Category.h */,
+				E437909C162C3766008A85DF /* Category.m */,
+				E4379098162C3765008A85DF /* News.h */,
+				E4379099162C3765008A85DF /* News.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -346,6 +373,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4379088162B77F5008A85DF /* NSString+MD5Addition.m in Sources */,
+				E4379089162B77F5008A85DF /* UIDevice+IdentifierAddition.m in Sources */,
 				E437902A162B5C70008A85DF /* XuankeModel.m in Sources */,
 				E4378FDB1628D620008A85DF /* main.m in Sources */,
 				E4378FDF1628D620008A85DF /* AppDelegate.m in Sources */,
@@ -354,6 +383,9 @@
 				E4379024162B54F6008A85DF /* NewsTableViewController.m in Sources */,
 				E4379032162B6147008A85DF /* UILabel+Addition.m in Sources */,
 				E4379047162B68FC008A85DF /* MyTabBarController.m in Sources */,
+				E4379095162C3047008A85DF /* Model.xcdatamodeld in Sources */,
+				E437909A162C3765008A85DF /* News.m in Sources */,
+				E437909D162C3766008A85DF /* Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +420,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (Q72CFHAJ2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -403,6 +436,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "00380B9B-4203-47EF-BC16-4A6AAB2314C4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -416,6 +450,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (Q72CFHAJ2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -424,6 +459,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "00380B9B-4203-47EF-BC16-4A6AAB2314C4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -473,6 +509,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E4379093162C3047008A85DF /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E4379094162C3047008A85DF /* Model.xcdatamodel */,
+			);
+			currentVersion = E4379094162C3047008A85DF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E4378FC11628D61F008A85DF /* Project object */;
 }

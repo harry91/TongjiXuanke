@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "UIDevice+IdentifierAddition.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,6 +38,7 @@
     
 	// Get Bundle Info for Remote Registration (handy if you have more than one app)
 	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    appName = @"pushdemo";
 	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
 	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
@@ -167,6 +168,8 @@
 	NSLog(@"Received Push Badge: %@", badge);
 	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
     
+    UIAlertView *alertWindow =   [[UIAlertView alloc] initWithTitle: @"新通知" message: alert delegate: self cancelButtonTitle: @"OK" otherButtonTitles: nil];
+    [alertWindow show];
 #endif
 }
 
