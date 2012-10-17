@@ -10,6 +10,55 @@
 #import "UIDevice+IdentifierAddition.h"
 @implementation AppDelegate
 
+
+- (void)customizeAppearance
+{
+
+//    UIImage *segmentSelected = [[UIImage imageNamed:@"segcontrol_sel.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
+//    UIImage *segmentUnselected = [[UIImage imageNamed:@"segcontrol_uns.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 15, 0, 15)];
+//    UIImage *segmentSelectedUnselected = [UIImage imageNamed:@"segcontrol_sel-uns.png"];
+//    UIImage *segUnselectedSelected = [UIImage imageNamed:@"segcontrol_uns-sel.png"];
+//    UIImage *segmentUnselectedUnselected = [UIImage imageNamed:@"segcontrol_uns-uns.png"];
+//    
+//    [[UISegmentedControl appearance] setBackgroundImage:segmentUnselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setBackgroundImage:segmentSelected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+//    
+//    [[UISegmentedControl appearance] setDividerImage:segmentUnselectedUnselected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setDividerImage:segmentSelectedUnselected forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setDividerImage:segUnselectedSelected forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+//    CGRect rect = CGRectMake(0, 0, 1, 1);
+//    UIGraphicsBeginImageContext(rect.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+//    CGContextFillRect(context, rect);
+//    UIImage *transparentImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    [[UISegmentedControl appearance] setBackgroundImage:transparentImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setDividerImage:transparentImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
+    [[UISegmentedControl appearance] setTintColor:[UIColor colorWithRed:75/255.0 green:165/255.0 blue:245/255.0 alpha:0.4]];
+    
+        
+    
+    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
+    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selectedIndicator.png"]];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIColor colorWithWhite:0.5 alpha:1], UITextAttributeTextColor,
+                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                       [UIColor colorWithWhite:0.85 alpha:1], UITextAttributeTextColor,
+                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
+                                             forState:UIControlStateSelected];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -19,6 +68,8 @@
     // Clear application badge when app launches
     application.applicationIconBadgeNumber = 0;
 
+    [self customizeAppearance];
+    
     return YES;
 }
 

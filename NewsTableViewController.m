@@ -32,9 +32,6 @@
 
 - (void)configureNavBar
 {
-    if([self.navigationController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)] ) {
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-    }
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"选课网通知"];
     self.navigationItem.titleView = titleLabel;
 }

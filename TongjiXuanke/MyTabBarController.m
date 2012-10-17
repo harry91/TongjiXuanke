@@ -29,25 +29,6 @@
     
     UITabBar *tabBar = self.tabBar;
     
-    if ([tabBar respondsToSelector:@selector(setBackgroundImage:)])
-    {
-        // set it just for this instance
-        //[tabBar setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
-        
-        // set for all
-        [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
-        [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selectedIndicator.png"]];
-        
-        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithWhite:0.5 alpha:1], UITextAttributeTextColor,
-                                                           [UIColor blackColor], UITextAttributeTextShadowColor, nil]
-                                                 forState:UIControlStateNormal];
-        [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithWhite:0.85 alpha:1], UITextAttributeTextColor,
-                                                           [UIColor blackColor], UITextAttributeTextShadowColor, nil]
-                                                 forState:UIControlStateSelected];
-    }
-    
     UIImage *selectedImage0 = [UIImage imageNamed:@"item0_selected.png"];
     UIImage *unselectedImage0 = [UIImage imageNamed:@"item0_unselected.png"];
     

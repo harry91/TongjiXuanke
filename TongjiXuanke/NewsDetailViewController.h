@@ -10,14 +10,16 @@
 #import "News.h"
 #import "Category.h"
 
-@interface NewsDetailViewController : UIViewController
+@interface NewsDetailViewController : UIViewController <UIWebViewDelegate>
 {
     News *news;
+    UISegmentedControl *segmentedControl;
 }
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (weak, nonatomic) IBOutlet UIWebView *original_webview;
+@property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;
 
 - (void)configureWithNews:(News *)news;
 
