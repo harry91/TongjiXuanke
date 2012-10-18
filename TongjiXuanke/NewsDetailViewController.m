@@ -11,6 +11,7 @@
 #import "UILabel+Addition.h"
 #import "UIBarButtonItem+Addtion.h"
 #import "MyDataStorage.h"
+#import "UIBarButtonItem+Addtion.h"
 
 @interface NewsDetailViewController ()
 
@@ -94,6 +95,17 @@
     }
 }
 
+- (void)clickFavButton
+{
+    news.favorated = [NSNumber numberWithBool:YES];
+    [[MyDataStorage instance] saveContext];
+}
+
+- (void)clickBackButton
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)configureNavBar {
     NSArray* arr = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"toolbar_article_view.png"], [UIImage   imageNamed:@"toolbar_web_view.png"], nil];
     segmentedControl = [[UISegmentedControl alloc] initWithItems:arr];
@@ -108,11 +120,13 @@
     UIBarButtonItem *backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
     
+    
+    UIBarButtonItem *favButton = [UIBarButtonItem getFunctionButtonItemWithTitle:@"收藏" target:self action:@selector(clickFavButton)];
+    self.navigationItem.rightBarButtonItem = favButton;
+    
 }
 
-- (void)clickBackButton {
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 
 - (void)didReceiveMemoryWarning

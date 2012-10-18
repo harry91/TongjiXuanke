@@ -133,7 +133,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" image="cellBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="BHi-P8-P8V">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="79" id="SlZ-Tf-SYr"/>
+                                                        <constraint firstAttribute="height" constant="79" id="417-xa-cFb"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYt-HL-kvA">
@@ -181,24 +181,27 @@
                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" translatesAutoresizingMaskIntoConstraints="NO" id="g3D-zq-Rv2"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Ky-vL-Bi1"/>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="2Ky-vL-Bi1" firstAttribute="leading" secondItem="3jy-1b-ztH" secondAttribute="leading" constant="2" id="1q2-CV-dGt"/>
                                             <constraint firstItem="BHi-P8-P8V" firstAttribute="leading" secondItem="3jy-1b-ztH" secondAttribute="leading" type="default" id="2Hi-f9-Dqm"/>
+                                            <constraint firstItem="2Ky-vL-Bi1" firstAttribute="centerX" secondItem="g3D-zq-Rv2" secondAttribute="centerX" type="default" id="9UA-Zk-QbL"/>
                                             <constraint firstAttribute="trailing" secondItem="BYt-HL-kvA" secondAttribute="trailing" constant="19" id="C3O-HJ-heD"/>
                                             <constraint firstItem="ErO-EO-MMG" firstAttribute="leading" secondItem="a2C-US-4TP" secondAttribute="leading" type="default" id="Jgs-LJ-siB"/>
                                             <constraint firstItem="ErO-EO-MMG" firstAttribute="leading" secondItem="3jy-1b-ztH" secondAttribute="leading" constant="23" id="KMG-vS-0gc"/>
                                             <constraint firstItem="ErO-EO-MMG" firstAttribute="top" secondItem="BYt-HL-kvA" secondAttribute="top" type="default" id="NzR-Ie-v9U"/>
-                                            <constraint firstItem="g3D-zq-Rv2" firstAttribute="leading" secondItem="3jy-1b-ztH" secondAttribute="leading" constant="5" id="OSK-ts-jsU"/>
                                             <constraint firstItem="O8S-ma-lN4" firstAttribute="centerY" secondItem="g3D-zq-Rv2" secondAttribute="centerY" type="default" id="VCm-zp-4AV"/>
+                                            <constraint firstItem="g3D-zq-Rv2" firstAttribute="centerY" secondItem="3jy-1b-ztH" secondAttribute="centerY" type="default" id="Wal-CI-LuN"/>
                                             <constraint firstItem="ErO-EO-MMG" firstAttribute="baseline" secondItem="BYt-HL-kvA" secondAttribute="baseline" type="default" id="aXT-t3-m0x"/>
                                             <constraint firstAttribute="trailing" secondItem="O8S-ma-lN4" secondAttribute="trailing" constant="7" id="bSh-7R-czr"/>
-                                            <constraint firstItem="a2C-US-4TP" firstAttribute="centerY" secondItem="BHi-P8-P8V" secondAttribute="centerY" type="default" id="cmI-Eb-YCq"/>
-                                            <constraint firstItem="O8S-ma-lN4" firstAttribute="centerY" secondItem="3jy-1b-ztH" secondAttribute="centerY" type="default" id="dqi-EU-nW0"/>
                                             <constraint firstItem="BHi-P8-P8V" firstAttribute="top" secondItem="3jy-1b-ztH" secondAttribute="top" type="default" id="f4N-76-XV9"/>
                                             <constraint firstItem="ErO-EO-MMG" firstAttribute="top" secondItem="3jy-1b-ztH" secondAttribute="top" constant="12" id="fKk-gU-ShT"/>
+                                            <constraint firstItem="a2C-US-4TP" firstAttribute="centerY" secondItem="2Ky-vL-Bi1" secondAttribute="centerY" type="default" id="kW7-n6-qR7"/>
                                             <constraint firstItem="a2C-US-4TP" firstAttribute="leading" secondItem="9zg-Ut-LIz" secondAttribute="leading" type="default" id="nys-Lg-mZB"/>
+                                            <constraint firstItem="BHi-P8-P8V" firstAttribute="centerY" secondItem="2Ky-vL-Bi1" secondAttribute="centerY" type="default" id="qW6-oH-Ah7"/>
                                             <constraint firstItem="BHi-P8-P8V" firstAttribute="bottom" secondItem="9zg-Ut-LIz" secondAttribute="bottom" type="default" id="uOY-bh-jT5"/>
                                         </constraints>
                                         <connections>
@@ -206,6 +209,7 @@
                                             <outlet property="briefContent" destination="9zg-Ut-LIz" id="a0x-uu-5gp"/>
                                             <outlet property="catagory" destination="ErO-EO-MMG" id="9ld-Fa-K1a"/>
                                             <outlet property="dateandtime" destination="BYt-HL-kvA" id="bYi-88-OR8"/>
+                                            <outlet property="favIndicator" destination="2Ky-vL-Bi1" id="K7h-FV-em5"/>
                                             <outlet property="title" destination="a2C-US-4TP" id="1GG-aH-B1J"/>
                                             <outlet property="unreadIndicator" destination="g3D-zq-Rv2" id="zBc-Sj-paU"/>
                                         </connections>
@@ -481,6 +485,7 @@
         <image name="cellBG.png" width="320" height="80"/>
         <image name="cellUnread.png" width="13" height="13"/>
         <image name="detailTitle.png" width="320" height="58"/>
+        <image name="fav_star.png" width="19" height="19"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -63,7 +63,7 @@
     cell.dateandtime.text = [NSString strTimeAgoFromDate:news.date];
     cell.briefContent.text = news.briefcontent == nil ? @"正在载入...":news.briefcontent;
     cell.catagory.text = news.category.name;
-    
+    cell.favIndicator.hidden = ! [news.favorated boolValue];
 }
 
 
