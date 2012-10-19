@@ -24,7 +24,8 @@
     BOOL detailGetting;
     NSString *tempContent;
     NSString *tempBriefContent;
-    BOOL requiringToken;
+    BOOL isgetting;
+    NSMutableArray *urlToRetireve;
 }
 @property (nonatomic) id<NewsLoaderProtocal> delegate;
 @property (nonatomic) NSString* userName;

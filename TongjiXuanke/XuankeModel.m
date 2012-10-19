@@ -26,8 +26,9 @@
         self.password = @"";
         dict = [@[] mutableCopy];
         self.userName = @"";
-        requiringToken = NO;
+        isgetting = NO;
         detailGetting = NO;
+        urlToRetireve = [@[] mutableCopy];
     }
     return self;
 }
@@ -118,7 +119,7 @@
 }
 
 
--(void)shallowSave
+-(void)distinctSave
 {
     NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
     
@@ -170,9 +171,22 @@
     [[MyDataStorage instance] saveContext];
 }
 
+
+-(void)addURLtoRetirve:(NSString*)url
+{
+    [urlToRetireve addObject:url];
+    if(!isgetting)
+    {
+        [self retreivingTherad];
+    }
+}
+
 #pragma mark UIWebView delegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    NSString *currentURL = _webView.request.URL.absoluteString;
+    
+    NSLog(@"start loading: %@",currentURL);
     
 }
 
@@ -222,7 +236,7 @@
             loginInState = 102;
             if([self parseResult:_content])
             {
-                [self shallowSave];
+                [self distinctSave];
                 [self.delegate finishedLoading];
                 tryTime = 0;
             }
@@ -259,7 +273,8 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    
+    NSLog(@"%@",error);
+    //[self.delegate errorLoading:error];
 }
 
 
@@ -270,20 +285,47 @@
     [self login];
 }
 
+-(void)retreivingTherad
+{
+    NSLog(@"URL TO GO %@",urlToRetireve);
+    if(urlToRetireve.count <= 0)
+    {
+        isgetting = NO;
+        return;
+    }
+    isgetting = YES;
+    NSString *url = urlToRetireve[0];
+    [urlToRetireve removeObjectAtIndex:0];
+    dispatch_async(kBgQueue, ^{
+        BOOL result = [self retreiveDetailForUrlLocal:url];
+        NSLog(@"loding result: %@ %c",url,result ? 'Y':'N');
+        [self performSelectorOnMainThread:@selector(retreivingTherad) withObject:nil waitUntilDone:YES];
+    });
+}
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
 {
-    requiringToken = YES;
-    while (detailGetting);
-    while (detailGetting);
-    while (detailGetting);
-    BOOL result = [self retreiveDetailForUrlLocal:url];
-    requiringToken = NO;
-    return result;
+    [urlToRetireve insertObject:url atIndex:0];
+    if(!isgetting)
+    {
+        [self retreivingTherad];
+    }
+    return YES;///TODO bug.....
 }
 
 -(BOOL)retreiveDetailForUrlLocal:(NSString*)url
 {
+    BOOL result = NO;
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
+        {
+            result = YES;
+        }
+    }
+    if(!result)
+        return NO;
+    
     if(loginInState < 100 || detailGetting == YES)
     {
         return NO;
@@ -334,7 +376,7 @@
     
     //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
     news.briefcontent = tempBriefContent;
-    NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
+    //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
     [[MyDataStorage instance] saveContext];
     detailGetting = NO;
     return YES;
@@ -361,16 +403,7 @@
         {
             if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
             {
-                if([[ReachabilityChecker instance] hasInternetAccess])
-                {
-                    if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
-                    {
-                        NSLog(@"Retriving content for: %@",item.title);
-                        while(requiringToken);
-                        if(!item.content)
-                            [self retreiveDetailForUrlLocal:item.url];
-                    }
-                }
+                [self addURLtoRetirve:item.url];
             }
         }
     });

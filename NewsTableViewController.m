@@ -23,6 +23,7 @@
 
 @implementation NewsTableViewController
 
+#pragma mark - Life Cycle
 - (id)init
 {
     self = [super init];
@@ -32,10 +33,7 @@
     return self;
 }
 
-- (void)viewDidUnload {
-    //[self setTableView:nil];
-    [super viewDidUnload];
-}
+#pragma mark - Helper Methods
 
 - (void)configureNavBar
 {
@@ -117,6 +115,7 @@
     _refreshHeaderView = view;
 }
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -132,6 +131,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload {
+    //[self setTableView:nil];
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,6 +233,7 @@
     {
         dispatch_async(kBgQueue, ^{
             [xuankeModel retreiveDetailForUrl:news.url];
+            while(!news.content);
             [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
         });
     }
@@ -332,8 +337,7 @@
     [self.tableView endUpdates];
 }
 
-
-#pragma mark - news loader
+#pragma mark - News Loader
 -(void)finishedLoading
 {
     //[self.tableView reloadData];

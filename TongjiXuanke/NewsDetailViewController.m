@@ -22,6 +22,7 @@
 
 - (void)configureWithNews:(News *)aNews {
     news = aNews;
+    textLoadComplete = 0;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,6 +65,8 @@
 {
     if(webView == self.original_webview)
     {
+        if(textLoadComplete != 0)
+            return;
         NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetail" ofType:@"html"];
         NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
         NSString *s = [self.original_webview stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
@@ -79,6 +82,7 @@
         infoText = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:s];
         NSLog(@"info text:%@", infoText);
         [self.puretext_webview loadHTMLString:infoText baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+        textLoadComplete = 1;
     }
 }
 
