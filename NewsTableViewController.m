@@ -14,6 +14,8 @@
 #import "Category.h"
 #import "NSString+TimeConvertion.h"
 #import "NewsDetailViewController.h"
+#import "SettingModal.h"
+#import "ReachabilityChecker.h"
 
 @interface NewsTableViewController ()
 
@@ -61,7 +63,27 @@
     cell.title.text = news.title;
     cell.unreadIndicator.hidden = [news.haveread boolValue];
     cell.dateandtime.text = [NSString strTimeAgoFromDate:news.date];
-    cell.briefContent.text = news.briefcontent == nil ? @"正在载入...":news.briefcontent;
+    
+    NSString *briefContentPlaceHolder;
+    if(!news.briefcontent)
+    {
+        if(![[ReachabilityChecker instance] hasInternetAccess])
+        {
+            briefContentPlaceHolder = @"目前没有网络连接...";
+        }
+        else
+        {
+            if([[ReachabilityChecker instance] usingWIFI])
+            {
+                briefContentPlaceHolder = @"正在下载...";
+            }
+            else if(![[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
+            {
+                briefContentPlaceHolder = @"将在连入WIFI后下载...";
+            }
+        }
+    }
+    cell.briefContent.text = news.briefcontent == nil ? briefContentPlaceHolder : news.briefcontent;
     cell.catagory.text = news.category.name;
     cell.favIndicator.hidden = ! [news.favorated boolValue];
 }
@@ -169,16 +191,34 @@
 */
 
 #pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)pushToDetailViewWithNews:(News*)news
 {
     NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
-    News *news = [_fetchedResultsController objectAtIndexPath:indexPath];
     
     [vc configureWithNews:news];
     
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    News *news = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    if(!news.content)
+    {
+        dispatch_async(kBgQueue, ^{
+            [xuankeModel retreiveDetailForUrl:news.url];
+            [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
+        });
+    }
+    else
+    {
+        [self pushToDetailViewWithNews:news];
+    }
+     
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -279,7 +319,13 @@
 -(void)finishedLoading
 {
     //[self.tableView reloadData];
-    [xuankeModel retreiveDetails];
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
+        {
+            [xuankeModel retreiveDetails];
+        }
+    }
 }
 
 -(void)errorLoading:(NSError*)error

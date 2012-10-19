@@ -88,6 +88,10 @@
 		E4AFCD041630256300358B1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4AFCD031630256300358B1B /* QuartzCore.framework */; };
 		E4AFCD07163028E800358B1B /* fav_star.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AFCD05163028E800358B1B /* fav_star.png */; };
 		E4AFCD08163028E800358B1B /* fav_star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AFCD06163028E800358B1B /* fav_star@2x.png */; };
+		E4AFCD161631884A00358B1B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4AFCD151631884A00358B1B /* SystemConfiguration.framework */; };
+		E4AFCD1C1631889700358B1B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1B1631889700358B1B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E4AFCD1F1631895A00358B1B /* ReachabilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */; };
+		E4AFCD2216318CBF00358B1B /* SettingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD2116318CBF00358B1B /* SettingModal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +197,13 @@
 		E4AFCD031630256300358B1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E4AFCD05163028E800358B1B /* fav_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fav_star.png; sourceTree = "<group>"; };
 		E4AFCD06163028E800358B1B /* fav_star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fav_star@2x.png"; sourceTree = "<group>"; };
+		E4AFCD151631884A00358B1B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E4AFCD1A1631889700358B1B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		E4AFCD1B1631889700358B1B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		E4AFCD1D1631895A00358B1B /* ReachabilityChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityChecker.h; sourceTree = "<group>"; };
+		E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityChecker.m; sourceTree = "<group>"; };
+		E4AFCD2016318CBF00358B1B /* SettingModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModal.h; sourceTree = "<group>"; };
+		E4AFCD2116318CBF00358B1B /* SettingModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4AFCD161631884A00358B1B /* SystemConfiguration.framework in Frameworks */,
 				E4AFCD041630256300358B1B /* QuartzCore.framework in Frameworks */,
 				E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */,
 				E4378FCF1628D620008A85DF /* UIKit.framework in Frameworks */,
@@ -236,6 +248,7 @@
 		E4378FCD1628D620008A85DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4AFCD151631884A00358B1B /* SystemConfiguration.framework */,
 				E4AFCD031630256300358B1B /* QuartzCore.framework */,
 				E43790A6162C6796008A85DF /* CoreData.framework */,
 				E4378FCE1628D620008A85DF /* UIKit.framework */,
@@ -262,6 +275,10 @@
 				E4379023162B54F5008A85DF /* NewsTableViewController.m */,
 				E4379018162B4872008A85DF /* NewsCell.h */,
 				E4379019162B4872008A85DF /* NewsCell.m */,
+				E4AFCD1D1631895A00358B1B /* ReachabilityChecker.h */,
+				E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */,
+				E4AFCD2016318CBF00358B1B /* SettingModal.h */,
+				E4AFCD2116318CBF00358B1B /* SettingModal.m */,
 				E4378FD51628D620008A85DF /* Supporting Files */,
 			);
 			path = TongjiXuanke;
@@ -393,6 +410,15 @@
 		E4AFCCE91630242100358B1B /* TOOL */ = {
 			isa = PBXGroup;
 			children = (
+				E4AFCD191631888900358B1B /* reachability */,
+				E4AFCD181631887C00358B1B /* PullRefresh */,
+			);
+			name = TOOL;
+			sourceTree = "<group>";
+		};
+		E4AFCD181631887C00358B1B /* PullRefresh */ = {
+			isa = PBXGroup;
+			children = (
 				E4AFCCF01630248800358B1B /* blackArrow.png */,
 				E4AFCCF11630248800358B1B /* blackArrow@2x.png */,
 				E4AFCCF21630248800358B1B /* blueArrow.png */,
@@ -404,7 +430,16 @@
 				E4AFCD001630249100358B1B /* EGORefreshTableHeaderView.h */,
 				E4AFCD011630249100358B1B /* EGORefreshTableHeaderView.m */,
 			);
-			name = TOOL;
+			name = PullRefresh;
+			sourceTree = "<group>";
+		};
+		E4AFCD191631888900358B1B /* reachability */ = {
+			isa = PBXGroup;
+			children = (
+				E4AFCD1A1631889700358B1B /* Reachability.h */,
+				E4AFCD1B1631889700358B1B /* Reachability.m */,
+			);
+			name = reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,6 +579,9 @@
 				E43790CA162C82FD008A85DF /* NSString+TimeConvertion.m in Sources */,
 				E43790D5162CA0CF008A85DF /* NewsDetailViewController.m in Sources */,
 				E43790E0162CB4FC008A85DF /* UIBarButtonItem+Addtion.m in Sources */,
+				E4AFCD1C1631889700358B1B /* Reachability.m in Sources */,
+				E4AFCD1F1631895A00358B1B /* ReachabilityChecker.m in Sources */,
+				E4AFCD2216318CBF00358B1B /* SettingModal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

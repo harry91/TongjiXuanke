@@ -10,6 +10,8 @@
 #import "MyDataStorage.h"
 #import "News.h"
 #import "Category.h"
+#import "ReachabilityChecker.h"
+#import "SettingModal.h"
 
 @implementation XuankeModel
 
@@ -24,6 +26,7 @@
         self.password = @"";
         dict = [@[] mutableCopy];
         self.userName = @"";
+        requiringToken = NO;
         detailGetting = NO;
     }
     return self;
@@ -268,8 +271,18 @@
 }
 
 
-
 -(BOOL)retreiveDetailForUrl:(NSString*)url
+{
+    requiringToken = YES;
+    while (detailGetting);
+    while (detailGetting);
+    while (detailGetting);
+    BOOL result = [self retreiveDetailForUrlLocal:url];
+    requiringToken = NO;
+    return result;
+}
+
+-(BOOL)retreiveDetailForUrlLocal:(NSString*)url
 {
     if(loginInState < 100 || detailGetting == YES)
     {
@@ -348,10 +361,18 @@
         {
             if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
             {
-                [self retreiveDetailForUrl:item.url];
+                if([[ReachabilityChecker instance] hasInternetAccess])
+                {
+                    if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
+                    {
+                        NSLog(@"Retriving content for: %@",item.title);
+                        while(requiringToken);
+                        if(!item.content)
+                            [self retreiveDetailForUrlLocal:item.url];
+                    }
+                }
             }
         }
-        //[self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
     });
     
 }

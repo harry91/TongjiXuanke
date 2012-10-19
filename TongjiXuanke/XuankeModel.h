@@ -24,6 +24,7 @@
     BOOL detailGetting;
     NSString *tempContent;
     NSString *tempBriefContent;
+    BOOL requiringToken;
 }
 @property (nonatomic) id<NewsLoaderProtocal> delegate;
 @property (nonatomic) NSString* userName;

@@ -16,15 +16,15 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
-MyDataStorage* _instance;
+MyDataStorage* _datainstance;
 
 + (MyDataStorage*)instance
 {
-    if(!_instance)
+    if(!_datainstance)
     {
-        _instance = [[MyDataStorage alloc] init];
+        _datainstance = [[MyDataStorage alloc] init];
     }
-    return _instance;
+    return _datainstance;
 }
 
 - (void)saveContext
