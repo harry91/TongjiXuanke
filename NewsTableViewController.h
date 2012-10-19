@@ -12,15 +12,18 @@
 #import "XuankeModel.h"
 #import "NewsLoaderProtocal.h"
 #import "MyDataStorage.h"
+#import "EGORefreshTableHeaderView.h"
 
 @class MyDataStorage;
 
-@interface NewsTableViewController : UIViewController<NewsLoaderProtocal,NSFetchedResultsControllerDelegate>
+@interface NewsTableViewController : UITableViewController<NewsLoaderProtocal,NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
 {
     XuankeModel *xuankeModel;
     MyDataStorage *dataStorage;
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    BOOL _reloading;
 }
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+//@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

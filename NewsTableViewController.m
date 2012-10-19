@@ -32,6 +32,11 @@
     return self;
 }
 
+- (void)viewDidUnload {
+    //[self setTableView:nil];
+    [super viewDidUnload];
+}
+
 - (void)configureNavBar
 {
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"选课网通知"];
@@ -44,7 +49,9 @@
     xuankeModel.password = @"21434909cbfv";
     xuankeModel.userName = @"102890";
     xuankeModel.delegate = self;
-    [xuankeModel start];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(66.0f, 0.0f, 0.0f, 0.0f);
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging: self.tableView];
 }
 
 
@@ -101,12 +108,23 @@
 	}
 }
 
+
+- (void)configurePullToRefresh
+{
+    EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
+    view.delegate = self;
+    [self.tableView addSubview:view];
+    _refreshHeaderView = view;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self configureModel];
     [self configureNavBar];
+    [self configurePullToRefresh];
+    [self configureModel];
+    
     
     [self dataInit];
         // Uncomment the following line to preserve selection between presentations.
@@ -326,16 +344,58 @@
             [xuankeModel retreiveDetails];
         }
     }
+    _reloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 -(void)errorLoading:(NSError*)error
 {
     NSLog(@"Error:%@",error.domain);
+    _reloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+	
 }
 
 
-- (void)viewDidUnload {
-    [self setTableView:nil];
-    [super viewDidUnload];
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+
+-(void)startLoading
+{
+    _reloading = YES;
+    [xuankeModel start];
 }
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	[self startLoading];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+
 @end
