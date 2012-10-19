@@ -26,7 +26,7 @@
         self.password = @"";
         dict = [@[] mutableCopy];
         self.userName = @"";
-        isgetting = NO;
+        isRetreivingThreadRunning = NO;
         detailGetting = NO;
         urlToRetireve = [@[] mutableCopy];
     }
@@ -85,7 +85,7 @@
         NSDictionary *item = @{@"ID":newsID, @"Title":newsTitle};
         [dict addObject:item];
     }
-    NSLog(@"%@",dict);
+    //NSLog(@"%@",dict);
     return YES;
 }
 
@@ -175,7 +175,7 @@
 -(void)addURLtoRetirve:(NSString*)url
 {
     [urlToRetireve addObject:url];
-    if(!isgetting)
+    if(!isRetreivingThreadRunning)
     {
         [self retreivingTherad];
     }
@@ -225,19 +225,19 @@
         else if(loginInState == 100)
         {
             _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-            NSLog(@"content: %@",_content);
+            //NSLog(@"content: %@",_content);
             loginInState = 101;
             
         }
         else if(loginInState == 101)
         {
             _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-            NSLog(@"content: %@",_content);
+            //NSLog(@"content: %@",_content);
             loginInState = 102;
             if([self parseResult:_content])
             {
                 [self distinctSave];
-                [self.delegate finishedLoading];
+                [self.delegate finishedLoading:[self catagoryForNews]];
                 tryTime = 0;
             }
             else
@@ -266,15 +266,22 @@
         tempContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         tempBriefContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
         detailGetting = NO;
+        
+        NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
+        
+        [self finishRetreiving:url];
     }
-    
-    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"%@",error);
-    //[self.delegate errorLoading:error];
+    if(detailGetting)
+    {
+        detailGetting = NO;
+        [self retreivingTherad];
+    }
+    else [self.delegate errorLoading:error];
 }
 
 
@@ -290,27 +297,77 @@
     NSLog(@"URL TO GO %@",urlToRetireve);
     if(urlToRetireve.count <= 0)
     {
-        isgetting = NO;
+        isRetreivingThreadRunning = NO;
         return;
     }
-    isgetting = YES;
+    isRetreivingThreadRunning = YES;
     NSString *url = urlToRetireve[0];
     [urlToRetireve removeObjectAtIndex:0];
-    dispatch_async(kBgQueue, ^{
-        BOOL result = [self retreiveDetailForUrlLocal:url];
-        NSLog(@"loding result: %@ %c",url,result ? 'Y':'N');
-        [self performSelectorOnMainThread:@selector(retreivingTherad) withObject:nil waitUntilDone:YES];
-    });
+    [self retreiveDetailForUrlLocal:url];
+//    dispatch_async(kBgQueue, ^{
+//        BOOL result = 
+//        NSLog(@"loding result: %@ %c",url,result ? 'Y':'N');
+//        [self performSelectorOnMainThread:@selector(retreivingTherad) withObject:nil waitUntilDone:YES];
+//    });
 }
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
 {
     [urlToRetireve insertObject:url atIndex:0];
-    if(!isgetting)
+    if(!isRetreivingThreadRunning)
     {
         [self retreivingTherad];
     }
     return YES;///TODO bug.....
+}
+
+- (void)finishRetreiving:(NSString *)aUrl
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", aUrl]];
+    
+    // make sure the results are sorted as well
+    
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    News *news;
+    if(matching.count > 0)
+    {
+        for(News *item in matching)
+        {
+            if([item.category.name isEqualToString:[self catagoryForNews]])
+            {
+                news = item;
+                break;
+            }
+        }
+    }
+    
+    tempContent = [tempContent stringByReplacingOccurrencesOfString:@"<link rel=\"stylesheet\" href=\"/tj_public/css/main.css\">" withString:@""];
+    //newsString = [newsString stringByReplacingOccurrencesOfString:news.title withString:@""];
+    tempContent = [tempContent stringByReplacingOccurrencesOfString:@"<input type=\"button\" class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
+    news.content = tempContent;
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
+    tempBriefContent =  [tempBriefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
+    news.briefcontent = tempBriefContent;
+    //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
+    [[MyDataStorage instance] saveContext];
+    detailGetting = NO;
+    [self retreivingTherad];
 }
 
 -(BOOL)retreiveDetailForUrlLocal:(NSString*)url
@@ -337,49 +394,9 @@
     
     [self loadWebPageWithString:urlToGo];
     
-    while(detailGetting);
+    //while(detailGetting);
     
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", url]];
-    
-    // make sure the results are sorted as well
-    
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    News *news;
-    if(matching.count > 0)
-    {
-        for(News *item in matching)
-        {
-            if([item.category.name isEqualToString:[self catagoryForNews]])
-            {
-                news = item;
-                break;
-            }
-        }
-    }
-    news.content = tempContent;
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
-    tempBriefContent =  [tempBriefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
-    news.briefcontent = tempBriefContent;
-    //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
-    [[MyDataStorage instance] saveContext];
-    detailGetting = NO;
-    return YES;
+    return YES;//TODO bug
 }
 
 
@@ -398,16 +415,13 @@
     NSError *error;
     NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
     
-    dispatch_async(kBgQueue, ^{
-        for(News* item in matching)
+    for(News* item in matching)
+    {
+        if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
         {
-            if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
-            {
-                [self addURLtoRetirve:item.url];
-            }
+            [self addURLtoRetirve:item.url];
         }
-    });
-    
+    }
 }
 
 

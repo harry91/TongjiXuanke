@@ -70,6 +70,8 @@
 
     [self customizeAppearance];
     
+    [NSUserDefaults initialize];
+    
     return YES;
 }
 

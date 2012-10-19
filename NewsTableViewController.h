@@ -13,14 +13,18 @@
 #import "NewsLoaderProtocal.h"
 #import "MyDataStorage.h"
 #import "EGORefreshTableHeaderView.h"
+#import "MBProgressHUD.h"
 
 @class MyDataStorage;
+@class SSEModel;
 
 @interface NewsTableViewController : UITableViewController<NewsLoaderProtocal,NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
 {
     XuankeModel *xuankeModel;
+    SSEModel *sseModel;
     MyDataStorage *dataStorage;
     EGORefreshTableHeaderView *_refreshHeaderView;
+    MBProgressHUD *HUD;
     BOOL _reloading;
 }
 //@property (strong, nonatomic) IBOutlet UITableView *tableView;

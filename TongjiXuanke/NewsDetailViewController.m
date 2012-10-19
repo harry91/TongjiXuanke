@@ -49,10 +49,6 @@
     
     NSString* newsString = news.content;
     
-    newsString = [newsString stringByReplacingOccurrencesOfString:@"<link rel=\"stylesheet\" href=\"/tj_public/css/main.css\">" withString:@""];
-    //newsString = [newsString stringByReplacingOccurrencesOfString:news.title withString:@""];
-    newsString = [newsString stringByReplacingOccurrencesOfString:@"<input type=\"button\" class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
-    
     [self.original_webview loadHTMLString:newsString baseURL:[NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"]];
     
     

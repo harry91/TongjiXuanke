@@ -16,6 +16,7 @@
 #import "NewsDetailViewController.h"
 #import "SettingModal.h"
 #import "ReachabilityChecker.h"
+#import "SSEModel.h"
 
 @interface NewsTableViewController ()
 
@@ -47,6 +48,11 @@
     xuankeModel.password = @"21434909cbfv";
     xuankeModel.userName = @"102890";
     xuankeModel.delegate = self;
+    
+    
+    sseModel = [[SSEModel alloc] init];
+    sseModel.delegate = self;
+    
     
     self.tableView.contentInset = UIEdgeInsetsMake(66.0f, 0.0f, 0.0f, 0.0f);
     [_refreshHeaderView egoRefreshScrollViewDidEndDragging: self.tableView];
@@ -215,6 +221,7 @@
 #pragma mark - Table view delegate
 - (void)pushToDetailViewWithNews:(News*)news
 {
+    [MBProgressHUD hideHUDForView:self.view.window animated:YES];
     NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
     
     [vc configureWithNews:news];
@@ -232,10 +239,22 @@
     if(!news.content)
     {
         dispatch_async(kBgQueue, ^{
-            [xuankeModel retreiveDetailForUrl:news.url];
+            while(_reloading);
+            if([news.category.name isEqualToString:[xuankeModel catagoryForNews]])
+            {
+                [xuankeModel retreiveDetailForUrl:news.url];
+            }
+            else if([news.category.name isEqualToString:[sseModel catagoryForNews]])
+            {
+                [sseModel retreiveDetailForUrl:news.url];
+            }
             while(!news.content);
             [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
         });
+        HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+        //HUD.mode = MBProgressHUDModeAnnularDeterminate;
+        HUD.labelText = @"正在载入";
+        HUD.dimBackground = YES;
     }
     else
     {
@@ -338,25 +357,35 @@
 }
 
 #pragma mark - News Loader
--(void)finishedLoading
+-(void)finishedLoading:(NSString*)category
 {
     //[self.tableView reloadData];
+    if([category isEqualToString:[xuankeModel catagoryForNews]])
+    {
+         _reloading = NO;
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    }
+   
     if([[ReachabilityChecker instance] hasInternetAccess])
     {
         if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
         {
-            [xuankeModel retreiveDetails];
+            if([category isEqualToString:[xuankeModel catagoryForNews]])
+            {
+                [xuankeModel retreiveDetails];
+
+            }
+            else
+            {
+                [sseModel retreiveDetails];
+            }
         }
     }
-    _reloading = NO;
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 -(void)errorLoading:(NSError*)error
 {
     NSLog(@"Error:%@",error.domain);
-    _reloading = NO;
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
 #pragma mark -
@@ -383,6 +412,7 @@
 {
     _reloading = YES;
     [xuankeModel start];
+    [sseModel start];
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{

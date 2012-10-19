@@ -1,38 +1,31 @@
 //
-//  XuankeModel.h
-//  xuanke
+//  SSEModel.h
+//  TongjiXuanke
 //
-//  Created by Song on 12-10-13.
+//  Created by Song on 12-10-19.
 //  Copyright (c) 2012年 Song. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "NewsFeedProtocal.h"
 #import "NewsLoaderProtocal.h"
+#import "MWFeedParser.h"
 
-#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) 
-
-
-@interface XuankeModel : NSObject <UIWebViewDelegate,NewsFeedProtocal>
+@interface SSEModel : NSObject <UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
 {
     UIWebView *_webView;
-    int loginInState;
-    NSString *_content;
-    NSMutableArray *dict;
-    int tryTime;
-    BOOL detailGetting;
+    MWFeedParser *feedParser;
+	NSMutableArray *parsedItems;
+    
+    NSString *curl;
     NSString *tempContent;
     NSString *tempBriefContent;
-    BOOL isRetreivingThreadRunning;
+    BOOL isgetting;
     NSMutableArray *urlToRetireve;
 }
+
 @property (nonatomic) id<NewsLoaderProtocal> delegate;
 @property (nonatomic) NSString* userName;
 @property (nonatomic) NSString* password;
-
-
-- (BOOL)hasFinishedLoading;
-
 
 @end
