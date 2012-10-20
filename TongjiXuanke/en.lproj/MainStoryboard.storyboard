@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YcT-Mx-81Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2843" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YcT-Mx-81Q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1929"/>
     </dependencies>
@@ -9,7 +9,7 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="SV4-Bn-5Xr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="通知" id="ws8-Qu-o8S"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bPK-b2-Yf1">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -52,6 +52,7 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="AW5-nA-4x3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="收藏" id="yqL-8k-lph"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iIE-fx-wz9">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -84,6 +85,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="X7D-nC-8i1"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pu1-jK-jZR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,6 +96,7 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="FtW-Mv-R3e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="设置" id="MCf-Oa-InD"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SZu-12-sJv">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -121,79 +124,53 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" image="cellBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLX-NE-BGu">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="79" id="eyA-eq-3cp"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" image="cellBG.png" id="OLX-NE-BGu">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="715-TK-y16">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="106" id="x3a-tD-aZy"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="715-TK-y16">
+                                            <rect key="frame" x="195" y="12" width="106" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFo-S4-SAz">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="280" id="dzs-Z9-Eel"/>
-                                                <constraint firstAttribute="height" constant="21" id="lCC-Ok-JJ6"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OFo-S4-SAz">
+                                            <rect key="frame" x="23" y="29" width="280" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellAccessory.png" translatesAutoresizingMaskIntoConstraints="NO" id="0FJ-VN-fYL"/>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="6co-bv-Lxf">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="I0s-3J-Wc6"/>
-                                                <constraint firstAttribute="width" constant="279" id="Tu2-1S-50X"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellAccessory.png" id="0FJ-VN-fYL">
+                                            <rect key="frame" x="305" y="35" width="8" height="11"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6co-bv-Lxf">
+                                            <rect key="frame" x="23" y="47" width="279" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8u-mF-LjD">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="21V-pZ-zfH"/>
-                                                <constraint firstAttribute="width" constant="96" id="PuP-bl-HtZ"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h8u-mF-LjD">
+                                            <rect key="frame" x="23" y="12" width="96" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" translatesAutoresizingMaskIntoConstraints="NO" id="WY4-uL-cp0"/>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="42H-2h-gxe"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" id="WY4-uL-cp0">
+                                            <rect key="frame" x="5" y="34" width="13" height="13"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" id="42H-2h-gxe">
+                                            <rect key="frame" x="2" y="30" width="19" height="19"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="0FJ-VN-fYL" secondAttribute="trailing" constant="7" id="16o-eC-OCO"/>
-                                    <constraint firstItem="h8u-mF-LjD" firstAttribute="top" secondItem="8R0-U3-xUm" secondAttribute="top" constant="12" id="B1r-YY-BsH"/>
-                                    <constraint firstItem="OFo-S4-SAz" firstAttribute="leading" secondItem="6co-bv-Lxf" secondAttribute="leading" type="default" id="JTg-9l-FEF"/>
-                                    <constraint firstItem="0FJ-VN-fYL" firstAttribute="centerY" secondItem="WY4-uL-cp0" secondAttribute="centerY" type="default" id="L3g-EI-l7a"/>
-                                    <constraint firstItem="h8u-mF-LjD" firstAttribute="leading" secondItem="OFo-S4-SAz" secondAttribute="leading" type="default" id="LKr-Kj-JFW"/>
-                                    <constraint firstItem="OLX-NE-BGu" firstAttribute="leading" secondItem="8R0-U3-xUm" secondAttribute="leading" type="default" id="TnW-Tu-UeJ"/>
-                                    <constraint firstItem="WY4-uL-cp0" firstAttribute="centerY" secondItem="8R0-U3-xUm" secondAttribute="centerY" type="default" id="bDT-mn-tJN"/>
-                                    <constraint firstItem="OLX-NE-BGu" firstAttribute="centerY" secondItem="42H-2h-gxe" secondAttribute="centerY" type="default" id="cAk-JC-gYN"/>
-                                    <constraint firstAttribute="trailing" secondItem="715-TK-y16" secondAttribute="trailing" constant="19" id="cV6-em-5Vs"/>
-                                    <constraint firstItem="42H-2h-gxe" firstAttribute="centerX" secondItem="WY4-uL-cp0" secondAttribute="centerX" type="default" id="d5x-q1-vdB"/>
-                                    <constraint firstItem="OLX-NE-BGu" firstAttribute="top" secondItem="8R0-U3-xUm" secondAttribute="top" type="default" id="eQQ-88-f7C"/>
-                                    <constraint firstItem="h8u-mF-LjD" firstAttribute="top" secondItem="715-TK-y16" secondAttribute="top" type="default" id="gJV-Ft-V3X"/>
-                                    <constraint firstItem="OLX-NE-BGu" firstAttribute="bottom" secondItem="6co-bv-Lxf" secondAttribute="bottom" type="default" id="kCg-h2-xeK"/>
-                                    <constraint firstItem="h8u-mF-LjD" firstAttribute="baseline" secondItem="715-TK-y16" secondAttribute="baseline" type="default" id="kXh-Al-63B"/>
-                                    <constraint firstItem="h8u-mF-LjD" firstAttribute="leading" secondItem="8R0-U3-xUm" secondAttribute="leading" constant="23" id="lDA-TL-XOQ"/>
-                                    <constraint firstItem="OFo-S4-SAz" firstAttribute="centerY" secondItem="42H-2h-gxe" secondAttribute="centerY" type="default" id="oW1-L6-eEn"/>
-                                    <constraint firstItem="42H-2h-gxe" firstAttribute="leading" secondItem="8R0-U3-xUm" secondAttribute="leading" constant="2" id="pHb-Pp-zpv"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="background" destination="OLX-NE-BGu" id="oT7-wl-IOF"/>
                                     <outlet property="briefContent" destination="6co-bv-Lxf" id="zDd-6Q-VMJ"/>
@@ -211,6 +188,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="aKC-cU-MUy"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gbq-Gm-sWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -225,51 +203,43 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="rAs-WT-sT4">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="499" id="3Mm-uY-wDH"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.png" id="rAs-WT-sT4">
+                                <rect key="frame" x="0.0" y="5" width="320" height="499"/>
                             </imageView>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60W-Vp-B3L" userLabel="original">
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" id="60W-Vp-B3L" userLabel="original">
+                                <rect key="frame" x="0.0" y="54" width="320" height="450"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hay-H0-0j0" userLabel="pure text">
+                            <webView contentMode="scaleToFill" id="Hay-H0-0j0" userLabel="pure text">
+                                <rect key="frame" x="0.0" y="54" width="320" height="450"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0q-EL-hry">
+                            <view contentMode="scaleToFill" id="Z0q-EL-hry">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detailTitle.png" translatesAutoresizingMaskIntoConstraints="NO" id="xHq-ur-vYJ">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="iKf-gG-vZf"/>
-                                        </constraints>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detailTitle.png" id="xHq-ur-vYJ">
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="60"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgG-Ie-NYA">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="106" id="AZW-p5-f75"/>
-                                        </constraints>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="dgG-Ie-NYA">
+                                        <rect key="frame" x="194" y="8" width="106" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5em-zD-0m6">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="ZPV-gl-KMN"/>
-                                        </constraints>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5em-zD-0m6">
+                                        <rect key="frame" x="20" y="26" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OW-TR-NPS">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="T5A-3f-RNJ"/>
-                                            <constraint firstAttribute="width" constant="96" id="ny3-kd-ule"/>
-                                        </constraints>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3OW-TR-NPS">
+                                        <rect key="frame" x="20" y="8" width="96" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -278,38 +248,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="dgG-Ie-NYA" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="0Eb-Ci-IBC"/>
-                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="-1" id="9ea-cO-HHg"/>
-                                    <constraint firstAttribute="trailing" secondItem="5em-zD-0m6" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CCQ-tx-8P2"/>
-                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="top" secondItem="dgG-Ie-NYA" secondAttribute="top" type="default" id="Ixk-by-IVU"/>
-                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="baseline" secondItem="dgG-Ie-NYA" secondAttribute="baseline" type="default" id="NWx-en-q1W"/>
-                                    <constraint firstItem="5em-zD-0m6" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="QRv-PK-3C2"/>
-                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Wg1-74-6aC"/>
-                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="centerY" secondItem="Z0q-EL-hry" secondAttribute="centerY" type="default" id="Zyb-35-JaJ"/>
-                                    <constraint firstItem="xHq-ur-vYJ" firstAttribute="leading" secondItem="Z0q-EL-hry" secondAttribute="leading" type="default" id="h1X-So-s4p"/>
-                                    <constraint firstItem="3OW-TR-NPS" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="8" id="i6b-lb-FUc"/>
-                                    <constraint firstItem="5em-zD-0m6" firstAttribute="top" secondItem="Z0q-EL-hry" secondAttribute="top" constant="26" id="oQ5-50-FXV"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Z0q-EL-hry" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" type="user" id="0jn-Fm-2WB"/>
-                            <constraint firstItem="Hay-H0-0j0" firstAttribute="top" secondItem="60W-Vp-B3L" secondAttribute="top" type="default" id="2MI-Ke-Mrz"/>
-                            <constraint firstItem="Hay-H0-0j0" firstAttribute="trailing" secondItem="WcS-zW-u3n" secondAttribute="trailing" type="default" id="CHT-Dx-o65"/>
-                            <constraint firstItem="Hay-H0-0j0" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="KJT-Zc-sZr"/>
-                            <constraint firstItem="Hay-H0-0j0" firstAttribute="bottom" secondItem="WcS-zW-u3n" secondAttribute="bottom" type="default" id="VQH-Hp-3qZ"/>
-                            <constraint firstItem="rAs-WT-sT4" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="VTc-DJ-KVc"/>
-                            <constraint firstItem="Z0q-EL-hry" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" type="user" id="Wq2-4E-d9Q"/>
-                            <constraint firstItem="60W-Vp-B3L" firstAttribute="trailing" secondItem="WcS-zW-u3n" secondAttribute="trailing" type="default" id="ZCr-wd-JSp"/>
-                            <constraint firstItem="Z0q-EL-hry" firstAttribute="trailing" secondItem="WcS-zW-u3n" secondAttribute="trailing" type="default" id="e4c-Ca-90l"/>
-                            <constraint firstItem="rAs-WT-sT4" firstAttribute="bottom" secondItem="WcS-zW-u3n" secondAttribute="bottom" type="default" id="f7t-uR-99q"/>
-                            <constraint firstAttribute="bottom" secondItem="60W-Vp-B3L" secondAttribute="bottom" type="user" id="ifc-w8-55B"/>
-                            <constraint firstItem="60W-Vp-B3L" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="jgk-dL-hUB"/>
-                            <constraint firstItem="Z0q-EL-hry" firstAttribute="leading" secondItem="WcS-zW-u3n" secondAttribute="leading" type="default" id="kdt-gv-Cj0"/>
-                            <constraint firstItem="60W-Vp-B3L" firstAttribute="top" secondItem="WcS-zW-u3n" secondAttribute="top" constant="54" type="user" id="mXg-UJ-39i"/>
-                        </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -328,6 +269,7 @@
         <scene sceneID="1XJ-82-e2z">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="YcT-Mx-81Q" customClass="MyTabBarController" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5jp-70-uWf">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -360,76 +302,50 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" image="cellBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-Go-HrF">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="79" id="mCP-ZH-MQe"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" image="cellBG.png" id="aXy-Go-HrF">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCZ-Bu-7gR">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="106" id="YbG-GK-Kfe"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="vCZ-Bu-7gR">
+                                            <rect key="frame" x="195" y="12" width="106" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9Y-Uh-521">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="280" id="DeS-k2-oH5"/>
-                                                <constraint firstAttribute="height" constant="21" id="vDH-WE-2Jp"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A9Y-Uh-521">
+                                            <rect key="frame" x="23" y="29" width="280" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellAccessory.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-JM-az0"/>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="Twa-66-V9a">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="279" id="odR-bS-46u"/>
-                                                <constraint firstAttribute="height" constant="32" id="r0H-ps-9uM"/>
-                                            </constraints>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellAccessory.png" id="Xpc-JM-az0">
+                                            <rect key="frame" x="305" y="35" width="8" height="11"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Twa-66-V9a">
+                                            <rect key="frame" x="23" y="47" width="279" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eq-0N-0GN">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="2or-WJ-7UQ"/>
-                                                <constraint firstAttribute="width" constant="96" id="W0X-b3-Fb9"/>
-                                            </constraints>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3eq-0N-0GN">
+                                            <rect key="frame" x="23" y="12" width="96" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" translatesAutoresizingMaskIntoConstraints="NO" id="RhJ-0e-SYB"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" id="RhJ-0e-SYB">
+                                            <rect key="frame" x="5" y="34" width="13" height="13"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <constraints>
-                                    <constraint firstItem="3eq-0N-0GN" firstAttribute="leading" secondItem="YvY-g6-cfz" secondAttribute="leading" constant="23" id="3mI-Ud-fwP"/>
-                                    <constraint firstItem="RhJ-0e-SYB" firstAttribute="centerY" secondItem="YvY-g6-cfz" secondAttribute="centerY" type="default" id="9hK-Ev-X6e"/>
-                                    <constraint firstItem="aXy-Go-HrF" firstAttribute="bottom" secondItem="Twa-66-V9a" secondAttribute="bottom" type="default" id="Jl3-cx-nhB"/>
-                                    <constraint firstItem="RhJ-0e-SYB" firstAttribute="leading" secondItem="YvY-g6-cfz" secondAttribute="leading" constant="5" id="SCt-J3-D2r"/>
-                                    <constraint firstItem="A9Y-Uh-521" firstAttribute="leading" secondItem="Twa-66-V9a" secondAttribute="leading" type="default" id="V6i-5k-4DT"/>
-                                    <constraint firstItem="Xpc-JM-az0" firstAttribute="centerY" secondItem="RhJ-0e-SYB" secondAttribute="centerY" type="default" id="WLi-co-ey6"/>
-                                    <constraint firstItem="3eq-0N-0GN" firstAttribute="baseline" secondItem="vCZ-Bu-7gR" secondAttribute="baseline" type="default" id="bK6-wd-Q1e"/>
-                                    <constraint firstItem="3eq-0N-0GN" firstAttribute="top" secondItem="YvY-g6-cfz" secondAttribute="top" constant="12" id="hcg-uh-Gj4"/>
-                                    <constraint firstAttribute="trailing" secondItem="vCZ-Bu-7gR" secondAttribute="trailing" constant="19" id="koS-cb-GqK"/>
-                                    <constraint firstItem="3eq-0N-0GN" firstAttribute="top" secondItem="vCZ-Bu-7gR" secondAttribute="top" type="default" id="nrI-Of-Q1x"/>
-                                    <constraint firstItem="aXy-Go-HrF" firstAttribute="leading" secondItem="YvY-g6-cfz" secondAttribute="leading" type="default" id="om8-De-LeY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xpc-JM-az0" secondAttribute="trailing" constant="7" id="pPf-Pa-9Fl"/>
-                                    <constraint firstItem="A9Y-Uh-521" firstAttribute="centerY" secondItem="aXy-Go-HrF" secondAttribute="centerY" type="default" id="r1D-Ot-aO9"/>
-                                    <constraint firstItem="aXy-Go-HrF" firstAttribute="top" secondItem="YvY-g6-cfz" secondAttribute="top" type="default" id="sZw-JG-GQT"/>
-                                    <constraint firstItem="3eq-0N-0GN" firstAttribute="leading" secondItem="A9Y-Uh-521" secondAttribute="leading" type="default" id="x8W-wl-wYd"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="background" destination="aXy-Go-HrF" id="wIv-69-X31"/>
                                     <outlet property="briefContent" destination="Twa-66-V9a" id="8e2-ci-n71"/>
@@ -463,6 +379,36 @@
         <image name="detailTitle.png" width="320" height="58"/>
         <image name="fav_star.png" width="19" height="19"/>
     </resources>
+    <classes>
+        <class className="MyTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTabBarController.h"/>
+        </class>
+        <class className="NewsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NewsDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="original_webview" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="puretext_webview" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NewsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsTableViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
