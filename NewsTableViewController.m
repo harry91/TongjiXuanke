@@ -240,23 +240,30 @@
     
     if(!news.content)
     {
-        dispatch_async(kBgQueue, ^{
-            while(_reloading);
-            if([news.category.name isEqualToString:[xuankeModel catagoryForNews]])
-            {
-                [xuankeModel retreiveDetailForUrl:news.url];
-            }
-            else if([news.category.name isEqualToString:[sseModel catagoryForNews]])
-            {
-                [sseModel retreiveDetailForUrl:news.url];
-            }
-            while(!news.content);
-            [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
-        });
-        HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
-        //HUD.mode = MBProgressHUDModeAnnularDeterminate;
-        HUD.labelText = @"正在载入";
-        HUD.dimBackground = YES;
+        if([[ReachabilityChecker instance] hasInternetAccess])
+        {
+            dispatch_async(kBgQueue, ^{
+                while(_reloading);
+                if([news.category.name isEqualToString:[xuankeModel catagoryForNews]])
+                {
+                    [xuankeModel retreiveDetailForUrl:news.url];
+                }
+                else if([news.category.name isEqualToString:[sseModel catagoryForNews]])
+                {
+                    [sseModel retreiveDetailForUrl:news.url];
+                }
+                while(!news.content);
+                [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
+            });
+            HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+            //HUD.mode = MBProgressHUDModeAnnularDeterminate;
+            HUD.labelText = @"正在载入";
+            HUD.dimBackground = YES;
+        }
+        else
+        {
+            [self showNoInternetNotification];
+        }
     }
     else
     {
