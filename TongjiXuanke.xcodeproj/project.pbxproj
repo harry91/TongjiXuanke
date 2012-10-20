@@ -23,7 +23,6 @@
 		E4378FE31628D620008A85DF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4378FE21628D620008A85DF /* Default@2x.png */; };
 		E4378FE51628D620008A85DF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4378FE41628D620008A85DF /* Default-568h@2x.png */; };
 		E4378FE81628D620008A85DF /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4378FE61628D620008A85DF /* MainStoryboard.storyboard */; };
-		E4378FEB1628D620008A85DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4378FEA1628D620008A85DF /* ViewController.m */; };
 		E437900A162B393E008A85DF /* cellBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379008162B393E008A85DF /* cellBG@2x.png */; };
 		E437900B162B393E008A85DF /* cellBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379009162B393E008A85DF /* cellBG.png */; };
 		E437900E162B3B84008A85DF /* cellAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E437900C162B3B84008A85DF /* cellAccessory@2x.png */; };
@@ -126,8 +125,6 @@
 		E4378FE21628D620008A85DF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E4378FE41628D620008A85DF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E4378FE71628D620008A85DF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		E4378FE91628D620008A85DF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E4378FEA1628D620008A85DF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E4379008162B393E008A85DF /* cellBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBG@2x.png"; sourceTree = "<group>"; };
 		E4379009162B393E008A85DF /* cellBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBG.png; sourceTree = "<group>"; };
 		E437900C162B3B84008A85DF /* cellAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellAccessory@2x.png"; sourceTree = "<group>"; };
@@ -258,8 +255,6 @@
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
-				E4997B0216320C1A0020999B /* icon@2x.png */,
-				E4997B0016320C130020999B /* icon.png */,
 				E4AFCCE91630242100358B1B /* 3rd party */,
 				E4379097162C3746008A85DF /* CoreData */,
 				E437903F162B6768008A85DF /* FakeUUID */,
@@ -303,8 +298,6 @@
 				E4378FE61628D620008A85DF /* MainStoryboard.storyboard */,
 				E4379045162B68FC008A85DF /* MyTabBarController.h */,
 				E4379046162B68FC008A85DF /* MyTabBarController.m */,
-				E4378FE91628D620008A85DF /* ViewController.h */,
-				E4378FEA1628D620008A85DF /* ViewController.m */,
 				E4379022162B54F5008A85DF /* NewsTableViewController.h */,
 				E4379023162B54F5008A85DF /* NewsTableViewController.m */,
 				E4379018162B4872008A85DF /* NewsCell.h */,
@@ -335,6 +328,8 @@
 		E4379003162B38A6008A85DF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E4997B0216320C1A0020999B /* icon@2x.png */,
+				E4997B0016320C130020999B /* icon.png */,
 				E40607B9162E10120094475B /* tongzhi.css */,
 				E40607B8162E10120094475B /* newsdetail.html */,
 				E4379034162B6233008A85DF /* bg.png */,
@@ -655,7 +650,6 @@
 				E437902A162B5C70008A85DF /* XuankeModel.m in Sources */,
 				E4378FDB1628D620008A85DF /* main.m in Sources */,
 				E4378FDF1628D620008A85DF /* AppDelegate.m in Sources */,
-				E4378FEB1628D620008A85DF /* ViewController.m in Sources */,
 				E437901A162B4872008A85DF /* NewsCell.m in Sources */,
 				E4379024162B54F6008A85DF /* NewsTableViewController.m in Sources */,
 				E4379032162B6147008A85DF /* UILabel+Addition.m in Sources */,

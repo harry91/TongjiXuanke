@@ -53,9 +53,11 @@
     sseModel = [[SSEModel alloc] init];
     sseModel.delegate = self;
     
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(66.0f, 0.0f, 0.0f, 0.0f);
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging: self.tableView];
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        self.tableView.contentInset = UIEdgeInsetsMake(66.0f, 0.0f, 0.0f, 0.0f);
+        [_refreshHeaderView egoRefreshScrollViewDidEndDragging: self.tableView];
+    }
 }
 
 
@@ -408,11 +410,41 @@
 #pragma mark EGORefreshTableHeaderDelegate Methods
 
 
+
+-(void)showNoInternetNotification
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+	
+	// Configure for text only and offset down
+	hud.mode = MBProgressHUDModeText;
+	hud.labelText = @"没有网络连接";
+	hud.margin = 10.f;
+	hud.yOffset = 150.f;
+	hud.removeFromSuperViewOnHide = YES;
+	
+	[hud hide:YES afterDelay:3];
+    
+    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:1];
+}
+
+-(void)stopLoading
+{
+    _reloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
 -(void)startLoading
 {
-    _reloading = YES;
-    [xuankeModel start];
-    [sseModel start];
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        _reloading = YES;
+        [xuankeModel start];
+        [sseModel start];
+    }
+    else
+    {
+        [self showNoInternetNotification];
+    }
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
