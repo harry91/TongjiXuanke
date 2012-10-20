@@ -207,17 +207,20 @@
                                 <rect key="frame" x="0.0" y="5" width="320" height="499"/>
                             </imageView>
                             <webView contentMode="scaleToFill" scalesPageToFit="YES" id="60W-Vp-B3L" userLabel="original">
-                                <rect key="frame" x="0.0" y="54" width="320" height="450"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="447"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
                             <webView contentMode="scaleToFill" id="Hay-H0-0j0" userLabel="pure text">
-                                <rect key="frame" x="0.0" y="54" width="320" height="450"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="447"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
                             <view contentMode="scaleToFill" id="Z0q-EL-hry">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="detailTitle.png" id="xHq-ur-vYJ">
                                         <rect key="frame" x="0.0" y="-1" width="320" height="60"/>
