@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dateLabel.text = [NSString strTimeAgoFromDate:news.date];
+    self.dateLabel.text = [NSString stringByConvertingTimeToAgoFormatFromDate:news.date];
     self.titleLabel.text = news.title;
     self.categoryLabel.text = news.category.name;
     

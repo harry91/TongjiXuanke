@@ -26,6 +26,8 @@
     EGORefreshTableHeaderView *_refreshHeaderView;
     MBProgressHUD *HUD;
     BOOL _reloading;
+    
+    //UINavigationController *strangeBug;
 }
 //@property (strong, nonatomic) IBOutlet UITableView *tableView;
 

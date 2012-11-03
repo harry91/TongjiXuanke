@@ -10,7 +10,7 @@
 
 @implementation NSString (TimeConvertion)
 
-+(NSString*)strTimeAgoFromDate:(NSDate*)date;
++(NSString*)stringByConvertingTimeToAgoFormatFromDate:(NSDate*)date;
 {
     NSDate *myDate = date;
     

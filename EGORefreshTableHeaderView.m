@@ -58,6 +58,9 @@
 		_lastUpdatedLabel=label;
         _lastUpdatedLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"EGORefreshTableView_LastRefresh"
                                   ];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
 		[label release];
 		
 		label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 48.0f, self.frame.size.width, 20.0f)];

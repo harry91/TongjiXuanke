@@ -10,6 +10,6 @@
 
 @interface NSString (TimeConvertion)
 
-+(NSString*)strTimeAgoFromDate:(NSDate*)date;
++(NSString*)stringByConvertingTimeToAgoFormatFromDate:(NSDate*)date;
 
 @end

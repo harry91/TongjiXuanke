@@ -61,16 +61,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    [[UIApplication sharedApplication]
-     registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    [NSUserDefaults initialize];
     
-    // Clear application badge when app launches
-    application.applicationIconBadgeNumber = 0;
-
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if([ud objectForKey:@"password"])
+    {
+        // Override point for customization after application launch.
+        [[UIApplication sharedApplication]
+         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        
+        // Clear application badge when app launches
+        application.applicationIconBadgeNumber = 0;
+    }
+   
     [self customizeAppearance];
     
-    [NSUserDefaults initialize];
     
     return YES;
 }
@@ -88,6 +94,10 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     
 #if !TARGET_IPHONE_SIMULATOR
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if(![ud objectForKey:@"password"])
+        return;
     
 	// Get Bundle Info for Remote Registration (handy if you have more than one app)
 	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];

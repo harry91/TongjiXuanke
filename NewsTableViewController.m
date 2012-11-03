@@ -17,6 +17,8 @@
 #import "SettingModal.h"
 #import "ReachabilityChecker.h"
 #import "SSEModel.h"
+#import "NSString+EncryptAndDecrypt.h"
+
 
 @interface NewsTableViewController ()
 
@@ -45,10 +47,16 @@
 - (void)configureModel
 {
     xuankeModel = [[XuankeModel alloc] init];
-    xuankeModel.password = @"21434909cbfv";
-    xuankeModel.userName = @"102890";
-    xuankeModel.delegate = self;
     
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *username = [ud objectForKey:@"username"];
+    NSString *pwd = [ud objectForKey:@"password"];
+    pwd = [NSString stringByDecryptString:pwd];
+    
+    
+    xuankeModel.userName = username;
+    xuankeModel.password = pwd;
+    xuankeModel.delegate = self;
     
     sseModel = [[SSEModel alloc] init];
     sseModel.delegate = self;
@@ -75,7 +83,7 @@
     
     cell.title.text = news.title;
     cell.unreadIndicator.hidden = [news.haveread boolValue];
-    cell.dateandtime.text = [NSString strTimeAgoFromDate:news.date];
+    cell.dateandtime.text = [NSString stringByConvertingTimeToAgoFormatFromDate:news.date];
     
     NSString *briefContentPlaceHolder;
     if(!news.briefcontent)
@@ -88,7 +96,7 @@
         {
             if([[ReachabilityChecker instance] usingWIFI])
             {
-                briefContentPlaceHolder = @"正在下载...";
+                briefContentPlaceHolder = @"等待下载...";
             }
             else if(![[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
             {
@@ -134,6 +142,9 @@
     
     
     [self dataInit];
+    
+    NSLog(@"%@",self.navigationController);
+    //strangeBug = self.navigationController;
         // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -227,6 +238,8 @@
     NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
     
     [vc configureWithNews:news];
+    
+    NSLog(@"%@",self.navigationController);
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -395,6 +408,22 @@
 -(void)errorLoading:(NSError*)error
 {
     NSLog(@"Error:%@",error.domain);
+    
+    if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
+    {
+        UIAlertView *alert =
+        [[UIAlertView alloc] initWithTitle: @"账号验证失败"
+                                   message: @"您是不是更改过密码？"
+                                  delegate: self
+                         cancelButtonTitle: @"重试"
+                         otherButtonTitles: nil];
+        [alert show];
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+        
+        //[self performSegueWithIdentifier:@"backToLogin" sender:self];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark -
