@@ -10,9 +10,11 @@
 #import <MessageUI/MessageUI.h>
 
 @interface SettingTableViewController : UITableViewController<MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
+{
+    UIActionSheet *shareActionSheet;
+    UIActionSheet *logoutActionSheet;
+}
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *pushTimeCell;
-@property (weak, nonatomic) IBOutlet UILabel *pushTimeLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *categoryCell;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *onlyWIFIdownloadSwtich;
@@ -20,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *tellFriendCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *suggestionCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *usernameCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *autoCleanCell;
+@property (weak, nonatomic) IBOutlet UILabel *autoCleanTimeLabel;
 
 @end

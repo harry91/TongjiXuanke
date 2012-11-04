@@ -29,9 +29,12 @@
 {
     [super viewDidLoad];
 
+    
+    self.usernameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
@@ -43,8 +46,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Account Methods
+-(void)logout
+{
+    UIActionSheet* actionSheet;
+    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil];
+    
+    UITabBar* tabBar = self.tabBarController.tabBar;
+    logoutActionSheet = actionSheet;
+    [actionSheet showFromTabBar:tabBar];
+}
 
-
+#pragma mark - About Methods
 -(void)sendSuggestionEmail
 {
     if (![MFMailComposeViewController canSendMail]) {
@@ -110,6 +123,7 @@
         actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享", nil];
     }
     UITabBar* tabBar = self.tabBarController.tabBar;
+    shareActionSheet = actionSheet;
     [actionSheet showFromTabBar:tabBar];
 }
 
@@ -130,14 +144,16 @@
     {
         [self rateMe];
     }
+    else if(cell == self.usernameCell)
+    {
+        [self logout];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
 - (void)viewDidUnload {
     [self setUsernameLabel:nil];
-    [self setPushTimeCell:nil];
-    [self setPushTimeLabel:nil];
     [self setCategoryCell:nil];
     [self setCategoryLabel:nil];
     [self setOnlyWIFIdownloadSwtich:nil];
@@ -145,6 +161,8 @@
     [self setTellFriendCell:nil];
     [self setSuggestionCell:nil];
     [self setUsernameCell:nil];
+    [self setAutoCleanCell:nil];
+    [self setAutoCleanTimeLabel:nil];
     [super viewDidUnload];
 }
 
@@ -312,28 +330,49 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) {
-        case 0:
-        {
-            [self shareByMessage];
-            
-            break;
+    if(actionSheet == shareActionSheet)
+    {
+        switch (buttonIndex) {
+            case 0:
+            {
+                [self shareByMessage];
+                
+                break;
+            }
+            case 1:
+            {
+                [self shareByMail];
+                
+                break;
+            }
+            case 2:
+            {
+                if([SocialShareModal socialShareAvailable])
+                    [self shareByWeibo];
+                
+                break;
+            }
+            default:
+                break;
         }
-        case 1:
-        {
-            [self shareByMail];
-            
-            break;
+    }
+    if(actionSheet == logoutActionSheet)
+    {
+        switch (buttonIndex) {
+            case 0:
+            {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                //[self performSegueWithIdentifier:@"backToLogin" sender:self];
+                [self dismissViewControllerAnimated:YES completion:nil];
+
+                //NSLog(@"Logout");
+                break;
+            }
+            default:
+                break;
         }
-        case 2:
-        {
-            if([SocialShareModal socialShareAvailable])
-                [self shareByWeibo];
-            
-            break;
-        }
-        default:
-            break;
     }
 }
 

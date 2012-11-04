@@ -420,7 +420,8 @@
         [alert show];
         
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
         //[self performSegueWithIdentifier:@"backToLogin" sender:self];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
