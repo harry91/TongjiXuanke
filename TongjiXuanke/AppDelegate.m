@@ -195,6 +195,43 @@
 	NSLog(@"Register URL: %@", url);
 	NSLog(@"Return Data: %@", returnData);
     
+    
+    //drop all subscrible
+    {
+        NSString *urlString = [@"/APNS/dropNotice.php?"stringByAppendingString:@"token="];
+        urlString = [urlString stringByAppendingString:deviceToken];
+        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSLog(@"Register URL: %@", url);
+        NSLog(@"Return Data: %@", returnData);
+    }
+    //re-subscrible Xuanke
+    {
+        NSString *urlString = [@"/APNS/regNotice.php?"stringByAppendingString:@"token="];
+        urlString = [urlString stringByAppendingString:deviceToken];
+        urlString = [urlString stringByAppendingString:@"&notice="];
+        urlString = [urlString stringByAppendingString:@"2"];
+
+        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSLog(@"Register URL: %@", url);
+        NSLog(@"Return Data: %@", returnData);
+    }
+    //re-subscrible SSE
+    {
+        NSString *urlString = [@"/APNS/regNotice.php?"stringByAppendingString:@"token="];
+        urlString = [urlString stringByAppendingString:deviceToken];
+        urlString = [urlString stringByAppendingString:@"&notice="];
+        urlString = [urlString stringByAppendingString:@"3"];
+        
+        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSLog(@"Register URL: %@", url);
+        NSLog(@"Return Data: %@", returnData);
+    }
 #endif
 }
 

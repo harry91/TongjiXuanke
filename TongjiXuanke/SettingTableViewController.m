@@ -135,7 +135,7 @@
         
         NSString *subject = [NSString stringWithFormat:@"同济通知早知道 v%@ 用户反馈",appVersion];
         
-        NSString *receiver = [NSString stringWithFormat:@"cbfvcbfv@126.com"];
+        NSString *receiver = [NSString stringWithFormat:@"tongzhizaozhidao@126.com"];
         [picker setToRecipients:[NSArray arrayWithObject:receiver]];
         
         [picker setSubject:subject];
@@ -348,6 +348,11 @@
     SocialShareModal *socialModal = [[SocialShareModal alloc] init];
     socialModal.targetViewController = self.tabBarController;
     socialModal.postText = @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。";
+    
+    
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://sbhhbs.com/static/test.jpg"]];
+    UIImage *image = [UIImage imageWithData:data];
+    socialModal.postImageList = @[image];
     [socialModal sendWeiboMessage];
 }
 
