@@ -244,7 +244,7 @@
     {
         case MFMailComposeResultCancelled: {
 //            message = NSLocalizedString(@"发送取消", nil);
-//            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:YES];
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
 //                                                                message:nil
 //                                                               delegate:nil
@@ -255,7 +255,7 @@
         }
         case MFMailComposeResultSaved: {
 //            message = NSLocalizedString(@"保存成功", nil);
-//            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:YES];
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
 //                                                                message:nil
 //                                                               delegate:nil
@@ -267,7 +267,7 @@
         case MFMailComposeResultSent: {
 //            message = NSLocalizedString(@"发送成功", nil);
 ////            [((RKTabBarController*)[[UIApplication sharedApplication] delegate].window.rootViewController) dismissModalViewControllerAnimated:YES];
-//            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:YES];
 //
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
 //                                                                message:NSLocalizedString(@"感谢您的使用！", nil)
@@ -303,7 +303,7 @@
     {
         case MessageComposeResultCancelled: {
 //            message = NSLocalizedString(@"您已取消发送", nil);
-//            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:YES];
 //
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
 //                                                                message:nil
@@ -315,7 +315,7 @@
         }
         case MessageComposeResultSent: {
 //            message = NSLocalizedString(@"发送成功", nil);
-//            [self dismissModalViewControllerAnimated:YES];
+            [self dismissModalViewControllerAnimated:YES];
 //
 //            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
 //                                                                message:NSLocalizedString(@"感谢您的使用", nil)
