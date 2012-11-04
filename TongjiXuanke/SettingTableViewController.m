@@ -8,6 +8,7 @@
 
 #import "SettingTableViewController.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "SocialShareModal.h"
 
 @interface SettingTableViewController ()
 
@@ -99,7 +100,15 @@
 
 -(void)tellFriend
 {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享", nil];
+    UIActionSheet* actionSheet;
+    if([SocialShareModal socialShareAvailable])
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享",@"微博分享", nil];
+    }
+    else
+    {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享", nil];
+    }
     UITabBar* tabBar = self.tabBarController.tabBar;
     [actionSheet showFromTabBar:tabBar];
 }
@@ -249,6 +258,14 @@
 
 #pragma mark - Share methods
 
+- (void)shareByWeibo
+{
+    SocialShareModal *socialModal = [[SocialShareModal alloc] init];
+    socialModal.targetViewController = self.tabBarController;
+    socialModal.postText = @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。";
+    [socialModal sendWeiboMessage];
+}
+
 - (void)shareByMessage
 {
     if (![MFMessageComposeViewController canSendText]) {
@@ -263,7 +280,7 @@
         MFMessageComposeViewController* picker = [[MFMessageComposeViewController alloc] init];
         picker.messageComposeDelegate = self;
         
-        NSString *body = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，在也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
+        NSString *body = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
         [picker setBody:body];
         [self presentModalViewController:picker animated:YES];
     }
@@ -285,7 +302,7 @@
         picker.modalPresentationStyle = UIModalPresentationPageSheet;
         NSString *subject = [NSString stringWithFormat:@"推荐你使用通知早知道"];
         [picker setSubject:subject];
-        NSString *emailBody = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，在也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
+        NSString *emailBody = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
         [picker setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:picker animated:YES];
     }
@@ -305,6 +322,13 @@
         case 1:
         {
             [self shareByMail];
+            
+            break;
+        }
+        case 2:
+        {
+            if([SocialShareModal socialShareAvailable])
+                [self shareByWeibo];
             
             break;
         }
