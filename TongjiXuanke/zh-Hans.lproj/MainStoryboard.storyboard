@@ -81,10 +81,10 @@
             </objects>
             <point key="canvasLocation" x="1889" y="805"/>
         </scene>
-        <!--Table View Controller - 设置-->
+        <!--Setting Table View Controller - 设置-->
         <scene sceneID="8Pa-ho-Nts">
             <objects>
-                <tableViewController id="a3L-Oj-0yo" sceneMemberID="viewController">
+                <tableViewController id="a3L-Oj-0yo" customClass="SettingTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1OH-Ks-b2Q">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,6 +260,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="设置" id="4FY-t8-TFd"/>
+                    <connections>
+                        <outlet property="categoryCell" destination="Ag6-hl-5Bf" id="mZ4-Fw-QBq"/>
+                        <outlet property="categoryLabel" destination="Nyd-Cc-yYS" id="J9r-bd-gPB"/>
+                        <outlet property="onlyWIFIdownloadSwtich" destination="2Bf-EJ-jM2" id="hVq-Cz-9IN"/>
+                        <outlet property="pushTimeCell" destination="dyN-XF-Adi" id="uie-Pp-bNU"/>
+                        <outlet property="pushTimeLabel" destination="BnK-ky-TBR" id="d6s-m2-3GH"/>
+                        <outlet property="rateMeCell" destination="O1p-Ov-ZZU" id="ZFk-aC-ddx"/>
+                        <outlet property="suggestionCell" destination="hfh-Eu-fUj" id="Y0d-4h-KfX"/>
+                        <outlet property="tellFriendCell" destination="kRH-Tz-zTc" id="fLF-1V-L7H"/>
+                        <outlet property="usernameCell" destination="FBA-Qo-bEd" id="wXs-tQ-0dc"/>
+                        <outlet property="usernameLabel" destination="D1O-Hp-k1m" id="S09-Te-BA9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3U-oL-zlu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -525,46 +537,6 @@
         <image name="loginFields.png" width="284" height="96"/>
         <image name="logo.png" width="241" height="65"/>
     </resources>
-    <classes>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="logo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="noticeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="studentNumberTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MyTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTabBarController.h"/>
-        </class>
-        <class className="NewsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NewsDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="original_webview" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="puretext_webview" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NewsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsTableViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -18,6 +18,10 @@
  * of your app.
  */
 
+- (NSString *) platform;
+
+- (NSString *) platformString;
+
 - (NSString *) uniqueDeviceIdentifier;
 
 /*
