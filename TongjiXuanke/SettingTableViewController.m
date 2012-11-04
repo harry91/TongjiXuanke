@@ -9,6 +9,7 @@
 #import "SettingTableViewController.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "SocialShareModal.h"
+#import "SettingModal.h"
 
 @interface SettingTableViewController ()
 
@@ -32,6 +33,12 @@
     
     self.usernameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
+    [self setAutoCleanTime: [[SettingModal instance] autoCleanInterval]];
+    
+    [self.onlyWIFIdownloadSwtich setOn:![[SettingModal instance] shouldDownloadAllContentWithoutWIFI]];
+    
+    [self.onlyWIFIdownloadSwtich addTarget:self action:@selector(downloadSwitchChanged:) forControlEvents:UIControlEventValueChanged]; 
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 
@@ -47,7 +54,7 @@
 }
 
 #pragma mark - Account Methods
--(void)logout
+- (void)logout
 {
     UIActionSheet* actionSheet;
     actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil];
@@ -56,6 +63,47 @@
     logoutActionSheet = actionSheet;
     [actionSheet showFromTabBar:tabBar];
 }
+
+-(void)downloadSwitchChanged:(id)sender
+{
+    UISwitch *switchButton = (UISwitch*)sender;
+    BOOL isButtonOn = [switchButton isOn];
+    [[SettingModal instance] setShouldDownloadAllContentWithoutWIFI:!isButtonOn];
+}
+
+- (void)setAutoCleanTime:(int)month
+{
+    NSLog(@"auto clean : %d",month);
+    NSString *text;
+    if(month == 0)
+    {
+        text = @"从不";
+    }
+    else
+    {
+        text = [NSString stringWithFormat:@"%d个月前",month];
+    }
+    self.autoCleanTimeLabel.text = text;
+    [[SettingModal instance] setAutoCleanInterval:month];
+    
+    [self cleanTableSelection];
+}
+
+- (void)autoCleanShowPicker
+{
+    ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        [self setAutoCleanTime:selectedIndex];
+    };
+    
+    ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
+        NSLog(@"AutoClean Picker Canceled");
+    };
+    
+    NSArray *months = @[@"从不", @"1个月前",@"2个月前",@"3个月前",@"4个月前",@"5个月前",@"6个月前",@"7个月前",@"8个月前",@"9个月前",@"10个月前",@"11个月前",@"12个月前"];
+    
+    [ActionSheetStringPicker showPickerWithTitle:@"自动清除" rows:months initialSelection:[[SettingModal instance] autoCleanInterval] doneBlock:done cancelBlock:cancel origin:self.autoCleanCell];
+}
+
 
 #pragma mark - About Methods
 -(void)sendSuggestionEmail
@@ -97,6 +145,8 @@
         [self presentModalViewController:picker animated:YES];
 //        [[[UIApplication sharedApplication] delegate].window.rootViewController presentModalViewController:picker animated:YES];
     }
+    
+    [self cleanTableSelection];
 }
 
 -(void)rateMe
@@ -108,6 +158,8 @@
     NSString* url = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8", appid];
     
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    
+    [self cleanTableSelection];
 }
 
 
@@ -125,9 +177,21 @@
     UITabBar* tabBar = self.tabBarController.tabBar;
     shareActionSheet = actionSheet;
     [actionSheet showFromTabBar:tabBar];
+    
+    [self cleanTableSelection];
 }
 
+
+
+
+
 #pragma mark - Table view delegate
+
+- (void)cleanTableSelection
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -148,7 +212,10 @@
     {
         [self logout];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    else if(cell == self.autoCleanCell)
+    {
+        [self autoCleanShowPicker];
+    }
     
 }
 
@@ -374,6 +441,8 @@
                 break;
         }
     }
+    
+    [self cleanTableSelection];
 }
 
 

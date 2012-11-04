@@ -11,5 +11,10 @@
 @interface SettingModal : NSObject
 
 +(SettingModal*)instance;
+
 -(BOOL)shouldDownloadAllContentWithoutWIFI;
+-(void)setShouldDownloadAllContentWithoutWIFI:(BOOL)value;
+
+-(int)autoCleanInterval;
+-(void)setAutoCleanInterval:(int)value;
 @end

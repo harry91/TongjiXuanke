@@ -30,9 +30,32 @@ SettingModal* _settinginstance;
     }
     return _settinginstance;
 }
+
 -(BOOL)shouldDownloadAllContentWithoutWIFI
 {
-    return NO;
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud boolForKey:@"shouldDownloadAllContentWithoutWIFI"];
 }
+
+-(void)setShouldDownloadAllContentWithoutWIFI:(BOOL)value
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:value forKey:@"shouldDownloadAllContentWithoutWIFI"];
+    [ud synchronize];
+}
+
+-(int)autoCleanInterval
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud integerForKey:@"autoCleanInterval"];
+}
+
+-(void)setAutoCleanInterval:(int)value;
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:value forKey:@"autoCleanInterval"];
+    [ud synchronize];
+}
+
 
 @end
