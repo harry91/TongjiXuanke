@@ -42,6 +42,19 @@
 {
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"选课网通知"];
     self.navigationItem.titleView = titleLabel;
+    
+    
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Left"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(showLeft)];
+    self.navigationItem.leftBarButtonItem = left;
+}
+
+- (void) showLeft
+{
+    UIViewController *vc = [self.revealSideViewController controllerForSide:PPRevealSideDirectionLeft];
+    [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft withOffset:80 animated:YES];
 }
 
 - (void)configureModel

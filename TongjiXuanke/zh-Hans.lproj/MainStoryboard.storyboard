@@ -7,7 +7,7 @@
         <!--Navigation Controller - 通知-->
         <scene sceneID="yUD-hy-Ik8">
             <objects>
-                <navigationController definesPresentationContext="YES" id="SV4-Bn-5Xr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="newsView" definesPresentationContext="YES" id="SV4-Bn-5Xr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="通知" id="ws8-Qu-o8S"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bPK-b2-Yf1">
@@ -67,7 +67,7 @@
         <!--Navigation Controller - 设置-->
         <scene sceneID="gyg-Uf-DGN">
             <objects>
-                <navigationController definesPresentationContext="YES" id="FtW-Mv-R3e" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="settingView" definesPresentationContext="YES" id="FtW-Mv-R3e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="设置" id="MCf-Oa-InD"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SZu-12-sJv">

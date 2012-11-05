@@ -15,7 +15,11 @@
 {
     MBProgressHUD *HUD;
     LogInModal *loginModel;
+    
 }
+@property (strong, nonatomic) PPRevealSideViewController *revealSideViewController;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *studentNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
