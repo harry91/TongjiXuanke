@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface SettingModal : NSObject
+{
+    NSArray *categorys;
+}
 
 +(SettingModal*)instance;
 
@@ -17,4 +20,12 @@
 
 -(int)autoCleanInterval;
 -(void)setAutoCleanInterval:(int)value;
+
+-(int)numberOfCategory;
+-(NSString*) nameForCategoryAtIndex:(int)index;
+-(int)serverIDForCategoryAtIndex:(int)index;
+
+-(BOOL)hasSubscribleCategoryAtIndex:(int)index;
+-(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value;
+
 @end

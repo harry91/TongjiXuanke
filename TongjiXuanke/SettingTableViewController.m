@@ -11,6 +11,7 @@
 #import "SocialShareModal.h"
 #import "SettingModal.h"
 
+
 @interface SettingTableViewController ()
 
 @end
@@ -26,18 +27,23 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 
-    
+-(void)configureData
+{
     self.usernameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     [self setAutoCleanTime: [[SettingModal instance] autoCleanInterval]];
     
     [self.onlyWIFIdownloadSwtich setOn:![[SettingModal instance] shouldDownloadAllContentWithoutWIFI]];
     
-    [self.onlyWIFIdownloadSwtich addTarget:self action:@selector(downloadSwitchChanged:) forControlEvents:UIControlEventValueChanged]; 
+    [self.onlyWIFIdownloadSwtich addTarget:self action:@selector(downloadSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self configureData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -52,6 +58,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Account Methods
 - (void)logout

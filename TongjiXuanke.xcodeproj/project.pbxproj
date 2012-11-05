@@ -126,6 +126,7 @@
 		E4AFCD1F1631895A00358B1B /* ReachabilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */; };
 		E4AFCD2216318CBF00358B1B /* SettingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD2116318CBF00358B1B /* SettingModal.m */; };
 		E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C33B8316481E8500E65C6B /* APNSManager.m */; };
+		E4DA0CD01648329C0076897A /* CategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DA0CCF1648329C0076897A /* CategorySelectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -298,6 +299,8 @@
 		E4AFCD2116318CBF00358B1B /* SettingModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModal.m; sourceTree = "<group>"; };
 		E4C33B8216481E8500E65C6B /* APNSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APNSManager.h; path = ../APNSManager.h; sourceTree = "<group>"; };
 		E4C33B8316481E8500E65C6B /* APNSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APNSManager.m; path = ../APNSManager.m; sourceTree = "<group>"; };
+		E4DA0CCE1648329C0076897A /* CategorySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectionViewController.h; sourceTree = "<group>"; };
+		E4DA0CCF1648329C0076897A /* CategorySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySelectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +384,8 @@
 				E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */,
 				E4AFCD2016318CBF00358B1B /* SettingModal.h */,
 				E4AFCD2116318CBF00358B1B /* SettingModal.m */,
+				E4DA0CCE1648329C0076897A /* CategorySelectionViewController.h */,
+				E4DA0CCF1648329C0076897A /* CategorySelectionViewController.m */,
 				E4378FD51628D620008A85DF /* Supporting Files */,
 			);
 			path = TongjiXuanke;
@@ -835,6 +840,7 @@
 				E49B74221646C6F200CE4324 /* ActionSheetStringPicker.m in Sources */,
 				E49B74231646C6F200CE4324 /* DistancePickerView.m in Sources */,
 				E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */,
+				E4DA0CD01648329C0076897A /* CategorySelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

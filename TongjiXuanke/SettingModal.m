@@ -17,7 +17,10 @@ SettingModal* _settinginstance;
 {
     if(self = [super init])
     {
-        
+        categorys = @[
+            @{@"id" : @2 , @"name" : @"选课网"},
+            @{@"id" : @3 , @"name" : @"软件学院"}
+        ];
     }
     return self;
 }
@@ -56,6 +59,34 @@ SettingModal* _settinginstance;
     [ud setInteger:value forKey:@"autoCleanInterval"];
     [ud synchronize];
 }
+
+
+-(int)numberOfCategory
+{
+    return [categorys count];
+}
+
+-(NSString*) nameForCategoryAtIndex:(int)index
+{
+    return categorys[index][@"name"];
+}
+
+-(int)serverIDForCategoryAtIndex:(int)index
+{
+    NSNumber *num = categorys[index][@"id"];
+    return [num integerValue];
+}
+
+-(BOOL)hasSubscribleCategoryAtIndex:(int)index
+{
+    return YES;
+}
+
+-(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value
+{
+    return YES;
+}
+
 
 
 @end
