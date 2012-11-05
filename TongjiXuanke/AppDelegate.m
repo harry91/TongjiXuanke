@@ -59,11 +59,18 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
-
+- (void)initUserDefault
+{
+    [NSUserDefaults initialize];
+    
+    NSDictionary *userDefaultsDefaults = @{@"selectedCategoryArray" : @[@0]};
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [NSUserDefaults initialize];
+    [self initUserDefault];
     
     [self customizeAppearance];
     

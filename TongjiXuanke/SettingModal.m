@@ -7,6 +7,7 @@
 //
 
 #import "SettingModal.h"
+#import "APNSManager.h"
 
 @implementation SettingModal
 
@@ -21,6 +22,9 @@ SettingModal* _settinginstance;
             @{@"id" : @2 , @"name" : @"选课网"},
             @{@"id" : @3 , @"name" : @"软件学院"}
         ];
+        
+        subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
+        
     }
     return self;
 }
@@ -79,12 +83,54 @@ SettingModal* _settinginstance;
 
 -(BOOL)hasSubscribleCategoryAtIndex:(int)index
 {
-    return YES;
+    for(NSNumber *n in subscribledIndex)
+    {
+        int num = [n integerValue];
+        if(num == index)
+            return YES;
+    }
+    return NO;
+}
+
+-(int)subscribledCount
+{
+    return subscribledIndex.count;
 }
 
 -(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value
 {
-    return YES;
+    BOOL result;
+    if(value)
+    {
+        result = [APNSManager subscribleCategory:[self serverIDForCategoryAtIndex:index]];
+    }
+    else
+    {
+        result = [APNSManager desubscribleCategory:[self serverIDForCategoryAtIndex:index]];
+    }
+    if(result)
+    {
+        if(value)
+        {
+            if(![self hasSubscribleCategoryAtIndex:index])
+            {
+                [subscribledIndex addObject:[NSNumber numberWithInt:index]];
+            }
+        }
+        else
+        {
+            for(int i = 0; i < subscribledIndex.count; i++)
+            {
+                NSNumber *n = subscribledIndex[i];
+                int num = [n integerValue];
+                if(num == index)
+                    [subscribledIndex removeObjectAtIndex:i];
+            }
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:subscribledIndex forKey:@"selectedCategoryArray"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return result;
 }
 
 

@@ -9,6 +9,8 @@
 #import "CategorySelectionViewController.h"
 #import "UIBarButtonItem+Addtion.h"
 #import "SettingModal.h"
+#import "MBProgressHUD.h"
+#import "ReachabilityChecker.h"
 
 @interface CategorySelectionViewController ()
 
@@ -31,11 +33,6 @@
 
     [self configureNavBar];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +50,22 @@
 - (void)configureNavBar {
     UIBarButtonItem *backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
+}
+
+
+-(void)showNoInternetNotification
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+	
+	// Configure for text only and offset down
+	hud.mode = MBProgressHUDModeText;
+	hud.labelText = @"设置失败，请检查网络连接";
+	hud.margin = 10.f;
+	hud.yOffset = 150.f;
+	hud.removeFromSuperViewOnHide = YES;
+	
+	[hud hide:YES afterDelay:3];
+    
 }
 
 #pragma mark - Table view data source
@@ -95,44 +108,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -140,13 +115,24 @@
 {
     if(indexPath.row == [[SettingModal instance] numberOfCategory])
         return;
-        
+    
+    if(![[ReachabilityChecker instance] hasInternetAccess])
+    {
+        [self showNoInternetNotification];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     BOOL selected = cell.accessoryType == UITableViewCellAccessoryNone ? NO : YES;
     selected = !selected;
     if([[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected])
     {
         cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    }
+    else
+    {
+        [self showNoInternetNotification];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

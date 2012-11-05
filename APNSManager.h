@@ -15,7 +15,7 @@
 +(BOOL)RegisterDevice:(NSData*)devToken;
 +(BOOL)cleanAllSubscrible;
 +(BOOL)subscribleCategory:(int)value;
-
++(BOOL)desubscribleCategory:(int)value;
 +(BOOL)reSubscrible;
 
 @end

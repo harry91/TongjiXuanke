@@ -139,6 +139,27 @@ NSString *host = @"www.sbhhbs.com";
     return YES;
 }
 
++(BOOL)desubscribleCategory:(int)value
+{
+    if(!deviceToken)
+        return NO;
+    
+    NSString *urlString = [@"/APNS/delNotice.php?"stringByAppendingString:@"token="];
+    urlString = [urlString stringByAppendingString:deviceToken];
+    urlString = [urlString stringByAppendingString:@"&notice="];
+    urlString = [urlString stringByAppendingString:[NSString stringWithFormat:@"%d",value]];
+    
+    NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSLog(@"Desubscrible URL: %@", url);
+    NSString* aStr;
+    aStr = [[NSString alloc] initWithData:returnData encoding:NSASCIIStringEncoding];
+	NSLog(@"Desubscrible Return String: %@", aStr);
+    
+    return YES;
+}
+
 +(BOOL)subscribleCategory:(int)value
 {
     if(!deviceToken)

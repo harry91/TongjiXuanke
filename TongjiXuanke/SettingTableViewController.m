@@ -37,14 +37,19 @@
     [self.onlyWIFIdownloadSwtich setOn:![[SettingModal instance] shouldDownloadAllContentWithoutWIFI]];
     
     [self.onlyWIFIdownloadSwtich addTarget:self action:@selector(downloadSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    self.categoryLabel.text = [NSString stringWithFormat:@"已选择%d个",[[SettingModal instance] subscribledCount]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self configureData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    [self configureData];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 

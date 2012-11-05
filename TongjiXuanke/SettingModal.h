@@ -11,6 +11,7 @@
 @interface SettingModal : NSObject
 {
     NSArray *categorys;
+    NSMutableArray *subscribledIndex;
 }
 
 +(SettingModal*)instance;
@@ -27,5 +28,6 @@
 
 -(BOOL)hasSubscribleCategoryAtIndex:(int)index;
 -(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value;
+-(int)subscribledCount;
 
 @end
