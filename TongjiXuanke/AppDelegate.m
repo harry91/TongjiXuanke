@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "APNSManager.h"
+
 @implementation AppDelegate
 
 
@@ -63,18 +65,6 @@
 {
     [NSUserDefaults initialize];
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    if([ud objectForKey:@"password"])
-    {
-        // Override point for customization after application launch.
-        [[UIApplication sharedApplication]
-         registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-        
-        // Clear application badge when app launches
-        application.applicationIconBadgeNumber = 0;
-    }
-   
     [self customizeAppearance];
     
     
@@ -94,144 +84,9 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     
 #if !TARGET_IPHONE_SIMULATOR
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-    if(![ud objectForKey:@"password"])
-        return;
+    [APNSManager RegisterDevice:devToken];
     
-	// Get Bundle Info for Remote Registration (handy if you have more than one app)
-	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
-    appName = @"pushdemo";
-	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    
-	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
-	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    
-	// Set the defaults to disabled unless we find otherwise...
-	NSString *pushBadge = @"disabled";
-	NSString *pushAlert = @"disabled";
-	NSString *pushSound = @"disabled";
-    
-	// Check what Registered Types are turned on. This is a bit tricky since if two are enabled, and one is off, it will return a number 2... not telling you which
-	// one is actually disabled. So we are literally checking to see if rnTypes matches what is turned on, instead of by number. The "tricky" part is that the
-	// single notification types will only match if they are the ONLY one enabled.  Likewise, when we are checking for a pair of notifications, it will only be
-	// true if those two notifications are on.  This is why the code is written this way
-	if(rntypes == UIRemoteNotificationTypeBadge){
-		pushBadge = @"enabled";
-	}
-	else if(rntypes == UIRemoteNotificationTypeAlert){
-		pushAlert = @"enabled";
-	}
-	else if(rntypes == UIRemoteNotificationTypeSound){
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)){
-		pushBadge = @"enabled";
-		pushAlert = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)){
-		pushBadge = @"enabled";
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)){
-		pushAlert = @"enabled";
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)){
-		pushBadge = @"enabled";
-		pushAlert = @"enabled";
-		pushSound = @"enabled";
-	}
-    
-	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
-	UIDevice *dev = [UIDevice currentDevice];
-	NSString *deviceUuid = [dev uniqueGlobalDeviceIdentifier];
-    NSString *deviceName = dev.name;
-	NSString *deviceModel = dev.model;
-	NSString *deviceSystemVersion = dev.systemVersion;
-    
-	// Prepare the Device Token for Registration (remove spaces and < >)
-	NSString *deviceToken = [[[[devToken description]
-                               stringByReplacingOccurrencesOfString:@"<"withString:@""]
-                              stringByReplacingOccurrencesOfString:@">" withString:@""]
-                             stringByReplacingOccurrencesOfString: @" " withString: @""];
-    
-	// Build URL String for Registration
-	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
-	// !!! SAMPLE: "secure.awesomeapp.com"
-	NSString *host = @"www.sbhhbs.com";
-    
-	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED
-	// !!! ( MUST START WITH / AND END WITH ? ).
-	// !!! SAMPLE: "/path/to/apns.php?"
-	NSString *urlString = [@"/APNS/apns.php?"stringByAppendingString:@"task=register"];
-    
-	urlString = [urlString stringByAppendingString:@"&appname="];
-	urlString = [urlString stringByAppendingString:appName];
-	urlString = [urlString stringByAppendingString:@"&appversion="];
-	urlString = [urlString stringByAppendingString:appVersion];
-	urlString = [urlString stringByAppendingString:@"&deviceuid="];
-	urlString = [urlString stringByAppendingString:deviceUuid];
-	urlString = [urlString stringByAppendingString:@"&devicetoken="];
-	urlString = [urlString stringByAppendingString:deviceToken];
-	urlString = [urlString stringByAppendingString:@"&devicename="];
-	urlString = [urlString stringByAppendingString:deviceName];
-	urlString = [urlString stringByAppendingString:@"&devicemodel="];
-	urlString = [urlString stringByAppendingString:deviceModel];
-	urlString = [urlString stringByAppendingString:@"&deviceversion="];
-	urlString = [urlString stringByAppendingString:deviceSystemVersion];
-	urlString = [urlString stringByAppendingString:@"&pushbadge="];
-	urlString = [urlString stringByAppendingString:pushBadge];
-	urlString = [urlString stringByAppendingString:@"&pushalert="];
-	urlString = [urlString stringByAppendingString:pushAlert];
-	urlString = [urlString stringByAppendingString:@"&pushsound="];
-	urlString = [urlString stringByAppendingString:pushSound];
-    
-	// Register the Device Data
-	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
-	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	NSLog(@"Register URL: %@", url);
-	NSLog(@"Return Data: %@", returnData);
-    
-    
-    //drop all subscrible
-    {
-        NSString *urlString = [@"/APNS/dropNotice.php?"stringByAppendingString:@"token="];
-        urlString = [urlString stringByAppendingString:deviceToken];
-        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        NSLog(@"Register URL: %@", url);
-        NSLog(@"Return Data: %@", returnData);
-    }
-    //re-subscrible Xuanke
-    {
-        NSString *urlString = [@"/APNS/regNotice.php?"stringByAppendingString:@"token="];
-        urlString = [urlString stringByAppendingString:deviceToken];
-        urlString = [urlString stringByAppendingString:@"&notice="];
-        urlString = [urlString stringByAppendingString:@"2"];
-
-        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        NSLog(@"Register URL: %@", url);
-        NSLog(@"Return Data: %@", returnData);
-    }
-    //re-subscrible SSE
-    {
-        NSString *urlString = [@"/APNS/regNotice.php?"stringByAppendingString:@"token="];
-        urlString = [urlString stringByAppendingString:deviceToken];
-        urlString = [urlString stringByAppendingString:@"&notice="];
-        urlString = [urlString stringByAppendingString:@"3"];
-        
-        NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        NSLog(@"Register URL: %@", url);
-        NSLog(@"Return Data: %@", returnData);
-    }
 #endif
 }
 

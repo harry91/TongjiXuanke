@@ -125,6 +125,7 @@
 		E4AFCD1C1631889700358B1B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1B1631889700358B1B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E4AFCD1F1631895A00358B1B /* ReachabilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */; };
 		E4AFCD2216318CBF00358B1B /* SettingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD2116318CBF00358B1B /* SettingModal.m */; };
+		E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C33B8316481E8500E65C6B /* APNSManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -295,6 +296,8 @@
 		E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityChecker.m; sourceTree = "<group>"; };
 		E4AFCD2016318CBF00358B1B /* SettingModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModal.h; sourceTree = "<group>"; };
 		E4AFCD2116318CBF00358B1B /* SettingModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModal.m; sourceTree = "<group>"; };
+		E4C33B8216481E8500E65C6B /* APNSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APNSManager.h; path = ../APNSManager.h; sourceTree = "<group>"; };
+		E4C33B8316481E8500E65C6B /* APNSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APNSManager.m; path = ../APNSManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +362,8 @@
 				E4379025162B58B2008A85DF /* Modal */,
 				E4378FDD1628D620008A85DF /* AppDelegate.h */,
 				E4378FDE1628D620008A85DF /* AppDelegate.m */,
+				E4C33B8216481E8500E65C6B /* APNSManager.h */,
+				E4C33B8316481E8500E65C6B /* APNSManager.m */,
 				E43790D3162CA0CB008A85DF /* NewsDetailViewController.h */,
 				E43790D4162CA0CD008A85DF /* NewsDetailViewController.m */,
 				E4378FE61628D620008A85DF /* MainStoryboard.storyboard */,
@@ -829,6 +834,7 @@
 				E49B74211646C6F200CE4324 /* ActionSheetDistancePicker.m in Sources */,
 				E49B74221646C6F200CE4324 /* ActionSheetStringPicker.m in Sources */,
 				E49B74231646C6F200CE4324 /* DistancePickerView.m in Sources */,
+				E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,8 +869,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (Q72CFHAJ2T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (57A72U5VT9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Boheng Song (57A72U5VT9)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -879,7 +885,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "00380B9B-4203-47EF-BC16-4A6AAB2314C4";
+				PROVISIONING_PROFILE = "795928AB-4175-4A5E-AFC5-D70D51BD39B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "795928AB-4175-4A5E-AFC5-D70D51BD39B3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -893,8 +900,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (Q72CFHAJ2T)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Boheng Song";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Boheng Song";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -902,7 +909,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "00380B9B-4203-47EF-BC16-4A6AAB2314C4";
+				PROVISIONING_PROFILE = "EBDD1C1F-5FA1-40EB-8ABE-4C2B156A3DC3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EBDD1C1F-5FA1-40EB-8ABE-4C2B156A3DC3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

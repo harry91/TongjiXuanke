@@ -18,7 +18,7 @@
 #import "ReachabilityChecker.h"
 #import "SSEModel.h"
 #import "NSString+EncryptAndDecrypt.h"
-
+#import "APNSManager.h"
 
 @interface NewsTableViewController ()
 
@@ -131,6 +131,18 @@
     _refreshHeaderView = view;
 }
 
+- (void)APNSThread
+{
+    [APNSManager reSubscrible];
+}
+
+- (void)configureAPNS
+{
+    [APNSManager requestAPNS];
+    [APNSManager cleanBadge];
+    [self performSelectorInBackground:@selector(APNSThread) withObject:nil];
+}
+
 #pragma mark - Life Cycle
 - (void)viewDidLoad
 {
@@ -140,8 +152,10 @@
     [self configurePullToRefresh];
     [self configureModel];
     
-    
     [self dataInit];
+    
+    [self configureAPNS];
+    
     
     NSLog(@"%@",self.navigationController);
     //strangeBug = self.navigationController;
