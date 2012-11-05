@@ -40,12 +40,23 @@
     {
         self.studentNumberTextField.hidden = YES;
         self.passwordTextField.hidden = YES;
-        self.logo.hidden = YES;
+        self.logo.hidden = NO;
         self.noticeLabel.hidden = YES;
         self.inputBG.hidden = YES;
         
-        [self performSelector:@selector(trans) withObject:nil afterDelay:0.1];
+        self.logo.alpha = 0;
+        __block CGRect theframe = self.logo.frame;
+        theframe.origin.y = 100;
+        self.logo.frame = theframe;
         
+        [UIView animateWithDuration:0.5f animations:^{
+            theframe.origin.y += 5;
+            self.logo.alpha = 1;
+            self.logo.frame = theframe;
+        } completion:^(BOOL finish)
+        {
+            [self performSelector:@selector(trans) withObject:nil afterDelay:0.1];
+        }];
     }
     else
     {
@@ -64,6 +75,10 @@
         self.logo.hidden = NO;
         self.noticeLabel.hidden = NO;
         self.inputBG.hidden = NO;
+        CGRect theframe = self.logo.frame;
+        theframe.origin.y = 25;
+        self.logo.frame = theframe;
+        self.logo.alpha = 1;
     }
 }
 

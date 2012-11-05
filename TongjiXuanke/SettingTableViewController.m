@@ -163,9 +163,7 @@
 
 -(void)rateMe
 {
-    NSString* appid = [NSString stringWithFormat:@"507861904"];
-    
-    //TODO change appid
+    NSString* appid = [NSString stringWithFormat:@"576480303"];
     
     NSString* url = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8", appid];
     
