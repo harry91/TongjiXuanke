@@ -19,6 +19,7 @@
 #import "SSEModel.h"
 #import "NSString+EncryptAndDecrypt.h"
 #import "APNSManager.h"
+#import "IIViewDeckController.h"
 
 @interface NewsTableViewController ()
 
@@ -53,7 +54,8 @@
 
 - (void) showLeft
 {
-    
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+
 }
 
 - (void)configureModel

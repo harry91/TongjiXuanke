@@ -17,6 +17,8 @@
 		E4177A7B164A96240035B080 /* SideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177A7A164A96230035B080 /* SideViewController.m */; };
 		E4177A82164AA5DF0035B080 /* sideTopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A80164AA5DF0035B080 /* sideTopBar.png */; };
 		E4177A83164AA5DF0035B080 /* sideTopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A81164AA5DF0035B080 /* sideTopBar@2x.png */; };
+		E4177ACE164ACC6F0035B080 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177ACB164ACC6F0035B080 /* IIViewDeckController.m */; };
+		E4177ACF164ACC6F0035B080 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177ACD164ACC6F0035B080 /* WrapController.m */; };
 		E418E0D7162E32DE0046C8D7 /* toolbar_article_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */; };
 		E418E0D8162E32DE0046C8D7 /* toolbar_article_view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */; };
 		E418E0D9162E32DE0046C8D7 /* toolbar_web_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */; };
@@ -146,6 +148,10 @@
 		E4177A7A164A96230035B080 /* SideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideViewController.m; sourceTree = "<group>"; };
 		E4177A80164AA5DF0035B080 /* sideTopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideTopBar.png; sourceTree = "<group>"; };
 		E4177A81164AA5DF0035B080 /* sideTopBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sideTopBar@2x.png"; sourceTree = "<group>"; };
+		E4177ACA164ACC6F0035B080 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		E4177ACB164ACC6F0035B080 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		E4177ACC164ACC6F0035B080 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrapController.h; sourceTree = "<group>"; };
+		E4177ACD164ACC6F0035B080 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrapController.m; sourceTree = "<group>"; };
 		E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_article_view.png; sourceTree = "<group>"; };
 		E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_article_view@2x.png"; sourceTree = "<group>"; };
 		E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_web_view.png; sourceTree = "<group>"; };
@@ -367,6 +373,17 @@
 				E4DA0CCF1648329C0076897A /* CategorySelectionViewController.m */,
 			);
 			name = Setting;
+			sourceTree = "<group>";
+		};
+		E4177AC9164ACC6F0035B080 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				E4177ACA164ACC6F0035B080 /* IIViewDeckController.h */,
+				E4177ACB164ACC6F0035B080 /* IIViewDeckController.m */,
+				E4177ACC164ACC6F0035B080 /* WrapController.h */,
+				E4177ACD164ACC6F0035B080 /* WrapController.m */,
+			);
+			path = ViewDeck;
 			sourceTree = "<group>";
 		};
 		E4378FBF1628D61F008A85DF = {
@@ -668,6 +685,7 @@
 		E4AFCCE91630242100358B1B /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				E4177AC9164ACC6F0035B080 /* ViewDeck */,
 				E49B74131646C6E600CE4324 /* Picker */,
 				E49B73FF16468A2400CE4324 /* Social */,
 				E437903F162B6768008A85DF /* FakeUUID */,
@@ -885,6 +903,8 @@
 				E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */,
 				E4DA0CD01648329C0076897A /* CategorySelectionViewController.m in Sources */,
 				E4177A7B164A96240035B080 /* SideViewController.m in Sources */,
+				E4177ACE164ACC6F0035B080 /* IIViewDeckController.m in Sources */,
+				E4177ACF164ACC6F0035B080 /* WrapController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

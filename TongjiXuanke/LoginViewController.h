@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "ReachabilityChecker.h"
 #import "LogInModal.h"
+#import "IIViewDeckController.h"
 
 @interface LoginViewController : UIViewController<NewsLoaderProtocal>
 {
