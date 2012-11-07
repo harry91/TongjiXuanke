@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "NSString+EncryptAndDecrypt.h"
+#import "SideViewController.h"
 
 @interface LoginViewController ()
 
@@ -33,7 +34,7 @@
     [self.revealSideViewController setPanInteractionsWhenClosed:PPRevealSideInteractionContentView | PPRevealSideInteractionNavigationBar];
     [self.revealSideViewController setDirectionsToShowBounce:PPRevealSideDirectionLeft];
     
-    UIViewController* leftBar = [self.storyboard instantiateViewControllerWithIdentifier:@"settingView"];
+    SideViewController* leftBar = [self.storyboard instantiateViewControllerWithIdentifier:@"sideView"];
     [self.revealSideViewController preloadViewController:leftBar forSide:PPRevealSideDirectionLeft];
     
     self.revealSideViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
