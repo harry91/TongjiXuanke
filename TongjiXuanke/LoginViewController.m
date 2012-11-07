@@ -28,19 +28,14 @@
 
 - (void)trans
 {
-    UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsView"];
-    
-    self.revealSideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:vc];
-    [self.revealSideViewController setPanInteractionsWhenClosed:PPRevealSideInteractionContentView | PPRevealSideInteractionNavigationBar];
-    [self.revealSideViewController setDirectionsToShowBounce:PPRevealSideDirectionLeft];
-    
-    SideViewController* leftBar = [self.storyboard instantiateViewControllerWithIdentifier:@"sideView"];
-    [self.revealSideViewController preloadViewController:leftBar forSide:PPRevealSideDirectionLeft];
-    
-    self.revealSideViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    [self presentViewController:self.revealSideViewController animated:YES completion:nil];
-    //[self performSegueWithIdentifier:@"doLogin" sender:self];
+//    UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsView"];
+//    
+//    SideViewController* leftBar = [self.storyboard instantiateViewControllerWithIdentifier:@"sideView"];
+//    
+//    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    
+//    [self presentViewController:vc animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"doLogin" sender:self];
 }
 
 - (void)prepare

@@ -53,8 +53,7 @@
 
 - (void) showLeft
 {
-    UIViewController *vc = [self.revealSideViewController controllerForSide:PPRevealSideDirectionLeft];
-    [self.revealSideViewController pushViewController:vc onDirection:PPRevealSideDirectionLeft withOffset:80 animated:YES];
+    
 }
 
 - (void)configureModel
