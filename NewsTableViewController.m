@@ -19,7 +19,7 @@
 #import "SSEModel.h"
 #import "NSString+EncryptAndDecrypt.h"
 #import "APNSManager.h"
-#import "IIViewDeckController.h"
+#import "UIBarButtonItem+Addtion.h"
 
 @interface NewsTableViewController ()
 
@@ -43,13 +43,21 @@
 {
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"选课网通知"];
     self.navigationItem.titleView = titleLabel;
+
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+    UIImage *icon = [UIImage imageNamed:@"nav_menu_icon.png"];
+    [button setImage:icon forState:UIControlStateNormal];
+    [button setImage:icon forState:UIControlStateHighlighted];
     
+    [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
     
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Left"
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(showLeft)];
-    self.navigationItem.leftBarButtonItem = left;
+    [button addTarget:self action:@selector(showLeft) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *result = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    self.navigationItem.leftBarButtonItem = result;
+
 }
 
 - (void) showLeft
@@ -170,7 +178,6 @@
     
     [self configureAPNS];
     
-    
     NSLog(@"%@",self.navigationController);
     //strangeBug = self.navigationController;
         // Uncomment the following line to preserve selection between presentations.
@@ -179,6 +186,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+}
+
 
 - (void)viewDidUnload {
     //[self setTableView:nil];

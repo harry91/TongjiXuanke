@@ -98,6 +98,15 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SrU-bi-xBG">
+                                        <rect key="frame" x="0.0" y="45" width="320" height="503"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="x4u-nK-Opo" id="8dT-H1-CnG"/>
+                                            <outlet property="delegate" destination="x4u-nK-Opo" id="BS6-a3-yRy"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -107,11 +116,12 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
                         <outlet property="background" destination="AWo-oW-GYi" id="Iwl-GS-0ER"/>
+                        <outlet property="tableView" destination="SrU-bi-xBG" id="AqL-Hq-c3C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivj-13-30H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1383" y="668"/>
+            <point key="canvasLocation" x="1369" y="634"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="gyg-Uf-DGN">

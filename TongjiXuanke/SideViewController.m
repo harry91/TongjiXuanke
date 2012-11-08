@@ -7,6 +7,7 @@
 //
 
 #import "SideViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SideViewController ()
 
@@ -31,6 +32,24 @@
     UIImage *resizeableImage = [[UIImage imageNamed:@"sideBarBGTextile.png"] resizableImageWithCapInsets:inset];
     self.background.image = resizeableImage;
     
+    NSArray *headers = @[
+    @"列表",
+    @"收藏",
+	];
+    NSArray *cellInfos = @[
+        @[
+            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"全部", @"")},
+            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"选课网", @"")},
+            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"软件学院", @"")}
+        ],
+        @[
+            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"全部", @"")},
+            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"选课网", @"")},
+            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"软件学院", @"")}        ]
+	];
+    
+    self.cellInfos = cellInfos;
+    self.headers = headers;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +66,76 @@
 
 - (void)viewDidUnload {
     [self setBackground:nil];
+    [self setTableView:nil];
     [super viewDidUnload];
 }
+
+
+
+#pragma mark UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSLog(@"sections: %d",self.headers.count);
+    return self.headers.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"count: %d",((NSArray *)_cellInfos[section]).count);
+    return ((NSArray *)_cellInfos[section]).count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"GHMenuCell";
+    GHMenuCell *cell = (GHMenuCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[GHMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+	NSDictionary *info = self.cellInfos[indexPath.section][indexPath.row];
+	cell.textLabel.text = info[@"text"];
+	cell.imageView.image = info[@"image"];
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return (self.headers[section] == [NSNull null]) ? 0.0f : 21.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	NSObject *headerText = _headers[section];
+	UIView *headerView = nil;
+	if (headerText != [NSNull null]) {
+		headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.height, 21.0f)];
+		CAGradientLayer *gradient = [CAGradientLayer layer];
+		gradient.frame = headerView.bounds;
+		gradient.colors = @[
+        (id)[UIColor colorWithRed:(67.0f/255.0f) green:(70.0f/255.0f) blue:(76.0f/255.0f) alpha:1.0f].CGColor,
+        (id)[UIColor colorWithRed:(66.0f/255.0f) green:(62.0f/255.0f) blue:(71.0f/255.0f) alpha:1.0f].CGColor,
+		];
+		[headerView.layer insertSublayer:gradient atIndex:0];
+		
+		UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectInset(headerView.bounds, 12.0f, 5.0f)];
+		textLabel.text = (NSString *) headerText;
+		textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:([UIFont systemFontSize] * 1.0f)];
+		textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		textLabel.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
+		textLabel.textColor = [UIColor colorWithRed:(145.0f/255.0f) green:(149.0f/255.0f) blue:(166.0f/255.0f) alpha:1.0f];
+		textLabel.backgroundColor = [UIColor clearColor];
+		[headerView addSubview:textLabel];
+		
+		UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.height, 1.0f)];
+		topLine.backgroundColor = [UIColor colorWithRed:(78.0f/255.0f) green:(86.0f/255.0f) blue:(103.0f/255.0f) alpha:1.0f];
+		[headerView addSubview:topLine];
+		
+		UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 21.0f, [UIScreen mainScreen].bounds.size.height, 1.0f)];
+		bottomLine.backgroundColor = [UIColor colorWithRed:(36.0f/255.0f) green:(42.0f/255.0f) blue:(5.0f/255.0f) alpha:1.0f];
+		[headerView addSubview:bottomLine];
+	}
+	return headerView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+
 @end

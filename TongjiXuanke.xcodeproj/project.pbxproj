@@ -19,6 +19,12 @@
 		E4177A83164AA5DF0035B080 /* sideTopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A81164AA5DF0035B080 /* sideTopBar@2x.png */; };
 		E4177ACE164ACC6F0035B080 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177ACB164ACC6F0035B080 /* IIViewDeckController.m */; };
 		E4177ACF164ACC6F0035B080 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177ACD164ACC6F0035B080 /* WrapController.m */; };
+		E4177AD9164B20090035B080 /* GHMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177AD6164B20090035B080 /* GHMenuCell.m */; };
+		E4177AE5164C63D10035B080 /* sideBarSelection.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AE3164C63D10035B080 /* sideBarSelection.png */; };
+		E4177AE6164C63D10035B080 /* sideBarSelection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AE4164C63D10035B080 /* sideBarSelection@2x.png */; };
+		E4177AE9164C65060035B080 /* UIImage+Opacity.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177AE8164C65060035B080 /* UIImage+Opacity.m */; };
+		E4177AEC164C66230035B080 /* nav_menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AEA164C66220035B080 /* nav_menu_icon.png */; };
+		E4177AED164C66230035B080 /* nav_menu_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */; };
 		E418E0D7162E32DE0046C8D7 /* toolbar_article_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */; };
 		E418E0D8162E32DE0046C8D7 /* toolbar_article_view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */; };
 		E418E0D9162E32DE0046C8D7 /* toolbar_web_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */; };
@@ -152,6 +158,14 @@
 		E4177ACB164ACC6F0035B080 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		E4177ACC164ACC6F0035B080 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrapController.h; sourceTree = "<group>"; };
 		E4177ACD164ACC6F0035B080 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrapController.m; sourceTree = "<group>"; };
+		E4177AD5164B20090035B080 /* GHMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHMenuCell.h; sourceTree = "<group>"; };
+		E4177AD6164B20090035B080 /* GHMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHMenuCell.m; sourceTree = "<group>"; };
+		E4177AE3164C63D10035B080 /* sideBarSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideBarSelection.png; sourceTree = "<group>"; };
+		E4177AE4164C63D10035B080 /* sideBarSelection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sideBarSelection@2x.png"; sourceTree = "<group>"; };
+		E4177AE7164C65060035B080 /* UIImage+Opacity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Opacity.h"; sourceTree = "<group>"; };
+		E4177AE8164C65060035B080 /* UIImage+Opacity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Opacity.m"; sourceTree = "<group>"; };
+		E4177AEA164C66220035B080 /* nav_menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu_icon.png; sourceTree = "<group>"; };
+		E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_menu_icon@2x.png"; sourceTree = "<group>"; };
 		E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_article_view.png; sourceTree = "<group>"; };
 		E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_article_view@2x.png"; sourceTree = "<group>"; };
 		E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_web_view.png; sourceTree = "<group>"; };
@@ -386,6 +400,17 @@
 			path = ViewDeck;
 			sourceTree = "<group>";
 		};
+		E4177AD4164B1FFA0035B080 /* SideSlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E4177A79164A96230035B080 /* SideViewController.h */,
+				E4177A7A164A96230035B080 /* SideViewController.m */,
+				E4177AD5164B20090035B080 /* GHMenuCell.h */,
+				E4177AD6164B20090035B080 /* GHMenuCell.m */,
+			);
+			name = SideSlideMenu;
+			sourceTree = "<group>";
+		};
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
@@ -436,8 +461,7 @@
 				E4177A1F16484D0F0035B080 /* Setting */,
 				E4379045162B68FC008A85DF /* MyTabBarController.h */,
 				E4379046162B68FC008A85DF /* MyTabBarController.m */,
-				E4177A79164A96230035B080 /* SideViewController.h */,
-				E4177A7A164A96230035B080 /* SideViewController.m */,
+				E4177AD4164B1FFA0035B080 /* SideSlideMenu */,
 				E4378FD51628D620008A85DF /* Supporting Files */,
 			);
 			path = TongjiXuanke;
@@ -460,6 +484,10 @@
 		E4379003162B38A6008A85DF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E4177AEA164C66220035B080 /* nav_menu_icon.png */,
+				E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */,
+				E4177AE3164C63D10035B080 /* sideBarSelection.png */,
+				E4177AE4164C63D10035B080 /* sideBarSelection@2x.png */,
 				E4177A80164AA5DF0035B080 /* sideTopBar.png */,
 				E4177A81164AA5DF0035B080 /* sideTopBar@2x.png */,
 				E4177A75164A95190035B080 /* sideBarBGTextile.png */,
@@ -547,6 +575,8 @@
 				E43790DF162CB4FB008A85DF /* UIBarButtonItem+Addtion.m */,
 				E44B081D164583010050FB18 /* NSString+EncryptAndDecrypt.h */,
 				E44B081E164583010050FB18 /* NSString+EncryptAndDecrypt.m */,
+				E4177AE7164C65060035B080 /* UIImage+Opacity.h */,
+				E4177AE8164C65060035B080 /* UIImage+Opacity.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -847,6 +877,10 @@
 				E4177A78164A95190035B080 /* sideBarBGTextile@2x.png in Resources */,
 				E4177A82164AA5DF0035B080 /* sideTopBar.png in Resources */,
 				E4177A83164AA5DF0035B080 /* sideTopBar@2x.png in Resources */,
+				E4177AE5164C63D10035B080 /* sideBarSelection.png in Resources */,
+				E4177AE6164C63D10035B080 /* sideBarSelection@2x.png in Resources */,
+				E4177AEC164C66230035B080 /* nav_menu_icon.png in Resources */,
+				E4177AED164C66230035B080 /* nav_menu_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +939,8 @@
 				E4177A7B164A96240035B080 /* SideViewController.m in Sources */,
 				E4177ACE164ACC6F0035B080 /* IIViewDeckController.m in Sources */,
 				E4177ACF164ACC6F0035B080 /* WrapController.m in Sources */,
+				E4177AD9164B20090035B080 /* GHMenuCell.m in Sources */,
+				E4177AE9164C65060035B080 /* UIImage+Opacity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

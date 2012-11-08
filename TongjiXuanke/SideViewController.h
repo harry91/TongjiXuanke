@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GHMenuCell.h"
 
 @interface SideViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *background;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
+@property (strong, nonatomic) IBOutlet NSArray *cellInfos;
+@property (strong, nonatomic) IBOutlet NSArray *headers;
 
 @end

@@ -14,6 +14,7 @@
 #import "MyDataStorage.h"
 #import "EGORefreshTableHeaderView.h"
 #import "MBProgressHUD.h"
+#import "IIViewDeckController.h"
 
 @class MyDataStorage;
 @class SSEModel;
