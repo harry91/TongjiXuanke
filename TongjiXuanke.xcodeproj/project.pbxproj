@@ -25,6 +25,16 @@
 		E4177AE9164C65060035B080 /* UIImage+Opacity.m in Sources */ = {isa = PBXBuildFile; fileRef = E4177AE8164C65060035B080 /* UIImage+Opacity.m */; };
 		E4177AEC164C66230035B080 /* nav_menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AEA164C66220035B080 /* nav_menu_icon.png */; };
 		E4177AED164C66230035B080 /* nav_menu_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */; };
+		E4177AFA164C77CA0035B080 /* .htaccess in Resources */ = {isa = PBXBuildFile; fileRef = E4177AF3164C77CA0035B080 /* .htaccess */; };
+		E4177AFB164C77CA0035B080 /* readability-start.js in Sources */ = {isa = PBXBuildFile; fileRef = E4177AF5164C77CA0035B080 /* readability-start.js */; };
+		E4177AFC164C77CA0035B080 /* jquery-1.3.1.min.js in Sources */ = {isa = PBXBuildFile; fileRef = E4177AF6164C77CA0035B080 /* jquery-1.3.1.min.js */; };
+		E4177AFD164C77CA0035B080 /* readability-0.1-debug.js in Sources */ = {isa = PBXBuildFile; fileRef = E4177AF7164C77CA0035B080 /* readability-0.1-debug.js */; };
+		E4177AFE164C77CA0035B080 /* readability-start.js in Sources */ = {isa = PBXBuildFile; fileRef = E4177AF8164C77CA0035B080 /* readability-start.js */; };
+		E4177AFF164C77CA0035B080 /* readability.js in Sources */ = {isa = PBXBuildFile; fileRef = E4177AF9164C77CA0035B080 /* readability.js */; };
+		E4177B06164C7A790035B080 /* readability-home.css in Resources */ = {isa = PBXBuildFile; fileRef = E4177B02164C7A790035B080 /* readability-home.css */; };
+		E4177B07164C7A790035B080 /* readability-home.css in Resources */ = {isa = PBXBuildFile; fileRef = E4177B03164C7A790035B080 /* readability-home.css */; };
+		E4177B08164C7A790035B080 /* readability-print.css in Resources */ = {isa = PBXBuildFile; fileRef = E4177B04164C7A790035B080 /* readability-print.css */; };
+		E4177B09164C7A790035B080 /* readability.css in Resources */ = {isa = PBXBuildFile; fileRef = E4177B05164C7A790035B080 /* readability.css */; };
 		E418E0D7162E32DE0046C8D7 /* toolbar_article_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */; };
 		E418E0D8162E32DE0046C8D7 /* toolbar_article_view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */; };
 		E418E0D9162E32DE0046C8D7 /* toolbar_web_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */; };
@@ -166,6 +176,16 @@
 		E4177AE8164C65060035B080 /* UIImage+Opacity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Opacity.m"; sourceTree = "<group>"; };
 		E4177AEA164C66220035B080 /* nav_menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_menu_icon.png; sourceTree = "<group>"; };
 		E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_menu_icon@2x.png"; sourceTree = "<group>"; };
+		E4177AF3164C77CA0035B080 /* .htaccess */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .htaccess; sourceTree = "<group>"; };
+		E4177AF5164C77CA0035B080 /* readability-start.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "readability-start.js"; sourceTree = "<group>"; };
+		E4177AF6164C77CA0035B080 /* jquery-1.3.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-1.3.1.min.js"; sourceTree = "<group>"; };
+		E4177AF7164C77CA0035B080 /* readability-0.1-debug.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "readability-0.1-debug.js"; sourceTree = "<group>"; };
+		E4177AF8164C77CA0035B080 /* readability-start.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "readability-start.js"; sourceTree = "<group>"; };
+		E4177AF9164C77CA0035B080 /* readability.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = readability.js; sourceTree = "<group>"; };
+		E4177B02164C7A790035B080 /* readability-home.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "readability-home.css"; sourceTree = "<group>"; };
+		E4177B03164C7A790035B080 /* readability-home.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "readability-home.css"; sourceTree = "<group>"; };
+		E4177B04164C7A790035B080 /* readability-print.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "readability-print.css"; sourceTree = "<group>"; };
+		E4177B05164C7A790035B080 /* readability.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = readability.css; sourceTree = "<group>"; };
 		E418E0D3162E32DE0046C8D7 /* toolbar_article_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_article_view.png; sourceTree = "<group>"; };
 		E418E0D4162E32DE0046C8D7 /* toolbar_article_view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_article_view@2x.png"; sourceTree = "<group>"; };
 		E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_web_view.png; sourceTree = "<group>"; };
@@ -409,6 +429,56 @@
 				E4177AD6164B20090035B080 /* GHMenuCell.m */,
 			);
 			name = SideSlideMenu;
+			sourceTree = "<group>";
+		};
+		E4177AF2164C77C90035B080 /* readability */ = {
+			isa = PBXGroup;
+			children = (
+				E4177B00164C7A790035B080 /* css */,
+				E4177B0A164C7A920035B080 /* js */,
+			);
+			name = readability;
+			path = js;
+			sourceTree = "<group>";
+		};
+		E4177AF4164C77CA0035B080 /* es */ = {
+			isa = PBXGroup;
+			children = (
+				E4177AF5164C77CA0035B080 /* readability-start.js */,
+			);
+			path = es;
+			sourceTree = "<group>";
+		};
+		E4177B00164C7A790035B080 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				E4177B01164C7A790035B080 /* es */,
+				E4177B03164C7A790035B080 /* readability-home.css */,
+				E4177B04164C7A790035B080 /* readability-print.css */,
+				E4177B05164C7A790035B080 /* readability.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		E4177B01164C7A790035B080 /* es */ = {
+			isa = PBXGroup;
+			children = (
+				E4177B02164C7A790035B080 /* readability-home.css */,
+			);
+			path = es;
+			sourceTree = "<group>";
+		};
+		E4177B0A164C7A920035B080 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				E4177AF3164C77CA0035B080 /* .htaccess */,
+				E4177AF4164C77CA0035B080 /* es */,
+				E4177AF6164C77CA0035B080 /* jquery-1.3.1.min.js */,
+				E4177AF7164C77CA0035B080 /* readability-0.1-debug.js */,
+				E4177AF8164C77CA0035B080 /* readability-start.js */,
+				E4177AF9164C77CA0035B080 /* readability.js */,
+			);
+			name = js;
 			sourceTree = "<group>";
 		};
 		E4378FBF1628D61F008A85DF = {
@@ -715,6 +785,7 @@
 		E4AFCCE91630242100358B1B /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				E4177AF2164C77C90035B080 /* readability */,
 				E4177AC9164ACC6F0035B080 /* ViewDeck */,
 				E49B74131646C6E600CE4324 /* Picker */,
 				E49B73FF16468A2400CE4324 /* Social */,
@@ -881,6 +952,11 @@
 				E4177AE6164C63D10035B080 /* sideBarSelection@2x.png in Resources */,
 				E4177AEC164C66230035B080 /* nav_menu_icon.png in Resources */,
 				E4177AED164C66230035B080 /* nav_menu_icon@2x.png in Resources */,
+				E4177AFA164C77CA0035B080 /* .htaccess in Resources */,
+				E4177B06164C7A790035B080 /* readability-home.css in Resources */,
+				E4177B07164C7A790035B080 /* readability-home.css in Resources */,
+				E4177B08164C7A790035B080 /* readability-print.css in Resources */,
+				E4177B09164C7A790035B080 /* readability.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -941,6 +1017,11 @@
 				E4177ACF164ACC6F0035B080 /* WrapController.m in Sources */,
 				E4177AD9164B20090035B080 /* GHMenuCell.m in Sources */,
 				E4177AE9164C65060035B080 /* UIImage+Opacity.m in Sources */,
+				E4177AFB164C77CA0035B080 /* readability-start.js in Sources */,
+				E4177AFC164C77CA0035B080 /* jquery-1.3.1.min.js in Sources */,
+				E4177AFD164C77CA0035B080 /* readability-0.1-debug.js in Sources */,
+				E4177AFE164C77CA0035B080 /* readability-start.js in Sources */,
+				E4177AFF164C77CA0035B080 /* readability.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,6 +51,9 @@
     
     [self.original_webview loadHTMLString:newsString baseURL:[NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"]];
     
+    //TODO base string change....
+    
+    [self.puretext_webview loadHTMLString:newsString baseURL:[NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"]];
     
     news.haveread = [[NSNumber alloc] initWithBool:YES];
     [[MyDataStorage instance] saveContext];
@@ -63,21 +66,34 @@
     {
         if(textLoadComplete != 0)
             return;
-        NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetail" ofType:@"html"];
-        NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
-        NSString *s = [self.original_webview stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
-        s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
-        s = [s stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-        s = [s stringByReplacingOccurrencesOfString:news.title withString:@""];
+//        NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetail" ofType:@"html"];
+//        NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
+//        NSString *s = [self.original_webview stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
+//        s = [s stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+//        s = [s stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+//        s = [s stringByReplacingOccurrencesOfString:news.title withString:@""];
+//        
+//        while([s rangeOfString:@"<br><br>"].length >= 1)
+//        {
+//            s = [s stringByReplacingOccurrencesOfString:@"<br><br>" withString:@"<br>"];
+//        }
+//        
+//        infoText = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:s];
+//        NSLog(@"info text:%@", infoText);
+//        [self.puretext_webview loadHTMLString:infoText baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
         
-        while([s rangeOfString:@"<br><br>"].length >= 1)
-        {
-            s = [s stringByReplacingOccurrencesOfString:@"<br><br>" withString:@"<br>"];
-        }
         
-        infoText = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:s];
-        NSLog(@"info text:%@", infoText);
-        [self.puretext_webview loadHTMLString:infoText baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]];
+        
+        
+        
+        NSString *text = @"javascript:(function()%7BreadStyle='style-newspaper';readSize='size-large';readMargin='margin-wide';_readability_script=document.createElement('SCRIPT');_readability_script.type='text/javascript';_readability_script.src='MYPATHreadability.js?x='+(Math.random());document.getElementsByTagName('head')%5B0%5D.appendChild(_readability_script);_readability_css=document.createElement('LINK');_readability_css.rel='stylesheet';_readability_css.href='MYPATHreadability.css';_readability_css.type='text/css';_readability_css.media='screen';document.getElementsByTagName('head')%5B0%5D.appendChild(_readability_css);_readability_print_css=document.createElement('LINK');_readability_print_css.rel='stylesheet';_readability_print_css.href='MYPATHreadability-print.css';_readability_print_css.media='print';_readability_print_css.type='text/css';document.getElementsByTagName('head')%5B0%5D.appendChild(_readability_print_css);%7D)();";
+        text = [text stringByReplacingOccurrencesOfString:@"MYPATH" withString:url.description];
+        NSLog(@"text:%@",text);
+        
+        [self.original_webview stringByEvaluatingJavaScriptFromString:text];
+        
+        
         textLoadComplete = 1;
     }
 }
