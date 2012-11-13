@@ -453,8 +453,6 @@
 
 -(void)errorLoading:(NSError*)error
 {
-    NSLog(@"Error:%@",error.domain);
-    
     if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
     {
         UIAlertView *alert =
@@ -470,6 +468,11 @@
 
         //[self performSegueWithIdentifier:@"backToLogin" sender:self];
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else if([error.domain isEqualToString:@"NSURLErrorDomain"])
+    {
+        [self stopLoading];
+        [self showNotification:error.localizedDescription];
     }
 }
 
@@ -492,6 +495,20 @@
 #pragma mark -
 #pragma mark EGORefreshTableHeaderDelegate Methods
 
+-(void)showNotification:(NSString*)text
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+	
+	// Configure for text only and offset down
+	hud.mode = MBProgressHUDModeText;
+	hud.labelText = text;
+	hud.margin = 10.f;
+	hud.yOffset = 150.f;
+	hud.removeFromSuperViewOnHide = YES;
+	
+	[hud hide:YES afterDelay:3];
+
+}
 
 
 -(void)showNoInternetNotification

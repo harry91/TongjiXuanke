@@ -14,6 +14,7 @@
 #import "ReachabilityChecker.h"
 #import "MWFeedItem.h"
 #import "NSString+HTML.h"
+#import "DataOperator.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -43,47 +44,11 @@
 }
 
 
--(void)distinctSave
+-(void)save
 {
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
     for(int i = 0; i <[self totalNewsCount]; i++)
     {
-        // Create the fetch request
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:
-         [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", [self idForNewsIndex:i]]];
-        
-        
-        // make sure the results are sorted as well
-        
-        NSError *error;
-        NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-        
-        if(!matching)
-        {
-            NSLog(@"Error: %@",[error description]);
-        }
-        if(matching.count > 0)
-        {
-            BOOL found = NO;
-            for(News *item in matching)
-            {
-                if([item.category.name isEqualToString:[self catagoryForNews]])
-                {
-                    found = YES;
-                    break;
-                }
-            }
-            if(found)
-                continue;
-        }
-        
-        News *news = [NSEntityDescription
-                      insertNewObjectForEntityForName:@"News"
-                      inManagedObjectContext:context];
-        news.category = [self myCategory];
+        FakeNews *news = [[FakeNews alloc] init];
         news.title = [self titleForNewsIndex:i];
         
         news.briefcontent = nil;
@@ -93,37 +58,10 @@
         news.favorated = NO;
         news.haveread = NO;
         news.url = [self idForNewsIndex:i];
+        [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
     }
-    [[MyDataStorage instance] saveContext];
 }
 
--(Category*)myCategory
-{
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"Category" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(name == %@)", [self catagoryForNews]]];
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    if(matching.count > 0)
-    {
-        return [matching lastObject];
-    }
-    
-    Category *category = [NSEntityDescription
-                          insertNewObjectForEntityForName:@"Category"
-                          inManagedObjectContext:context];
-    category.name = [self catagoryForNews];
-    [[MyDataStorage instance] saveContext];
-    return category;
-}
 
 
 -(void)retreivingTherad
@@ -355,7 +293,7 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
-    [self distinctSave];
+    [self save];
     [self.delegate finishedLoading:[self catagoryForNews]];
 }
 
@@ -367,7 +305,7 @@
     } else {
         NSLog(@"SSE RSS partly Failed"); 
         // Failed but some items parsed, so show and inform of error
-        [self distinctSave];
+        [self save];
         [self.delegate finishedLoading:[self catagoryForNews]];
     }
     
