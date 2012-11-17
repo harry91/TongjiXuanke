@@ -417,7 +417,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="715-TK-y16">
-                                            <rect key="frame" x="195" y="12" width="106" height="21"/>
+                                            <rect key="frame" x="195" y="3" width="106" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -425,7 +425,7 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OFo-S4-SAz">
-                                            <rect key="frame" x="23" y="29" width="280" height="21"/>
+                                            <rect key="frame" x="23" y="18" width="280" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -433,10 +433,10 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellAccessory.png" id="0FJ-VN-fYL">
-                                            <rect key="frame" x="305" y="35" width="8" height="11"/>
+                                            <rect key="frame" x="305" y="34" width="8" height="11"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6co-bv-Lxf">
-                                            <rect key="frame" x="23" y="47" width="279" height="32"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6co-bv-Lxf">
+                                            <rect key="frame" x="23" y="38" width="279" height="39"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -444,7 +444,7 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h8u-mF-LjD">
-                                            <rect key="frame" x="23" y="12" width="96" height="21"/>
+                                            <rect key="frame" x="23" y="3" width="96" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -452,10 +452,10 @@
                                             <size key="shadowOffset" width="0.0" height="1"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" id="WY4-uL-cp0">
-                                            <rect key="frame" x="5" y="34" width="13" height="13"/>
+                                            <rect key="frame" x="5" y="29" width="13" height="13"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" id="42H-2h-gxe">
-                                            <rect key="frame" x="2" y="30" width="19" height="19"/>
+                                            <rect key="frame" x="2" y="25" width="19" height="19"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

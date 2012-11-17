@@ -402,6 +402,12 @@
     return @"选课网通知";
 }
 
+-(NSURL*)baseURL
+{
+    return [NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"];
+}
+
+
 #pragma mark 
 - (BOOL)hasFinishedLoading
 {

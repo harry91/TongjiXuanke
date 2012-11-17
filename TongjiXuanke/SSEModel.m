@@ -275,6 +275,11 @@
     return @"软院新闻";
 }
 
+-(NSURL*)baseURL
+{
+    return [NSURL URLWithString:@"http://sse.tongji.edu.cn/"];
+}
+
 #pragma mark -
 #pragma mark MWFeedParserDelegate
 

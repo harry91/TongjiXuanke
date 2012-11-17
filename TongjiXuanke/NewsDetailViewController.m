@@ -23,6 +23,11 @@
 - (void)configureWithNews:(News *)aNews {
     news = aNews;
     textLoadComplete = 0;
+    
+    NSString *categoryTitle = news.category.name;
+    
+    self.baseURL = [NSURL URLWithString:@"http://xuanke.tongji.edu.cn"];
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,19 +46,16 @@
     self.titleLabel.text = news.title;
     self.categoryLabel.text = news.category.name;
     
-    
-    NSLog(@"content: %@",news.content);
+    //NSLog(@"content: %@",news.content);
     
     self.original_webview.delegate = self;
     self.puretext_webview.delegate = self;
     
     NSString* newsString = news.content;
     
-    [self.original_webview loadHTMLString:newsString baseURL:[NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"]];
+    [self.original_webview loadHTMLString:newsString baseURL:self.baseURL];
     
-    //TODO base string change....
-    
-    [self.puretext_webview loadHTMLString:newsString baseURL:[NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"]];
+    [self.puretext_webview loadHTMLString:newsString baseURL:self.baseURL];
     
     news.haveread = [[NSNumber alloc] initWithBool:YES];
     [[MyDataStorage instance] saveContext];

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIWebView *original_webview;
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;
 
+@property (strong,nonatomic) NSURL *baseURL;
+
 - (void)configureWithNews:(News *)news;
 
 @end
