@@ -80,7 +80,7 @@
     xuankeModel.password = pwd;
     xuankeModel.delegate = self;
     
-    sseModel = [[SSEModel alloc] init];
+    //sseModel = [[SSEModel alloc] init];
     sseModel.delegate = self;
     
     if([[ReachabilityChecker instance] hasInternetAccess])

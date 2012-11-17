@@ -128,7 +128,7 @@
 		
 	} else {
 		
-		_lastUpdatedLabel.text = nil;
+		_lastUpdatedLabel.text = @"从未更新";
 		
 	}
 

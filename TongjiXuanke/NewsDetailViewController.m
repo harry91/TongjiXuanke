@@ -42,11 +42,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dateLabel.text = [NSString stringByConvertingTimeToAgoFormatFromDate:news.date];
-    self.titleLabel.text = news.title;
-    self.categoryLabel.text = news.category.name;
-    
-    //NSLog(@"content: %@",news.content);
     
     self.original_webview.delegate = self;
     self.puretext_webview.delegate = self;
@@ -113,9 +108,31 @@
     }
 }
 
+- (void)matchFavoratebuttonApperaence:(BOOL)favorated
+{
+    if(favorated)
+    {
+        [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateNormal];
+        [insideFavButton setTitle:@"取消" forState:UIControlStateNormal];
+        //[favButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+    }
+    else if(!favorated)
+    {
+        [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
+        [insideFavButton setTitle:@"收藏" forState:UIControlStateNormal];
+        //[favButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+    }
+}
+
 - (void)clickFavButton
 {
-    news.favorated = [NSNumber numberWithBool:YES];
+    
+    BOOL favorated = [news.favorated boolValue];
+    
+    news.favorated = [NSNumber numberWithBool:!favorated];
+    favorated =! favorated;
+    [self matchFavoratebuttonApperaence:favorated];
+    
     [[MyDataStorage instance] saveContext];
 }
 
@@ -139,8 +156,25 @@
     self.navigationItem.leftBarButtonItem = backButton;
     
     
-    UIBarButtonItem *favButton = [UIBarButtonItem getFunctionButtonItemWithTitle:@"收藏" target:self action:@selector(clickFavButton)];
+    insideFavButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+    [insideFavButton setTitle:@"收藏" forState:UIControlStateNormal];
+    [insideFavButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8] forState:UIControlStateNormal];
+    [insideFavButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8f] forState:UIControlStateHighlighted];
+    [insideFavButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    insideFavButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    insideFavButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    
+    [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
+    [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+    
+    [insideFavButton addTarget:self action:@selector(clickFavButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *favButton = [[UIBarButtonItem alloc] initWithCustomView:insideFavButton];
+
     self.navigationItem.rightBarButtonItem = favButton;
+    
+    BOOL favorated = [news.favorated boolValue];
+    [self matchFavoratebuttonApperaence:favorated];
     
 }
 
@@ -154,9 +188,6 @@
 }
 
 - (void)viewDidUnload {
-    [self setDateLabel:nil];
-    [self setTitleLabel:nil];
-    [self setCategoryLabel:nil];
     [self setOriginal_webview:nil];
     [self setPuretext_webview:nil];
     [super viewDidUnload];

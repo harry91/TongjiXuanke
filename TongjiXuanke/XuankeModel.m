@@ -20,16 +20,24 @@
 {
     if(self = [super init])
     {
-        _webView = [[UIWebView alloc] init];
-        loginInState = 0;
-        _webView.delegate = self;
-        tryTime = 0;
+        _listView = [[UIWebView alloc] init];
+        _detailView = [[UIWebView alloc] init];
+        
+        _listView.delegate = self;
+        _detailView.delegate = self;
+        
         self.password = @"";
-        dict = [@[] mutableCopy];
         self.userName = @"";
+        dict = [@[] mutableCopy];
+        
         isRetreivingThreadRunning = NO;
         detailGetting = NO;
         urlToRetireve = [@[] mutableCopy];
+        
+        loginModal = [[LogInModal alloc] init];
+        loginModal.delegate = self;
+        
+        logined = NO;
     }
     return self;
 }
@@ -39,21 +47,18 @@
     _delegate = delegate;
 }
 
-- (void)loadWebPageWithString:(NSString*)urlString
-{
-    NSURL *url =[NSURL URLWithString:urlString];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    [_webView loadRequest:request];
-}
-
 
 -(void)login
 {
-    [self loadWebPageWithString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login?goto=http%3A%2F%2Fxuanke.tongji.edu.cn%2Fpass.jsp"];
-    loginInState = 0;
-    detailGetting = NO;
+    loginModal.userName = self.userName;
+    loginModal.password = self.password;
+    [loginModal start];
 }
 
+-(void)retrieveList
+{
+    [_listView loadRequest:[@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp" convertToURLRequest]];
+}
 
 -(BOOL)parseResult:(NSString*)result
 {
@@ -108,104 +113,50 @@
 }
 
 
--(void)addURLtoRetirve:(NSString*)url
-{
-    [urlToRetireve addObject:url];
-    if(!isRetreivingThreadRunning)
-    {
-        [self retreivingTherad];
-    }
-}
-
 #pragma mark UIWebView delegate
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    NSString *currentURL = _webView.request.URL.absoluteString;
-    
-    NSLog(@"start loading: %@",currentURL);
-    
-}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSString *currentURL = _webView.request.URL.absoluteString;
+    NSString *currentURL = webView.request.URL.absoluteString;
     
     NSLog(@"Finish loading: %@",currentURL);
-    NSLog(@"state: %d",loginInState);
-    NSLog(@"Detail getting: %@",detailGetting?@"Y":@"N");
     
-    if(!detailGetting)
+    if(webView == _listView)
     {
-        if(loginInState == 1 && [currentURL isEqualToString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login"])
+        _content = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
+        NSLog(@"content: %@",_content);
+        
+        if([self parseResult:_content])
         {
-            NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
-            [self.delegate errorLoading:error];
-        }
-        else if(loginInState == 0)
-        {
-            NSString *fillUserName = @"document.frm1.IDToken1.value='USERNAME';";
-            NSString *fillPwd = @"document.frm2.IDToken2.value='PASSWORD';";
-            fillUserName = [fillUserName stringByReplacingOccurrencesOfString:@"USERNAME" withString:self.userName];
-            fillPwd = [fillPwd stringByReplacingOccurrencesOfString:@"PASSWORD" withString:self.password];
-            
-            [_webView stringByEvaluatingJavaScriptFromString:fillUserName];
-            [_webView stringByEvaluatingJavaScriptFromString:fillPwd];
-            [_webView stringByEvaluatingJavaScriptFromString:@"LoginSubmit('登录')"];
-            loginInState ++;
-        }
-        else if(loginInState > 3 && loginInState < 100)
-        {
-            [self loadWebPageWithString:@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp"];
-            loginInState = 100;
-        }
-        else if(loginInState == 100)
-        {
-            _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-            //NSLog(@"content: %@",_content);
-            loginInState = 101;
-            
-        }
-        else if(loginInState == 101)
-        {
-            _content = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-            //NSLog(@"content: %@",_content);
-            loginInState = 102;
-            if([self parseResult:_content])
-            {
-                [self save];
-                [self.delegate finishedLoading:[self catagoryForNews]];
-                tryTime = 0;
-            }
-            else
-            {
-                if(tryTime < 3)
-                {
-                    [self login];
-                }
-                else
-                {
-                    NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
-                    [self.delegate errorLoading:error];
-                }
-                tryTime++;
-                ///TODO error error type
-            }
+            [self save];
+            [self.delegate finishedLoading:[self catagoryForNews]];
+            tryTime = 0;
         }
         else
         {
-            loginInState ++;
+            if(tryTime < 3)
+            {
+                [self login];
+                logined = NO;
+            }
+            else
+            {
+                NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
+                [self.delegate errorLoading:error];
+            }
+            tryTime++;
         }
-
     }
-    else
+    else if(webView == _detailView)
     {
-        tempContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
-        tempBriefContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
+        tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+        tempBriefContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
         detailGetting = NO;
         
         NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
         
         [self finishRetreiving:url];
+
     }
 }
 
@@ -215,7 +166,7 @@
     if(detailGetting)
     {
         detailGetting = NO;
-        [self retreivingTherad];
+        //[self retreivingTherad];
     }
     else [self.delegate errorLoading:error];
 }
@@ -225,8 +176,22 @@
 
 -(void)start
 {
-    [self login];
+    if(!logined)
+        [self login];
+    else
+        [self retrieveList];
 }
+
+
+-(void)addURLtoRetirve:(NSString*)url
+{
+    [urlToRetireve addObject:url];
+    if(!isRetreivingThreadRunning)
+    {
+        [self retreivingTherad];
+    }
+}
+
 
 -(void)retreivingTherad
 {
@@ -240,11 +205,7 @@
     NSString *url = urlToRetireve[0];
     [urlToRetireve removeObjectAtIndex:0];
     [self retreiveDetailForUrlLocal:url];
-//    dispatch_async(kBgQueue, ^{
-//        BOOL result = 
-//        NSLog(@"loding result: %@ %c",url,result ? 'Y':'N');
-//        [self performSelectorOnMainThread:@selector(retreivingTherad) withObject:nil waitUntilDone:YES];
-//    });
+
 }
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
@@ -319,18 +280,17 @@
     if(!result)
         return NO;
     
-    if(loginInState < 100 || detailGetting == YES)
+    if(detailGetting == YES)
     {
         return NO;
     }
+    
     detailGetting = YES;
     
     NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
     urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
     
-    [self loadWebPageWithString:urlToGo];
-    
-    //while(detailGetting);
+    [_detailView loadRequest:[urlToGo convertToURLRequest]];
     
     return YES;//TODO bug
 }
@@ -359,9 +319,6 @@
         }
     }
 }
-
-
-
 
 -(int)totalNewsCount
 {
@@ -408,10 +365,17 @@
 }
 
 
-#pragma mark 
-- (BOOL)hasFinishedLoading
+#pragma mark News Loader For login modal
+-(void)finishedLoading:(NSString*)category
 {
-    return loginInState >= 101;
+    logined = YES;
+    [self retrieveList];
 }
+
+-(void)errorLoading:(NSError*)error
+{
+    
+}
+
 
 @end

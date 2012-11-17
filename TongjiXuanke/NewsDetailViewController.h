@@ -15,6 +15,7 @@
     News *news;
     UISegmentedControl *segmentedControl;
     int textLoadComplete;
+    UIButton *insideFavButton;
 }
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

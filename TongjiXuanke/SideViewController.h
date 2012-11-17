@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "GHMenuCell.h"
+#import "IIViewDeckController.h"
 
 @interface SideViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *background;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 
 @property (strong, nonatomic) IBOutlet NSArray *cellInfos;
 @property (strong, nonatomic) IBOutlet NSArray *headers;
+
+-(IBAction)settingClicked:(id)sender;
 
 @end

@@ -109,6 +109,7 @@
 		E44B083B1645B0380050FB18 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08341645B0380050FB18 /* NSData+Base64.m */; };
 		E44B083C1645B0380050FB18 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08361645B0380050FB18 /* NSData+CommonCrypto.m */; };
 		E44B083D1645B0380050FB18 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08381645B0380050FB18 /* NSString+Base64.m */; };
+		E48C670C16580428002F8BCB /* NSString+URLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C670B16580428002F8BCB /* NSString+URLRequest.m */; };
 		E4997AD51631B2450020999B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E4997AD41631B2450020999B /* MBProgressHUD.m */; };
 		E4997ADC1631DAA20020999B /* SSEModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4997ADB1631DAA20020999B /* SSEModel.m */; };
 		E4997AED1631DE750020999B /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E4997AE71631DE750020999B /* MWFeedInfo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -150,6 +151,9 @@
 		E4AFCD1C1631889700358B1B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1B1631889700358B1B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E4AFCD1F1631895A00358B1B /* ReachabilityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */; };
 		E4AFCD2216318CBF00358B1B /* SettingModal.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AFCD2116318CBF00358B1B /* SettingModal.m */; };
+		E4BD099516580BC200F18EDC /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BD099416580BC200F18EDC /* UIImage+ColorImage.m */; };
+		E4BD099916581CF600F18EDC /* slideNumberBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E4BD099716581CF600F18EDC /* slideNumberBG.png */; };
+		E4BD099A16581CF600F18EDC /* slideNumberBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4BD099816581CF600F18EDC /* slideNumberBG@2x.png */; };
 		E4C33B8416481E8500E65C6B /* APNSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C33B8316481E8500E65C6B /* APNSManager.m */; };
 		E4DA0CD01648329C0076897A /* CategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DA0CCF1648329C0076897A /* CategorySelectionViewController.m */; };
 /* End PBXBuildFile section */
@@ -290,6 +294,8 @@
 		E44B08361645B0380050FB18 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		E44B08371645B0380050FB18 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		E44B08381645B0380050FB18 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		E48C670A16580428002F8BCB /* NSString+URLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLRequest.h"; sourceTree = "<group>"; };
+		E48C670B16580428002F8BCB /* NSString+URLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLRequest.m"; sourceTree = "<group>"; };
 		E4997AD31631B2450020999B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E4997AD41631B2450020999B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E4997ADA1631DAA20020999B /* SSEModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSEModel.h; sourceTree = "<group>"; };
@@ -353,6 +359,10 @@
 		E4AFCD1E1631895A00358B1B /* ReachabilityChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityChecker.m; sourceTree = "<group>"; };
 		E4AFCD2016318CBF00358B1B /* SettingModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModal.h; sourceTree = "<group>"; };
 		E4AFCD2116318CBF00358B1B /* SettingModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModal.m; sourceTree = "<group>"; };
+		E4BD099316580BC200F18EDC /* UIImage+ColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorImage.h"; sourceTree = "<group>"; };
+		E4BD099416580BC200F18EDC /* UIImage+ColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorImage.m"; sourceTree = "<group>"; };
+		E4BD099716581CF600F18EDC /* slideNumberBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideNumberBG.png; sourceTree = "<group>"; };
+		E4BD099816581CF600F18EDC /* slideNumberBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slideNumberBG@2x.png"; sourceTree = "<group>"; };
 		E4C33B8216481E8500E65C6B /* APNSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APNSManager.h; path = ../APNSManager.h; sourceTree = "<group>"; };
 		E4C33B8316481E8500E65C6B /* APNSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APNSManager.m; path = ../APNSManager.m; sourceTree = "<group>"; };
 		E4DA0CCE1648329C0076897A /* CategorySelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectionViewController.h; sourceTree = "<group>"; };
@@ -560,6 +570,8 @@
 		E4379003162B38A6008A85DF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E4BD099716581CF600F18EDC /* slideNumberBG.png */,
+				E4BD099816581CF600F18EDC /* slideNumberBG@2x.png */,
 				E4177AEA164C66220035B080 /* nav_menu_icon.png */,
 				E4177AEB164C66220035B080 /* nav_menu_icon@2x.png */,
 				E4177AE3164C63D10035B080 /* sideBarSelection.png */,
@@ -653,6 +665,10 @@
 				E44B081E164583010050FB18 /* NSString+EncryptAndDecrypt.m */,
 				E4177AE7164C65060035B080 /* UIImage+Opacity.h */,
 				E4177AE8164C65060035B080 /* UIImage+Opacity.m */,
+				E48C670A16580428002F8BCB /* NSString+URLRequest.h */,
+				E48C670B16580428002F8BCB /* NSString+URLRequest.m */,
+				E4BD099316580BC200F18EDC /* UIImage+ColorImage.h */,
+				E4BD099416580BC200F18EDC /* UIImage+ColorImage.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -967,6 +983,8 @@
 				E4177B07164C7A790035B080 /* readability-home.css in Resources */,
 				E4177B08164C7A790035B080 /* readability-print.css in Resources */,
 				E4177B09164C7A790035B080 /* readability.css in Resources */,
+				E4BD099916581CF600F18EDC /* slideNumberBG.png in Resources */,
+				E4BD099A16581CF600F18EDC /* slideNumberBG@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,6 +1052,8 @@
 				E4177AFF164C77CA0035B080 /* readability.js in Sources */,
 				E4177B0D165024690035B080 /* DataOperator.m in Sources */,
 				E434CAE21652CC750086DF56 /* FakeNews.m in Sources */,
+				E48C670C16580428002F8BCB /* NSString+URLRequest.m in Sources */,
+				E4BD099516580BC200F18EDC /* UIImage+ColorImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

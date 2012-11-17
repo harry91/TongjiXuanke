@@ -49,8 +49,8 @@
 #pragma mark UIView
 - (void)layoutSubviews {
 	[super layoutSubviews];
-	self.textLabel.frame = CGRectMake(50.0f, 0.0f, 200.0f, 43.0f);
-	self.imageView.frame = CGRectMake(0.0f, 0.0f, 50.0f, 43.0f);
+	self.textLabel.frame = CGRectMake(30.0f, 0.0f, 150.0f, 43.0f);
+	self.imageView.frame = CGRectMake(150.0f, 0.0f, 50.0f, 43.0f);
 }
 
 @end

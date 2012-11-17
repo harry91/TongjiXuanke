@@ -8,5 +8,6 @@
 #import <Foundation/Foundation.h>
 
 @interface GHMenuCell : UITableViewCell
+@property (strong,nonatomic) NSNumber *count;
 
 @end

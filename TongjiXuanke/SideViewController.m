@@ -8,6 +8,8 @@
 
 #import "SideViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIImage+ColorImage.h"
+#import "SettingTableViewController.h"
 
 @interface SideViewController ()
 
@@ -32,29 +34,51 @@
     UIImage *resizeableImage = [[UIImage imageNamed:@"sideBarBGTextile.png"] resizableImageWithCapInsets:inset];
     self.background.image = resizeableImage;
     
+    UIImage *clearImage = [UIImage imageNamed:@"slideNumberBG.png"];
+    
     NSArray *headers = @[
+    //@"设置",
     @"列表",
     @"收藏",
 	];
     NSArray *cellInfos = @[
+        //@[
+        //    @{@"image": clearImage, @"text": NSLocalizedString(@"设置", @"")}
+        //],
         @[
-            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"全部", @"")},
-            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"选课网", @"")},
-            @{@"image": [UIImage imageNamed:@"cellUnread.png"], @"text": NSLocalizedString(@"软件学院", @"")}
+            @{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")},
+            @{@"image": clearImage, @"text": NSLocalizedString(@"选课网", @"")},
+            @{@"image": clearImage, @"text": NSLocalizedString(@"软件学院", @"")}
         ],
         @[
-            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"全部", @"")},
-            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"选课网", @"")},
-            @{@"image": [UIImage imageNamed:@"fav_star.png"], @"text": NSLocalizedString(@"软件学院", @"")}        ]
+            @{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")},
+            @{@"image": clearImage, @"text": NSLocalizedString(@"选课网", @"")},
+            @{@"image": clearImage, @"text": NSLocalizedString(@"软件学院", @"")}        ]
 	];
     
     self.cellInfos = cellInfos;
     self.headers = headers;
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *username = [ud objectForKey:@"username"];
+    self.usernameLabel.text = username;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"I am Called!");
+    
+}
+
+
+-(IBAction)settingClicked:(id)sender
+{
+    [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
+        SettingTableViewController* mainView = [self.storyboard instantiateViewControllerWithIdentifier:@"settingView"];
+        controller.centerController = mainView;
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+        }
+//        [NSThread sleepForTimeInterval:(300+arc4random()%700)/1000000.0]; // mimic delay... not really necessary
+    ];
 }
 
 
@@ -67,9 +91,9 @@
 - (void)viewDidUnload {
     [self setBackground:nil];
     [self setTableView:nil];
+    [self setUsernameLabel:nil];
     [super viewDidUnload];
 }
-
 
 
 #pragma mark UITableViewDataSource
@@ -134,7 +158,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
+        UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsView"];
+        self.viewDeckController.centerController = vc;
+    }
+     ];
 }
 
 
