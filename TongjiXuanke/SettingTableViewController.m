@@ -103,9 +103,8 @@
     UIActionSheet* actionSheet;
     actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil];
     
-    UITabBar* tabBar = self.tabBarController.tabBar;
     logoutActionSheet = actionSheet;
-    [actionSheet showFromTabBar:tabBar];
+    [actionSheet showInView:self.view];
 }
 
 -(void)downloadSwitchChanged:(id)sender
@@ -216,9 +215,10 @@
     {
         actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享", nil];
     }
-    UITabBar* tabBar = self.tabBarController.tabBar;
+    //UITabBar* tabBar = self.viewDeckController.centerController.tabBarController.tabBar;
     shareActionSheet = actionSheet;
-    [actionSheet showFromTabBar:tabBar];
+    [actionSheet showInView:self.view];
+//  [actionSheet showFromTabBar:tabBar];
     
     [self cleanTableSelection];
 }
@@ -388,13 +388,13 @@
 - (void)shareByWeibo
 {
     SocialShareModal *socialModal = [[SocialShareModal alloc] init];
-    socialModal.targetViewController = self.tabBarController;
+    socialModal.targetViewController = self;
     socialModal.postText = @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。";
     
     
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://sbhhbs.com/static/test.jpg"]];
-    UIImage *image = [UIImage imageWithData:data];
-    socialModal.postImageList = @[image];
+    //NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://sbhhbs.com/static/test.jpg"]];
+    //UIImage *image = [UIImage imageWithData:data];
+    //socialModal.postImageList = @[image];
     [socialModal sendWeiboMessage];
 }
 

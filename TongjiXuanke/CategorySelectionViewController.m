@@ -11,6 +11,7 @@
 #import "SettingModal.h"
 #import "MBProgressHUD.h"
 #import "ReachabilityChecker.h"
+#import "Brain.h"
 
 @interface CategorySelectionViewController ()
 
@@ -35,6 +36,11 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[Brain instance] configureClasses];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -48,7 +54,7 @@
 }
 
 - (void)configureNavBar {
-    UIBarButtonItem *backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
+    backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
 }
 
@@ -135,6 +141,15 @@
         [self showNoInternetNotification];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if([[SettingModal instance] subscribledCount] == 0)
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItem = backButton;
+    }
 }
 
 @end

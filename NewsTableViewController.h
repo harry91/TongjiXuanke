@@ -12,26 +12,21 @@
 #import "XuankeModel.h"
 #import "NewsLoaderProtocal.h"
 #import "MyDataStorage.h"
-#import "EGORefreshTableHeaderView.h"
+#import "Brain.h"
 #import "MBProgressHUD.h"
 #import "IIViewDeckController.h"
 
 @class MyDataStorage;
 @class SSEModel;
 
-@interface NewsTableViewController : UITableViewController<NewsLoaderProtocal,NSFetchedResultsControllerDelegate,EGORefreshTableHeaderDelegate>
+@interface NewsTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 {
     XuankeModel *xuankeModel;
     SSEModel *sseModel;
     MyDataStorage *dataStorage;
-    EGORefreshTableHeaderView *_refreshHeaderView;
     MBProgressHUD *HUD;
     BOOL _reloading;
-    
-    //UINavigationController *strangeBug;
 }
-//@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 

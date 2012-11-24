@@ -19,8 +19,8 @@ SettingModal* _settinginstance;
     if(self = [super init])
     {
         categorys = @[
-            @{@"id" : @2 , @"name" : @"选课网"},
-            @{@"id" : @3 , @"name" : @"软件学院"}
+        @{@"id" : @2 , @"name" : @"选课网",    @"class" : @"XuankeModel" ,@"baseURL" : @"http://sse.tongji.edu.cn/" },
+        @{@"id" : @3 , @"name" : @"软件学院",  @"class" : @"SSEModel" ,@"baseURL" : @"http://xuanke.tongji.edu.cn/"}
         ];
         
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
@@ -73,6 +73,16 @@ SettingModal* _settinginstance;
 -(NSString*) nameForCategoryAtIndex:(int)index
 {
     return categorys[index][@"name"];
+}
+
+-(NSString*) classStringForCategoryAtIndex:(int)index
+{
+    return categorys[index][@"class"];
+}
+
+-(NSString*) baseURLStringForCategoryAtIndex:(int)index
+{
+    return categorys[index][@"baseURL"];
 }
 
 -(int)serverIDForCategoryAtIndex:(int)index

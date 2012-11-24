@@ -12,11 +12,12 @@
 #import "NewsLoaderProtocal.h"
 #import "LogInModal.h"
 #import "NSString+URLRequest.h"
+#import "DummyNewsModel.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) 
 
 
-@interface XuankeModel : NSObject <UIWebViewDelegate,NewsFeedProtocal,NewsLoaderProtocal>
+@interface XuankeModel : DummyNewsModel <UIWebViewDelegate,NewsFeedProtocal,LoginProtocal>
 {
     UIWebView *_listView;
     UIWebView *_detailView;
@@ -35,9 +36,7 @@
     BOOL logined;
     int tryTime;
 }
-@property (nonatomic) id<NewsLoaderProtocal> delegate;
 @property (nonatomic) NSString* userName;
 @property (nonatomic) NSString* password;
-
 
 @end

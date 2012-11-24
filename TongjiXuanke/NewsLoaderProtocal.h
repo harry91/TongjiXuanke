@@ -10,8 +10,8 @@
 
 @protocol NewsLoaderProtocal <NSObject>
 
--(void)finishedLoading:(NSString*)category;
+-(void)finishedLoadingInCategory:(int)categoryIndex;
 
--(void)errorLoading:(NSError*)error;
+-(void)errorLoading:(NSError*)error inCategory:(int)categoryIndex;
 
 @end

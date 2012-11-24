@@ -15,6 +15,7 @@
 #import "MWFeedItem.h"
 #import "NSString+HTML.h"
 #import "DataOperator.h"
+#import "SettingModal.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -222,7 +223,7 @@
 }
 
 #pragma mark News Feed Protocal
--(void)start
+-(void)realStart
 {
     [feedParser parse];
 }
@@ -270,15 +271,7 @@
     }
     return nil;
 }
--(NSString*)catagoryForNews
-{
-    return @"软院新闻";
-}
 
--(NSURL*)baseURL
-{
-    return [NSURL URLWithString:@"http://sse.tongji.edu.cn/"];
-}
 
 #pragma mark -
 #pragma mark MWFeedParserDelegate
@@ -299,19 +292,20 @@
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
     [self save];
-    [self.delegate finishedLoading:[self catagoryForNews]];
+    [self.delegate finishedLoadingInCategory:self.categoryIndex];
+    lastUpdateEnd = [NSDate date];
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
 	NSLog(@"Finished Parsing With Error: %@", error);
     if (parsedItems.count == 0) {
         NSLog(@"SSE RSS Failed");
-        [self.delegate errorLoading:error];
+        [self.delegate errorLoading:error inCategory:self.categoryIndex];
     } else {
         NSLog(@"SSE RSS partly Failed"); 
         // Failed but some items parsed, so show and inform of error
         [self save];
-        [self.delegate finishedLoading:[self catagoryForNews]];
+        [self.delegate finishedLoadingInCategory:self.categoryIndex];
     }
     
 }

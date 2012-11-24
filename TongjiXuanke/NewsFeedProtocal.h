@@ -22,7 +22,5 @@
 -(NSString*)idForNewsIndex:(int)index;
 -(NSDate*)timeForNewsIndex:(int)index;
 -(NSString*)catagoryForNews;
--(NSURL*)baseURL;
-
 
 @end

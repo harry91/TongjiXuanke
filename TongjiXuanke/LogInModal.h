@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "NewsLoaderProtocal.h"
 
+
+@protocol LoginProtocal <NSObject>
+
+-(void)LoginSuccess;
+-(void)LoginFailWithError:(NSError*)error;
+
+@end
+
+
 @interface LogInModal : NSObject<UIWebViewDelegate>
 {
     UIWebView *_webView;
@@ -18,7 +27,7 @@
     int tryTime;
     BOOL finished;
 }
-@property (nonatomic) id<NewsLoaderProtocal> delegate;
+@property (nonatomic) id delegate;
 @property (nonatomic) NSString* userName;
 @property (nonatomic) NSString* password;
 

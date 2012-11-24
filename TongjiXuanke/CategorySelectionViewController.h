@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CategorySelectionViewController : UITableViewController
-
+{
+    UIBarButtonItem *backButton;
+}
 @end

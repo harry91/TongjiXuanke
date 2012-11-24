@@ -13,6 +13,8 @@
 #import "ReachabilityChecker.h"
 #import "SettingModal.h"
 #import "DataOperator.h"
+#import "SettingModal.h"
+#import "NSString+EncryptAndDecrypt.h"
 
 @implementation XuankeModel
 
@@ -26,8 +28,15 @@
         _listView.delegate = self;
         _detailView.delegate = self;
         
-        self.password = @"";
-        self.userName = @"";
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSString *username = [ud objectForKey:@"username"];
+        NSString *pwd = [ud objectForKey:@"password"];
+        pwd = [NSString stringByDecryptString:pwd];
+        
+        
+        self.userName = username;
+        self.password = pwd;
+        
         dict = [@[] mutableCopy];
         
         isRetreivingThreadRunning = NO;
@@ -40,11 +49,6 @@
         logined = NO;
     }
     return self;
-}
-
--(void)setDelegate:(id<NewsLoaderProtocal>)delegate
-{
-    _delegate = delegate;
 }
 
 
@@ -129,7 +133,8 @@
         if([self parseResult:_content])
         {
             [self save];
-            [self.delegate finishedLoading:[self catagoryForNews]];
+            [self.delegate finishedLoadingInCategory:self.categoryIndex];
+            lastUpdateEnd = [NSDate date];
             tryTime = 0;
         }
         else
@@ -142,7 +147,7 @@
             else
             {
                 NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
-                [self.delegate errorLoading:error];
+                [self.delegate errorLoading:error inCategory:self.categoryIndex];
             }
             tryTime++;
         }
@@ -168,13 +173,13 @@
         detailGetting = NO;
         //[self retreivingTherad];
     }
-    else [self.delegate errorLoading:error];
+    else [self.delegate errorLoading:error inCategory:self.categoryIndex];
 }
 
 
 #pragma mark NewsFeedProtocal delegate
 
--(void)start
+-(void)realStart
 {
     if(!logined)
         [self login];
@@ -354,25 +359,15 @@
     return myDate;
 }
 
--(NSString*)catagoryForNews
-{
-    return @"选课网通知";
-}
 
--(NSURL*)baseURL
-{
-    return [NSURL URLWithString:@"http://xuanke.tongji.edu.cn/"];
-}
-
-
-#pragma mark News Loader For login modal
--(void)finishedLoading:(NSString*)category
+#pragma mark For login modal
+-(void)LoginSuccess
 {
     logined = YES;
     [self retrieveList];
 }
 
--(void)errorLoading:(NSError*)error
+-(void)LoginFailWithError:(NSError*)error
 {
     
 }

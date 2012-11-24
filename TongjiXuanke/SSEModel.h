@@ -10,8 +10,9 @@
 #import "NewsFeedProtocal.h"
 #import "NewsLoaderProtocal.h"
 #import "MWFeedParser.h"
+#import "DummyNewsModel.h"
 
-@interface SSEModel : NSObject <UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
+@interface SSEModel : DummyNewsModel <UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
 {
     UIWebView *_webView;
     MWFeedParser *feedParser;
@@ -24,7 +25,6 @@
     NSMutableArray *urlToRetireve;
 }
 
-@property (nonatomic) id<NewsLoaderProtocal> delegate;
 @property (nonatomic) NSString* userName;
 @property (nonatomic) NSString* password;
 

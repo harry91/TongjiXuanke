@@ -62,7 +62,7 @@
     if(loginInState == 1 && [currentURL isEqualToString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login"])
     {
         NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
-        [self.delegate errorLoading:error];
+        [self.delegate LoginFailWithError:error];
     }
     else if(loginInState == 0)
     {
@@ -80,7 +80,7 @@
     {
         if(!finished)
         {
-            [self.delegate finishedLoading:nil];
+            [self.delegate LoginSuccess];
             finished = YES;
         }
     }
@@ -93,7 +93,7 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     NSLog(@"%@",error);
-    [self.delegate errorLoading:error];
+    [self.delegate LoginFailWithError:error];
 }
 
 

@@ -17,9 +17,10 @@
 #import "SettingModal.h"
 #import "ReachabilityChecker.h"
 #import "SSEModel.h"
-#import "NSString+EncryptAndDecrypt.h"
 #import "APNSManager.h"
 #import "UIBarButtonItem+Addtion.h"
+#import "CKRefreshControl.h"
+#import "UIApplication+Toast.h"
 
 @interface NewsTableViewController ()
 
@@ -64,30 +65,6 @@
 {
     [self.viewDeckController toggleLeftViewAnimated:YES];
 
-}
-
-- (void)configureModel
-{
-    xuankeModel = [[XuankeModel alloc] init];
-    
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *username = [ud objectForKey:@"username"];
-    NSString *pwd = [ud objectForKey:@"password"];
-    pwd = [NSString stringByDecryptString:pwd];
-    
-    
-    xuankeModel.userName = username;
-    xuankeModel.password = pwd;
-    xuankeModel.delegate = self;
-    
-    //sseModel = [[SSEModel alloc] init];
-    sseModel.delegate = self;
-    
-    if([[ReachabilityChecker instance] hasInternetAccess])
-    {
-        self.tableView.contentInset = UIEdgeInsetsMake(66.0f, 0.0f, 0.0f, 0.0f);
-        [_refreshHeaderView egoRefreshScrollViewDidEndDragging: self.tableView];
-    }
 }
 
 
@@ -147,23 +124,17 @@
 
 - (void)configurePullToRefresh
 {
-    EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height, self.view.frame.size.width, self.tableView.bounds.size.height)];
-    view.delegate = self;
-    [self.tableView addSubview:view];
-    _refreshHeaderView = view;
+    CKRefreshControl *refreshControl = [CKRefreshControl new];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉以更新"];
+    [refreshControl addTarget:self action:@selector(doRefresh:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = (id)refreshControl;
 }
 
-- (void)APNSThread
-{
-    [APNSManager reSubscrible];
+- (void)doRefresh:(CKRefreshControl *)sender {
+    NSLog(@"refreshing");
+    [self startLoading];
 }
 
-- (void)configureAPNS
-{
-    [APNSManager requestAPNS];
-    [APNSManager cleanBadge];
-    [self performSelectorInBackground:@selector(APNSThread) withObject:nil];
-}
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad
@@ -172,19 +143,11 @@
     
     [self configureNavBar];
     [self configurePullToRefresh];
-    [self configureModel];
     
     [self dataInit];
     
-    [self configureAPNS];
+    [[Brain instance] APNSStart];
     
-    NSLog(@"%@",self.navigationController);
-    //strangeBug = self.navigationController;
-        // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -321,7 +284,7 @@
         }
         else
         {
-            [self showNoInternetNotification];
+            [UIApplication presentToast:@"没有网络连接"];
         }
     }
     else
@@ -427,28 +390,7 @@
 #pragma mark - News Loader
 -(void)finishedLoading:(NSString*)category
 {
-    //[self.tableView reloadData];
-    if([category isEqualToString:[xuankeModel catagoryForNews]])
-    {
-         _reloading = NO;
-        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    }
-   
-    if([[ReachabilityChecker instance] hasInternetAccess])
-    {
-        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
-        {
-            if([category isEqualToString:[xuankeModel catagoryForNews]])
-            {
-                [xuankeModel retreiveDetails];
-
-            }
-            else
-            {
-                [sseModel retreiveDetails];
-            }
-        }
-    }
+    [self stopLoading];
 }
 
 -(void)errorLoading:(NSError*)error
@@ -472,65 +414,17 @@
     else if([error.domain isEqualToString:@"NSURLErrorDomain"])
     {
         [self stopLoading];
-        [self showNotification:error.localizedDescription];
+        [UIApplication presentToast:error.localizedDescription];
     }
 }
 
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-	
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-	
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-	
-}
-
 
 #pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
--(void)showNotification:(NSString*)text
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
-	
-	// Configure for text only and offset down
-	hud.mode = MBProgressHUDModeText;
-	hud.labelText = text;
-	hud.margin = 10.f;
-	hud.yOffset = 150.f;
-	hud.removeFromSuperViewOnHide = YES;
-	
-	[hud hide:YES afterDelay:3];
-
-}
-
-
--(void)showNoInternetNotification
-{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
-	
-	// Configure for text only and offset down
-	hud.mode = MBProgressHUDModeText;
-	hud.labelText = @"没有网络连接";
-	hud.margin = 10.f;
-	hud.yOffset = 150.f;
-	hud.removeFromSuperViewOnHide = YES;
-	
-	[hud hide:YES afterDelay:3];
-    
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:1];
-}
 
 -(void)stopLoading
 {
     _reloading = NO;
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    [self.refreshControl endRefreshing];
 }
 
 -(void)startLoading
@@ -538,30 +432,16 @@
     if([[ReachabilityChecker instance] hasInternetAccess])
     {
         _reloading = YES;
-        [xuankeModel start];
-        [sseModel start];
+        [[Brain instance] refresh];
     }
     else
     {
-        [self showNoInternetNotification];
+        [UIApplication presentToast:@"没有网络连接"];
+        [self stopLoading];
     }
 }
 
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-	[self startLoading];
-}
 
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
-	
-	return _reloading; // should return if data source model is reloading
-	
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-	
-	return [NSDate date]; // should return date data source was last changed
-	
-}
 
 
 @end
