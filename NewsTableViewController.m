@@ -129,7 +129,8 @@
     //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉以更新"];
     [refreshControl addTarget:self action:@selector(doRefresh:) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = (id)refreshControl;
-    [NSNotificationCenter registerAllUpdateDoneNotificationWithSelector:@selector(stopLoading) target:nil];
+    [NSNotificationCenter registerAllUpdateDoneNotificationWithSelector:@selector(stopLoading) target:self];
+    [self startLoading];
 }
 
 - (void)doRefresh:(CKRefreshControl *)sender {
@@ -137,6 +138,22 @@
     [self startLoading];
 }
 
+
+- (void)wrongPassCode
+{
+    UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle: @"账号验证失败"
+                               message: @"您是不是更改过密码？"
+                              delegate: self
+                     cancelButtonTitle: @"重试"
+                     otherButtonTitles: nil];
+    [alert show];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad
@@ -150,6 +167,7 @@
     
     [[Brain instance] APNSStart];
     
+    [NSNotificationCenter registerUserCheckFailNotificationWithSelector:@selector(wrongPassCode) target:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -232,6 +250,8 @@
         if([[ReachabilityChecker instance] hasInternetAccess])
         {
             dispatch_async(kBgQueue, ^{
+                int categoryIndex = [[SettingModal instance] indexOfCategoryWithName:news.category.name];
+                [[Brain instance] requestedNewsWithCategoryIndex:categoryIndex url:news.url];
                 while(!news.content);
                 [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
             });
@@ -269,10 +289,40 @@
         return _fetchedResultsController;
     }
     
+    [NSFetchedResultsController deleteCacheWithName:@"Root"];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSPredicate *simplePredicate = nil;
+    NSLog(@"now select: %@--%@",[SettingModal instance].currentHeader,[SettingModal instance].currentCategory);
+//    if([SettingModal instance].currentCategory == nil || ([[SettingModal instance].currentCategory isEqualToString:@"全部"] &&[[SettingModal instance].currentHeader isEqualToString:@"列表"]))// show all
+//    {
+//        
+//    }
+    if([[SettingModal instance].currentHeader isEqualToString:@"列表"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
+    {
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"category.name == \"%@\"",[SettingModal instance].currentCategory];
+        simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
+    }
+    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && [[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
+    {
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE "];
+        simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
+    }
+    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
+    {
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE AND category.name == \"%@\"",[SettingModal instance].currentCategory];
+        simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
+    }
+    
+    
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"News" inManagedObjectContext:_managedObjectContext];
+    
     [fetchRequest setEntity:entity];
+    
+    if(simplePredicate) [fetchRequest setPredicate:simplePredicate];
+    
+    
     
     NSSortDescriptor *sort = [[NSSortDescriptor alloc]
                               initWithKey:@"date" ascending:NO];
@@ -288,7 +338,6 @@
     _fetchedResultsController.delegate = self;
     
     return _fetchedResultsController;
-    
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {

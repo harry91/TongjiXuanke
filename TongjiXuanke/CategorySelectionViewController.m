@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "ReachabilityChecker.h"
 #import "Brain.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @interface CategorySelectionViewController ()
 
@@ -38,7 +39,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[Brain instance] configureClasses];
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 - (void)didReceiveMemoryWarning

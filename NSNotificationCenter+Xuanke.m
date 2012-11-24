@@ -9,6 +9,8 @@
 #import "NSNotificationCenter+Xuanke.h"
 
 #define kAllUpdateDoneNotification @"kAllUpdateDoneNotification"
+#define kUserCheckFailNotification @"kUserCheckFailNotification"
+#define kCategoryChangedNotification @"kCategoryChangedNotification"
 
 
 @implementation NSNotificationCenter (Xuanke)
@@ -22,6 +24,34 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:aTarget selector:aSelector
                    name:kAllUpdateDoneNotification
+                 object:nil];
+}
+
++ (void)postUserCheckFailNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUserCheckFailNotification object:nil userInfo:nil];
+}
+
++ (void)registerUserCheckFailNotificationWithSelector:(SEL)aSelector target:(id)aTarget
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:aTarget selector:aSelector
+                   name:kUserCheckFailNotification
+                 object:nil];
+}
+
+
++ (void)postCategoryChangedNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCategoryChangedNotification object:nil userInfo:nil];
+
+}
+
++ (void)registerCategoryChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:aTarget selector:aSelector
+                   name:kCategoryChangedNotification
                  object:nil];
 }
 

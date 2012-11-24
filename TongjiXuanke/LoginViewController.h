@@ -12,7 +12,7 @@
 #import "LogInModal.h"
 #import "IIViewDeckController.h"
 
-@interface LoginViewController : UIViewController<NewsLoaderProtocal>
+@interface LoginViewController : UIViewController<LoginProtocal>
 {
     MBProgressHUD *HUD;
     LogInModal *loginModel;

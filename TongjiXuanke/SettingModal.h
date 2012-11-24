@@ -33,4 +33,7 @@
 -(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value;
 -(int)subscribledCount;
 
+@property (nonatomic,strong) NSString* currentCategory;
+@property (nonatomic,strong) NSString* currentHeader;
+
 @end

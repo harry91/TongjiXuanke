@@ -25,6 +25,8 @@
 
 - (void)refresh;
 
+- (void)requestedNewsWithCategoryIndex:(int)index url:(NSString*)url;
+
 @property (nonatomic,readonly) BOOL refreshing;
 
 @end

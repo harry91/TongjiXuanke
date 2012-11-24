@@ -7,6 +7,7 @@
 //
 
 #import "LogInModal.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation LogInModal
 
@@ -62,6 +63,7 @@
     if(loginInState == 1 && [currentURL isEqualToString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login"])
     {
         NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
+        [NSNotificationCenter postUserCheckFailNotification];
         [self.delegate LoginFailWithError:error];
     }
     else if(loginInState == 0)

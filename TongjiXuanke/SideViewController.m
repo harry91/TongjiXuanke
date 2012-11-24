@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIImage+ColorImage.h"
 #import "SettingTableViewController.h"
+#import "SettingModal.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @interface SideViewController ()
 
@@ -34,35 +36,49 @@
     UIImage *resizeableImage = [[UIImage imageNamed:@"sideBarBGTextile.png"] resizableImageWithCapInsets:inset];
     self.background.image = resizeableImage;
     
-    UIImage *clearImage = [UIImage imageNamed:@"slideNumberBG.png"];
+    [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(categoryChanged) target:self];
     
     NSArray *headers = @[
     //@"设置",
     @"列表",
     @"收藏",
 	];
-    NSArray *cellInfos = @[
-        //@[
-        //    @{@"image": clearImage, @"text": NSLocalizedString(@"设置", @"")}
-        //],
-        @[
-            @{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")},
-            @{@"image": clearImage, @"text": NSLocalizedString(@"选课网", @"")},
-            @{@"image": clearImage, @"text": NSLocalizedString(@"软件学院", @"")}
-        ],
-        @[
-            @{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")},
-            @{@"image": clearImage, @"text": NSLocalizedString(@"选课网", @"")},
-            @{@"image": clearImage, @"text": NSLocalizedString(@"软件学院", @"")}        ]
-	];
-    
-    self.cellInfos = cellInfos;
     self.headers = headers;
+    [self generateCellInfo];
+    
+    
+    //NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    //[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *username = [ud objectForKey:@"username"];
     self.usernameLabel.text = username;
 }
+
+
+- (void)categoryChanged
+{
+    [self generateCellInfo];
+    [self.tableView reloadData];
+}
+
+- (void)generateCellInfo
+{
+    UIImage *clearImage = [UIImage imageWithColor:[UIColor clearColor]];
+    NSMutableArray *categorys = [@[@{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")}] mutableCopy];
+    
+    for(int i = 0; i < [[SettingModal instance] subscribledCount]; i++)
+    {
+        NSMutableDictionary *category = [@{} mutableCopy];
+        category[@"image"] = clearImage;
+        category[@"text"] = [[SettingModal instance] nameForCategoryAtIndex:i];
+        [categorys addObject:category];
+    }
+    NSArray *cellInfos = [NSArray arrayWithObjects:categorys, categorys,nil];
+    self.cellInfos = cellInfos;
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -159,6 +175,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    [SettingModal instance].currentCategory = self.cellInfos[indexPath.section][indexPath.row][@"text"];
+    [SettingModal instance].currentHeader = self.headers[indexPath.section];
     
     [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
         UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsView"];

@@ -10,6 +10,7 @@
 #import "DummyNewsModel.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation Brain
 
@@ -27,6 +28,7 @@ Brain* _brainInstance = nil;
         for (int i = 0; i < [instance numberOfCategory]; i++) {
             [updateArray addObject:@"ready"];
         }
+        [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(configureClasses) target:self];
     }
     return self;
 }
@@ -111,6 +113,12 @@ Brain* _brainInstance = nil;
     {
         return;
     }
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if(![ud objectForKey:@"password"])
+    {
+        return;
+    }
     
     SettingModal *instance = [SettingModal instance];
     for (int i = 0; i < [instance numberOfCategory]; i++)
@@ -124,6 +132,12 @@ Brain* _brainInstance = nil;
     _refreshing = YES;
 }
 
+
+- (void)requestedNewsWithCategoryIndex:(int)index url:(NSString*)url
+{
+    DummyNewsModel *anFeed = classArray[index];
+    [anFeed retreiveDetailForUrl:url];
+}
 
 - (BOOL)allUpdateDone
 {

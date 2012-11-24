@@ -116,7 +116,6 @@
 
 - (void)setAutoCleanTime:(int)month
 {
-    NSLog(@"auto clean : %d",month);
     NSString *text;
     if(month == 0)
     {

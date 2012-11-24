@@ -12,5 +12,11 @@
 + (void)postAllUpdateDoneNotification;
 + (void)registerAllUpdateDoneNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 
++ (void)postUserCheckFailNotification;
++ (void)registerUserCheckFailNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
+
++ (void)postCategoryChangedNotification;
++ (void)registerCategoryChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
+
 
 @end

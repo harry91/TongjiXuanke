@@ -163,7 +163,7 @@
 
 
 
--(void)finishedLoading:(NSString*)category
+-(void)LoginSuccess
 {
     [MBProgressHUD hideHUDForView:self.view.window animated:YES];
     
@@ -194,7 +194,7 @@
 ////                    completion:nil];
 }
 
--(void)errorLoading:(NSError*)error
+-(void)LoginFailWithError:(NSError *)error
 {
     
     if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
@@ -204,7 +204,6 @@
     }
 
 }
-
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
