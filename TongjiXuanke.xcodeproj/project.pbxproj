@@ -41,6 +41,7 @@
 		E418E0D9162E32DE0046C8D7 /* toolbar_web_view.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D5162E32DE0046C8D7 /* toolbar_web_view.png */; };
 		E418E0DA162E32DE0046C8D7 /* toolbar_web_view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E418E0D6162E32DE0046C8D7 /* toolbar_web_view@2x.png */; };
 		E434CAE21652CC750086DF56 /* FakeNews.m in Sources */ = {isa = PBXBuildFile; fileRef = E434CAE11652CC750086DF56 /* FakeNews.m */; };
+		E43674BD1661636A008F2300 /* NSNotificationCenter+Xuanke.m in Sources */ = {isa = PBXBuildFile; fileRef = E43674BC1661636A008F2300 /* NSNotificationCenter+Xuanke.m */; };
 		E4378FCF1628D620008A85DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4378FCE1628D620008A85DF /* UIKit.framework */; };
 		E4378FD11628D620008A85DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4378FD01628D620008A85DF /* Foundation.framework */; };
 		E4378FD31628D620008A85DF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4378FD21628D620008A85DF /* CoreGraphics.framework */; };
@@ -197,6 +198,8 @@
 		E418E0D6162E32DE0046C8D7 /* toolbar_web_view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_web_view@2x.png"; sourceTree = "<group>"; };
 		E434CAE01652CC750086DF56 /* FakeNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeNews.h; sourceTree = "<group>"; };
 		E434CAE11652CC750086DF56 /* FakeNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeNews.m; sourceTree = "<group>"; };
+		E43674BB1661636A008F2300 /* NSNotificationCenter+Xuanke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+Xuanke.h"; sourceTree = "<group>"; };
+		E43674BC1661636A008F2300 /* NSNotificationCenter+Xuanke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+Xuanke.m"; sourceTree = "<group>"; };
 		E4378FCA1628D620008A85DF /* TongjiXuanke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TongjiXuanke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4378FCE1628D620008A85DF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E4378FD01628D620008A85DF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -674,6 +677,8 @@
 				E4BD099416580BC200F18EDC /* UIImage+ColorImage.m */,
 				E4B1619116615AA100F35E89 /* UIApplication+Toast.h */,
 				E4B1619216615AA100F35E89 /* UIApplication+Toast.m */,
+				E43674BB1661636A008F2300 /* NSNotificationCenter+Xuanke.h */,
+				E43674BC1661636A008F2300 /* NSNotificationCenter+Xuanke.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -1060,6 +1065,7 @@
 				E491FD311661456C00BAE0D0 /* DummyNewsModel.m in Sources */,
 				E4B1618B1661596C00F35E89 /* OLGhostAlertView.m in Sources */,
 				E4B1619316615AA100F35E89 /* UIApplication+Toast.m in Sources */,
+				E43674BD1661636A008F2300 /* NSNotificationCenter+Xuanke.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

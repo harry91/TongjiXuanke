@@ -21,8 +21,6 @@
 
 @interface NewsTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 {
-    XuankeModel *xuankeModel;
-    SSEModel *sseModel;
     MyDataStorage *dataStorage;
     MBProgressHUD *HUD;
     BOOL _reloading;

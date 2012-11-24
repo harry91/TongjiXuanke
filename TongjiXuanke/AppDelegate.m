@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "APNSManager.h"
+#import "Brain.h"
 
 @implementation AppDelegate
 
@@ -74,6 +75,7 @@
     
     [self customizeAppearance];
     
+    [[Brain instance] refresh];
     
     return YES;
 }
@@ -157,6 +159,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[Brain instance] refresh];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

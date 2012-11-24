@@ -8,6 +8,8 @@
 
 #import "Brain.h"
 #import "DummyNewsModel.h"
+#import "NSNotificationCenter+Xuanke.h"
+#import "ReachabilityChecker.h"
 
 @implementation Brain
 
@@ -105,6 +107,11 @@ Brain* _brainInstance = nil;
 
 - (void)refresh
 {
+    if(![[ReachabilityChecker instance] hasInternetAccess])
+    {
+        return;
+    }
+    
     SettingModal *instance = [SettingModal instance];
     for (int i = 0; i < [instance numberOfCategory]; i++)
     {
@@ -135,6 +142,19 @@ Brain* _brainInstance = nil;
     if([self allUpdateDone])
     {
         _refreshing = NO;
+        [NSNotificationCenter postAllUpdateDoneNotification];
+    }
+}
+
+- (void)getDetails:(int)categoryIndex
+{
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
+        {
+            DummyNewsModel *anFeed = classArray[categoryIndex];
+            [anFeed retreiveDetails];
+        }
     }
 }
 
@@ -142,11 +162,14 @@ Brain* _brainInstance = nil;
 -(void)finishedLoadingInCategory:(int)categoryIndex
 {
     updateArray[categoryIndex] = @"done";
+    [self checkUpdate];
+    [self getDetails:categoryIndex];
 }
 
 -(void)errorLoading:(NSError*)error inCategory:(int)categoryIndex
 {
     updateArray[categoryIndex] = @"error";
+    [self checkUpdate];
 }
 
 

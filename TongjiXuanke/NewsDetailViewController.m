@@ -12,6 +12,7 @@
 #import "UIBarButtonItem+Addtion.h"
 #import "MyDataStorage.h"
 #import "UIBarButtonItem+Addtion.h"
+#import "SettingModal.h"
 
 @interface NewsDetailViewController ()
 
@@ -26,8 +27,9 @@
     
     NSString *categoryTitle = news.category.name;
     
-    self.baseURL = [NSURL URLWithString:@"http://xuanke.tongji.edu.cn"];
+    int categoryIndex = [[SettingModal instance] indexOfCategoryWithName:categoryTitle];
     
+    self.baseURL = [NSURL URLWithString:[[SettingModal instance] baseURLStringForCategoryAtIndex:categoryIndex]];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +51,6 @@
     NSString* newsString = news.content;
     
     [self.original_webview loadHTMLString:newsString baseURL:self.baseURL];
-    
     [self.puretext_webview loadHTMLString:newsString baseURL:self.baseURL];
     
     news.haveread = [[NSNumber alloc] initWithBool:YES];

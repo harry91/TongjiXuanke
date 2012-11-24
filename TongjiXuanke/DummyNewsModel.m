@@ -19,6 +19,7 @@
         double deltaMinutes = deltaSeconds / 60.0f;
         if(deltaMinutes < 20)
         {
+            [self performSelector:@selector(OhYeah) withObject:nil afterDelay:1];
             return;
         }
         else
@@ -28,18 +29,20 @@
             return;
         }
     }
-    [self performSelector:@selector(OhYeah) withObject:nil afterDelay:1];
-//    if(lastUpdateStart && !lastUpdateEnd)
-//    {
-//    }
-//    else
-//    {
-//        if(!lastUpdateStart)
-//        {
-//            lastUpdateStart = [NSDate date];
-//            [self realStart];
-//        }
-//    }
+    else
+    {
+        if(!lastUpdateStart)
+        {
+            lastUpdateStart = [NSDate date];
+            [self realStart];
+            return;
+        }
+        else
+        {
+            [self performSelector:@selector(OhYeah) withObject:nil afterDelay:1];
+            return;
+        }
+    }
 }
 
 -(void)OhYeah

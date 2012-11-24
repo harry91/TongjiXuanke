@@ -21,6 +21,7 @@
 #import "UIBarButtonItem+Addtion.h"
 #import "CKRefreshControl.h"
 #import "UIApplication+Toast.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @interface NewsTableViewController ()
 
@@ -125,9 +126,10 @@
 - (void)configurePullToRefresh
 {
     CKRefreshControl *refreshControl = [CKRefreshControl new];
-    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉以更新"];
+    //refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉以更新"];
     [refreshControl addTarget:self action:@selector(doRefresh:) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = (id)refreshControl;
+    [NSNotificationCenter registerAllUpdateDoneNotificationWithSelector:@selector(stopLoading) target:nil];
 }
 
 - (void)doRefresh:(CKRefreshControl *)sender {
@@ -153,6 +155,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    
+    if([Brain instance].refreshing)
+    {
+        [self.refreshControl beginRefreshing];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -200,46 +207,6 @@
 
 
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 - (void)pushToDetailViewWithNews:(News*)news
 {
@@ -265,15 +232,6 @@
         if([[ReachabilityChecker instance] hasInternetAccess])
         {
             dispatch_async(kBgQueue, ^{
-                while(_reloading);
-                if([news.category.name isEqualToString:[xuankeModel catagoryForNews]])
-                {
-                    [xuankeModel retreiveDetailForUrl:news.url];
-                }
-                else if([news.category.name isEqualToString:[sseModel catagoryForNews]])
-                {
-                    [sseModel retreiveDetailForUrl:news.url];
-                }
                 while(!news.content);
                 [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
             });
@@ -388,35 +346,35 @@
 }
 
 #pragma mark - News Loader
--(void)finishedLoading:(NSString*)category
-{
-    [self stopLoading];
-}
-
--(void)errorLoading:(NSError*)error
-{
-    if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
-    {
-        UIAlertView *alert =
-        [[UIAlertView alloc] initWithTitle: @"账号验证失败"
-                                   message: @"您是不是更改过密码？"
-                                  delegate: self
-                         cancelButtonTitle: @"重试"
-                         otherButtonTitles: nil];
-        [alert show];
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
-        //[self performSegueWithIdentifier:@"backToLogin" sender:self];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else if([error.domain isEqualToString:@"NSURLErrorDomain"])
-    {
-        [self stopLoading];
-        [UIApplication presentToast:error.localizedDescription];
-    }
-}
+//-(void)finishedLoading:(NSString*)category
+//{
+//    [self stopLoading];
+//}
+//
+//-(void)errorLoading:(NSError*)error
+//{
+//    if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
+//    {
+//        UIAlertView *alert =
+//        [[UIAlertView alloc] initWithTitle: @"账号验证失败"
+//                                   message: @"您是不是更改过密码？"
+//                                  delegate: self
+//                         cancelButtonTitle: @"重试"
+//                         otherButtonTitles: nil];
+//        [alert show];
+//        
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//        //[self performSegueWithIdentifier:@"backToLogin" sender:self];
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+//    else if([error.domain isEqualToString:@"NSURLErrorDomain"])
+//    {
+//        [self stopLoading];
+//        [UIApplication presentToast:error.localizedDescription];
+//    }
+//}
 
 
 #pragma mark -

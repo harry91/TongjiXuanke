@@ -75,6 +75,18 @@ SettingModal* _settinginstance;
     return categorys[index][@"name"];
 }
 
+-(int)indexOfCategoryWithName:(NSString*)str
+{
+    for(int i = 0; i < categorys.count; i ++)
+    {
+        if([categorys[i][@"name"] isEqualToString:str])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 -(NSString*) classStringForCategoryAtIndex:(int)index
 {
     return categorys[index][@"class"];
