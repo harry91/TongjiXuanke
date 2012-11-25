@@ -8,6 +8,7 @@
 
 #import "MyIAP.h"
 #import "SettingModal.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 #define GOPROID @"com.sbhhbs.tzzzd.pro"
 
@@ -42,6 +43,7 @@ MyIAP* _MYIAP_INSTANCE = nil;
 
 - (void)goPro
 {
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:YES];
     [[SettingModal instance] goPro];
 }
 
@@ -63,6 +65,7 @@ MyIAP* _MYIAP_INSTANCE = nil;
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
     NSLog(@"IAP failedTransaction");
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 
@@ -86,6 +89,7 @@ MyIAP* _MYIAP_INSTANCE = nil;
 - (void)downloadIAPDataFailed
 {
     NSLog(@"IAP download iap data failed");
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 - (NSString *)encode:(const uint8_t *)input length:(NSInteger)length {

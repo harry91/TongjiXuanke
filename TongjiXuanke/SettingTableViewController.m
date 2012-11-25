@@ -11,6 +11,9 @@
 #import "SocialShareModal.h"
 #import "SettingModal.h"
 #import "IIViewDeckController.h"
+#import "NSNotificationCenter+Xuanke.h"
+
+#define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
 
 @interface SettingTableViewController ()
 
@@ -82,13 +85,10 @@
     [super viewDidLoad];
 
     [self configureNavBar];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [NSNotificationCenter registerUpgradeProNotificationWithSelector:@selector(showBuyResult:) target:self];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -267,7 +267,6 @@
         {
             [[MyIAP instance] buyPro];
         }
-        [self cleanTableSelection];
     }
     else if(cell == self.restorePurchaseCell)
     {
@@ -279,7 +278,6 @@
         {
             [[MyIAP instance] restorePurchase];
         }
-        [self cleanTableSelection];
     }
 }
 
@@ -417,6 +415,30 @@
                                               cancelButtonTitle:NSLocalizedString(@"确定", nil)
                                               otherButtonTitles:nil];
     [alertView show];
+    [self cleanTableSelection];
+}
+
+
+- (void)showBuyResult:(NSNotification *)notification
+{
+    NSNumber *result = notification.object;
+    BOOL r = [result boolValue];
+    NSString *message;
+    if(r)
+    {
+        message = @"升级成功！";
+    }
+    else
+    {
+        message = @"升级失败！";
+    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                          otherButtonTitles:nil];
+    [alertView show];
+    [self cleanTableSelection];
 }
 
 #pragma mark - Share methods
@@ -424,7 +446,7 @@
 {
     SocialShareModal *socialModal = [[SocialShareModal alloc] init];
     socialModal.targetViewController = self;
-    socialModal.postText = @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。";
+    socialModal.postText = RECOMMAND_TEXT;
     
     
     //NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://sbhhbs.com/static/test.jpg"]];
@@ -447,7 +469,7 @@
         MFMessageComposeViewController* picker = [[MFMessageComposeViewController alloc] init];
         picker.messageComposeDelegate = self;
         
-        NSString *body = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
+        NSString *body = [NSString stringWithFormat:RECOMMAND_TEXT];
         [picker setBody:body];
         [self presentModalViewController:picker animated:YES];
     }
@@ -469,7 +491,7 @@
         picker.modalPresentationStyle = UIModalPresentationPageSheet;
         NSString *subject = [NSString stringWithFormat:@"推荐你使用通知早知道"];
         [picker setSubject:subject];
-        NSString *emailBody = [NSString stringWithFormat:@"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。通知推送+离线查看 贴心，放心^^。 推荐你也来用。"];
+        NSString *emailBody = [NSString stringWithFormat:RECOMMAND_TEXT];
         [picker setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:picker animated:YES];
     }

@@ -16,6 +16,7 @@
 #import "NSString+HTML.h"
 #import "DataOperator.h"
 #import "SettingModal.h"
+#import "UIApplication+Toast.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -166,6 +167,7 @@
     if(!result)
         return NO;
     
+    [[UIApplication sharedApplication] showNetworkIndicator];
     [self loadWebPageWithString:url];
     
     return YES;//TODO bug
@@ -210,10 +212,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [[UIApplication sharedApplication] hideNetworkIndicator];
+    
     tempContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
     tempBriefContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
     
-    NSString *currentURL = _webView.request.URL.absoluteString;;
+    NSString *currentURL = _webView.request.URL.absoluteString;
     
     [self finishRetreiving:currentURL];
 }
@@ -225,6 +229,7 @@
 #pragma mark News Feed Protocal
 -(void)realStart
 {
+    [[UIApplication sharedApplication] showNetworkIndicator];
     [feedParser parse];
 }
 
@@ -294,6 +299,7 @@
     [self save];
     [self.delegate finishedLoadingInCategory:self.categoryIndex];
     lastUpdateEnd = [NSDate date];
+    [[UIApplication sharedApplication] hideNetworkIndicator];
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
@@ -307,7 +313,7 @@
         [self save];
         [self.delegate finishedLoadingInCategory:self.categoryIndex];
     }
-    
+    [[UIApplication sharedApplication] hideNetworkIndicator];
 }
 
 

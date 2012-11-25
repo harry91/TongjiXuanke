@@ -18,5 +18,8 @@
 + (void)postCategoryChangedNotification;
 + (void)registerCategoryChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 
++ (void)postUpgradeProNotificationWithSuccess:(BOOL)success;
++ (void)registerUpgradeProNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
+
 
 @end

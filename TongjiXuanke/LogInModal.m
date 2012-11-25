@@ -8,6 +8,7 @@
 
 #import "LogInModal.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "UIApplication+Toast.h"
 
 @implementation LogInModal
 
@@ -42,6 +43,7 @@
 
 -(void)login
 {
+    [[UIApplication sharedApplication] showNetworkIndicator];
     [self loadWebPageWithString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login?goto=http%3A%2F%2Fxuanke.tongji.edu.cn%2Fpass.jsp"];
     loginInState = 0;
 }
@@ -64,6 +66,7 @@
     {
         NSError *error = [[NSError alloc] initWithDomain:@"AccountOrPwdInvalid" code:0 userInfo:nil];
         [NSNotificationCenter postUserCheckFailNotification];
+        [[UIApplication sharedApplication] hideNetworkIndicator];
         [self.delegate LoginFailWithError:error];
     }
     else if(loginInState == 0)
@@ -92,6 +95,7 @@
         {
             [self.delegate LoginSuccess];
             finished = YES;
+            [[UIApplication sharedApplication] hideNetworkIndicator];
         }
     }
     else

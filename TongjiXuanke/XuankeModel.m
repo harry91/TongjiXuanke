@@ -15,6 +15,7 @@
 #import "DataOperator.h"
 #import "SettingModal.h"
 #import "NSString+EncryptAndDecrypt.h"
+#import "UIApplication+Toast.h"
 
 @implementation XuankeModel
 
@@ -61,6 +62,7 @@
 
 -(void)retrieveList
 {
+    [[UIApplication sharedApplication] showNetworkIndicator];
     [_listView loadRequest:[@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp" convertToURLRequest]];
 }
 
@@ -134,6 +136,7 @@
         {
             [self save];
             [self.delegate finishedLoadingInCategory:self.categoryIndex];
+            [[UIApplication sharedApplication] hideNetworkIndicator];
             lastUpdateEnd = [NSDate date];
             tryTime = 0;
         }
@@ -148,6 +151,7 @@
             {
                 NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
                 [self.delegate errorLoading:error inCategory:self.categoryIndex];
+                [[UIApplication sharedApplication] hideNetworkIndicator];
             }
             tryTime++;
         }
@@ -157,6 +161,7 @@
         tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         tempBriefContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
         detailGetting = NO;
+        [[UIApplication sharedApplication] hideNetworkIndicator];
         
         NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
         
@@ -295,6 +300,7 @@
     NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
     urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
     
+    [[UIApplication sharedApplication] showNetworkIndicator];
     [_detailView loadRequest:[urlToGo convertToURLRequest]];
     
     return YES;//TODO bug
