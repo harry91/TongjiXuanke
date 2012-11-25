@@ -70,8 +70,16 @@
     {
         NSString *fillUserName = @"document.frm1.IDToken1.value='USERNAME';";
         NSString *fillPwd = @"document.frm2.IDToken2.value='PASSWORD';";
-        fillUserName = [fillUserName stringByReplacingOccurrencesOfString:@"USERNAME" withString:self.userName];
-        fillPwd = [fillPwd stringByReplacingOccurrencesOfString:@"PASSWORD" withString:self.password];
+        @try {
+            fillUserName = [fillUserName stringByReplacingOccurrencesOfString:@"USERNAME" withString:self.userName];
+            fillPwd = [fillPwd stringByReplacingOccurrencesOfString:@"PASSWORD" withString:self.password];
+        }
+        @catch (NSException *exception) {
+            NSLog (@"Caught %@%@", [exception name], [exception reason]);
+        }
+        @finally {
+            
+        }
         
         [_webView stringByEvaluatingJavaScriptFromString:fillUserName];
         [_webView stringByEvaluatingJavaScriptFromString:fillPwd];

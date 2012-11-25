@@ -43,7 +43,7 @@
 
 - (void)configureNavBar
 {
-    UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"选课网通知"];
+    UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"通知早知道"];
     self.navigationItem.titleView = titleLabel;
 
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
