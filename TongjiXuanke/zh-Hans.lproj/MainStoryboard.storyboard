@@ -299,10 +299,50 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="感谢你的使用^o^" id="gbY-mX-onW">
+                            <tableViewSection footerTitle="升级为专业版后去除广告，开启收藏功能。同时后续所有更新免费使用。" id="LUr-GB-esc">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="gYW-Dk-Bse">
+                                        <rect key="frame" x="0.0" y="261" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="升级为专业版" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gig-ML-RTJ">
+                                                    <rect key="frame" x="0.0" y="11" width="300" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cBK-2y-v1r">
+                                        <rect key="frame" x="0.0" y="306" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="恢复购买" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ut0-iq-7im">
+                                                    <rect key="frame" x="0.0" y="11" width="300" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="gbY-mX-onW">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="O1p-Ov-ZZU">
-                                        <rect key="frame" x="0.0" y="261" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="421" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -320,7 +360,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kRH-Tz-zTc">
-                                        <rect key="frame" x="0.0" y="306" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="466" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -338,7 +378,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hfh-Eu-fUj">
-                                        <rect key="frame" x="0.0" y="350" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="510" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -367,10 +407,12 @@
                     <connections>
                         <outlet property="autoCleanCell" destination="jwz-HH-yvf" id="Yt2-6W-sLN"/>
                         <outlet property="autoCleanTimeLabel" destination="XxK-Ua-m9t" id="gPc-ZG-pmI"/>
+                        <outlet property="buyProCell" destination="gYW-Dk-Bse" id="irJ-Fg-Kkr"/>
                         <outlet property="categoryCell" destination="Ag6-hl-5Bf" id="mZ4-Fw-QBq"/>
                         <outlet property="categoryLabel" destination="Nyd-Cc-yYS" id="J9r-bd-gPB"/>
                         <outlet property="onlyWIFIdownloadSwtich" destination="AVN-CE-a9t" id="oir-kE-EHg"/>
                         <outlet property="rateMeCell" destination="O1p-Ov-ZZU" id="ZFk-aC-ddx"/>
+                        <outlet property="restorePurchaseCell" destination="cBK-2y-v1r" id="iiC-7e-p75"/>
                         <outlet property="suggestionCell" destination="hfh-Eu-fUj" id="Y0d-4h-KfX"/>
                         <outlet property="tellFriendCell" destination="kRH-Tz-zTc" id="fLF-1V-L7H"/>
                         <outlet property="usernameCell" destination="FBA-Qo-bEd" id="wXs-tQ-0dc"/>
@@ -673,6 +715,74 @@
         <image name="sideTopBar.png" width="320" height="45"/>
         <image name="slideNumberBG.png" width="40" height="18"/>
     </resources>
+    <classes>
+        <class className="CategorySelectionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorySelectionViewController.h"/>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="inputBG" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="logo" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="noticeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="studentNumberTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MyTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyTabBarController.h"/>
+        </class>
+        <class className="NewsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NewsDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="original_webview" candidateClass="UIWebView"/>
+                <relationship kind="outlet" name="puretext_webview" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NewsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsTableViewController.h"/>
+        </class>
+        <class className="SettingTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="autoCleanCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="autoCleanTimeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="buyProCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="categoryCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="onlyWIFIdownloadSwtich" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="rateMeCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="restorePurchaseCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="suggestionCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="tellFriendCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SideViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SideViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="settingClicked:"/>
+                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="cellInfos" candidateClass="NSArray"/>
+                <relationship kind="outlet" name="headers" candidateClass="NSArray"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

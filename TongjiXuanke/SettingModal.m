@@ -8,6 +8,8 @@
 
 #import "SettingModal.h"
 #import "APNSManager.h"
+#import "NSString+EncryptAndDecrypt.h"
+#import "UIDevice+IdentifierAddition.h"
 
 @implementation SettingModal
 
@@ -26,7 +28,16 @@ SettingModal* _settinginstance;
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
         
         _isProVersion = NO;
+        UIDevice *dev = [UIDevice currentDevice];
+        NSString *deviceUuid = [dev uniqueGlobalDeviceIdentifier];
         
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSString *ProVersion = [ud objectForKey:@"ProVersion"];
+        ProVersion = [NSString stringByDecryptString:ProVersion];
+        if([deviceUuid isEqualToString:ProVersion])
+        {
+            _isProVersion = YES;
+        }
     }
     return self;
 }
@@ -157,6 +168,20 @@ SettingModal* _settinginstance;
     return result;
 }
 
+-(void)goPro
+{
+    if(self.isProVersion)
+        return;
+    UIDevice *dev = [UIDevice currentDevice];
+	NSString *deviceUuid = [dev uniqueGlobalDeviceIdentifier];
+    deviceUuid = [NSString stringByEncryptString:deviceUuid];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    [ud setObject:deviceUuid forKey:@"ProVersion"];
+    [ud synchronize];
+    _isProVersion = YES;
+}
 
 
 @end

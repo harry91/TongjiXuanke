@@ -44,6 +44,8 @@
 		E429EE5A166275BF0014A5F6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE59166275BE0014A5F6 /* StoreKit.framework */; };
 		E429EE5C166275C70014A5F6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE5B166275C70014A5F6 /* AudioToolbox.framework */; };
 		E429EE5E166275F00014A5F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE5D166275F00014A5F6 /* AdSupport.framework */; };
+		E429EE8A16628AE20014A5F6 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E429EE8916628AE20014A5F6 /* IAPManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E429EE93166290200014A5F6 /* MyIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = E429EE92166290200014A5F6 /* MyIAP.m */; };
 		E434CAE21652CC750086DF56 /* FakeNews.m in Sources */ = {isa = PBXBuildFile; fileRef = E434CAE11652CC750086DF56 /* FakeNews.m */; };
 		E43674BD1661636A008F2300 /* NSNotificationCenter+Xuanke.m in Sources */ = {isa = PBXBuildFile; fileRef = E43674BC1661636A008F2300 /* NSNotificationCenter+Xuanke.m */; };
 		E4378FCF1628D620008A85DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4378FCE1628D620008A85DF /* UIKit.framework */; };
@@ -213,6 +215,10 @@
 		E429EE59166275BE0014A5F6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E429EE5B166275C70014A5F6 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E429EE5D166275F00014A5F6 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		E429EE8816628AE20014A5F6 /* IAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPManager.h; sourceTree = "<group>"; };
+		E429EE8916628AE20014A5F6 /* IAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPManager.m; sourceTree = "<group>"; };
+		E429EE91166290200014A5F6 /* MyIAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIAP.h; sourceTree = "<group>"; };
+		E429EE92166290200014A5F6 /* MyIAP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIAP.m; sourceTree = "<group>"; };
 		E434CAE01652CC750086DF56 /* FakeNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeNews.h; sourceTree = "<group>"; };
 		E434CAE11652CC750086DF56 /* FakeNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeNews.m; sourceTree = "<group>"; };
 		E43674BB1661636A008F2300 /* NSNotificationCenter+Xuanke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+Xuanke.h"; sourceTree = "<group>"; };
@@ -537,6 +543,17 @@
 				E429EE57166275960014A5F6 /* libGoogleAdMobAds.a */,
 			);
 			name = AdMob;
+			sourceTree = "<group>";
+		};
+		E429EE8B16628AE80014A5F6 /* IAPManager */ = {
+			isa = PBXGroup;
+			children = (
+				E429EE8816628AE20014A5F6 /* IAPManager.h */,
+				E429EE8916628AE20014A5F6 /* IAPManager.m */,
+				E429EE91166290200014A5F6 /* MyIAP.h */,
+				E429EE92166290200014A5F6 /* MyIAP.m */,
+			);
+			name = IAPManager;
 			sourceTree = "<group>";
 		};
 		E4378FBF1628D61F008A85DF = {
@@ -873,6 +890,7 @@
 		E4AFCCE91630242100358B1B /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				E429EE8B16628AE80014A5F6 /* IAPManager */,
 				E429EE4D166275440014A5F6 /* AdMob */,
 				E4B1618C1661598200F35E89 /* OLGhostAlertView */,
 				E491FD2316613C9200BAE0D0 /* CKRefreshControl */,
@@ -1108,6 +1126,8 @@
 				E4B1618B1661596C00F35E89 /* OLGhostAlertView.m in Sources */,
 				E4B1619316615AA100F35E89 /* UIApplication+Toast.m in Sources */,
 				E43674BD1661636A008F2300 /* NSNotificationCenter+Xuanke.m in Sources */,
+				E429EE8A16628AE20014A5F6 /* IAPManager.m in Sources */,
+				E429EE93166290200014A5F6 /* MyIAP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

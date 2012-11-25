@@ -46,6 +46,7 @@
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
+    
     if([ud objectForKey:@"password"])
     {
         self.studentNumberTextField.hidden = YES;
@@ -80,6 +81,7 @@
         {
             [self.studentNumberTextField becomeFirstResponder];
         }
+        
         self.studentNumberTextField.hidden = NO;
         self.passwordTextField.hidden = NO;
         self.logo.hidden = NO;

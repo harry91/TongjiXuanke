@@ -15,6 +15,7 @@
 #import "SettingModal.h"
 #import "GADBannerView.h"
 #import "GADRequest.h"
+#import "MyIAP.h"
 
 @interface NewsDetailViewController ()
 
@@ -189,6 +190,7 @@
 	NSLog(@"clickedButtonAtIndex:%d",buttonIndex);
     switch (buttonIndex) {
         case 1://upgrade
+            [[MyIAP instance] buyPro];
             
             break;
             

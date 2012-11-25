@@ -257,7 +257,30 @@
     {
         [self autoCleanShowPicker];
     }
-    
+    else if(cell == self.buyProCell)
+    {
+        if([SettingModal instance].isProVersion)
+        {
+            [self alreadyProversionAlert];
+        }
+        else
+        {
+            [[MyIAP instance] buyPro];
+        }
+        [self cleanTableSelection];
+    }
+    else if(cell == self.restorePurchaseCell)
+    {
+        if([SettingModal instance].isProVersion)
+        {
+            [self alreadyProversionAlert];
+        }
+        else
+        {
+            [[MyIAP instance] restorePurchase];
+        }
+        [self cleanTableSelection];
+    }
 }
 
 - (void)viewDidUnload {
@@ -271,6 +294,8 @@
     [self setUsernameCell:nil];
     [self setAutoCleanCell:nil];
     [self setAutoCleanTimeLabel:nil];
+    [self setBuyProCell:nil];
+    [self setRestorePurchaseCell:nil];
     [super viewDidUnload];
 }
 
@@ -382,8 +407,19 @@
     }
 }
 
-#pragma mark - Share methods
+#pragma mark - Buy methods
 
+- (void)alreadyProversionAlert
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您已经是尊贵的专业版。"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
+#pragma mark - Share methods
 - (void)shareByWeibo
 {
     SocialShareModal *socialModal = [[SocialShareModal alloc] init];
@@ -440,6 +476,7 @@
 }
 
 #pragma mark - UIActionSheetDelegate
+
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {

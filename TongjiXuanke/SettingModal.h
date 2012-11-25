@@ -33,6 +33,9 @@
 -(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value;
 -(int)subscribledCount;
 
+
+-(void)goPro;
+
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
 @property (nonatomic,readonly) BOOL isProVersion;
