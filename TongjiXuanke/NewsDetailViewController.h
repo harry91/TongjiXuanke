@@ -10,12 +10,17 @@
 #import "News.h"
 #import "Category.h"
 
-@interface NewsDetailViewController : UIViewController <UIWebViewDelegate>
+#import "GADBannerViewDelegate.h"
+
+@class GADBannerView, GADRequest;
+
+@interface NewsDetailViewController : UIViewController <UIWebViewDelegate,GADBannerViewDelegate>
 {
     News *news;
     UISegmentedControl *segmentedControl;
     int textLoadComplete;
     UIButton *insideFavButton;
+    GADBannerView *adBanner;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *original_webview;
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;

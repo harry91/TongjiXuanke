@@ -23,6 +23,7 @@
 #import "UIApplication+Toast.h"
 #import "NSNotificationCenter+Xuanke.h"
 
+
 @interface NewsTableViewController ()
 
 @end
@@ -65,7 +66,6 @@
 - (void) showLeft
 {
     [self.viewDeckController toggleLeftViewAnimated:YES];
-
 }
 
 
@@ -162,7 +162,6 @@
     
     [self configureNavBar];
     [self configurePullToRefresh];
-    
     [self dataInit];
     
     [[Brain instance] APNSStart];
@@ -447,8 +446,6 @@
         [self stopLoading];
     }
 }
-
-
 
 
 @end

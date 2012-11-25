@@ -35,5 +35,7 @@
 
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
+@property (nonatomic,readonly) BOOL isProVersion;
+
 
 @end

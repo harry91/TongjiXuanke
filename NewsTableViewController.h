@@ -19,6 +19,7 @@
 @class MyDataStorage;
 @class SSEModel;
 
+
 @interface NewsTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 {
     MyDataStorage *dataStorage;

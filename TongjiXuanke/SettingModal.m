@@ -25,6 +25,8 @@ SettingModal* _settinginstance;
         
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
         
+        _isProVersion = NO;
+        
     }
     return self;
 }
