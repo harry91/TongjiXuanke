@@ -295,15 +295,36 @@
         return NO;
     }
     
-    detailGetting = YES;
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
     
-    NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
-    urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
-    [[UIApplication sharedApplication] showNetworkIndicator];
-    [_detailView loadRequest:[urlToGo convertToURLRequest]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"url == %@", url]];
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
     
-    return YES;//TODO bug
+    for(News* item in matching)
+    {
+        if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
+        {
+            detailGetting = YES;
+            
+            NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
+            urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
+            
+            [[UIApplication sharedApplication] showNetworkIndicator];
+            [_detailView loadRequest:[urlToGo convertToURLRequest]];
+            
+            return YES;//TODO bug
+        }
+    }
+
+    return NO;
 }
 
 

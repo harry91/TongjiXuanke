@@ -8,6 +8,7 @@
 
 #import "APNSManager.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "SettingModal.h"
 
 @implementation APNSManager
 
@@ -196,8 +197,16 @@ NSString *host = @"www.sbhhbs.com";
 {
     while(!deviceToken);
     [APNSManager cleanAllSubscrible];
-    [APNSManager subscribleCategory:2];
-    [APNSManager subscribleCategory:3];
+    
+    SettingModal *instance = [SettingModal instance];
+    
+    for(int i = 0; i < [instance numberOfCategory]; i++)
+    {
+        if([instance hasSubscribleCategoryAtIndex:i])
+        {
+            [APNSManager subscribleCategory:[instance serverIDForCategoryAtIndex:i]];
+        }
+    }
     return YES;
 }
 

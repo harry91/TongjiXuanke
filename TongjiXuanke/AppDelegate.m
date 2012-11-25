@@ -64,7 +64,7 @@
 {
     [NSUserDefaults initialize];
     
-    NSDictionary *userDefaultsDefaults = @{@"selectedCategoryArray" : @[@0]};
+    NSDictionary *userDefaultsDefaults = @{@"selectedCategoryArray" : @[@0,@1]};
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
 }

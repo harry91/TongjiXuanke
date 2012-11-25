@@ -1,18 +1,16 @@
 //
-//  SSEModel.h
+//  SystemNewsModel.h
 //  TongjiXuanke
 //
-//  Created by Song on 12-10-19.
+//  Created by Song on 12-11-25.
 //  Copyright (c) 2012年 Song. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "NewsFeedProtocal.h"
-#import "NewsLoaderProtocal.h"
-#import "MWFeedParser.h"
 #import "DummyNewsModel.h"
+#import "NewsFeedProtocal.h"
+#import "MWFeedParser.h"
 
-@interface SSEModel : DummyNewsModel <UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
+@interface SystemNewsModel : DummyNewsModel<UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
 {
     UIWebView *_webView;
     MWFeedParser *feedParser;
@@ -24,5 +22,4 @@
     BOOL isgetting;
     NSMutableArray *urlToRetireve;
 }
-
 @end
