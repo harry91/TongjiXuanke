@@ -449,10 +449,8 @@
     socialModal.targetViewController = self;
     socialModal.postText = RECOMMAND_TEXT;
     
-    
-    //NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://sbhhbs.com/static/test.jpg"]];
-    //UIImage *image = [UIImage imageWithData:data];
-    //socialModal.postImageList = @[image];
+    UIImage *image = [UIImage imageNamed:@"ads.png"];
+    socialModal.postImageList = @[image];
     [socialModal sendWeiboMessage];
 }
 
@@ -492,8 +490,12 @@
         picker.modalPresentationStyle = UIModalPresentationPageSheet;
         NSString *subject = [NSString stringWithFormat:@"推荐你使用通知早知道"];
         [picker setSubject:subject];
-        NSString *emailBody = [NSString stringWithFormat:RECOMMAND_TEXT];
-        [picker setMessageBody:emailBody isHTML:NO];
+        
+        NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"recommand_email" ofType:@"html"];
+        NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
+        
+        NSLog(@"Content: %@",infoText);
+        [picker setMessageBody:infoText isHTML:YES];
         [self presentModalViewController:picker animated:YES];
     }
 }
