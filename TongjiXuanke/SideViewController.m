@@ -67,12 +67,15 @@
     UIImage *clearImage = [UIImage imageWithColor:[UIColor clearColor]];
     NSMutableArray *categorys = [@[@{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")}] mutableCopy];
     
-    for(int i = 0; i < [[SettingModal instance] subscribledCount]; i++)
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
     {
-        NSMutableDictionary *category = [@{} mutableCopy];
-        category[@"image"] = clearImage;
-        category[@"text"] = [[SettingModal instance] nameForCategoryAtIndex:i];
-        [categorys addObject:category];
+        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
+        {
+            NSMutableDictionary *category = [@{} mutableCopy];
+            category[@"image"] = clearImage;
+            category[@"text"] = [[SettingModal instance] nameForCategoryAtIndex:i];
+            [categorys addObject:category];
+        }
     }
     NSArray *cellInfos = [NSArray arrayWithObjects:categorys, categorys,nil];
     self.cellInfos = cellInfos;
