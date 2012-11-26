@@ -84,7 +84,7 @@
     [request addKeyword:@"学习"];
     [request addKeyword:@"单词"];
     [request addKeyword:@"出国"];
-    
+    [request addKeyword:news.title];
     // Make the request for a test ad. Put in an identifier for the simulator as
     // well as any devices you want to receive test ads.
     request.testDevices =
@@ -97,7 +97,15 @@
 {
     NSNumber* r = notification.object;
     if(![r boolValue])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"升级失败"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"确定", nil)
+                                                  otherButtonTitles:nil];
+        [alertView show];
         return;
+    }
     
     [adBanner removeFromSuperview];
     adBanner = nil;

@@ -116,6 +116,8 @@
 		E44B083B1645B0380050FB18 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08341645B0380050FB18 /* NSData+Base64.m */; };
 		E44B083C1645B0380050FB18 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08361645B0380050FB18 /* NSData+CommonCrypto.m */; };
 		E44B083D1645B0380050FB18 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = E44B08381645B0380050FB18 /* NSString+Base64.m */; };
+		E455FE941663C0E300310D7C /* cellBG_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E455FE921663C0E300310D7C /* cellBG_selected.png */; };
+		E455FE951663C0E300310D7C /* cellBG_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E455FE931663C0E300310D7C /* cellBG_selected@2x.png */; };
 		E48C670C16580428002F8BCB /* NSString+URLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C670B16580428002F8BCB /* NSString+URLRequest.m */; };
 		E491FD2916613C9200BAE0D0 /* CKRefreshArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E491FD2516613C9200BAE0D0 /* CKRefreshArrowView.m */; };
 		E491FD2A16613C9200BAE0D0 /* CKRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E491FD2816613C9200BAE0D0 /* CKRefreshControl.m */; };
@@ -318,6 +320,8 @@
 		E44B08361645B0380050FB18 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		E44B08371645B0380050FB18 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
 		E44B08381645B0380050FB18 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		E455FE921663C0E300310D7C /* cellBG_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBG_selected.png; sourceTree = "<group>"; };
+		E455FE931663C0E300310D7C /* cellBG_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBG_selected@2x.png"; sourceTree = "<group>"; };
 		E48C670A16580428002F8BCB /* NSString+URLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLRequest.h"; sourceTree = "<group>"; };
 		E48C670B16580428002F8BCB /* NSString+URLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLRequest.m"; sourceTree = "<group>"; };
 		E491FD2416613C9200BAE0D0 /* CKRefreshArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshArrowView.h; sourceTree = "<group>"; };
@@ -635,6 +639,8 @@
 		E4379003162B38A6008A85DF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E455FE921663C0E300310D7C /* cellBG_selected.png */,
+				E455FE931663C0E300310D7C /* cellBG_selected@2x.png */,
 				E4BD099716581CF600F18EDC /* slideNumberBG.png */,
 				E4BD099816581CF600F18EDC /* slideNumberBG@2x.png */,
 				E4177AEA164C66220035B080 /* nav_menu_icon.png */,
@@ -1056,6 +1062,8 @@
 				E4177B09164C7A790035B080 /* readability.css in Resources */,
 				E4BD099916581CF600F18EDC /* slideNumberBG.png in Resources */,
 				E4BD099A16581CF600F18EDC /* slideNumberBG@2x.png in Resources */,
+				E455FE941663C0E300310D7C /* cellBG_selected.png in Resources */,
+				E455FE951663C0E300310D7C /* cellBG_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

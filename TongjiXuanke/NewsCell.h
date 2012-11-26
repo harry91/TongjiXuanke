@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *unreadIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *catagory;
 @property (weak, nonatomic) IBOutlet UILabel *dateandtime;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
+//@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIImageView *favIndicator;
 
 @end

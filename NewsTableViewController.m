@@ -107,6 +107,17 @@
     cell.briefContent.text = news.briefcontent == nil ? briefContentPlaceHolder : news.briefcontent;
     cell.catagory.text = news.category.name;
     cell.favIndicator.hidden = ! [news.favorated boolValue];
+    
+    UIImage *selectedImage = [UIImage imageNamed:@"cellBG_selected.png"];
+    UIImageView *selectedView = [[UIImageView alloc] initWithImage:selectedImage];
+    
+    [cell setSelectedBackgroundView:selectedView];
+    
+    UIImage *unselectedImage = [UIImage imageNamed:@"cellBG.png"];
+    UIImageView *unselectedView = [[UIImageView alloc] initWithImage:unselectedImage];
+    
+    [cell setBackgroundView:unselectedView];
+
 }
 
 
@@ -167,6 +178,8 @@
     [[Brain instance] APNSStart];
     
     [NSNotificationCenter registerUserCheckFailNotificationWithSelector:@selector(wrongPassCode) target:self];
+    
+    self.clearsSelectionOnViewWillAppear = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -177,6 +190,8 @@
     {
         [self.refreshControl beginRefreshing];
     }
+    
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -55,25 +55,20 @@ MyIAP* _MYIAP_INSTANCE = nil;
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"IAP completeTransaction");
-    if([transaction.transactionIdentifier isEqualToString:GOPROID])
-    {
-        [self goPro];
-        return;
-    }
-    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
+    NSLog(@"IAP completeTransaction: %@",transaction.transactionIdentifier);
+    [self goPro];
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
-    NSLog(@"IAP failedTransaction");
+    NSLog(@"IAP failedTransaction %@",transaction.transactionIdentifier);
     [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 
 - (void)cancelTransaction: (SKPaymentTransaction *)transaction
 {
-    NSLog(@"IAP cancelTransaction");
+    NSLog(@"IAP cancelTransaction %@",transaction.transactionIdentifier);
     [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
@@ -126,7 +121,12 @@ MyIAP* _MYIAP_INSTANCE = nil;
 - (VerifyReceiptResult)verifyReceipt:(SKPaymentTransaction *)transaction
 {
     NSString *jsonObjectString = [self encode:(uint8_t *)transaction.transactionReceipt.bytes length:transaction.transactionReceipt.length];
+#ifndef __OPTIMIZE__
+    NSString *completeString = [NSString stringWithFormat:@"http://sbhhbs.com/IAP/verify_sandbox.php?data=%@", jsonObjectString];
+#else
     NSString *completeString = [NSString stringWithFormat:@"http://sbhhbs.com/IAP/verify.php?data=%@", jsonObjectString];
+#endif
+    
     NSURL *urlForValidation = [NSURL URLWithString:completeString];
     NSLog(@"Verify URL:%@",completeString);
     NSMutableURLRequest *validationRequest = [[NSMutableURLRequest alloc] initWithURL:urlForValidation];
