@@ -20,4 +20,6 @@
 
 -(void)distinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle;
 
+-(void)cleanUpExpireNews;
+
 @end

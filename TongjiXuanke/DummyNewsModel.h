@@ -19,4 +19,6 @@
 @property (nonatomic) int categoryIndex;
 @property (nonatomic) id<NewsLoaderProtocal> delegate;
 
+-(BOOL)shouldSaveThisNewsWithThisDate:(NSDate*)date;
+
 @end

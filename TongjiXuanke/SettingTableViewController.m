@@ -12,6 +12,7 @@
 #import "SettingModal.h"
 #import "IIViewDeckController.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "DataOperator.h"
 
 #define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
 
@@ -127,7 +128,7 @@
     }
     self.autoCleanTimeLabel.text = text;
     [[SettingModal instance] setAutoCleanInterval:month];
-    
+    [[DataOperator instance] cleanUpExpireNews];
     [self cleanTableSelection];
 }
 

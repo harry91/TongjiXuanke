@@ -8,6 +8,7 @@
 
 #import "DummyNewsModel.h"
 #import "SettingModal.h"
+#import "SettingModal.h"
 
 @implementation DummyNewsModel
 -(void)start
@@ -96,5 +97,22 @@
     }
     return [[SettingModal instance] nameForCategoryAtIndex:self.categoryIndex];
 }
+
+-(BOOL)shouldSaveThisNewsWithThisDate:(NSDate*)theDate
+{
+    if([[SettingModal instance] autoCleanInterval] == 0)
+        return YES;
+    else
+    {
+        NSDate *now = [NSDate date];
+        double deltaSeconds = fabs([theDate timeIntervalSinceDate:now]);
+        double deltaMinutes = deltaSeconds / 60.0f;
+        int monthAgo = (int)floor(deltaMinutes/(60 * 24 * 30));
+        if(monthAgo >= [[SettingModal instance] autoCleanInterval])
+            return NO;
+    }
+    return YES;
+}
+
 
 @end

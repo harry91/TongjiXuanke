@@ -11,6 +11,7 @@
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "DataOperator.h"
 
 @implementation Brain
 
@@ -28,6 +29,7 @@ Brain* _brainInstance = nil;
         for (int i = 0; i < [instance numberOfCategory]; i++) {
             [updateArray addObject:@"ready"];
         }
+        [[DataOperator instance] cleanUpExpireNews];
         [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(configureClasses) target:self];
     }
     return self;

@@ -7,6 +7,7 @@
 //
 
 #import "DataOperator.h"
+#import "SettingModal.h"
 
 @implementation DataOperator
 
@@ -102,5 +103,41 @@ DataOperator* _dataOperatorInstance = nil;
 
     [[MyDataStorage instance] saveContext];
 }
+
+-(void)cleanUpExpireNews
+{
+    if([[SettingModal instance] autoCleanInterval] == 0)
+        return;
+    NSDate *now = [NSDate date];
+    
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    for(News* item in matching)
+    {
+        if(![item.favorated isEqualToNumber:[NSNumber numberWithBool:YES]])
+        {
+            double deltaSeconds = fabs([item.date timeIntervalSinceDate:now]);
+            double deltaMinutes = deltaSeconds / 60.0f;
+            int monthAgo = (int)floor(deltaMinutes/(60 * 24 * 30));
+            if(monthAgo >= [[SettingModal instance] autoCleanInterval])
+            {
+                NSLog(@"Cleaned item: %@",item.title);
+                [context deleteObject:item];
+            }
+        }
+    }
+    [[MyDataStorage instance] saveContext];
+}
+
 
 @end

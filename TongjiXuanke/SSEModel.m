@@ -50,17 +50,20 @@
 {
     for(int i = 0; i <[self totalNewsCount]; i++)
     {
-        FakeNews *news = [[FakeNews alloc] init];
-        news.title = [self titleForNewsIndex:i];
-        
-        news.briefcontent = nil;
-        
-        news.content = nil;
-        news.date = [self timeForNewsIndex:i];
-        news.favorated = NO;
-        news.haveread = NO;
-        news.url = [self idForNewsIndex:i];
-        [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
+        if([self shouldSaveThisNewsWithThisDate:[self timeForNewsIndex:i]])
+        {
+            FakeNews *news = [[FakeNews alloc] init];
+            news.title = [self titleForNewsIndex:i];
+            
+            news.briefcontent = nil;
+            
+            news.content = nil;
+            news.date = [self timeForNewsIndex:i];
+            news.favorated = NO;
+            news.haveread = NO;
+            news.url = [self idForNewsIndex:i];
+            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
+        }
     }
 }
 

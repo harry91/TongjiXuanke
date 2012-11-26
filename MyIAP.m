@@ -59,7 +59,9 @@ MyIAP* _MYIAP_INSTANCE = nil;
     if([transaction.transactionIdentifier isEqualToString:GOPROID])
     {
         [self goPro];
+        return;
     }
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
@@ -72,6 +74,7 @@ MyIAP* _MYIAP_INSTANCE = nil;
 - (void)cancelTransaction: (SKPaymentTransaction *)transaction
 {
     NSLog(@"IAP cancelTransaction");
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 - (void)restoreBatchTransactions:(NSArray *)transactions
@@ -82,8 +85,10 @@ MyIAP* _MYIAP_INSTANCE = nil;
         if([identifier isEqualToString:GOPROID])
         {
             [self goPro];
+            return;
         }
     }
+    [NSNotificationCenter postUpgradeProNotificationWithSuccess:NO];
 }
 
 - (void)downloadIAPDataFailed
