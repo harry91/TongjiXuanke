@@ -123,24 +123,25 @@
     if(indexPath.row == [[SettingModal instance] numberOfCategory])
         return;
     
-    if(![[ReachabilityChecker instance] hasInternetAccess])
-    {
-        [self showNoInternetNotification];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        return;
-    }
+//    if(![[ReachabilityChecker instance] hasInternetAccess])
+//    {
+//        [self showNoInternetNotification];
+//        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//        return;
+//    }
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     BOOL selected = cell.accessoryType == UITableViewCellAccessoryNone ? NO : YES;
     selected = !selected;
-    if([[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected])
-    {
-        cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    }
-    else
-    {
-        [self showNoInternetNotification];
-    }
+    
+    cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+
+    dispatch_async(kBgQueue, ^{
+        [[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected];
+    });
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if([[SettingModal instance] subscribledCount] == 0)
     {

@@ -138,33 +138,31 @@ SettingModal* _settinginstance;
     BOOL result;
     if(value)
     {
+        if(![self hasSubscribleCategoryAtIndex:index])
+        {
+            [subscribledIndex addObject:[NSNumber numberWithInt:index]];
+        }
+    }
+    else
+    {
+        for(int i = 0; i < subscribledIndex.count; i++)
+        {
+            NSNumber *n = subscribledIndex[i];
+            int num = [n integerValue];
+            if(num == index)
+                [subscribledIndex removeObjectAtIndex:i];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:subscribledIndex forKey:@"selectedCategoryArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if(value)
+    {
         result = [APNSManager subscribleCategory:[self serverIDForCategoryAtIndex:index]];
     }
     else
     {
         result = [APNSManager desubscribleCategory:[self serverIDForCategoryAtIndex:index]];
-    }
-    if(result)
-    {
-        if(value)
-        {
-            if(![self hasSubscribleCategoryAtIndex:index])
-            {
-                [subscribledIndex addObject:[NSNumber numberWithInt:index]];
-            }
-        }
-        else
-        {
-            for(int i = 0; i < subscribledIndex.count; i++)
-            {
-                NSNumber *n = subscribledIndex[i];
-                int num = [n integerValue];
-                if(num == index)
-                    [subscribledIndex removeObjectAtIndex:i];
-            }
-        }
-        [[NSUserDefaults standardUserDefaults] setObject:subscribledIndex forKey:@"selectedCategoryArray"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     return result;
 }

@@ -118,6 +118,8 @@
     
     NSString* newsString = news.content;
     
+    NSLog(@"Detail news String: %@",newsString);
+    
     [self.original_webview loadHTMLString:newsString baseURL:self.baseURL];
     [self.puretext_webview loadHTMLString:newsString baseURL:self.baseURL];
     

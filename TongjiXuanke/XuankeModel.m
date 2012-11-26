@@ -75,27 +75,36 @@
     }
     NSMutableString *str = [result mutableCopy];
     NSRange range;
-    while(1)
-    {
-        range = [str rangeOfString:@"onclick=\"showNotice('"];
-        if(range.length <= 0)
-            break;
-        NSString *newsID = [str substringWithRange:NSMakeRange(range.location+range.length, 14)];
-        str = [[str substringFromIndex:range.location+range.length] mutableCopy];
-        range = [str rangeOfString:@"onclick=\"showNotice('"];
-        NSRange r1,r2;
-        r1 = [str rangeOfString:@"<font color=\"green\">\n"];
-        r2 = [str rangeOfString:@"\n</font>\n"];
+    
+    @try {
+        while(1)
+        {
+            range = [str rangeOfString:@"onclick=\"showNotice('"];
+            if(range.length <= 0)
+                break;
+            NSString *newsID = [str substringWithRange:NSMakeRange(range.location+range.length, 14)];
+            str = [[str substringFromIndex:range.location+range.length] mutableCopy];
+            range = [str rangeOfString:@"onclick=\"showNotice('"];
+            NSRange r1,r2;
+            r1 = [str rangeOfString:@"<font color=\"green\">\n"];
+            r2 = [str rangeOfString:@"\n</font>\n"];
+            
+            NSString *newsTitle = [str substringWithRange:NSMakeRange(r1.length+r1.location, r2.location)];
+            r1 = [newsTitle rangeOfString:@"."];
+            r2 = [newsTitle rangeOfString:@"\n"];
+            
+            newsTitle = [newsTitle substringWithRange:NSMakeRange(r1.location + 1, r2.location - 2)];
+            str = [[str substringFromIndex:r1.location] mutableCopy];
+            
+            NSDictionary *item = @{@"ID":newsID, @"Title":newsTitle};
+            [dict addObject:item];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"XuankeModel Caught %@",exception);
+    }
+    @finally {
         
-        NSString *newsTitle = [str substringWithRange:NSMakeRange(r1.length+r1.location, r2.location)];
-        r1 = [newsTitle rangeOfString:@"."];
-        r2 = [newsTitle rangeOfString:@"\n"];
-
-        newsTitle = [newsTitle substringWithRange:NSMakeRange(r1.location + 1, r2.location - 2)];
-        str = [[str substringFromIndex:r1.location] mutableCopy];
-        
-        NSDictionary *item = @{@"ID":newsID, @"Title":newsTitle};
-        [dict addObject:item];
     }
     //NSLog(@"%@",dict);
     return YES;
@@ -166,10 +175,16 @@
         detailGetting = NO;
         [[UIApplication sharedApplication] hideNetworkIndicator];
         
-        NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
-        
-        [self finishRetreiving:url];
-
+        @try {
+            NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
+            [self finishRetreiving:url];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
     }
 }
 
