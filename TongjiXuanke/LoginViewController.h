@@ -16,7 +16,7 @@
 {
     MBProgressHUD *HUD;
     LogInModal *loginModel;
-    
+    NSTimer *timer;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *studentNumberTextField;

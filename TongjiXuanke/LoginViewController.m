@@ -146,6 +146,19 @@
     loginModel.userName = self.studentNumberTextField.text;
     loginModel.delegate = self;
     [loginModel start];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval: 60
+                                             target: self
+                                           selector: @selector(timeOutHandler)
+                                           userInfo: nil
+                                            repeats: NO];
+    
+}
+
+- (void)timeOutHandler
+{
+    [MBProgressHUD hideHUDForView:self.view.window animated:YES];
+    [self showNotification:@"登陆超时"];
 }
 
 
@@ -168,10 +181,11 @@
 -(void)LoginSuccess
 {
     [MBProgressHUD hideHUDForView:self.view.window animated:YES];
-    
+    [timer invalidate];
     [self save];
 
     [self trans];
+    
     
 //    UIViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"mainView"];
 //    
@@ -198,13 +212,16 @@
 
 -(void)LoginFailWithError:(NSError *)error
 {
-    
+    [timer invalidate];
     if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
     {
         [self showNotification:@"错误的账号或密码"];
-        [MBProgressHUD hideHUDForView:self.view.window animated:YES];
     }
-
+    else
+    {
+        [self showNotification:@"登陆发生错误"];
+    }
+    [MBProgressHUD hideHUDForView:self.view.window animated:YES];
 }
 
 

@@ -282,6 +282,28 @@
 #pragma mark - NSFetchResultDelegate
 
 
+- (NSString*)allFilterClause
+{
+    NSMutableString *str = [@"" mutableCopy];
+    NSMutableArray *arr = [@[] mutableCopy];
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
+    {
+        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
+        {
+            NSString * s = [NSString stringWithFormat:@" category.name == \"%@\" ",[[SettingModal instance] nameForCategoryAtIndex:i]];
+            
+            [arr addObject:s];
+        }
+    }
+    for(int i = 0; i < arr.count; i++)
+    {
+        [str appendString:arr[i]];
+        if(i+1 != arr.count)
+            [str appendString:@"OR"];
+    }
+    return str;
+}
+
 - (NSFetchedResultsController *)fetchedResultsController {
     
     if (_fetchedResultsController != nil) {
@@ -302,12 +324,12 @@
         NSString *simplePredicateFormat = [NSString stringWithFormat:@"category.name == \"%@\"",[SettingModal instance].currentCategory];
         simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
     }
-    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && [[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
+    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && [[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all favorated.
     {
-        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE "];
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE AND (%@)", [self allFilterClause]];
         simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
     }
-    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
+    if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all favorated in a category
     {
         NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE AND category.name == \"%@\"",[SettingModal instance].currentCategory];
         simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
@@ -319,9 +341,11 @@
     
     [fetchRequest setEntity:entity];
     
-    if(simplePredicate) [fetchRequest setPredicate:simplePredicate];
-    
-    
+    if(!simplePredicate)
+    {
+        simplePredicate = [NSPredicate predicateWithFormat:[self allFilterClause]];
+    }
+    [fetchRequest setPredicate:simplePredicate];
     
     NSSortDescriptor *sort = [[NSSortDescriptor alloc]
                               initWithKey:@"date" ascending:NO];
