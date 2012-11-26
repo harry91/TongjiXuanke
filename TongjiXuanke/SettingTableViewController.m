@@ -73,6 +73,8 @@
     
     self.navigationItem.leftBarButtonItem = result;
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+
 }
 
 - (void) showLeft

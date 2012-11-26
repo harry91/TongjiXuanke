@@ -43,21 +43,18 @@
 
     [[UISegmentedControl appearance] setTintColor:[UIColor colorWithRed:75/255.0 green:165/255.0 blue:245/255.0 alpha:0.4]];
     
-        
-    
-    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
-    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selectedIndicator.png"]];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       [UIColor colorWithWhite:0.5 alpha:1], UITextAttributeTextColor,
-                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
-                                             forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       [UIColor colorWithWhite:0.85 alpha:1], UITextAttributeTextColor,
-                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
-                                             forState:UIControlStateSelected];
-    
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+//    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
+//    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selectedIndicator.png"]];
+//    
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                       [UIColor colorWithWhite:0.5 alpha:1], UITextAttributeTextColor,
+//                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
+//                                             forState:UIControlStateNormal];
+//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                       [UIColor colorWithWhite:0.85 alpha:1], UITextAttributeTextColor,
+//                                                       [UIColor blackColor], UITextAttributeTextShadowColor, nil]
+//                                             forState:UIControlStateSelected];
+//    
 }
 
 - (void)initUserDefault
