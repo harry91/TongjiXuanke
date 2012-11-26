@@ -53,6 +53,8 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *username = [ud objectForKey:@"username"];
     self.usernameLabel.text = username;
+    
+    [self.tableView setScrollsToTop:NO];
 }
 
 
