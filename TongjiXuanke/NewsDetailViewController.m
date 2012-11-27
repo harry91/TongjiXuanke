@@ -17,6 +17,7 @@
 #import "GADRequest.h"
 #import "MyIAP.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "ReachabilityChecker.h"
 
 @interface NewsDetailViewController ()
 
@@ -58,39 +59,50 @@
     //CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGPoint origin = CGPointMake(0.0,
                                  self.view.frame.size.height -
-                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height - 40);
+                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height - 41);
     
-    // Use predefined GADAdSize constants to define the GADBannerView.
-    adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
-                                              origin:origin];
-    adBanner.adUnitID = @"a150b23cf74437a";
-    adBanner.delegate = self;
-    [adBanner setRootViewController:self];
-    [self.view addSubview:adBanner];
-    adBanner.center = CGPointMake(self.view.center.x, adBanner.center.y);
-    GADRequest *request = [GADRequest request];
-    [request addKeyword:@"同济"];
-    [request addKeyword:@"大学生"];
-    [request addKeyword:@"研究生"];
-    [request addKeyword:@"英语"];
-    [request addKeyword:@"微软"];
-    [request addKeyword:@"苹果"];
-    [request addKeyword:@"土木"];
-    [request addKeyword:@"手机"];
-    [request addKeyword:@"新东方"];
-    [request addKeyword:@"上海"];
-    [request addKeyword:@"嘉年华"];
-    [request addKeyword:@"游戏"];
-    [request addKeyword:@"学习"];
-    [request addKeyword:@"单词"];
-    [request addKeyword:@"出国"];
-    [request addKeyword:news.title];
-    // Make the request for a test ad. Put in an identifier for the simulator as
-    // well as any devices you want to receive test ads.
-    request.testDevices =
-    [NSArray arrayWithObjects:
-     nil];
-    [adBanner loadRequest:request];
+    if([[ReachabilityChecker instance] hasInternetAccess])
+    {
+        // Use predefined GADAdSize constants to define the GADBannerView.
+        adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
+                                                  origin:origin];
+        adBanner.adUnitID = @"a150b23cf74437a";
+        adBanner.delegate = self;
+        [adBanner setRootViewController:self];
+        [self.view addSubview:adBanner];
+        adBanner.center = CGPointMake(self.view.center.x, adBanner.center.y);
+        GADRequest *request = [GADRequest request];
+        [request addKeyword:@"同济"];
+        [request addKeyword:@"大学生"];
+        [request addKeyword:@"研究生"];
+        [request addKeyword:@"英语"];
+        [request addKeyword:@"微软"];
+        [request addKeyword:@"苹果"];
+        [request addKeyword:@"土木"];
+        [request addKeyword:@"手机"];
+        [request addKeyword:@"新东方"];
+        [request addKeyword:@"上海"];
+        [request addKeyword:@"嘉年华"];
+        [request addKeyword:@"游戏"];
+        [request addKeyword:@"学习"];
+        [request addKeyword:@"单词"];
+        [request addKeyword:@"出国"];
+        [request addKeyword:news.title];
+        // Make the request for a test ad. Put in an identifier for the simulator as
+        // well as any devices you want to receive test ads.
+        request.testDevices =
+        [NSArray arrayWithObjects:
+         nil];
+        [adBanner loadRequest:request];
+    }
+    else
+    {
+        adPlaceHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"adPlaceHolder.png"]];
+        CGRect frame = adPlaceHolder.frame;
+        frame.origin = origin;
+        adPlaceHolder.frame = frame;
+        [self.view addSubview:adPlaceHolder];
+    }
 }
 
 - (void)removeAds:(NSNotification*)notification
@@ -116,6 +128,18 @@
     self.puretext_webview.frame = frame;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    
+    [UIView animateWithDuration:0.2 animations:^(){
+        CGRect frame = fav_button.frame;
+        frame.origin.y = -70;
+        
+        fav_button.frame = frame;
+} completion:^(BOOL finish){
+        [fav_button removeFromSuperview];}
+     ];
+}
 
 - (void)viewDidLoad
 {
@@ -138,6 +162,8 @@
     
     [NSNotificationCenter registerUpgradeProNotificationWithSelector:@selector(removeAds:) target:self];
 }
+
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -194,15 +220,29 @@
 {
     if(favorated)
     {
-        [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateNormal];
-        [insideFavButton setTitle:@"取消" forState:UIControlStateNormal];
-        //[favButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+        [UIView animateWithDuration:0.2 animations:^(){
+            CGRect frame = fav_button.frame;
+            frame.origin.y = -2;
+            
+            fav_button.frame = frame;
+            }
+                         completion:^(BOOL finish){
+                             [UIView animateWithDuration:0.1 animations:^(){
+                                 CGRect frame = fav_button.frame;
+                                 frame.origin.y = -4;
+                                 
+                                 fav_button.frame = frame;
+                             }];
+                         }];
     }
     else if(!favorated)
     {
-        [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
-        [insideFavButton setTitle:@"收藏" forState:UIControlStateNormal];
-        //[favButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+        [UIView animateWithDuration:0.2 animations:^(){
+            CGRect frame = fav_button.frame;
+            frame.origin.y = - 25;
+            
+            fav_button.frame = frame;
+        }];
     }
 }
 
@@ -262,23 +302,19 @@
     UIBarButtonItem *backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
     
+    CGRect frame;
+    frame.origin.x = 260;
+    frame.origin.y = -30;
     
-    insideFavButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    [insideFavButton setTitle:@"收藏" forState:UIControlStateNormal];
-    [insideFavButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8] forState:UIControlStateNormal];
-    [insideFavButton setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8f] forState:UIControlStateHighlighted];
-    [insideFavButton setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    insideFavButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-    insideFavButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    frame.size.width = 35;
+    frame.size.height = 63;
     
-    [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
-    [insideFavButton setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+    fav_button = [[UIButton alloc] initWithFrame:frame];
+    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateNormal];
+    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateHighlighted];
+    [fav_button addTarget:self action:@selector(clickFavButton) forControlEvents:UIControlEventTouchUpInside];
     
-    [insideFavButton addTarget:self action:@selector(clickFavButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *favButton = [[UIBarButtonItem alloc] initWithCustomView:insideFavButton];
-
-    self.navigationItem.rightBarButtonItem = favButton;
+    [self.navigationController.navigationBar addSubview:fav_button];
     
     BOOL favorated = [news.favorated boolValue];
     [self matchFavoratebuttonApperaence:favorated];

@@ -19,8 +19,9 @@
     News *news;
     UISegmentedControl *segmentedControl;
     int textLoadComplete;
-    UIButton *insideFavButton;
     GADBannerView *adBanner;
+    UIImageView *adPlaceHolder;
+    UIButton *fav_button;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *original_webview;
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;
