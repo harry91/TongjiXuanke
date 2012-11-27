@@ -69,7 +69,6 @@
 		E4379032162B6147008A85DF /* UILabel+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379031162B6147008A85DF /* UILabel+Addition.m */; };
 		E4379035162B6233008A85DF /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379033162B6233008A85DF /* bg@2x.png */; };
 		E4379036162B6233008A85DF /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379034162B6233008A85DF /* bg.png */; };
-		E4379047162B68FC008A85DF /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4379046162B68FC008A85DF /* MyTabBarController.m */; };
 		E437904E162B6AC6008A85DF /* tabbarBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E437904C162B6AC6008A85DF /* tabbarBG.png */; };
 		E437904F162B6AC6008A85DF /* tabbarBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E437904D162B6AC6008A85DF /* tabbarBG@2x.png */; };
 		E4379066162B7279008A85DF /* item0_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4379064162B7279008A85DF /* item0_selected@2x.png */; };
@@ -270,8 +269,6 @@
 		E4379042162B6777008A85DF /* NSString+MD5Addition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
 		E4379043162B6777008A85DF /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		E4379044162B6777008A85DF /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
-		E4379045162B68FC008A85DF /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
-		E4379046162B68FC008A85DF /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		E437904C162B6AC6008A85DF /* tabbarBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbarBG.png; sourceTree = "<group>"; };
 		E437904D162B6AC6008A85DF /* tabbarBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbarBG@2x.png"; sourceTree = "<group>"; };
 		E4379064162B7279008A85DF /* item0_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item0_selected@2x.png"; sourceTree = "<group>"; };
@@ -636,8 +633,6 @@
 				E44B0810164572270050FB18 /* LoginViewController.m */,
 				E4177A1E16484CEF0035B080 /* NewsList */,
 				E4177A1F16484D0F0035B080 /* Setting */,
-				E4379045162B68FC008A85DF /* MyTabBarController.h */,
-				E4379046162B68FC008A85DF /* MyTabBarController.m */,
 				E4177AD4164B1FFA0035B080 /* SideSlideMenu */,
 				E4378FD51628D620008A85DF /* Supporting Files */,
 			);
@@ -1127,7 +1122,6 @@
 				E437901A162B4872008A85DF /* NewsCell.m in Sources */,
 				E4379024162B54F6008A85DF /* NewsTableViewController.m in Sources */,
 				E4379032162B6147008A85DF /* UILabel+Addition.m in Sources */,
-				E4379047162B68FC008A85DF /* MyTabBarController.m in Sources */,
 				E4379095162C3047008A85DF /* Model.xcdatamodeld in Sources */,
 				E43790C4162C7D75008A85DF /* Category.m in Sources */,
 				E43790C7162C7D75008A85DF /* News.m in Sources */,
