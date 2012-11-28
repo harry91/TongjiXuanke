@@ -185,16 +185,15 @@ SettingModal* _settinginstance;
 -(int)needHelp
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
     if([ud objectForKey:@"Help"])
     {
         NSNumber *n = [ud objectForKey:@"Help"];
         if([n integerValue] < 3)//first help 3 pages
-            return YES;
+            return 0;
         else
-            return NO;
+            return -1;
     }
-    return YES;
+    return 0;
 }
 
 -(void)finishTourialWithProgress:(int)progress

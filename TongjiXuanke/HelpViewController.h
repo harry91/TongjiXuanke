@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *blurView;
 @property (nonatomic,retain) UIImage *viewImage;
-
+@property (nonatomic) int shouldShowPage;
 -(IBAction)dismissPressed:(id)sender;
 
 @end

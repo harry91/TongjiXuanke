@@ -204,8 +204,9 @@
 {
     
     //[[SettingModal instance] finishTourialWithProgress:0];
-    if([[SettingModal instance] needHelp])
+    if([[SettingModal instance] needHelp] != -1)
     {
+        int page = [[SettingModal instance] needHelp];
         if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
             UIGraphicsBeginImageContextWithOptions(self.view.window.bounds.size, NO, [UIScreen mainScreen].scale);
         else
@@ -215,6 +216,7 @@
         
         HelpViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"helpView"];
         vc.viewImage = image;
+        vc.shouldShowPage = page;
         vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentModalViewController:vc animated:YES];
     }

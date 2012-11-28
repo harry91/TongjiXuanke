@@ -32,8 +32,21 @@
     [self.scrollView setContentSize:CGSizeMake(900, 400)];
     self.scrollView.delegate = self;
     if(self.viewImage)
-        self.blurView.image = [self.viewImage stackBlur:1.0f];
+        self.blurView.image = [self.viewImage stackBlur:2.0f];
+    self.pageControl.currentPage = self.shouldShowPage;
+    [self scrollToFitPage];
 }
+
+- (void)scrollToFitPage
+{
+    CGRect frame;
+    frame.size.width = 300;
+    frame.size.height = 400;
+    frame.origin.y = 0;
+    frame.origin.x = 300 * self.shouldShowPage;
+    [self.scrollView scrollRectToVisible:frame animated:NO];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,15 +73,17 @@
 {
     int x = self.scrollView.contentOffset.x;
     
-    if (x < 0) {
-        [self.pageControl setCurrentPage:0];
-    }
-    else if (0 < x && x < 0 + 300) {
-        [self.pageControl setCurrentPage:1];
-    }
-    else if (0 + 300 < x && x < 0 + 600) {
-        [self.pageControl setCurrentPage:2];
-    }
+    [self.pageControl setCurrentPage:x / 300.0];
+    
+//    if (x < 0) {
+//        [self.pageControl setCurrentPage:0];
+//    }
+//    else if (0 < x && x < 0 + 300) {
+//        [self.pageControl setCurrentPage:1];
+//    }
+//    else if (0 + 300 < x && x < 0 + 600) {
+//        [self.pageControl setCurrentPage:2];
+//    }
 }
 
 @end
