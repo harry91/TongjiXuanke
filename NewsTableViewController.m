@@ -22,7 +22,8 @@
 #import "CKRefreshControl.h"
 #import "UIApplication+Toast.h"
 #import "NSNotificationCenter+Xuanke.h"
-
+#import "HelpViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface NewsTableViewController ()
 
@@ -182,6 +183,7 @@
     [NSNotificationCenter registerUserCheckFailNotificationWithSelector:@selector(wrongPassCode) target:self];
     
     self.clearsSelectionOnViewWillAppear = YES;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -194,6 +196,28 @@
     }
     
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    //[[SettingModal instance] finishTourialWithProgress:0];
+    if([[SettingModal instance] needHelp])
+    {
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
+            UIGraphicsBeginImageContextWithOptions(self.view.window.bounds.size, NO, [UIScreen mainScreen].scale);
+        else
+            UIGraphicsBeginImageContext(self.view.window.bounds.size);
+        [self.view.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        HelpViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"helpView"];
+        vc.viewImage = image;
+        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentModalViewController:vc animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

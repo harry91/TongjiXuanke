@@ -182,5 +182,27 @@ SettingModal* _settinginstance;
     _isProVersion = YES;
 }
 
+-(int)needHelp
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if([ud objectForKey:@"Help"])
+    {
+        NSNumber *n = [ud objectForKey:@"Help"];
+        if([n integerValue] < 3)//first help 3 pages
+            return YES;
+        else
+            return NO;
+    }
+    return YES;
+}
+
+-(void)finishTourialWithProgress:(int)progress
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSNumber *num = [NSNumber numberWithInt:progress];
+    [ud setObject:num forKey:@"Help"];
+    [ud synchronize];
+}
 
 @end

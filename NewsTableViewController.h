@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 #import "XuankeModel.h"
 #import "NewsLoaderProtocal.h"
