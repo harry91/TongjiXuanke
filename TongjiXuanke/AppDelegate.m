@@ -87,12 +87,16 @@
 /**
  * Fetch and Format Device Token and Register Important Information to Remote Server
  */
+
+- (void)registerDevice:(NSData*)devToken
+{
+    [APNSManager RegisterDevice:devToken];
+}
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     
 #if !TARGET_IPHONE_SIMULATOR
-    
-    [APNSManager RegisterDevice:devToken];
-    
+    [self performSelectorInBackground:@selector(registerDevice:) withObject:devToken];
 #endif
 }
 

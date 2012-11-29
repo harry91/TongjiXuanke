@@ -36,11 +36,11 @@
 {
     if([[SettingModal instance] hasStudentProfileSet])
     {
-        self.usernameLabel.text = [[SettingModal instance] studentName];
+        self.usernameLabel.text =  [SettingModal instance].studentName;
     }
     else
     {
-        self.usernameLabel.text = [[SettingModal instance] studentID];
+        self.usernameLabel.text = [SettingModal instance].studentID;
     }
     
     [self setAutoCleanTime: [[SettingModal instance] autoCleanInterval]];

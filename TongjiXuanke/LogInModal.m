@@ -114,6 +114,11 @@
 }
 
 
+-(BOOL)loggedIn
+{
+    return finished;
+}
+
 #pragma mark NewsFeedProtocal delegate
 
 -(void)start

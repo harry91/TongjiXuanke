@@ -49,6 +49,8 @@
 -(void)OhYeah
 {
     [self.delegate finishedLoadingInCategory:self.categoryIndex];
+    
+    //[self retreiveDetails];
 }
 
 -(void)realStart

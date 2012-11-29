@@ -213,13 +213,14 @@
     [urlToRetireve addObject:url];
     if(!isRetreivingThreadRunning)
     {
-        [self retreivingTherad];
+        [self performSelectorInBackground:@selector(retreivingTherad) withObject:nil];
     }
 }
 
 
 -(void)retreivingTherad
 {
+    
     NSLog(@"URL TO GO %@",urlToRetireve);
     if(urlToRetireve.count <= 0)
     {
@@ -227,10 +228,15 @@
         return;
     }
     isRetreivingThreadRunning = YES;
+    while(![loginModal loggedIn])
+    {
+        sleep(1);
+        NSLog(@"Xuanke retreiving thread waiting...");
+    }
+    
     NSString *url = urlToRetireve[0];
     [urlToRetireve removeObjectAtIndex:0];
-    [self retreiveDetailForUrlLocal:url];
-
+    [self performSelectorOnMainThread:@selector(retreiveDetailForUrlLocal:) withObject:url waitUntilDone:YES];
 }
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
@@ -314,17 +320,6 @@
 
 -(BOOL)retreiveDetailForUrlLocal:(NSString*)url
 {
-    BOOL result = NO;
-    if([[ReachabilityChecker instance] hasInternetAccess])
-    {
-        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
-        {
-            result = YES;
-        }
-    }
-    if(!result)
-        return NO;
-    
     if(detailGetting == YES)
     {
         return NO;
@@ -380,6 +375,7 @@
     
     for(News* item in matching)
     {
+        //NSLog(@"%@",item);
         if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
         {
             [self addURLtoRetirve:item.url];

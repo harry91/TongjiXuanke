@@ -17,6 +17,7 @@
 #import "DataOperator.h"
 #import "SettingModal.h"
 #import "UIApplication+Toast.h"
+#import "NSString+URLRequest.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -150,28 +151,17 @@
 }
 
 
-- (void)loadWebPageWithString:(NSString*)urlString
-{
-    NSURL *url =[NSURL URLWithString:urlString];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    [_webView loadRequest:request];
-}
+//- (void)loadWebPageWithString:(NSString*)urlString
+//{
+//    NSURL *url =[NSURL URLWithString:urlString];
+//    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+//    [_webView loadRequest:request];
+//}
 
 -(BOOL)retreiveDetailForUrlLocal:(NSString*)url
 {
-    BOOL result = NO;
-    if([[ReachabilityChecker instance] hasInternetAccess])
-    {
-        if([[ReachabilityChecker instance] usingWIFI] || [[SettingModal instance] shouldDownloadAllContentWithoutWIFI])
-        {
-            result = YES;
-        }
-    }
-    if(!result)
-        return NO;
-    
     [[UIApplication sharedApplication] showNetworkIndicator];
-    [self loadWebPageWithString:url];
+    [_webView loadRequest:[url convertToURLRequest]];
     
     return YES;//TODO bug
 }

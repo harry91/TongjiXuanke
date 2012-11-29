@@ -33,5 +33,5 @@
 @property (nonatomic) NSString* password;
 
 -(void)start;
-
+-(BOOL)loggedIn;
 @end

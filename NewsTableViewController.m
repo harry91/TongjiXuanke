@@ -281,7 +281,10 @@
     
 }
 
-
+- (void)cancelDownload
+{
+    shouldContinueLoading = NO;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -291,11 +294,36 @@
     {
         if([[ReachabilityChecker instance] hasInternetAccess])
         {
+            timer = [NSTimer scheduledTimerWithTimeInterval: 20
+                                                     target: self
+                                                   selector: @selector(cancelDownload)
+                                                   userInfo: nil
+                                                    repeats: NO];
+
             dispatch_async(kBgQueue, ^{
                 int categoryIndex = [[SettingModal instance] indexOfCategoryWithName:news.category.name];
                 [[Brain instance] requestedNewsWithCategoryIndex:categoryIndex url:news.url];
-                while(!news.content);
-                [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
+                                shouldContinueLoading = YES;
+                while((!news.content) && shouldContinueLoading)
+                {
+                    sleep(1);
+                    NSLog(@"waiting for content...");
+                }
+                    
+                if(news.content)
+                {
+                    [timer invalidate];
+                    
+                    [self performSelectorOnMainThread:@selector(pushToDetailViewWithNews:) withObject:news waitUntilDone:YES];
+                }
+                else
+                {
+                    [timer invalidate];
+                    [MBProgressHUD hideHUDForView:self.view.window animated:YES];
+                    [UIApplication presentToast:@"网络超时"];
+                    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+
+                }
             });
             HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
             //HUD.mode = MBProgressHUDModeAnnularDeterminate;

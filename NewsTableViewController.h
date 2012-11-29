@@ -25,6 +25,8 @@
 {
     MyDataStorage *dataStorage;
     MBProgressHUD *HUD;
+    NSTimer *timer;
+    BOOL shouldContinueLoading;
     BOOL _reloading;
 }
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
