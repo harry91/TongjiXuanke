@@ -39,6 +39,16 @@
 -(int)needHelp;//return the starting help page -1 for no
 -(void)finishTourialWithProgress:(int)progress;
 
+
+-(BOOL)hasStudentProfileSet;
+-(void)setStudentProfileWithName:(NSString*)name department:(NSString*)department Major:(NSString*)Major;
+-(NSString*)studentName;
+-(NSString*)studentDepartment;
+-(NSString*)studentMajor;
+
+
+-(void)doLogoutCleanUp;
+
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
 @property (nonatomic,readonly) BOOL isProVersion;

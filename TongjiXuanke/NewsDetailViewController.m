@@ -248,7 +248,7 @@
 
 - (void)clickFavButton
 {
-    //if([SettingModal instance].isProVersion)
+    if([SettingModal instance].isProVersion)
     {
         BOOL favorated = [news.favorated boolValue];
         
@@ -258,15 +258,15 @@
         
         [[MyDataStorage instance] saveContext];
     }
-//    else
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"专业版"
-//                                                       message:@"升级为专业版，开启收藏，去除广告并可免费使用以后所有更新内容。仅需￥6.00。"
-//                                                      delegate:self
-//                                             cancelButtonTitle:@"取消"
-//                                             otherButtonTitles:@"升级",nil];
-//        [alert show];
-//    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"专业版"
+                                                       message:@"升级为专业版，开启收藏，去除广告并可免费使用以后所有更新内容。仅需￥6.00。"
+                                                      delegate:self
+                                             cancelButtonTitle:@"取消"
+                                             otherButtonTitles:@"升级",nil];
+        [alert show];
+    }
 }
 
 //根据被点击按钮的索引处理点击事件

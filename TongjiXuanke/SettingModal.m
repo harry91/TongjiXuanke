@@ -204,4 +204,52 @@ SettingModal* _settinginstance;
     [ud synchronize];
 }
 
+-(BOOL)hasStudentProfileSet
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if([ud objectForKey:@"studentName"])
+    {
+        return YES;
+    }
+    return NO;
+}
+-(void)setStudentProfileWithName:(NSString*)name department:(NSString*)department Major:(NSString*)major
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if(name)
+        [ud setObject:name forKey:@"studentName"];
+    if(department)
+        [ud setObject:name forKey:@"department"];
+    if(major)
+        [ud setObject:name forKey:@"major"];
+    [ud synchronize];
+}
+-(NSString*)studentName
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"studentName"];
+}
+-(NSString*)studentDepartment
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"department"];
+}
+
+-(NSString*)studentMajor
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"major"];
+}
+
+
+-(void)doLogoutCleanUp
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"studentName"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"department"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"major"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+
 @end

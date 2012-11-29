@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NewsLoaderProtocal.h"
-
+#import "StudentProfileGetter.h"
 
 @protocol LoginProtocal <NSObject>
 
@@ -26,6 +26,7 @@
     NSMutableArray *dict;
     int tryTime;
     BOOL finished;
+    StudentProfileGetter *studentProfileGetter;
 }
 @property (nonatomic) id delegate;
 @property (nonatomic) NSString* userName;

@@ -287,6 +287,26 @@
     tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
     tempBriefContent =  [tempBriefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
+    
+    if([tempBriefContent rangeOfString:@"发送日期:"].location != NSNotFound)
+    {
+        NSRange range = [tempBriefContent rangeOfString:@"发送日期:"];
+        NSString *remaining = [tempBriefContent substringFromIndex:range.location + range.length];
+        while([remaining  rangeOfString:@"发送日期:"].location != NSNotFound)
+        {
+            NSRange range = [remaining rangeOfString:@"发送日期:"];
+            remaining = [remaining substringFromIndex:range.location + range.length];
+        }
+        remaining = [remaining substringToIndex:10];
+        NSLog(@"Remaining: %@",remaining);
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        NSDate *myDate = [df dateFromString: remaining];
+        if(myDate)
+            news.date = myDate;
+    }
+    
+    
     //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
     news.briefcontent = tempBriefContent;
     //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);

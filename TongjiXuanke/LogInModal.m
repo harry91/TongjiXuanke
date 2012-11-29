@@ -9,6 +9,8 @@
 #import "LogInModal.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "UIApplication+Toast.h"
+#import "SettingModal.h"
+#import "NSString+URLRequest.h"
 
 @implementation LogInModal
 
@@ -28,23 +30,19 @@
     return self;
 }
 
--(void)setDelegate:(id<NewsLoaderProtocal>)delegate
-{
-    _delegate = delegate;
-}
 
-- (void)loadWebPageWithString:(NSString*)urlString
-{
-    NSURL *url =[NSURL URLWithString:urlString];
-    NSURLRequest *request =[NSURLRequest requestWithURL:url];
-    [_webView loadRequest:request];
-}
+//- (void)loadWebPageWithString:(NSString*)urlString
+//{
+//    NSURL *url =[NSURL URLWithString:urlString];
+//    NSURLRequest *request =[NSURLRequest requestWithURL:url];
+//    [_webView loadRequest:request];
+//}
 
 
 -(void)login
 {
     [[UIApplication sharedApplication] showNetworkIndicator];
-    [self loadWebPageWithString:@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login?goto=http%3A%2F%2Fxuanke.tongji.edu.cn%2Fpass.jsp"];
+    [_webView loadRequest:[@"http://tjis2.tongji.edu.cn:58080/amserver/UI/Login?goto=http%3A%2F%2Fxuanke.tongji.edu.cn%2Fpass.jsp" convertToURLRequest]];
     loginInState = 0;
 }
 
@@ -96,6 +94,11 @@
             [self.delegate LoginSuccess];
             finished = YES;
             [[UIApplication sharedApplication] hideNetworkIndicator];
+            if(![[SettingModal instance] hasStudentProfileSet])
+            {
+                studentProfileGetter = [[StudentProfileGetter alloc] init];
+                [studentProfileGetter start];
+            }
         }
     }
     else

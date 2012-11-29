@@ -538,13 +538,10 @@
         switch (buttonIndex) {
             case 0:
             {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                //[self performSegueWithIdentifier:@"backToLogin" sender:self];
+                [[SettingModal instance] doLogoutCleanUp];
                 [self dismissViewControllerAnimated:YES completion:nil];
 
-                //NSLog(@"Logout");
+                NSLog(@"Logout");
                 break;
             }
             default:
