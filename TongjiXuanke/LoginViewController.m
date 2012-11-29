@@ -89,6 +89,8 @@
         theframe.origin.y = 25;
         self.logo.frame = theframe;
         self.logo.alpha = 1;
+        
+        [SettingModal instance].studentName = nil;
     }
 }
 
