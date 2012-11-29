@@ -34,7 +34,14 @@
 
 -(void)configureData
 {
-    self.usernameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    if([[SettingModal instance] hasStudentProfileSet])
+    {
+        self.usernameLabel.text = [[SettingModal instance] studentName];
+    }
+    else
+    {
+        self.usernameLabel.text = [[SettingModal instance] studentID];
+    }
     
     [self setAutoCleanTime: [[SettingModal instance] autoCleanInterval]];
     

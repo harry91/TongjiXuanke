@@ -10,6 +10,7 @@
 #import "APNSManager.h"
 #import "NSString+EncryptAndDecrypt.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "NSString+EncryptAndDecrypt.h"
 
 @implementation SettingModal
 
@@ -214,29 +215,70 @@ SettingModal* _settinginstance;
     }
     return NO;
 }
--(void)setStudentProfileWithName:(NSString*)name department:(NSString*)department Major:(NSString*)major
-{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    if(name)
-        [ud setObject:name forKey:@"studentName"];
-    if(department)
-        [ud setObject:name forKey:@"department"];
-    if(major)
-        [ud setObject:name forKey:@"major"];
-    [ud synchronize];
-}
+
 -(NSString*)studentName
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"studentName"];
 }
+
+-(void)setStudentName:(NSString*)name
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:name forKey:@"studentName"];
+    [ud synchronize];
+}
+
 -(NSString*)studentDepartment
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"department"];
+}
+-(void)setStudentDepartment:(NSString*)department
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:department forKey:@"department"];
+    [ud synchronize];
 }
 
 -(NSString*)studentMajor
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"major"];
+}
+
+-(void)setStudentMajor:(NSString*)major
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:major forKey:@"major"];
+    [ud synchronize];
+}
+
+-(NSString*)studentID
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+}
+
+-(void)setStudentID:(NSString*)username
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:username forKey:@"username"];
+    [ud synchronize];
+}
+
+-(NSString*)password
+{
+    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];;
+    if (pwd) {
+        pwd = [NSString stringByDecryptString:pwd];
+    }
+    return pwd;
+}
+
+-(void)setPassword:(NSString *)password
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if(password)
+        password = [NSString stringByEncryptString:password];
+    [ud setObject:password forKey:@"password"];
+    [ud synchronize];
 }
 
 
@@ -248,7 +290,6 @@ SettingModal* _settinginstance;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"department"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"major"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-
 }
 
 

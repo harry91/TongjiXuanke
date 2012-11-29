@@ -54,7 +54,9 @@
     range = [content rangeOfString:@"&nbsp;&nbsp"];
     NSString *major = [content substringToIndex:range.location];
     
-    [[SettingModal instance] setStudentProfileWithName:name department:department Major:major];
+    [SettingModal instance].studentName = name;
+    [SettingModal instance].studentDepartment = department;
+    [SettingModal instance].studentMajor = major;
 }
 
 @end

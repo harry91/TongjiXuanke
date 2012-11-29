@@ -29,11 +29,8 @@
         _listView.delegate = self;
         _detailView.delegate = self;
         
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSString *username = [ud objectForKey:@"username"];
-        NSString *pwd = [ud objectForKey:@"password"];
-        pwd = [NSString stringByDecryptString:pwd];
-        
+        NSString *username = [SettingModal instance].studentID;
+        NSString *pwd = [SettingModal instance].password;
         
         self.userName = username;
         self.password = pwd;

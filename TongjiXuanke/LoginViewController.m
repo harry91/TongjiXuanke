@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "NSString+EncryptAndDecrypt.h"
 #import "SideViewController.h"
+#import "SettingModal.h"
 
 @interface LoginViewController ()
 
@@ -44,10 +45,7 @@
 
 - (void)prepare
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    
-    if([ud objectForKey:@"password"])
+    if([[SettingModal instance] password])
     {
         self.studentNumberTextField.hidden = YES;
         self.passwordTextField.hidden = YES;
@@ -71,7 +69,7 @@
     }
     else
     {
-        NSString *username = [ud objectForKey:@"username"];
+        NSString *username = [[SettingModal instance] studentID];
         if(username)
         {
             self.studentNumberTextField.text = username;
@@ -164,16 +162,8 @@
 
 -(void)save
 {
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:self.studentNumberTextField.text forKey:@"username"];
-    NSString *pwd = [NSString stringByEncryptString:self.passwordTextField.text];
-    if(![[NSString stringByDecryptString:pwd] isEqualToString:self.passwordTextField.text])
-    {
-        NSLog(@"FATAL ERROR!!!!! Decrypt pwd failed");
-    }
-    
-    [ud setObject:pwd forKey:@"password"];
-    [ud synchronize];
+    [SettingModal instance].studentID = self.studentNumberTextField.text;
+    [SettingModal instance].password = self.passwordTextField.text;
 }
 
 

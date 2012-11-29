@@ -41,11 +41,12 @@
 
 
 -(BOOL)hasStudentProfileSet;
--(void)setStudentProfileWithName:(NSString*)name department:(NSString*)department Major:(NSString*)Major;
+
 -(NSString*)studentName;
 -(NSString*)studentDepartment;
 -(NSString*)studentMajor;
-
+-(NSString*)studentID;
+-(NSString*)password;
 
 -(void)doLogoutCleanUp;
 
@@ -53,5 +54,10 @@
 @property (nonatomic,strong) NSString* currentHeader;
 @property (nonatomic,readonly) BOOL isProVersion;
 
+@property (nonatomic,retain) NSString* studentName;
+@property (nonatomic,retain) NSString* studentDepartment;
+@property (nonatomic,retain) NSString* studentMajor;
+@property (nonatomic,retain) NSString* studentID;
+@property (nonatomic,retain) NSString* password;
 
 @end

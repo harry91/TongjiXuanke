@@ -49,11 +49,7 @@
     
     //NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     //[self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *username = [ud objectForKey:@"username"];
-    self.usernameLabel.text = username;
-    
+
     [self.tableView setScrollsToTop:NO];
 }
 
@@ -87,7 +83,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    if([[SettingModal instance] hasStudentProfileSet])
+    {
+        self.usernameLabel.text = [[SettingModal instance] studentName];
+    }
+    else
+    {
+        self.usernameLabel.text = [[SettingModal instance] studentID];
+    }
 }
 
 
