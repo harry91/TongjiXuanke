@@ -26,6 +26,7 @@
 -(NSString*) nameForCategoryAtIndex:(int)index;
 -(NSString*) classStringForCategoryAtIndex:(int)index;
 -(NSString*) baseURLStringForCategoryAtIndex:(int)index;
+-(BOOL) isCategoryAtIndexServerRSS:(int)index;
 -(int)indexOfCategoryWithName:(NSString*)str;
 -(int)serverIDForCategoryAtIndex:(int)index;
 

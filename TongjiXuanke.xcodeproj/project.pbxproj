@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E40607BA162E10120094475B /* newsdetail.html in Resources */ = {isa = PBXBuildFile; fileRef = E40607B8162E10120094475B /* newsdetail.html */; };
-		E40607BB162E10120094475B /* tongzhi.css in Resources */ = {isa = PBXBuildFile; fileRef = E40607B9162E10120094475B /* tongzhi.css */; };
+		E40607BA162E10120094475B /* newsdetailArticleView.html in Resources */ = {isa = PBXBuildFile; fileRef = E40607B8162E10120094475B /* newsdetailArticleView.html */; };
 		E4177A2116485A260035B080 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A2016485A260035B080 /* Default.png */; };
 		E4177A2316485A360035B080 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A2216485A360035B080 /* Default@2x.png */; };
 		E4177A2516485A3B0035B080 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4177A2416485A3B0035B080 /* Default-568h@2x.png */; };
@@ -42,7 +41,7 @@
 		E429EE58166275960014A5F6 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE57166275960014A5F6 /* libGoogleAdMobAds.a */; };
 		E429EE5A166275BF0014A5F6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE59166275BE0014A5F6 /* StoreKit.framework */; };
 		E429EE5C166275C70014A5F6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE5B166275C70014A5F6 /* AudioToolbox.framework */; };
-		E429EE5E166275F00014A5F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE5D166275F00014A5F6 /* AdSupport.framework */; };
+		E429EE5E166275F00014A5F6 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E429EE5D166275F00014A5F6 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E429EE8A16628AE20014A5F6 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E429EE8916628AE20014A5F6 /* IAPManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E429EE93166290200014A5F6 /* MyIAP.m in Sources */ = {isa = PBXBuildFile; fileRef = E429EE92166290200014A5F6 /* MyIAP.m */; };
 		E434CAE21652CC750086DF56 /* FakeNews.m in Sources */ = {isa = PBXBuildFile; fileRef = E434CAE11652CC750086DF56 /* FakeNews.m */; };
@@ -118,6 +117,16 @@
 		E455FE941663C0E300310D7C /* cellBG_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E455FE921663C0E300310D7C /* cellBG_selected.png */; };
 		E455FE951663C0E300310D7C /* cellBG_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E455FE931663C0E300310D7C /* cellBG_selected@2x.png */; };
 		E466BC07166EBC7F00ED370A /* ServerRSSNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E466BC06166EBC7F00ED370A /* ServerRSSNewsModel.m */; };
+		E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC1D166FD77200ED370A /* Parse.framework */; };
+		E466BC21166FD83C00ED370A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC20166FD83C00ED370A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E466BC23166FD84B00ED370A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC22166FD84B00ED370A /* CoreLocation.framework */; };
+		E466BC25166FD85700ED370A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC24166FD85700ED370A /* libsqlite3.dylib */; };
+		E466BC27166FD86200ED370A /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC26166FD86200ED370A /* libz.1.1.3.dylib */; };
+		E466BC29166FD86B00ED370A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC28166FD86B00ED370A /* MobileCoreServices.framework */; };
+		E466BC2B166FD8A300ED370A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC2A166FD8A300ED370A /* CFNetwork.framework */; };
+		E466BC2D166FD8CA00ED370A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC2C166FD8CA00ED370A /* Security.framework */; };
+		E466BC30166FE13800ED370A /* UserStudyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E466BC2F166FE13800ED370A /* UserStudyModel.m */; };
+		E466BC32166FF0B400ED370A /* newsdetailWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E466BC31166FF0B400ED370A /* newsdetailWebView.html */; };
 		E48119CB1663CF69005032E6 /* Icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CA1663CF69005032E6 /* Icon57.png */; };
 		E48119CD1663CF77005032E6 /* Icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CC1663CF77005032E6 /* Icon114.png */; };
 		E48119D11663D54F005032E6 /* ads.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119D01663D54F005032E6 /* ads.png */; };
@@ -181,8 +190,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E40607B8162E10120094475B /* newsdetail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newsdetail.html; sourceTree = "<group>"; };
-		E40607B9162E10120094475B /* tongzhi.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = tongzhi.css; sourceTree = "<group>"; };
+		E40607B8162E10120094475B /* newsdetailArticleView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newsdetailArticleView.html; sourceTree = "<group>"; };
 		E4177A2016485A260035B080 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		E4177A2216485A360035B080 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		E4177A2416485A3B0035B080 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -338,6 +346,17 @@
 		E455FE931663C0E300310D7C /* cellBG_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBG_selected@2x.png"; sourceTree = "<group>"; };
 		E466BC05166EBC7F00ED370A /* ServerRSSNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerRSSNewsModel.h; sourceTree = "<group>"; };
 		E466BC06166EBC7F00ED370A /* ServerRSSNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerRSSNewsModel.m; sourceTree = "<group>"; };
+		E466BC1D166FD77200ED370A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		E466BC20166FD83C00ED370A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		E466BC22166FD84B00ED370A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E466BC24166FD85700ED370A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E466BC26166FD86200ED370A /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		E466BC28166FD86B00ED370A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E466BC2A166FD8A300ED370A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E466BC2C166FD8CA00ED370A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E466BC2E166FE13800ED370A /* UserStudyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStudyModel.h; sourceTree = "<group>"; };
+		E466BC2F166FE13800ED370A /* UserStudyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserStudyModel.m; sourceTree = "<group>"; };
+		E466BC31166FF0B400ED370A /* newsdetailWebView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = newsdetailWebView.html; sourceTree = "<group>"; };
 		E48119CA1663CF69005032E6 /* Icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon57.png; path = ../Icon57.png; sourceTree = "<group>"; };
 		E48119CC1663CF77005032E6 /* Icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon114.png; path = ../Icon114.png; sourceTree = "<group>"; };
 		E48119D01663D54F005032E6 /* ads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ads.png; sourceTree = "<group>"; };
@@ -439,18 +458,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E429EE5E166275F00014A5F6 /* AdSupport.framework in Frameworks */,
+				E466BC2D166FD8CA00ED370A /* Security.framework in Frameworks */,
+				E4AFCD041630256300358B1B /* QuartzCore.framework in Frameworks */,
 				E4378FD31628D620008A85DF /* CoreGraphics.framework in Frameworks */,
+				E466BC2B166FD8A300ED370A /* CFNetwork.framework in Frameworks */,
+				E466BC29166FD86B00ED370A /* MobileCoreServices.framework in Frameworks */,
+				E466BC27166FD86200ED370A /* libz.1.1.3.dylib in Frameworks */,
+				E466BC25166FD85700ED370A /* libsqlite3.dylib in Frameworks */,
+				E466BC23166FD84B00ED370A /* CoreLocation.framework in Frameworks */,
+				E466BC21166FD83C00ED370A /* Accounts.framework in Frameworks */,
+				E429EE5C166275C70014A5F6 /* AudioToolbox.framework in Frameworks */,
+				E429EE5E166275F00014A5F6 /* AdSupport.framework in Frameworks */,
 				E4AFCD161631884A00358B1B /* SystemConfiguration.framework in Frameworks */,
 				E49B73F816467D1100CE4324 /* MessageUI.framework in Frameworks */,
-				E429EE5C166275C70014A5F6 /* AudioToolbox.framework in Frameworks */,
 				E429EE5A166275BF0014A5F6 /* StoreKit.framework in Frameworks */,
 				E49B73FE1646899D00CE4324 /* Social.framework in Frameworks */,
-				E4AFCD041630256300358B1B /* QuartzCore.framework in Frameworks */,
 				E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */,
 				E4378FCF1628D620008A85DF /* UIKit.framework in Frameworks */,
 				E4378FD11628D620008A85DF /* Foundation.framework in Frameworks */,
 				E429EE58166275960014A5F6 /* libGoogleAdMobAds.a in Frameworks */,
+				E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +495,8 @@
 				E4AFCD2116318CBF00358B1B /* SettingModal.m */,
 				E491FD2C16613FFE00BAE0D0 /* Brain.h */,
 				E491FD2D16613FFE00BAE0D0 /* Brain.m */,
+				E466BC2E166FE13800ED370A /* UserStudyModel.h */,
+				E466BC2F166FE13800ED370A /* UserStudyModel.m */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -620,6 +649,14 @@
 		E4378FCD1628D620008A85DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E466BC2C166FD8CA00ED370A /* Security.framework */,
+				E466BC2A166FD8A300ED370A /* CFNetwork.framework */,
+				E466BC28166FD86B00ED370A /* MobileCoreServices.framework */,
+				E466BC26166FD86200ED370A /* libz.1.1.3.dylib */,
+				E466BC24166FD85700ED370A /* libsqlite3.dylib */,
+				E466BC22166FD84B00ED370A /* CoreLocation.framework */,
+				E466BC20166FD83C00ED370A /* Accounts.framework */,
+				E466BC1D166FD77200ED370A /* Parse.framework */,
 				E429EE5D166275F00014A5F6 /* AdSupport.framework */,
 				E429EE5B166275C70014A5F6 /* AudioToolbox.framework */,
 				E429EE59166275BE0014A5F6 /* StoreKit.framework */,
@@ -674,8 +711,8 @@
 		E4379003162B38A6008A85DF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				E40607B9162E10120094475B /* tongzhi.css */,
-				E40607B8162E10120094475B /* newsdetail.html */,
+				E466BC31166FF0B400ED370A /* newsdetailWebView.html */,
+				E40607B8162E10120094475B /* newsdetailArticleView.html */,
 				E48119D21663D9A7005032E6 /* recommand_email.html */,
 				E48119EE16656A8F005032E6 /* adPlaceHolder.png */,
 				E48119EF16656A8F005032E6 /* adPlaceHolder@2x.png */,
@@ -1081,8 +1118,7 @@
 				E43790E6162CB5C1008A85DF /* nav_bar_btn_back_hl@2x.png in Resources */,
 				E43790E7162CB5C1008A85DF /* nav_bar_btn_back.png in Resources */,
 				E43790E8162CB5C1008A85DF /* nav_bar_btn_back@2x.png in Resources */,
-				E40607BA162E10120094475B /* newsdetail.html in Resources */,
-				E40607BB162E10120094475B /* tongzhi.css in Resources */,
+				E40607BA162E10120094475B /* newsdetailArticleView.html in Resources */,
 				E418E0D7162E32DE0046C8D7 /* toolbar_article_view.png in Resources */,
 				E418E0D8162E32DE0046C8D7 /* toolbar_article_view@2x.png in Resources */,
 				E418E0D9162E32DE0046C8D7 /* toolbar_web_view.png in Resources */,
@@ -1135,6 +1171,7 @@
 				E4811A0616657EC1005032E6 /* guide2@2x.png in Resources */,
 				E4811A0E166584C5005032E6 /* guide3.png in Resources */,
 				E4811A0F166584C5005032E6 /* guide3@2x.png in Resources */,
+				E466BC32166FF0B400ED370A /* newsdetailWebView.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,6 +1253,7 @@
 				E4811A181665908F005032E6 /* UIImage+StackBlur.m in Sources */,
 				E45594D51667F5F0007F45F3 /* StudentProfileGetter.m in Sources */,
 				E466BC07166EBC7F00ED370A /* ServerRSSNewsModel.m in Sources */,
+				E466BC30166FE13800ED370A /* UserStudyModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,6 +1338,10 @@
 		E4378FEF1628D620008A85DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TongjiXuanke/TongjiXuanke-Prefix.pch";
 				INFOPLIST_FILE = "TongjiXuanke/TongjiXuanke-Info.plist";
@@ -1317,6 +1359,10 @@
 		E4378FF01628D620008A85DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TongjiXuanke/TongjiXuanke-Prefix.pch";
 				INFOPLIST_FILE = "TongjiXuanke/TongjiXuanke-Info.plist";

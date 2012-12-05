@@ -148,12 +148,26 @@
     self.original_webview.delegate = self;
     self.puretext_webview.delegate = self;
     
-    NSString* newsString = news.content;
+    NSString* articleViewString = news.content;
+    NSString* webViewString = articleViewString;
+    if([[SettingModal instance] isCategoryAtIndexServerRSS:[[SettingModal instance] indexOfCategoryWithName:news.category.name]])
+    {
+        {
+            NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetailArticleView" ofType:@"html"];
+            NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
+            articleViewString = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:articleViewString];
+        }
+        {
+            NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetailWebView" ofType:@"html"];
+            NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
+            webViewString = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:articleViewString];
+        }
+    }
     
-    NSLog(@"Detail news String: %@",newsString);
+    NSLog(@"Detail news String: %@",articleViewString);
     
-    [self.original_webview loadHTMLString:newsString baseURL:self.baseURL];
-    [self.puretext_webview loadHTMLString:newsString baseURL:self.baseURL];
+    [self.original_webview loadHTMLString:webViewString baseURL:self.baseURL];
+    [self.puretext_webview loadHTMLString:articleViewString baseURL:self.baseURL];
     
     news.haveread = [[NSNumber alloc] initWithBool:YES];
     [[MyDataStorage instance] saveContext];

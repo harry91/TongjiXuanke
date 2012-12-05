@@ -46,10 +46,7 @@
             // Process
             NSString *itemTitle = item.summary;
             news.briefcontent = [itemTitle stringByConvertingHTMLToPlainText];
-            NSMutableString *source = [item.summary mutableCopy];
-            NSString *infoSouceFile = [[NSBundle mainBundle] pathForResource:@"newsdetail" ofType:@"html"];
-            NSString *infoText = [[NSString alloc] initWithContentsOfFile:infoSouceFile encoding:NSUTF8StringEncoding error:nil];
-            news.content = [infoText stringByReplacingOccurrencesOfString:@"@#Content#@" withString:source];
+            news.content = item.summary;
         }
         
         news.date = [self timeForNewsIndex:i];

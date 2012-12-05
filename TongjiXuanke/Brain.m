@@ -31,6 +31,8 @@ Brain* _brainInstance = nil;
         }
         [[DataOperator instance] cleanUpExpireNews];
         [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(configureClasses) target:self];
+        
+        userStudy = [UserStudyModel instance];
     }
     return self;
 }

@@ -22,9 +22,9 @@ SettingModal* _settinginstance;
     if(self = [super init])
     {
         categorys = @[
-        @{@"id" : @1 , @"name" : @"系统消息",    @"class" : @"SystemNewsModel" ,@"baseURL" : @"http://sbhhbs.com/" },
-        @{@"id" : @2 , @"name" : @"选课网",    @"class" : @"XuankeModel" ,@"baseURL" : @"http://xuanke.tongji.edu.cn/" },
-        @{@"id" : @3 , @"name" : @"软件学院",  @"class" : @"SSEModel" ,@"baseURL" : @"http://sse.tongji.edu.cn/Notice/"}
+        @{@"id" : @1 , @"name" : @"系统消息",    @"class" : @"SystemNewsModel" ,@"baseURL" : @"http://sbhhbs.com/", @"serverrss" : @YES },
+        @{@"id" : @2 , @"name" : @"选课网",    @"class" : @"XuankeModel" ,@"baseURL" : @"http://xuanke.tongji.edu.cn/" , @"serverrss" : @NO },
+        @{@"id" : @3 , @"name" : @"软件学院",  @"class" : @"SSEModel" ,@"baseURL" : @"http://sse.tongji.edu.cn/Notice/" , @"serverrss" : @NO }
         ];
         
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
@@ -40,6 +40,8 @@ SettingModal* _settinginstance;
         {
             _isProVersion = YES;
         }
+        
+        _isProVersion = YES;//always pro version><...
     }
     return self;
 }
@@ -88,6 +90,12 @@ SettingModal* _settinginstance;
 -(NSString*) nameForCategoryAtIndex:(int)index
 {
     return categorys[index][@"name"];
+}
+
+-(BOOL) isCategoryAtIndexServerRSS:(int)index
+{
+    NSNumber* num = categorys[index][@"serverrss"];
+    return [num boolValue];
 }
 
 -(int)indexOfCategoryWithName:(NSString*)str

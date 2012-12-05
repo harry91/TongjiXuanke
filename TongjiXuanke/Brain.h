@@ -10,12 +10,15 @@
 #import "APNSManager.h"
 #import "SettingModal.h"
 #import "NewsLoaderProtocal.h"
+#import <Parse/Parse.h>
+#import "UserStudyModel.h"
 
 @interface Brain : NSObject<NewsLoaderProtocal>
 {
     BOOL hasAPNSResubscribed;
     NSMutableArray *classArray;
     NSMutableArray *updateArray;
+    UserStudyModel *userStudy;
 }
 + (Brain*)instance;
 
