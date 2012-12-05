@@ -75,7 +75,8 @@ DataOperator* _dataOperatorInstance = nil;
     if(matching.count > 0)
     {
         BOOL found = NO;
-        for(News *item in matching)
+        News *item;
+        for(item in matching)
         {
             if([item.category.name isEqualToString:categoryTitle])
             {
@@ -84,7 +85,22 @@ DataOperator* _dataOperatorInstance = nil;
             }
         }
         if(found)
+        {
+            if(newsToInsert.content)
+            {
+                if(![newsToInsert.content isEqualToString:item.content])//update content;
+                {
+                    item.content = newsToInsert.content;
+                    item.briefcontent = newsToInsert.briefcontent;
+                    item.date = newsToInsert.date;
+                    item.title = newsToInsert.title;
+                    item.favorated = NO;
+                    item.haveread = NO;
+                    [[MyDataStorage instance] saveContext];
+                }
+            }
             return;
+        }
     }
     
     News *news = [NSEntityDescription
