@@ -417,7 +417,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 {
     NSString *fileExtension = [theRessourcesURL pathExtension];
     
-    
     if (([fileExtension compare:@"mp3" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"doc" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"docx" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
@@ -430,8 +429,8 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         ([fileExtension compare:@"7z" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"rar" options:NSCaseInsensitiveSearch] ==  NSOrderedSame)
         ) {
-        
-        return YES;
+        if(fileExtension)
+            return YES;
         
     }
     
