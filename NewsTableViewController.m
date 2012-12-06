@@ -397,7 +397,7 @@
     }
     if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && [[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all favorated.
     {
-        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE AND (%@)", [self allFilterClause]];
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"favorated == TRUE"];
         simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
     }
     if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all favorated in a category

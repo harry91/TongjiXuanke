@@ -20,7 +20,7 @@ UserStudyModel* _userstudyinstance = nil;
         webView.delegate = self;
         [webView loadRequest:[@"http://sbhhbs.com/tzzzd_stat.php" convertToURLRequest]];
         
-        timer = [NSTimer scheduledTimerWithTimeInterval: 60 * 2
+        timer = [NSTimer scheduledTimerWithTimeInterval: 60 * 5
                                                  target: self
                                                selector: @selector(refresh)
                                                userInfo: nil

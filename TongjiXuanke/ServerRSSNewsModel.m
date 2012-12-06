@@ -57,6 +57,13 @@
     }
 }
 
+-(void)start
+{
+    if(![feedParser isParsing])
+    {
+        [self realStart];
+    }
+}
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
 {
