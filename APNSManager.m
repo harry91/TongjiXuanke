@@ -89,12 +89,6 @@ NSString *host = @"www.sbhhbs.com";
     [myInstallation setObject:deviceUuid forKey:@"itisme"];
     [myInstallation setObject:deviceModel forKey:@"model"];
     [myInstallation setObject:deviceSystemVersion forKey:@"systemversion"];
-    NSNumber *userTime = [myInstallation objectForKey:@"timeofuse"];
-    if(!userTime)
-        userTime = @1;
-    else
-        userTime = [NSNumber numberWithInt:([userTime intValue]+1)];
-    [myInstallation setObject:userTime forKey:@"timeofuse"];
     [myInstallation setObject:deviceName forKey:@"devicecalled"];
     
     if([[SettingModal instance] hasStudentProfileSet])
