@@ -129,6 +129,7 @@
 		E466BC32166FF0B400ED370A /* newsdetailWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E466BC31166FF0B400ED370A /* newsdetailWebView.html */; };
 		E466BC3C166FFC1800ED370A /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC3B166FFC1800ED370A /* QuickLook.framework */; };
 		E466BC451670033000ED370A /* DownloadPercentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E466BC441670033000ED370A /* DownloadPercentObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E466BC561670E68A00ED370A /* CAUPNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E466BC551670E68900ED370A /* CAUPNewsModel.m */; };
 		E48119CB1663CF69005032E6 /* Icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CA1663CF69005032E6 /* Icon57.png */; };
 		E48119CD1663CF77005032E6 /* Icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CC1663CF77005032E6 /* Icon114.png */; };
 		E48119D11663D54F005032E6 /* ads.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119D01663D54F005032E6 /* ads.png */; };
@@ -362,6 +363,8 @@
 		E466BC3B166FFC1800ED370A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		E466BC431670033000ED370A /* DownloadPercentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadPercentObject.h; sourceTree = "<group>"; };
 		E466BC441670033000ED370A /* DownloadPercentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadPercentObject.m; sourceTree = "<group>"; };
+		E466BC541670E68900ED370A /* CAUPNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUPNewsModel.h; sourceTree = "<group>"; };
+		E466BC551670E68900ED370A /* CAUPNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUPNewsModel.m; sourceTree = "<group>"; };
 		E48119CA1663CF69005032E6 /* Icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon57.png; path = ../Icon57.png; sourceTree = "<group>"; };
 		E48119CC1663CF77005032E6 /* Icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon114.png; path = ../Icon114.png; sourceTree = "<group>"; };
 		E48119D01663D54F005032E6 /* ads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ads.png; sourceTree = "<group>"; };
@@ -806,6 +809,8 @@
 				E491FD301661456C00BAE0D0 /* DummyNewsModel.m */,
 				E4997ADA1631DAA20020999B /* SSEModel.h */,
 				E4997ADB1631DAA20020999B /* SSEModel.m */,
+				E466BC541670E68900ED370A /* CAUPNewsModel.h */,
+				E466BC551670E68900ED370A /* CAUPNewsModel.m */,
 				E466BC05166EBC7F00ED370A /* ServerRSSNewsModel.h */,
 				E466BC06166EBC7F00ED370A /* ServerRSSNewsModel.m */,
 				E4E7B09A1662B97300CB994F /* SystemNewsModel.h */,
@@ -1272,6 +1277,7 @@
 				E466BC07166EBC7F00ED370A /* ServerRSSNewsModel.m in Sources */,
 				E466BC30166FE13800ED370A /* UserStudyModel.m in Sources */,
 				E466BC451670033000ED370A /* DownloadPercentObject.m in Sources */,
+				E466BC561670E68A00ED370A /* CAUPNewsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

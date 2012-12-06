@@ -117,4 +117,23 @@
 }
 
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSURL *theRessourcesURL = [request URL];
+    NSString *fileExtension = [theRessourcesURL pathExtension];
+    
+    if (([fileExtension compare:@"mp3" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
+        ([fileExtension compare:@"css" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
+        ([fileExtension compare:@"jpg" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
+        ([fileExtension compare:@"gif" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
+        ([fileExtension compare:@"png" options:NSCaseInsensitiveSearch] ==  NSOrderedSame))
+    {
+        if(fileExtension)
+            return NO;
+    }
+    return YES;
+}
+
+
 @end

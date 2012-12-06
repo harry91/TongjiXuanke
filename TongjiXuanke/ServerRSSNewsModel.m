@@ -26,7 +26,7 @@
     if(self = [super init])
     {
         parsedItems = [[NSMutableArray alloc] init];
-        
+        categoryOnServer = @"test";
     }
     return self;
 }
