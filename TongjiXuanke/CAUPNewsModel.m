@@ -66,35 +66,44 @@
 {
     while(1)
     {
-        NSRange range = [source rangeOfString:@"<td align=\"left\" class=\"TLE\" width=\"736\" valign=\"top\"><span class=\"Hdate\">["];
-        if(range.location == NSNotFound)
-            break;
-        source = [source substringFromIndex:range.location + range.length];
-        NSString* date = [source substringToIndex:5];
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        if([date hasPrefix:@"0"] && ![date hasPrefix:@"09"])
-        {
-            date = [@"2013" stringByAppendingString:date];
+        @try {
+            NSRange range = [source rangeOfString:@"<td align=\"left\" class=\"TLE\" width=\"736\" valign=\"top\"><span class=\"Hdate\">["];
+            if(range.location == NSNotFound)
+                break;
+            source = [source substringFromIndex:range.location + range.length];
+            NSString* date = [source substringToIndex:5];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            if([date hasPrefix:@"0"] && ![date hasPrefix:@"09"])
+            {
+                date = [@"2013" stringByAppendingString:date];
+            }
+            else
+            {
+                date = [@"2012" stringByAppendingString:date];
+            }
+            [df setDateFormat:@"yyyyMM-dd"];
+            NSDate *myDate = [df dateFromString: date];
+            
+            NSLog(@"news time: %@",myDate);
+            range = [source rangeOfString:@"<a href=\"news_detail.asp?id="];
+            source = [source substringFromIndex:range.location + range.length];
+            NSString *newsURL = [source substringToIndex:4];
+            
+            range = [source rangeOfString:@"\">"];
+            source = [source substringFromIndex:range.location + range.length];
+            range = [source rangeOfString:@"</a></td>"];
+            NSString* title = [source substringToIndex:range.location];
+            
+            NSDictionary *item = @{@"url":newsURL, @"title":title, @"date": myDate};
+            [dict addObject:item];
         }
-        else
-        {
-            date = [@"2012" stringByAppendingString:date];
+        @catch (NSException *exception) {
+            NSLog(@"CAUD parse list fail due to %@",exception);
         }
-        [df setDateFormat:@"yyyyMM-dd"];
-        NSDate *myDate = [df dateFromString: date];
+        @finally {
+            
+        }
         
-        NSLog(@"news time: %@",myDate);
-        range = [source rangeOfString:@"<a href=\"news_detail.asp?id="];
-        source = [source substringFromIndex:range.location + range.length];
-        NSString *newsURL = [source substringToIndex:4];
-        
-        range = [source rangeOfString:@"\">"];
-        source = [source substringFromIndex:range.location + range.length];
-        range = [source rangeOfString:@"</a></td>"];
-        NSString* title = [source substringToIndex:range.location];
-        
-        NSDictionary *item = @{@"url":newsURL, @"title":title, @"date": myDate};
-        [dict addObject:item];
     }
 
 }
@@ -105,6 +114,8 @@
     [[UIApplication sharedApplication] hideNetworkIndicator];
     NSString *currentURL = webView.request.URL.absoluteString;
     
+    NSLog(@"CAUD finish loading: %@",currentURL);
+    
     if([currentURL isEqualToString:@"http://old.tongji-caup.org/student/News_nmore.asp"])
     {
         tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
@@ -114,11 +125,12 @@
         return;
     }
     
-    if(isgetting)
+    else
     {
+        NSString *url = [currentURL substringFromIndex:currentURL.length - 4];
         tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         tempBriefContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
-        [self finishRetreiving:curl];
+        [self finishRetreiving:url];
     }
 }
 
@@ -211,7 +223,13 @@
         
         //tempContent = [tempContent substringToIndex:end.location];
         
-        news.content = tempContent;
+        if(news.content)
+        {
+            if(news.content.length < tempContent.length)
+                news.content = tempContent;
+        }
+        else
+            news.content = tempContent;
         
         
         NSString *briefContent = [news.content  stringByConvertingHTMLToPlainText];

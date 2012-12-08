@@ -31,5 +31,6 @@
 }
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) IBOutlet UIView *noDataPlaceHolder;
 
 @end

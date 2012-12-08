@@ -170,6 +170,41 @@
 }
 
 #pragma mark - Life Cycle
+
+- (void)updateNoDataPlaceHolder
+{
+    if([self tableView:self.tableView numberOfRowsInSection:0] == 0)
+    {
+        self.noDataPlaceHolder.hidden = NO;
+    }
+    else
+    {
+        self.noDataPlaceHolder.hidden = YES;
+    }
+}
+
+- (void)initNoDataPlaceHolder
+{
+    //self.noDataPlaceHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nodataplaceholder.png"]];
+    self.noDataPlaceHolder = [[UIView alloc] init];
+    self.noDataPlaceHolder.frame = self.tableView.frame;
+    self.noDataPlaceHolder.backgroundColor = [UIColor clearColor];
+    CGRect frame = self.noDataPlaceHolder.frame;
+    frame.size.height /= 2.0;
+    UILabel *info = [[UILabel alloc] initWithFrame:frame];
+    info.text = @"暂无数据";
+    info.shadowColor = [UIColor whiteColor];
+    CGSize offset;
+    offset.height = 1;
+    info.shadowOffset = offset;
+    info.textColor = [UIColor darkGrayColor];
+    info.backgroundColor = [UIColor clearColor];
+    [info setTextAlignment:UITextAlignmentCenter];
+    [self.noDataPlaceHolder addSubview:info];
+    
+    [self.tableView addSubview:self.noDataPlaceHolder];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -183,7 +218,10 @@
     [NSNotificationCenter registerUserCheckFailNotificationWithSelector:@selector(wrongPassCode) target:self];
     
     self.clearsSelectionOnViewWillAppear = YES;
+
+    [self initNoDataPlaceHolder];
     
+    [self updateNoDataPlaceHolder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -230,6 +268,7 @@
 
 - (void)viewDidUnload {
     //[self setTableView:nil];
+    [self setNoDataPlaceHolder:nil];
     [super viewDidUnload];
 }
 
@@ -486,6 +525,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+    [self updateNoDataPlaceHolder];
 }
 
 #pragma mark - News Loader
