@@ -51,14 +51,21 @@ Brain* _brainInstance = nil;
     [APNSManager reSubscrible];
 }
 
+
+- (void)APNSProcess
+{
+    [self performSelectorInBackground:@selector(APNSThread) withObject:nil];
+    [APNSManager cleanBadge];
+
+}
+
 - (void)APNSStart
 {
     if(hasAPNSResubscribed)
         return;
     hasAPNSResubscribed = YES;
     [APNSManager requestAPNS];
-    [APNSManager cleanBadge];
-    [self performSelectorInBackground:@selector(APNSThread) withObject:nil];
+    [self performSelector:@selector(APNSProcess) withObject:nil afterDelay:5];
 }
 
 - (void)configureClasses

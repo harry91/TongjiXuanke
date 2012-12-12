@@ -226,7 +226,8 @@ NSString *host = @"www.sbhhbs.com";
 
 +(BOOL)reSubscrible
 {
-    while(!deviceToken);
+    if(!deviceToken)
+        return NO;
     [APNSManager cleanAllSubscrible];
     
     SettingModal *instance = [SettingModal instance];
