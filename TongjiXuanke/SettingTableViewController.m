@@ -149,6 +149,7 @@
     
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"AutoClean Picker Canceled");
+        [self cleanTableSelection];
     };
     
     NSArray *months = @[@"从不", @"1个月前",@"2个月前",@"3个月前",@"4个月前",@"5个月前",@"6个月前",@"7个月前",@"8个月前",@"9个月前",@"10个月前",@"11个月前",@"12个月前"];

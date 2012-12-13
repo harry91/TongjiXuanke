@@ -147,6 +147,7 @@
 		E4811A0F166584C5005032E6 /* guide3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E4811A0D166584C5005032E6 /* guide3@2x.png */; };
 		E4811A181665908F005032E6 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = E4811A171665908F005032E6 /* UIImage+StackBlur.m */; };
 		E48293ED16780AAF002F3994 /* TumuXiaozhanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E48293EC16780AAF002F3994 /* TumuXiaozhanModel.m */; };
+		E4829406167A83A2002F3994 /* InternationalOfficeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4829405167A83A2002F3994 /* InternationalOfficeModel.m */; };
 		E48C670C16580428002F8BCB /* NSString+URLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E48C670B16580428002F8BCB /* NSString+URLRequest.m */; };
 		E491FD2916613C9200BAE0D0 /* CKRefreshArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = E491FD2516613C9200BAE0D0 /* CKRefreshArrowView.m */; };
 		E491FD2A16613C9200BAE0D0 /* CKRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E491FD2816613C9200BAE0D0 /* CKRefreshControl.m */; };
@@ -386,6 +387,8 @@
 		E4811A171665908F005032E6 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		E48293EB16780AAF002F3994 /* TumuXiaozhanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TumuXiaozhanModel.h; sourceTree = "<group>"; };
 		E48293EC16780AAF002F3994 /* TumuXiaozhanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TumuXiaozhanModel.m; sourceTree = "<group>"; };
+		E4829404167A83A2002F3994 /* InternationalOfficeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternationalOfficeModel.h; sourceTree = "<group>"; };
+		E4829405167A83A2002F3994 /* InternationalOfficeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternationalOfficeModel.m; sourceTree = "<group>"; };
 		E48C670A16580428002F8BCB /* NSString+URLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLRequest.h"; sourceTree = "<group>"; };
 		E48C670B16580428002F8BCB /* NSString+URLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLRequest.m"; sourceTree = "<group>"; };
 		E491FD2416613C9200BAE0D0 /* CKRefreshArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshArrowView.h; sourceTree = "<group>"; };
@@ -814,6 +817,8 @@
 				E4997ADB1631DAA20020999B /* SSEModel.m */,
 				E466BC541670E68900ED370A /* CAUPNewsModel.h */,
 				E466BC551670E68900ED370A /* CAUPNewsModel.m */,
+				E4829404167A83A2002F3994 /* InternationalOfficeModel.h */,
+				E4829405167A83A2002F3994 /* InternationalOfficeModel.m */,
 				E466BC05166EBC7F00ED370A /* ServerRSSNewsModel.h */,
 				E466BC06166EBC7F00ED370A /* ServerRSSNewsModel.m */,
 				E4E7B09A1662B97300CB994F /* SystemNewsModel.h */,
@@ -1284,6 +1289,7 @@
 				E466BC451670033000ED370A /* DownloadPercentObject.m in Sources */,
 				E466BC561670E68A00ED370A /* CAUPNewsModel.m in Sources */,
 				E48293ED16780AAF002F3994 /* TumuXiaozhanModel.m in Sources */,
+				E4829406167A83A2002F3994 /* InternationalOfficeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

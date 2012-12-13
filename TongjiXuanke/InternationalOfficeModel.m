@@ -1,20 +1,19 @@
 //
-//  CAUPNewsModel.m
+//  InternationalOfficeModel.m
 //  TongjiXuanke
 //
-//  Created by Song on 12-12-6.
+//  Created by Song on 12-12-13.
 //  Copyright (c) 2012年 Song. All rights reserved.
 //
 
-#import "CAUPNewsModel.h"
+#import "InternationalOfficeModel.h"
 #import "UIApplication+Toast.h"
 #import "FakeNews.h"
 #import "DataOperator.h"
 #import "NSString+URLRequest.h"
 #import "NSString+HTML.h"
 
-@implementation CAUPNewsModel
-
+@implementation InternationalOfficeModel
 -(id)init
 {
     if(self = [super init])
@@ -23,7 +22,7 @@
         webview.delegate = self;
         
         isgetting = NO;
-
+        
         urlToRetireve = [@[] mutableCopy];
     }
     return self;
@@ -56,7 +55,7 @@
 {
     dict = [@[] mutableCopy];
     
-    [webview loadRequest:[@"http://old.tongji-caup.org/student/News_nmore.asp" convertToURLRequest]];
+    [webview loadRequest:[@"http://www.tongji-uni.com/newslist.aspx?intclass=1" convertToURLRequest]];
     
 }
 
@@ -67,25 +66,11 @@
     while(1)
     {
         @try {
-            NSRange range = [source rangeOfString:@"<td align=\"left\" class=\"TLE\" width=\"736\" valign=\"top\"><span class=\"Hdate\">["];
+            NSRange range = [source rangeOfString:@"<tr align=\"left\" valign=\"middle\" style=\"color:#424242;background-color:#424242;\">"];
             if(range.location == NSNotFound)
                 break;
             source = [source substringFromIndex:range.location + range.length];
-            NSString* date = [source substringToIndex:5];
-            NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            if([date hasPrefix:@"0"] && ![date hasPrefix:@"09"])
-            {
-                date = [@"2013" stringByAppendingString:date];
-            }
-            else
-            {
-                date = [@"2012" stringByAppendingString:date];
-            }
-            [df setDateFormat:@"yyyyMM-dd"];
-            NSDate *myDate = [df dateFromString: date];
-            
-            NSLog(@"news time: %@",myDate);
-            range = [source rangeOfString:@"<a href=\"news_detail.asp?id="];
+            range = [source rangeOfString:@"<td><a href=\"newsshow.aspx?sn="];
             source = [source substringFromIndex:range.location + range.length];
             NSString *newsURL = [source substringToIndex:4];
             
@@ -94,18 +79,18 @@
             range = [source rangeOfString:@"</a></td>"];
             NSString* title = [source substringToIndex:range.location];
             
-            NSDictionary *item = @{@"url":newsURL, @"title":title, @"date": myDate};
+            NSDictionary *item = @{@"url":newsURL, @"title":title};
             [dict addObject:item];
         }
         @catch (NSException *exception) {
-            NSLog(@"CAUD parse list fail due to %@",exception);
+            NSLog(@"IO parse list fail due to %@",exception);
         }
         @finally {
             
         }
         
     }
-
+    
 }
 
 
@@ -114,9 +99,9 @@
     [[UIApplication sharedApplication] hideNetworkIndicator];
     NSString *currentURL = webView.request.URL.absoluteString;
     
-    NSLog(@"CAUD finish loading: %@",currentURL);
+    NSLog(@"IO finish loading: %@",currentURL);
     
-    if([currentURL isEqualToString:@"http://old.tongji-caup.org/student/News_nmore.asp"])
+    if([currentURL isEqualToString:@"http://www.tongji-uni.com/newslist.aspx?intclass=1"])
     {
         tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         [self parseList:tempContent];
@@ -141,7 +126,6 @@
 #pragma mark detail getting
 -(void)retreivingTherad
 {
-    NSLog(@"URL TO GO %@",urlToRetireve);
     if(urlToRetireve.count <= 0)
     {
         isgetting = NO;
@@ -194,45 +178,57 @@
         }
     }
     
+    NSString* backupstring = [tempContent copy];
+    
+    
     @try {
-        NSRange start = [tempContent rangeOfString:@"发布时间："];
+        
+        
+        NSRange start = [tempContent rangeOfString:@"lblTime\">"];
         
         tempContent = [tempContent substringFromIndex:start.location + start.length];
         
+        NSRange end = [tempContent rangeOfString:@"</span>"];
         
-        NSString* timeYear = [tempContent substringToIndex:4];
         
-        NSString* originalDate = [news.date description];
-        
-        originalDate = [originalDate substringFromIndex:4];
-        
-        originalDate = [timeYear stringByAppendingString:originalDate];
-        originalDate = [originalDate substringToIndex:10];
+        NSString* timeString = [tempContent substringToIndex:end.location];
+        end = [timeString rangeOfString:@" "];
+        timeString = [timeString substringToIndex:end.location];
+
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         
-        [df setDateFormat:@"yyyy-MM-dd"];
-        NSDate *myDate = [df dateFromString: originalDate];
+        [df setDateFormat:@"yyyy-M-d"];
+        NSDate *myDate = [df dateFromString: timeString];
         
         news.date = myDate;
         
-        start = [tempContent rangeOfString:@"class=\"TLE\">"];
+        tempContent = [backupstring copy];
         
-        tempContent = [tempContent substringFromIndex:start.location + start.length];
+        start = [backupstring rangeOfString:@"<b><span id=\"lblTitle\">"];
         
-        //NSRange end = [tempContent rangeOfString:@"<!--内容-->"];
+        backupstring = [backupstring substringFromIndex:start.location];
         
-        //tempContent = [tempContent substringToIndex:end.location];
+        end = [backupstring rangeOfString:@"<p></p><div align=\"right\"><a href=\"default.aspx\">"];
+        
+        backupstring = [backupstring substringToIndex:end.location];
+        
+        backupstring =  [backupstring stringByReplacingOccurrencesOfString: @"#ffffff" withString:@"#777777"];
+        
         
         if(news.content)
         {
-            if(news.content.length < tempContent.length)
-                news.content = tempContent;
+            if(news.content.length < backupstring.length)
+                news.content = backupstring;
         }
         else
-            news.content = tempContent;
+            news.content = backupstring;
         
         
-        NSString *briefContent = [news.content  stringByConvertingHTMLToPlainText];
+        start = [backupstring rangeOfString:@"<td class=\"wh\">"];
+        
+        backupstring = [backupstring substringFromIndex:start.location];
+        
+        NSString *briefContent = [backupstring  stringByConvertingHTMLToPlainText];
         
         briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
         briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
@@ -243,13 +239,13 @@
         
         //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
         [[MyDataStorage instance] saveContext];
-
+        
     }
     @catch (NSException *exception) {
-        NSLog(@"caught in caud with news urld: %@, %@", news.url, exception);
+        NSLog(@"caught in od with news urld: %@, %@", news.url, exception);
     }
     @finally {
-        [self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
+        [self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:1];
         //[self retreivingTherad];
     }
     
@@ -260,7 +256,7 @@
 {
     [[UIApplication sharedApplication] showNetworkIndicator];
     
-    url = [@"http://old.tongji-caup.org/student/news_detail.asp?id=" stringByAppendingString:url];
+    url = [@"http://www.tongji-uni.com/newsshow.aspx?sn=" stringByAppendingString:url];
     
     [webview loadRequest:[url convertToURLRequest]];
     
@@ -295,6 +291,7 @@
 -(void)addURLtoRetirve:(NSString*)url
 {
     [urlToRetireve addObject:url];
+    NSLog(@"URL TO GO %@",urlToRetireve);
     if(!isgetting)
     {
         [self retreivingTherad];
@@ -333,7 +330,8 @@
 
 -(NSDate*)timeForNewsIndex:(int)index
 {
-    return dict[index][@"date"];
+    return nil;
 }
+
 
 @end
