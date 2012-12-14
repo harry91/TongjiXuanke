@@ -19,6 +19,8 @@
     BOOL isgetting;
     NSString *curl;
     NSMutableArray *urlToRetireve;
+    float timeToWait;
+    BOOL iamwaiting;
 }
 
 @end

@@ -88,9 +88,31 @@
     return [[SettingModal instance] numberOfCategory] + 1;
 }
 
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    NSMutableAttributedString *string; // assume string exists
+//    NSRange selectedRange; // assume this is set
+//    
+//    NSURL *linkURL = [NSURL URLWithString:@"mailto:tongzhizaozhidao@126.com"];
+//    
+//    [string beginEditing];
+//    [string addAttribute:NSLinkAttributeName
+//                   value:linkURL
+//                   range:selectedRange];
+//    
+//    [string addAttribute:NSForegroundColorAttributeName
+//                   value:[NSColor blueColor]
+//                   range:selectedRange];
+//    
+//    [string addAttribute:NSUnderlineStyleAttributeName
+//                   value:[NSNumber numberWithInt:NSSingleUnderlineStyle]
+//                   range:selectedRange];
+//    [string endEditing];
+//}
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"没有你的学院？通过邮件反馈给我们，告诉我们贵学院通知的网址，我们将尽快推出";
+    return @"没有你想要的信息？请反馈给我们";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -147,7 +147,8 @@
     
     //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
     [[MyDataStorage instance] saveContext];
-    [self retreivingTherad];
+    [self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:1];
+    
 }
 
 

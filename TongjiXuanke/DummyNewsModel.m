@@ -127,6 +127,7 @@
         ([fileExtension compare:@"css" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"jpg" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"gif" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
+        ([fileExtension compare:@"jpeg" options:NSCaseInsensitiveSearch] ==  NSOrderedSame) ||
         ([fileExtension compare:@"png" options:NSCaseInsensitiveSearch] ==  NSOrderedSame))
     {
         if(fileExtension)

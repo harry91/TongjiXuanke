@@ -25,6 +25,9 @@
         isgetting = NO;
 
         urlToRetireve = [@[] mutableCopy];
+        
+        timeToWait = 0;
+        iamwaiting = NO;
     }
     return self;
 }
@@ -141,6 +144,15 @@
 #pragma mark detail getting
 -(void)retreivingTherad
 {
+    if(iamwaiting)
+        return;
+    while(timeToWait >= 1)
+    {
+        iamwaiting = YES;
+        sleep(1);
+        timeToWait --;
+    }
+    iamwaiting = NO;
     NSLog(@"URL TO GO %@",urlToRetireve);
     if(urlToRetireve.count <= 0)
     {
@@ -249,7 +261,9 @@
         NSLog(@"caught in caud with news urld: %@, %@", news.url, exception);
     }
     @finally {
-        [self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
+        timeToWait = 5;
+        [self retreivingTherad];
+        //[self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
         //[self retreivingTherad];
     }
     

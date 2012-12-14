@@ -372,6 +372,7 @@
         else
         {
             [UIApplication presentToast:@"没有网络连接"];
+            [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
         }
     }
     else
