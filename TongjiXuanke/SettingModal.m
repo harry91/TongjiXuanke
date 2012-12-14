@@ -36,19 +36,6 @@ SettingModal* _settinginstance;
         
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
         
-        _isProVersion = NO;
-        UIDevice *dev = [UIDevice currentDevice];
-        NSString *deviceUuid = [dev uniqueGlobalDeviceIdentifier];
-        
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSString *ProVersion = [ud objectForKey:@"ProVersion"];
-        ProVersion = [NSString stringByDecryptString:ProVersion];
-        if([deviceUuid isEqualToString:ProVersion])
-        {
-            _isProVersion = YES;
-        }
-        
-        _isProVersion = YES;//always pro version><...
     }
     return self;
 }
@@ -183,20 +170,6 @@ SettingModal* _settinginstance;
     return result;
 }
 
--(void)goPro
-{
-    if(self.isProVersion)
-        return;
-    UIDevice *dev = [UIDevice currentDevice];
-	NSString *deviceUuid = [dev uniqueGlobalDeviceIdentifier];
-    deviceUuid = [NSString stringByEncryptString:deviceUuid];
-    
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    [ud setObject:deviceUuid forKey:@"ProVersion"];
-    [ud synchronize];
-    _isProVersion = YES;
-}
 
 -(int)needHelp
 {

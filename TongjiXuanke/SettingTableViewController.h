@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "ActionSheetPicker.h"
-#import "MyIAP.h"
 
 @interface SettingTableViewController : UITableViewController<MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
 {
     UIActionSheet *shareActionSheet;
     UIActionSheet *logoutActionSheet;
 }
-@property (weak, nonatomic) IBOutlet UITableViewCell *buyProCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *restorePurchaseCell;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *categoryCell;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;

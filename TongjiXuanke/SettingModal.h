@@ -35,8 +35,6 @@
 -(int)subscribledCount;
 
 
--(void)goPro;
-
 -(int)needHelp;//return the starting help page -1 for no
 -(void)finishTourialWithProgress:(int)progress;
 
@@ -53,7 +51,6 @@
 
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
-@property (nonatomic,readonly) BOOL isProVersion;
 
 @property (nonatomic,retain) NSString* studentName;
 @property (nonatomic,retain) NSString* studentDepartment;

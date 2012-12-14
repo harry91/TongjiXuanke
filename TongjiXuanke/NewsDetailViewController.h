@@ -11,19 +11,15 @@
 #import "Category.h"
 #import <QuickLook/QuickLook.h>
 
-#import "GADBannerViewDelegate.h"
-
 #import "MBProgressHUD.h"
 
 @class GADBannerView, GADRequest;
 
-@interface NewsDetailViewController : UIViewController <QLPreviewControllerDataSource,QLPreviewControllerDelegate,UIDocumentInteractionControllerDelegate,UIWebViewDelegate,GADBannerViewDelegate>
+@interface NewsDetailViewController : UIViewController <QLPreviewControllerDataSource,QLPreviewControllerDelegate,UIDocumentInteractionControllerDelegate,UIWebViewDelegate>
 {
     News *news;
     UISegmentedControl *segmentedControl;
     int textLoadComplete;
-    GADBannerView *adBanner;
-    UIImageView *adPlaceHolder;
     UIButton *fav_button;
     
     NSURL *urlDownload;

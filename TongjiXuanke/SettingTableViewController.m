@@ -268,28 +268,7 @@
     {
         [self autoCleanShowPicker];
     }
-    else if(cell == self.buyProCell)
-    {
-        if([SettingModal instance].isProVersion)
-        {
-            [self alreadyProversionAlert];
-        }
-        else
-        {
-            [[MyIAP instance] buyPro];
-        }
-    }
-    else if(cell == self.restorePurchaseCell)
-    {
-        if([SettingModal instance].isProVersion)
-        {
-            [self alreadyProversionAlert];
-        }
-        else
-        {
-            [[MyIAP instance] restorePurchase];
-        }
-    }
+    
 }
 
 - (void)viewDidUnload {
@@ -303,8 +282,6 @@
     [self setUsernameCell:nil];
     [self setAutoCleanCell:nil];
     [self setAutoCleanTimeLabel:nil];
-    [self setBuyProCell:nil];
-    [self setRestorePurchaseCell:nil];
     [super viewDidUnload];
 }
 

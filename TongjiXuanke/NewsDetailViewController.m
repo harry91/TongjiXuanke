@@ -13,9 +13,6 @@
 #import "MyDataStorage.h"
 #import "UIBarButtonItem+Addtion.h"
 #import "SettingModal.h"
-#import "GADBannerView.h"
-#import "GADRequest.h"
-#import "MyIAP.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
 
@@ -46,87 +43,6 @@
     return self;
 }
 
-
-- (void)configureAds
-{
-    if([SettingModal instance].isProVersion)
-        return;
-    CGRect frame = self.original_webview.frame;
-    frame.size.height -= 50;
-    self.original_webview.frame = frame;
-    self.puretext_webview.frame = frame;
-    
-    //CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGPoint origin = CGPointMake(0.0,
-                                 self.view.frame.size.height -
-                                 CGSizeFromGADAdSize(kGADAdSizeBanner).height - 41);
-    
-    if([[ReachabilityChecker instance] hasInternetAccess])
-    {
-        // Use predefined GADAdSize constants to define the GADBannerView.
-        adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner
-                                                  origin:origin];
-        adBanner.adUnitID = @"a150b23cf74437a";
-        adBanner.delegate = self;
-        [adBanner setRootViewController:self];
-        [self.view addSubview:adBanner];
-        adBanner.center = CGPointMake(self.view.center.x, adBanner.center.y);
-        GADRequest *request = [GADRequest request];
-        [request addKeyword:@"同济"];
-        [request addKeyword:@"大学生"];
-        [request addKeyword:@"研究生"];
-        [request addKeyword:@"英语"];
-        [request addKeyword:@"微软"];
-        [request addKeyword:@"苹果"];
-        [request addKeyword:@"土木"];
-        [request addKeyword:@"手机"];
-        [request addKeyword:@"新东方"];
-        [request addKeyword:@"上海"];
-        [request addKeyword:@"嘉年华"];
-        [request addKeyword:@"游戏"];
-        [request addKeyword:@"学习"];
-        [request addKeyword:@"单词"];
-        [request addKeyword:@"出国"];
-        [request addKeyword:news.title];
-        // Make the request for a test ad. Put in an identifier for the simulator as
-        // well as any devices you want to receive test ads.
-        request.testDevices =
-        [NSArray arrayWithObjects:
-         nil];
-        [adBanner loadRequest:request];
-    }
-    else
-    {
-        adPlaceHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"adPlaceHolder.png"]];
-        CGRect frame = adPlaceHolder.frame;
-        frame.origin = origin;
-        adPlaceHolder.frame = frame;
-        [self.view addSubview:adPlaceHolder];
-    }
-}
-
-- (void)removeAds:(NSNotification*)notification
-{
-    NSNumber* r = notification.object;
-    if(![r boolValue])
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"升级失败"
-                                                            message:nil
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return;
-    }
-    
-    [adBanner removeFromSuperview];
-    adBanner = nil;
-    
-    CGRect frame = self.original_webview.frame;
-    frame.size.height += 50;
-    self.original_webview.frame = frame;
-    self.puretext_webview.frame = frame;
-}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -173,7 +89,7 @@
     news.haveread = [[NSNumber alloc] initWithBool:YES];
     [[MyDataStorage instance] saveContext];
     [self configureNavBar];
-    [self configureAds];
+    
     
     [NSNotificationCenter registerUpgradeProNotificationWithSelector:@selector(removeAds:) target:self];
     
@@ -270,40 +186,16 @@
 
 - (void)clickFavButton
 {
-    if([SettingModal instance].isProVersion)
-    {
-        BOOL favorated = [news.favorated boolValue];
-        
-        news.favorated = [NSNumber numberWithBool:!favorated];
-        favorated =! favorated;
-        [self matchFavoratebuttonApperaence:favorated];
-        
-        [[MyDataStorage instance] saveContext];
-    }
-    else
-    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"专业版"
-                                                       message:@"升级为专业版，开启收藏，去除广告并可免费使用以后所有更新内容。仅需￥6.00。"
-                                                      delegate:self
-                                             cancelButtonTitle:@"取消"
-                                             otherButtonTitles:@"升级",nil];
-        [alert show];
-    }
+    BOOL favorated = [news.favorated boolValue];
+    
+    news.favorated = [NSNumber numberWithBool:!favorated];
+    favorated =! favorated;
+    [self matchFavoratebuttonApperaence:favorated];
+    
+    [[MyDataStorage instance] saveContext];
 }
 
-//根据被点击按钮的索引处理点击事件
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSLog(@"clickedButtonAtIndex:%d",buttonIndex);
-    switch (buttonIndex) {
-        case 1://upgrade
-            [[MyIAP instance] buyPro];
-            
-            break;
-            
-        default:
-            break;
-    }
-}
+
 
 - (void)clickBackButton
 {
@@ -362,17 +254,6 @@
 }
 
 
-#pragma mark GADBannerViewDelegate impl
-
-// We've received an ad successfully.
-- (void)adViewDidReceiveAd:(GADBannerView *)adView {
-    NSLog(@"Received ad successfully");
-}
-
-- (void)adView:(GADBannerView *)view
-didFailToReceiveAdWithError:(GADRequestError *)error {
-    NSLog(@"Failed to receive ad with error: %@", [error localizedFailureReason]);
-}
 
 #pragma mark -
 #pragma mark UIDocumentInteractionControllerDelegate
