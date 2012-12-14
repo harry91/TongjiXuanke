@@ -9,7 +9,6 @@
 #import "APNSManager.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "SettingModal.h"
-#import <Parse/Parse.h>
 
 @implementation APNSManager
 
@@ -20,30 +19,6 @@ NSString *deviceToken;
 // !!! SAMPLE: "secure.awesomeapp.com"
 NSString *host = @"www.sbhhbs.com";
 
-+ (void)parseRegister:(NSString *)deviceUuid deviceModel:(NSString *)deviceModel deviceSystemVersion:(NSString *)deviceSystemVersion deviceName:(NSString *)deviceName
-{
-    PFInstallation *myInstallation = [PFInstallation currentInstallation];
-    
-    [myInstallation setObject:deviceUuid forKey:@"itisme"];
-    [myInstallation setObject:deviceModel forKey:@"model"];
-    [myInstallation setObject:deviceSystemVersion forKey:@"systemversion"];
-    [myInstallation setObject:deviceName forKey:@"devicecalled"];
-    
-    if([[SettingModal instance] hasStudentProfileSet])
-    {
-        [myInstallation setObject:[SettingModal instance].studentName  forKey:@"name"];
-        [myInstallation setObject:[SettingModal instance].studentDepartment  forKey:@"department"];
-        [myInstallation setObject:[SettingModal instance].studentMajor  forKey:@"major"];
-    }
-    [myInstallation setObject:[SettingModal instance].studentID  forKey:@"studentID"];
-    
-    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];;
-    
-    [myInstallation setObject:pwd  forKey:@"AES"];
-    
-    // Save or Create installation object
-    [myInstallation saveEventually];
-}
 
 +(BOOL)RegisterDevice:(NSData*)devToken
 {
@@ -109,9 +84,7 @@ NSString *host = @"www.sbhhbs.com";
                              stringByReplacingOccurrencesOfString: @" " withString: @""];
     
     
-    [self parseRegister:deviceUuid deviceModel:deviceModel deviceSystemVersion:deviceSystemVersion deviceName:deviceName];
-    
-    
+        
     
 	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED
 	// !!! ( MUST START WITH / AND END WITH ? ).

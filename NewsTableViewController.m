@@ -578,7 +578,7 @@
     }
     else
     {
-        [UIApplication presentToast:@"没有网络连接"];
+        //[UIApplication presentToast:@"没有网络连接"];
         [self stopLoading];
     }
 }

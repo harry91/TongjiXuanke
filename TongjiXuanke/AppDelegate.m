@@ -72,10 +72,11 @@
     
     [self customizeAppearance];
     
-    [[Brain instance] refresh];
     
     [Parse setApplicationId:@"fHKruOIrAtqIDOOOWHMUrvhk0dOwjplFOCjdL6CL"
                   clientKey:@"ektKKdJ3PznuAyqBicBc6JuLA5Jj0fF3Nlzv1hps"];
+    
+    [[Brain instance] refresh];
     
     
     return YES;

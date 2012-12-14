@@ -206,65 +206,81 @@
         }
     }
     
+    BOOL resultComplete;
+    
     @try {
-        NSRange start = [tempContent rangeOfString:@"发布时间："];
-        
-        tempContent = [tempContent substringFromIndex:start.location + start.length];
-        
-        
-        NSString* timeYear = [tempContent substringToIndex:4];
-        
-        NSString* originalDate = [news.date description];
-        
-        originalDate = [originalDate substringFromIndex:4];
-        
-        originalDate = [timeYear stringByAppendingString:originalDate];
-        originalDate = [originalDate substringToIndex:10];
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        
-        [df setDateFormat:@"yyyy-MM-dd"];
-        NSDate *myDate = [df dateFromString: originalDate];
-        
-        news.date = myDate;
-        
-        start = [tempContent rangeOfString:@"class=\"TLE\">"];
-        
-        tempContent = [tempContent substringFromIndex:start.location + start.length];
-        
-        //NSRange end = [tempContent rangeOfString:@"<!--内容-->"];
-        
-        //tempContent = [tempContent substringToIndex:end.location];
-        
-        if(news.content)
+        NSRange ifcomplate = [tempContent rangeOfString:@"版权所有&nbsp;同济大学建筑与城市规划学院本科生办公室"];
+        resultComplete = !(ifcomplate.location == NSNotFound);
+        if(resultComplete)
         {
-            if(news.content.length < tempContent.length)
+            
+            NSRange start = [tempContent rangeOfString:@"发布时间："];
+            
+            tempContent = [tempContent substringFromIndex:start.location + start.length];
+            
+            
+            NSString* timeYear = [tempContent substringToIndex:4];
+            
+            NSString* originalDate = [news.date description];
+            
+            originalDate = [originalDate substringFromIndex:4];
+            
+            originalDate = [timeYear stringByAppendingString:originalDate];
+            originalDate = [originalDate substringToIndex:10];
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            
+            [df setDateFormat:@"yyyy-MM-dd"];
+            NSDate *myDate = [df dateFromString: originalDate];
+            
+            news.date = myDate;
+            
+            start = [tempContent rangeOfString:@"class=\"TLE\">"];
+            
+            tempContent = [tempContent substringFromIndex:start.location + start.length];
+            
+            //NSRange end = [tempContent rangeOfString:@"<!--内容-->"];
+            
+            //tempContent = [tempContent substringToIndex:end.location];
+            
+            if(news.content)
+            {
+                if(news.content.length < tempContent.length)
+                    news.content = tempContent;
+            }
+            else
                 news.content = tempContent;
+            
+            
+            NSString *briefContent = [news.content  stringByConvertingHTMLToPlainText];
+            
+            briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+            briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+            //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
+            briefContent =  [briefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            news.briefcontent = briefContent;
+            
+            
+            //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
+            [[MyDataStorage instance] saveContext];
         }
-        else
-            news.content = tempContent;
         
-        
-        NSString *briefContent = [news.content  stringByConvertingHTMLToPlainText];
-        
-        briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-        briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-        //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
-        briefContent =  [briefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        
-        news.briefcontent = briefContent;
-        
-        //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
-        [[MyDataStorage instance] saveContext];
 
     }
     @catch (NSException *exception) {
         NSLog(@"caught in caud with news urld: %@, %@", news.url, exception);
     }
     @finally {
-        timeToWait = 5;
-        [self retreivingTherad];
-        //[self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
-        //[self retreivingTherad];
+        if (resultComplete) {
+            [self retreivingTherad];
+        }
+        else
+        {
+            timeToWait = 5;
+            //[self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
+            [self retreivingTherad];
+        }
+        
     }
     
 }

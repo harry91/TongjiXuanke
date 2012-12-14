@@ -69,6 +69,7 @@ ReachabilityChecker *_reachinstance;
 
 -(BOOL)usingWIFI
 {
+    //return NO;
     NetworkStatus netStatus = [wifiReach currentReachabilityStatus];
     switch (netStatus)
     {
