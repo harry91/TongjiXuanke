@@ -276,9 +276,9 @@
         }
         else
         {
-            timeToWait = 5;
+            //timeToWait = 5;
             //[self performSelector:@selector(retreivingTherad) withObject:nil afterDelay:7];
-            [self retreivingTherad];
+            //[self retreivingTherad];
         }
         
     }

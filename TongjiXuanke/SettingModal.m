@@ -24,10 +24,10 @@ SettingModal* _settinginstance;
         categorys = @[
         @{@"id" : @1 , @"name" : @"系统消息",    @"class" : @"SystemNewsModel" ,@"baseURL" : @"http://sbhhbs.com/", @"serverrss" : @YES },
         @{@"id" : @2 , @"name" : @"选课网",    @"class" : @"XuankeModel" ,@"baseURL" : @"http://xuanke.tongji.edu.cn/" , @"serverrss" : @NO },
-        @{@"id" : @6 , @"name" : @"外事办",  @"class" : @"InternationalOfficeModel" ,@"baseURL" : @"http://www.tongji-uni.com/" , @"serverrss" : @NO },
         @{@"id" : @3 , @"name" : @"软件学院",  @"class" : @"SSEModel" ,@"baseURL" : @"http://sse.tongji.edu.cn/Notice/" , @"serverrss" : @NO },
         @{@"id" : @4 , @"name" : @"土木小站",  @"class" : @"TumuXiaozhanModel" ,@"baseURL" : @"http://sbhhbs.com/" , @"serverrss" : @YES },
-        @{@"id" : @5 , @"name" : @"建筑与城市规划",  @"class" : @"CAUPNewsModel" ,@"baseURL" : @"http://old.tongji-caup.org/" , @"serverrss" : @NO }
+        @{@"id" : @5 , @"name" : @"建筑与城市规划",  @"class" : @"CAUPNewsModel" ,@"baseURL" : @"http://old.tongji-caup.org/" , @"serverrss" : @NO },
+        @{@"id" : @6 , @"name" : @"外事办",  @"class" : @"InternationalOfficeModel" ,@"baseURL" : @"http://www.tongji-uni.com/" , @"serverrss" : @NO }
         
 #ifndef __OPTIMIZE__
 ,@{@"id" : @999 , @"name" : @"测试",  @"class" : @"ServerRSSNewsModel" ,@"baseURL" : @"http://sbhhbs.com/" , @"serverrss" : @YES }
