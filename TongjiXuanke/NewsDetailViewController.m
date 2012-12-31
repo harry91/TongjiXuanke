@@ -262,6 +262,11 @@
 }
 
 
+- (IBAction)swipedLeft:(id)sender
+{
+    [self clickBackButton];
+}
+
 
 #pragma mark -
 #pragma mark UIDocumentInteractionControllerDelegate

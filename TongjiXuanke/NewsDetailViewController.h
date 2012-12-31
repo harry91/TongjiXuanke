@@ -38,4 +38,6 @@
 
 - (void)configureWithNews:(News *)news;
 
+- (IBAction)swipedLeft:(id)sender;
+
 @end
