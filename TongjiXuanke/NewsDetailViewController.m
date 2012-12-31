@@ -158,6 +158,8 @@
 {
     if(favorated)
     {
+        [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateNormal];
+        [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateHighlighted];
         [UIView animateWithDuration:0.2 animations:^(){
             CGRect frame = fav_button.frame;
             frame.origin.y = -2;
@@ -175,9 +177,11 @@
     }
     else if(!favorated)
     {
+        [fav_button setImage:[UIImage imageNamed:@"fav_ribbon_add.png"] forState:UIControlStateNormal];
+        [fav_button setImage:[UIImage imageNamed:@"fav_ribbon_add.png"] forState:UIControlStateHighlighted];
         [UIView animateWithDuration:0.2 animations:^(){
             CGRect frame = fav_button.frame;
-            frame.origin.y = - 25;
+            frame.origin.y = - 20;
             
             fav_button.frame = frame;
         }];
@@ -208,7 +212,11 @@
     [segmentedControl addTarget:self action:@selector(modeChanged:)   forControlEvents:UIControlEventValueChanged];
     [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
     
-    self.navigationItem.titleView = segmentedControl;
+    
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 150, 30)];
+    [container addSubview:segmentedControl];
+    
+    self.navigationItem.titleView = container;
     [segmentedControl setSelectedSegmentIndex:0];
     [self modeChanged:nil];
 
@@ -224,8 +232,8 @@
     frame.size.height = 63;
     
     fav_button = [[UIButton alloc] initWithFrame:frame];
-    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateNormal];
-    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon.png"] forState:UIControlStateHighlighted];
+    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon_add.png"] forState:UIControlStateNormal];
+    [fav_button setImage:[UIImage imageNamed:@"fav_ribbon_add.png"] forState:UIControlStateHighlighted];
     [fav_button addTarget:self action:@selector(clickFavButton) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
