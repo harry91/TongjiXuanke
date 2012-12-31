@@ -14,15 +14,8 @@
 
 @interface SSEModel : DummyNewsModel <UIWebViewDelegate,NewsFeedProtocal,MWFeedParserDelegate>
 {
-    UIWebView *_webView;
     MWFeedParser *feedParser;
 	NSMutableArray *parsedItems;
-    
-    NSString *curl;
-    NSString *tempContent;
-    NSString *tempBriefContent;
-    BOOL isgetting;
-    NSMutableArray *urlToRetireve;
 }
 
 @end
