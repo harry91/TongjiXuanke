@@ -568,6 +568,9 @@
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="jba-8t-iFP" appends="YES" id="k8Y-P5-0xK"/>
+                                </connections>
                             </webView>
                             <webView contentMode="scaleToFill" id="Hay-H0-0j0" userLabel="pure text">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="502"/>
