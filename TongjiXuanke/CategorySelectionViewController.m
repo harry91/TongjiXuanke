@@ -13,6 +13,8 @@
 #import "ReachabilityChecker.h"
 #import "Brain.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "NSAttributedString+Attributes.h"
+#import "OHAttributedLabel.h"
 
 @interface CategorySelectionViewController ()
 
@@ -90,24 +92,29 @@
 
 //- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 //{
-//    NSMutableAttributedString *string; // assume string exists
-//    NSRange selectedRange; // assume this is set
+//#define TXT_BEGIN "没有你想要的信息？"
+//#define TXT_LINK "请反馈给我们"
+//    NSString* txt = @ TXT_BEGIN TXT_LINK ; //
+//	/**(1)** Build the NSAttributedString *******/
+//	NSMutableAttributedString* attrStr = [NSMutableAttributedString attributedStringWithString:txt];
+//	// for those calls we don't specify a range so it affects the whole string
+//	[attrStr setFont:[UIFont fontWithName:@"Helvetica" size:18]];
+//	[attrStr setTextColor:[UIColor grayColor]];
+//    [attrStr setTextAlignment:kCTJustifiedTextAlignment lineBreakMode:kCTLineBreakByWordWrapping];
 //    
-//    NSURL *linkURL = [NSURL URLWithString:@"mailto:tongzhizaozhidao@126.com"];
+//	// and add a link to the "share your food!" text
+//    [attrStr setLink:[NSURL URLWithString:@"mailto:tongzhizaozhidao@126.com"] range:[txt rangeOfString:@TXT_LINK]];
 //    
-//    [string beginEditing];
-//    [string addAttribute:NSLinkAttributeName
-//                   value:linkURL
-//                   range:selectedRange];
+//	/**(2)** Affect the NSAttributedString to the OHAttributedLabel *******/
+//	OHAttributedLabel *label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textColor = [UIColor darkGrayColor];
+//    label.shadowOffset = CGSizeMake(0, -1);
+//    label.shadowColor = [UIColor whiteColor];
+//    label.attributedText = attrStr;
 //    
-//    [string addAttribute:NSForegroundColorAttributeName
-//                   value:[NSColor blueColor]
-//                   range:selectedRange];
-//    
-//    [string addAttribute:NSUnderlineStyleAttributeName
-//                   value:[NSNumber numberWithInt:NSSingleUnderlineStyle]
-//                   range:selectedRange];
-//    [string endEditing];
+//    //self.customLinkDemoLabel.attributedText = attrStr;
+//    return label;
 //}
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
