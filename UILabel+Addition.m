@@ -17,7 +17,7 @@
     titleLabel.minimumFontSize = 13;
     titleLabel.textColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.9];
     titleLabel.shadowColor = [UIColor darkGrayColor];
-    titleLabel.shadowOffset = CGSizeMake(0, 1);
+    titleLabel.shadowOffset = CGSizeMake(0, -1);
     [titleLabel sizeToFit];
     titleLabel.backgroundColor = [UIColor clearColor];
     return titleLabel;

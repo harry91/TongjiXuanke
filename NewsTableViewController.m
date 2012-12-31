@@ -45,7 +45,17 @@
 
 - (void)configureNavBar
 {
-    UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"通知早知道"];
+    UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"全部"];
+    if([SettingModal instance].currentCategory)
+    {
+        NSString* str = [SettingModal instance].currentCategory;
+        if([[SettingModal instance].currentHeader isEqualToString:@"收藏"])
+        {
+            str = [str stringByAppendingString:[SettingModal instance].currentHeader];
+        }
+        titleLabel = [UILabel getNavBarTitleLabel:str];
+    }
+    
     self.navigationItem.titleView = titleLabel;
 
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
