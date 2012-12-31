@@ -15,6 +15,8 @@
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
+#import "UIViewController+KNSemiModal.h"
+#import "NewsInfoViewController.h"
 
 @interface NewsDetailViewController ()
 
@@ -206,6 +208,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)clickInfoButton
+{    
+    NewsInfoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsInfoView"];
+    [vc configureWithNews:news];
+    
+    [self presentSemiViewController:vc withOptions:@{
+     KNSemiModalOptionKeys.pushParentBack    : @(YES),
+     KNSemiModalOptionKeys.animationDuration : @(0.3),
+     KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
+	 }];
+}
+
 - (void)configureNavBar {
     NSArray* arr = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"toolbar_article_view.png"], [UIImage   imageNamed:@"toolbar_web_view.png"], nil];
     segmentedControl = [[UISegmentedControl alloc] initWithItems:arr];
@@ -213,14 +227,21 @@
     [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
     
     
-    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 150, 30)];
+    
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    
+    infoButton.frame = CGRectMake(95, 0, 50, 30);
+    
+    [infoButton addTarget:self action:@selector(clickInfoButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 20, 130, 30)];
     [container addSubview:segmentedControl];
+    [container addSubview:infoButton];
     
     self.navigationItem.titleView = container;
     [segmentedControl setSelectedSegmentIndex:0];
     [self modeChanged:nil];
 
-    
     UIBarButtonItem *backButton = [UIBarButtonItem getBackButtonItemWithTitle:@"返回" target:self action:@selector(clickBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
     
