@@ -57,7 +57,7 @@
     }
     
     self.navigationItem.titleView = titleLabel;
-
+    
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     UIImage *icon = [UIImage imageNamed:@"nav_menu_icon.png"];
     [button setImage:icon forState:UIControlStateNormal];
