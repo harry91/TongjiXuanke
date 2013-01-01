@@ -91,10 +91,6 @@
     [[MyDataStorage instance] saveContext];
     [self configureNavBar];
     
-    
-    [NSNotificationCenter registerUpgradeProNotificationWithSelector:@selector(removeAds:) target:self];
-    
-    
 }
 
 

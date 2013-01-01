@@ -11,7 +11,7 @@
 #define kAllUpdateDoneNotification @"kAllUpdateDoneNotification"
 #define kUserCheckFailNotification @"kUserCheckFailNotification"
 #define kCategoryChangedNotification @"kCategoryChangedNotification"
-#define kUpgradeProNotification @"kUpgradeProNotification"
+#define kFoundPersenalInfoInNews @"kFoundPersenalInfoInNews"
 
 
 @implementation NSNotificationCenter (Xuanke)
@@ -57,16 +57,16 @@
 }
 
 
-+ (void)postUpgradeProNotificationWithSuccess:(BOOL)success
++ (void)postFoundPersenalInfoInNewsNotification:(News*)news;
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpgradeProNotification object:[NSNumber numberWithBool:success] userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFoundPersenalInfoInNews object:news userInfo:nil];
 }
 
-+ (void)registerUpgradeProNotificationWithSelector:(SEL)aSelector target:(id)aTarget
++ (void)registerFoundPersenalInfoInNewsNotificationWithSelector:(SEL)aSelector target:(id)aTarget
 {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:aTarget selector:aSelector
-                   name:kUpgradeProNotification
+                   name:kFoundPersenalInfoInNews
                  object:nil];
 }
 

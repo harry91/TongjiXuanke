@@ -28,6 +28,8 @@
     NSTimer *timer;
     BOOL shouldContinueLoading;
     BOOL _reloading;
+    
+    News* importantNewsTempStore;
 }
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

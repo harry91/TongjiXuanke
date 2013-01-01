@@ -8,6 +8,7 @@
 
 #import "DataOperator.h"
 #import "SettingModal.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation DataOperator
 
@@ -97,6 +98,7 @@ DataOperator* _dataOperatorInstance = nil;
                     item.favorated = NO;
                     item.haveread = NO;
                     [[MyDataStorage instance] saveContext];
+                    [self checkForPersonalInfo:item];
                 }
             }
             return;
@@ -118,7 +120,29 @@ DataOperator* _dataOperatorInstance = nil;
     news.url = newsToInsert.url;
 
     [[MyDataStorage instance] saveContext];
+    
+    [self checkForPersonalInfo:news];
 }
+
+
+-(void)checkForPersonalInfo:(News*)news
+{
+    BOOL result = NO;
+    if([news.content rangeOfString:[SettingModal instance].studentID].location != NSNotFound)
+    {
+        result = result | YES;
+    }
+    if([news.content rangeOfString:[SettingModal instance].studentName].location != NSNotFound)
+    {
+        result = result | YES;
+    }
+    if(result)
+    {
+        [NSNotificationCenter postFoundPersenalInfoInNewsNotification:news];
+    }
+}
+
+
 
 -(void)cleanUpExpireNews
 {

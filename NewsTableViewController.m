@@ -81,6 +81,28 @@
     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
 
+- (void)importantNewsNeedToShow:(NSNotification *)notification
+{
+    importantNewsTempStore = (News*) notification.object;
+    
+    NSString* title = [NSString stringWithFormat:@"[%@]包含你个人信息的通知,是否现在查看？",importantNewsTempStore.title];
+    UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle: @"貌似是很重要的信息呢"
+                               message: title
+                              delegate: self
+                     cancelButtonTitle: @"取消"
+                     otherButtonTitles: @"查看",nil];
+    [alert show];
+
+}
+
+- (void) alertView: (UIAlertView *) alertView clickedButtonAtIndex: (NSInteger) buttonIndex {
+    NSLog(@"foobage! %d", buttonIndex);
+    if(buttonIndex)
+    {
+        [self pushToDetailViewWithNews:importantNewsTempStore];
+    }
+}
 
 - (void)configureCell:(UITableViewCell *)aCell atIndexPath:(NSIndexPath *)indexPath {
     
@@ -232,6 +254,8 @@
     [self initNoDataPlaceHolder];
     
     [self updateNoDataPlaceHolder];
+    
+    [NSNotificationCenter registerFoundPersenalInfoInNewsNotificationWithSelector:@selector(importantNewsNeedToShow:) target:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated

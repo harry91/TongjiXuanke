@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class News;
 @interface NSNotificationCenter (Xuanke)
 + (void)postAllUpdateDoneNotification;
 + (void)registerAllUpdateDoneNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
@@ -18,8 +18,8 @@
 + (void)postCategoryChangedNotification;
 + (void)registerCategoryChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 
-+ (void)postUpgradeProNotificationWithSuccess:(BOOL)success;
-+ (void)registerUpgradeProNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
++ (void)postFoundPersenalInfoInNewsNotification:(News*)news;
++ (void)registerFoundPersenalInfoInNewsNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 
 
 @end

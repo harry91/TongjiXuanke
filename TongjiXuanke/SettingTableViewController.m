@@ -96,7 +96,6 @@
 
     [self configureNavBar];
     
-    [NSNotificationCenter registerUpgradeProNotificationWithSelector:@selector(showBuyResult:) target:self];
 }
 
 
@@ -393,41 +392,6 @@
     }
 }
 
-#pragma mark - Buy methods
-
-- (void)alreadyProversionAlert
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您已经是尊贵的专业版。"
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                              otherButtonTitles:nil];
-    [alertView show];
-    [self cleanTableSelection];
-}
-
-
-- (void)showBuyResult:(NSNotification *)notification
-{
-    NSNumber *result = notification.object;
-    BOOL r = [result boolValue];
-    NSString *message;
-    if(r)
-    {
-        message = @"升级成功！";
-    }
-    else
-    {
-        message = @"升级失败！";
-    }
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
-                                                    message:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:NSLocalizedString(@"确定", nil)
-                                          otherButtonTitles:nil];
-    [alertView show];
-    [self cleanTableSelection];
-}
 
 #pragma mark - Share methods
 - (void)shareByWeibo
