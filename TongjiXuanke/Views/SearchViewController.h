@@ -17,6 +17,9 @@
 {
     JCAutocompletingSearchViewController* searchController;
     SearchCategorySelectionViewController* categorySelection;
+    
+    NSArray* sharedList;
+    //dispatch_once_t onceToken;
 }
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @end

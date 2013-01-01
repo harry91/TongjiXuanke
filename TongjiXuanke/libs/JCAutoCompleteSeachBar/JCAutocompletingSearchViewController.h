@@ -14,4 +14,6 @@
 
 - (void) setSearchBarLeftView:(UIView*)view;
 
+- (void)redoSearch;
+
 @end

@@ -21,7 +21,6 @@
 		E4378FDF1628D620008A85DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4378FDE1628D620008A85DF /* AppDelegate.m */; };
 		E4378FE81628D620008A85DF /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4378FE61628D620008A85DF /* MainStoryboard.storyboard */; };
 		E43790A7162C6796008A85DF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43790A6162C6796008A85DF /* CoreData.framework */; };
-		E43BB555169366720052E82D /* JCAutocompletingSearchGenericResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E43BB54E169366720052E82D /* JCAutocompletingSearchGenericResultCell.m */; };
 		E43BB556169366720052E82D /* JCAutocompletingSearchStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E43BB54F169366720052E82D /* JCAutocompletingSearchStoryboard.storyboard */; };
 		E43BB557169366720052E82D /* JCAutocompletingSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43BB551169366720052E82D /* JCAutocompletingSearchViewController.m */; };
 		E43BB558169366720052E82D /* UISearchBar+CustomLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43BB554169366720052E82D /* UISearchBar+CustomLeftView.m */; };
@@ -202,8 +201,6 @@
 		E4378FDD1628D620008A85DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E4378FDE1628D620008A85DF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E43790A6162C6796008A85DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		E43BB54D169366720052E82D /* JCAutocompletingSearchGenericResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAutocompletingSearchGenericResultCell.h; sourceTree = "<group>"; };
-		E43BB54E169366720052E82D /* JCAutocompletingSearchGenericResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAutocompletingSearchGenericResultCell.m; sourceTree = "<group>"; };
 		E43BB54F169366720052E82D /* JCAutocompletingSearchStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = JCAutocompletingSearchStoryboard.storyboard; sourceTree = "<group>"; };
 		E43BB550169366720052E82D /* JCAutocompletingSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCAutocompletingSearchViewController.h; sourceTree = "<group>"; };
 		E43BB551169366720052E82D /* JCAutocompletingSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCAutocompletingSearchViewController.m; sourceTree = "<group>"; };
@@ -583,8 +580,6 @@
 		E43BB54C169366720052E82D /* JCAutoCompleteSeachBar */ = {
 			isa = PBXGroup;
 			children = (
-				E43BB54D169366720052E82D /* JCAutocompletingSearchGenericResultCell.h */,
-				E43BB54E169366720052E82D /* JCAutocompletingSearchGenericResultCell.m */,
 				E43BB54F169366720052E82D /* JCAutocompletingSearchStoryboard.storyboard */,
 				E43BB550169366720052E82D /* JCAutocompletingSearchViewController.h */,
 				E43BB551169366720052E82D /* JCAutocompletingSearchViewController.m */,
@@ -1327,7 +1322,6 @@
 				E484AF9516928A8100BA2E7F /* UIImage+ColorImage.m in Sources */,
 				E484AF9616928A8100BA2E7F /* UIImage+Opacity.m in Sources */,
 				E484AF9716928A8100BA2E7F /* UILabel+Addition.m in Sources */,
-				E43BB555169366720052E82D /* JCAutocompletingSearchGenericResultCell.m in Sources */,
 				E43BB557169366720052E82D /* JCAutocompletingSearchViewController.m in Sources */,
 				E43BB558169366720052E82D /* UISearchBar+CustomLeftView.m in Sources */,
 				E43BB55C169366CD0052E82D /* SearchViewController.m in Sources */,

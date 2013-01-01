@@ -1,6 +1,9 @@
 #import "JCAutocompletingSearchViewController.h"
-#import "JCAutocompletingSearchGenericResultCell.h"
+#import "NewsCell.h"
 #import "UISearchBar+CustomLeftView.h"
+#import "News.h"
+#import "NSString+TimeConvertion.h"
+#import "Category.h"
 
 @interface JCAutocompletingSearchViewController ()
 
@@ -86,6 +89,8 @@
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
+    
+    
   // Search for Cancel button in searchbar, enable it and add key-value observer.
   for (id subview in [self.searchBar subviews]) {
     if ([subview isKindOfClass:[UIButton class]]) {
@@ -152,6 +157,11 @@
   [self searchBar:self.searchBar textDidChange:query];
 }
 
+- (void)redoSearch
+{
+    [self setSearchBarTextAndPerformSearch:[self.searchBar.text copy]];
+}
+
 #pragma mark - UISearchBarDelegate Implementation
 
 - (void) searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)searchText {
@@ -185,6 +195,10 @@
   [self.delegate searchControllerCanceled:self];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
 
 #pragma mark - UITableViewDelegate Implementation
 
@@ -192,7 +206,7 @@
   if (delegateManagesTableViewCells) {
     return [self.delegate searchController:self tableView:self.resultsTableView heightForRowAtIndexPath:indexPath];
   } else {
-    return self.resultsTableView.rowHeight;
+    return 80;
   }
 }
 
@@ -210,6 +224,8 @@
 [self.delegate searchController:self
                       tableView:self.resultsTableView
                  selectedResult:[self.results objectAtIndex:row]];
+    
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 
 
@@ -237,9 +253,28 @@
     return [self.delegate searchController:self tableView:self.resultsTableView cellForRowAtIndexPath:indexPath];
   } else {
     if (row < self.results.count) {
-      NSDictionary* result = (NSDictionary*)[self.results objectAtIndex:row];
-      JCAutocompletingSearchGenericResultCell* cell = (JCAutocompletingSearchGenericResultCell*)[self.resultsTableView dequeueReusableCellWithIdentifier:@"ResultCell"];
-      cell.resultLabel.text = [result objectForKey:@"label"];
+      News* result = (News*)[self.results objectAtIndex:row];
+      NewsCell* cell = (NewsCell*)[self.resultsTableView dequeueReusableCellWithIdentifier:@"ResultCell"];
+      
+        
+        cell.title.text = result.title;
+        cell.unreadIndicator.hidden = YES;
+        cell.dateandtime.text = [NSString stringByConvertingTimeToAgoFormatFromDate:result.date];
+        
+        cell.briefContent.text = result.briefcontent;
+        cell.catagory.text = result.category.name;
+        cell.favIndicator.hidden = YES;
+        
+        UIImage *selectedImage = [UIImage imageNamed:@"cellBG_selected.png"];
+        UIImageView *selectedView = [[UIImageView alloc] initWithImage:selectedImage];
+        
+        [cell setSelectedBackgroundView:selectedView];
+        
+//        UIImage *unselectedImage = [UIImage imageNamed:@"cellBG.png"];
+//        UIImageView *unselectedView = [[UIImageView alloc] initWithImage:unselectedImage];
+//        
+//        [cell setBackgroundView:unselectedView];
+
       return cell;
     } else {
       return Nil;

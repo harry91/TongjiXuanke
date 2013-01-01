@@ -53,25 +53,64 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" textLabel="ZpZ-8E-Mty" style="IBUITableViewCellStyleDefault" id="XCB-JZ-OuZ" customClass="JCAutocompletingSearchGenericResultCell">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" rowHeight="80" id="twK-An-krx" customClass="NewsCell">
+                                        <rect key="frame" x="0.0" y="66" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZpZ-8E-Mty">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2012-12-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="zSq-NZ-Hco">
+                                                    <rect key="frame" x="192" y="6" width="106" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.094117647060000004" green="0.53725490200000003" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="1"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈北新区公开选聘2013年优秀应届大学毕业生的公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kbP-2y-2uh">
+                                                    <rect key="frame" x="10" y="16" width="293" height="34"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" image="cellAccessory.png" id="6br-hK-zUi">
+                                                    <rect key="frame" x="305" y="34" width="8" height="11"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="沈阳市沈北新区是经国务院批准成立的行政新区，是沈阳经济区国家新型工业化综合配套改革先导区，是沈阳市的重要发展空间之一，为加快新区开发建设，培养和储备年轻干部，优化干部队伍结构，现面向全国高等院校选聘2013年优秀应届大学毕业生。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNI-hf-cxu">
+                                                    <rect key="frame" x="10" y="48" width="292" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="选课网通知" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WIc-jc-pms">
+                                                    <rect key="frame" x="10" y="6" width="173" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                                </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="cellUnread.png" id="5ue-tc-YIc">
+                                                    <rect key="frame" x="5" y="34" width="13" height="13"/>
+                                                </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" id="EnB-6i-mz7">
+                                                    <rect key="frame" x="2" y="30" width="19" height="19"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="resultLabel" destination="ZpZ-8E-Mty" id="xaU-88-tcy"/>
+                                            <outlet property="briefContent" destination="DNI-hf-cxu" id="uAK-CX-VTq"/>
+                                            <outlet property="catagory" destination="WIc-jc-pms" id="kJ1-EF-Q96"/>
+                                            <outlet property="dateandtime" destination="zSq-NZ-Hco" id="Dhx-0W-Q7X"/>
+                                            <outlet property="favIndicator" destination="EnB-6i-mz7" id="5Ky-fm-inD"/>
+                                            <outlet property="title" destination="kbP-2y-2uh" id="0CH-nY-tJA"/>
+                                            <outlet property="unreadIndicator" destination="5ue-tc-YIc" id="yaC-KW-sRw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -97,6 +136,31 @@
             <point key="canvasLocation" x="3928" y="-720"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cellAccessory.png" width="8" height="11"/>
+        <image name="cellUnread.png" width="13" height="13"/>
+        <image name="fav_star.png" width="19" height="19"/>
+    </resources>
+    <classes>
+        <class className="JCAutocompletingSearchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/JCAutocompletingSearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="resultsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="NewsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

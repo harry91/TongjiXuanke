@@ -10,6 +10,8 @@
 #import "IIViewDeckController.h"
 #import "JCAutocompletingSearchViewController.h"
 #import "UILabel+Addition.h"
+#import "DataOperator.h"
+#import "NewsDetailViewController.h"
 
 @implementation SearchViewController
 
@@ -127,21 +129,34 @@
 
 
 - (NSArray*) possibleItems {
-    static NSArray* sharedList = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // Random names courtesy of http://www.kleimo.com/random/name.cfm
-        sharedList = [@[
-                      @"Debbie Cawthon", @"Philip Mahan", @"Susie Sloan", @"Melinda Wurth", @"Flora Bible",
-                      @"Marlene Collier", @"John Trammell", @"Kristina Chun", @"Linda Caldera", @"Veronica Jaime",
-                      @"Rosie Melo", @"Joyce Vella", @"Douglas Leger", @"Brandon Koon", @"Rachel Peeples",
-                      @"Vicki Castor", @"Benjamin Lynch", @"Velma Vann", @"Della Sherrer", @"Aaron Lyle",
-                      @"Arthur Jonas", @"Irma Atwood", @"Randy Cheatham", @"Billy Voyles", @"Michele Crouch",
-                      @"Kenneth Shankle", @"Fred Anglin", @"Dennis Fries", @"Lillie Albertson", @"Iris Bertram"
-                      ] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                          return [(NSString*)obj1 compare:(NSString*)obj2];
-                      }];
-    });
+    if(!sharedList)
+    {
+        NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+        
+        // Create the fetch request
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:
+         [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+        
+        NSError *error;
+        NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+        
+        if(!matching)
+        {
+            NSLog(@"Error: %@",[error description]);
+        }
+        
+        NSMutableArray *list = [@[] mutableCopy];
+        
+        News *item;
+        for(item in matching)
+        {
+            if(item.content)
+                [list addObject:item];
+        }
+        
+        sharedList = [NSArray arrayWithArray:list];
+    }
     return sharedList;
 }
 
@@ -153,25 +168,56 @@
     // Simulate the asynchronicity and delay of a web request...
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray* possibleItems = [self possibleItems];
+        NSMutableArray* matchedItems = [NSMutableArray new];
         
-        NSMutableArray* predicates = [NSMutableArray new];
-        for (__strong NSString* queryPart in [query componentsSeparatedByString:@" "]) {
-            if (queryPart && (queryPart = [queryPart stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]).length > 0) {
-                [predicates addObject:[NSPredicate predicateWithFormat:@"SELF like[cd] %@", [NSString stringWithFormat:@"*%@*", queryPart]]];
+        if(categorySelection.currentHeader == nil)
+        {
+            categorySelection.currentHeader = @"列表";
+            categorySelection.currentCategory = @"全部";
+        }
+        
+        News *item;
+        for(item in possibleItems)
+        {
+            NSLog(@"Current: %@ %@",categorySelection.currentHeader,categorySelection.currentCategory);
+            
+            if(![categorySelection.currentCategory isEqualToString:@"全部"])
+            {
+                if(![item.category.name isEqualToString:categorySelection.currentCategory])
+                    continue;
+            }
+            if([categorySelection.currentHeader isEqualToString:@"收藏"])
+            {
+                if(![item.favorated boolValue])
+                    continue;
+            }
+            if([query isEqualToString:@""] || query == nil)
+            {
+                [matchedItems addObject:item];
+                continue;
+            }
+            
+            BOOL result = NO;
+            if([item.briefcontent rangeOfString:query options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                result = YES;
+            }
+            if(result)
+            {
+                [matchedItems addObject:item];
+                continue;
+            }
+            if([item.title rangeOfString:query options:NSCaseInsensitiveSearch].location != NSNotFound)
+            {
+                [matchedItems addObject:item];
             }
         }
-        NSPredicate* predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
+
         
-        NSArray* matchedItems = [possibleItems filteredArrayUsingPredicate:predicate];
-        NSMutableArray* results = [NSMutableArray new];
-        for (NSString* item in matchedItems) {
-            [results addObject:@{@"label": item}];
-        }
-        
-        double delayInSeconds = 0.4;
+        double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            resultsHandler(results);
+            resultsHandler(matchedItems);
         });
     });
 }
@@ -183,13 +229,16 @@
 - (void) searchController:(JCAutocompletingSearchViewController*)searchController
                 tableView:(UITableView*)tableView
            selectedResult:(id)result {
-    NSString* resultLabel = [(NSDictionary*)result objectForKey:@"label"];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Result Selected"
-                                                    message:[NSString stringWithFormat:@"Tapped result: %@", resultLabel]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    News *item = result;
+    
+    NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
+    
+    [vc configureWithNews:item];
+    
+    NSLog(@"%@",self.navigationController);
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 // Optional.
@@ -217,6 +266,8 @@
     }
     
     self.navigationItem.titleView = titleLabel;
+    
+    [searchController redoSearch];
 }
 
 #pragma mark - IIViewDeckControllerDelegate Methods
