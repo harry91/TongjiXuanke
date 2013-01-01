@@ -42,23 +42,7 @@
        && [self.delegate searchControllerShouldPerformBlankSearchOnLoad:self]) {
     [self searchBar:self.searchBar textDidChange:@""];
   }
-    UIImage *image = [UIImage imageNamed: @"SearchMenuIcon.png"];
-    UIImageView *iView = [[UIImageView alloc] initWithImage:image];
-    
-    CGRect frame = iView.frame;
-    frame.origin.x -= 7;
-    frame.origin.y += 8;
-    iView.frame = frame;
-    
-    UIButton *categoryFilter = [UIButton buttonWithType:UIButtonTypeCustom];
-    categoryFilter.frame = iView.frame;
-    [categoryFilter setBackgroundImage:image forState:UIControlStateNormal];
-    
-    
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [v addSubview:categoryFilter];
-    
-    [self.searchBar setSearchIconView:v];
+
 }
 
 - (void) setSearchBarLeftView:(UIView*)view
@@ -117,7 +101,7 @@
   // Remove observer for the Cancel button in searchBar.
   for (id subview in [self.searchBar subviews]) {
     if ([subview isKindOfClass:[UIButton class]]) {
-      [subview removeObserver:self forKeyPath:@"enabled"];
+      //[subview removeObserver:self forKeyPath:@"enabled"];
     }
   }
 }

@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JCAutocompletingSearchViewControllerDelegate.h"
+#import "JCAutocompletingSearchViewController.h"
+#import "SearchCategorySelectionViewController.h"
+#import "PopoverView.h"
 
-@interface SearchViewController : UIViewController
-
+@interface SearchViewController : UIViewController<PopoverViewDelegate,JCAutocompletingSearchViewControllerDelegate>
+{
+    JCAutocompletingSearchViewController* searchController;
+    SearchCategorySelectionViewController* categorySelection;
+}
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @end
