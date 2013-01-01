@@ -130,11 +130,21 @@ DataOperator* _dataOperatorInstance = nil;
     BOOL result = NO;
     if([news.content rangeOfString:[SettingModal instance].studentID].location != NSNotFound)
     {
-        result = result | YES;
+        if(news.content)
+        {
+            result = result | YES;
+        }
     }
-    if([news.content rangeOfString:[SettingModal instance].studentName].location != NSNotFound)
+    if([SettingModal instance].hasStudentProfileSet)
     {
-        result = result | YES;
+        //NSLog(@"name: %@",[SettingModal instance].studentName);
+        if([news.content rangeOfString:[SettingModal instance].studentName].location != NSNotFound)
+        {
+            if(news.content)
+            {
+                result = result | YES;
+            }
+        }
     }
     if(result)
     {
