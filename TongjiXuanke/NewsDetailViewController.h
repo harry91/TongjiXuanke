@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "News.h"
-#import "Category.h"
+//#import "Category.h"
 #import <QuickLook/QuickLook.h>
 
 #import "MBProgressHUD.h"
@@ -39,5 +39,7 @@
 - (void)configureWithNews:(News *)news;
 
 - (IBAction)swipedLeft:(id)sender;
+
+- (void)dismissMySemiModalView;
 
 @end

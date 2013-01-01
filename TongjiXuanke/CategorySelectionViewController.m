@@ -13,8 +13,6 @@
 #import "ReachabilityChecker.h"
 #import "Brain.h"
 #import "NSNotificationCenter+Xuanke.h"
-#import "NSAttributedString+Attributes.h"
-#import "OHAttributedLabel.h"
 
 @interface CategorySelectionViewController ()
 

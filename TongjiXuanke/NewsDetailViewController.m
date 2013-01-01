@@ -15,8 +15,9 @@
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
-#import "UIViewController+KNSemiModal.h"
 #import "NewsInfoViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIViewController+KNSemiModal.h"
 
 @interface NewsDetailViewController ()
 
@@ -212,12 +213,11 @@
 {    
     NewsInfoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsInfoView"];
     [vc configureWithNews:news];
+    vc.myparent = self;
     
-    [self presentSemiViewController:vc withOptions:@{
-     KNSemiModalOptionKeys.pushParentBack    : @(YES),
-     KNSemiModalOptionKeys.animationDuration : @(0.3),
-     KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
-	 }];
+    [self presentSemiView:vc.view];
+    //[self presentViewController:vc animated:YES completion:^(void){}];
+
 }
 
 - (void)configureNavBar {
@@ -497,5 +497,11 @@
     shouldWaitingForDownload = NO;
 }
 
+#pragma mark - - SemiModel
+
+- (void)dismissMySemiModalView
+{
+    [self dismissSemiModalViewWithCompletion:nil];
+}
 
 @end
