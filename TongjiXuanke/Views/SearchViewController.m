@@ -52,6 +52,7 @@
     
     categorySelection = [self.storyboard instantiateViewControllerWithIdentifier:@"searchCategorySelection"];
     
+    self.viewDeckController.delegate = self;
 }
 
 - (void) showLeft
@@ -109,6 +110,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    self.viewDeckController.delegate = nil;
     self.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
@@ -174,13 +176,8 @@
     });
 }
 
-- (void) searchControllerCanceled:(JCAutocompletingSearchViewController*)searchController {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Cancel Button Tapped"
-                                                    message:@""
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+- (void) searchControllerCanceled:(JCAutocompletingSearchViewController*)aSearchController {
+    [searchController.searchBar resignFirstResponder];
 }
 
 - (void) searchController:(JCAutocompletingSearchViewController*)searchController
@@ -222,5 +219,10 @@
     self.navigationItem.titleView = titleLabel;
 }
 
-
+#pragma mark - IIViewDeckControllerDelegate Methods
+- (BOOL)viewDeckControllerWillOpenLeftView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
+{
+    [searchController.searchBar resignFirstResponder];
+    return YES;
+}
 @end

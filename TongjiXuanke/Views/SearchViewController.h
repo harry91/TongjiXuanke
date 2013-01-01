@@ -11,8 +11,9 @@
 #import "JCAutocompletingSearchViewController.h"
 #import "SearchCategorySelectionViewController.h"
 #import "PopoverView.h"
+#import "IIViewDeckController.h"
 
-@interface SearchViewController : UIViewController<PopoverViewDelegate,JCAutocompletingSearchViewControllerDelegate>
+@interface SearchViewController : UIViewController<IIViewDeckControllerDelegate,PopoverViewDelegate,JCAutocompletingSearchViewControllerDelegate>
 {
     JCAutocompletingSearchViewController* searchController;
     SearchCategorySelectionViewController* categorySelection;
