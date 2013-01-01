@@ -100,6 +100,13 @@
     return [[SettingModal instance] nameForCategoryAtIndex:self.categoryIndex];
 }
 
+-(NSString*)safariLink:(News*)aNews
+{
+    return nil;
+}
+
+
+
 -(BOOL)shouldSaveThisNewsWithThisDate:(NSDate*)theDate
 {
     if([[SettingModal instance] autoCleanInterval] == 0)

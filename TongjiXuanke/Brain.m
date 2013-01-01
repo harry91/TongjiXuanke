@@ -183,6 +183,11 @@ Brain* _brainInstance = nil;
     }
 }
 
+- (id<NewsFeedProtocal>) instanceOfCategoryAtIndex:(int)index
+{
+    return classArray[index];
+}
+
 #pragma mark News Loader Protocal
 -(void)finishedLoadingInCategory:(int)categoryIndex
 {

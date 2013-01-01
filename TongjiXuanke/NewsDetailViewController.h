@@ -12,6 +12,7 @@
 #import <QuickLook/QuickLook.h>
 
 #import "MBProgressHUD.h"
+#import "NewsInfoViewController.h"
 
 @class GADBannerView, GADRequest;
 
@@ -30,6 +31,7 @@
     MBProgressHUD *HUD;
     BOOL shouldWaitingForDownload;
     
+    NewsInfoViewController *newsInfo;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *original_webview;
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;
@@ -41,5 +43,8 @@
 - (IBAction)swipedLeft:(id)sender;
 
 - (void)dismissMySemiModalView;
+- (void)semiModalViewCopyLink;
+- (void)semiModalViewOpenInSafari;
+
 
 @end

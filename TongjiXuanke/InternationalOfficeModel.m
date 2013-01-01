@@ -333,5 +333,9 @@
     return nil;
 }
 
+-(NSString*)safariLink:(News*)aNews
+{
+    return [@"http://www.tongji-uni.com/newsshow.aspx?sn=" stringByAppendingString:aNews.url];
+}
 
 @end

@@ -366,4 +366,10 @@
     return dict[index][@"date"];
 }
 
+-(NSString*)safariLink:(News*)aNews
+{
+    return [@"http://old.tongji-caup.org/student/news_detail.asp?id=" stringByAppendingString:aNews.url];
+}
+
+
 @end

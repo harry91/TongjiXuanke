@@ -119,6 +119,10 @@
     return nil;
 }
 
+-(NSString*)safariLink:(News*)aNews
+{
+    return aNews.url;
+}
 
 #pragma mark -
 #pragma mark MWFeedParserDelegate

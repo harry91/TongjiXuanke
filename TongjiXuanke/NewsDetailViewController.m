@@ -15,8 +15,6 @@
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
-#import "NewsInfoViewController.h"
-#import <QuartzCore/QuartzCore.h>
 #import "UIViewController+KNSemiModal.h"
 
 @interface NewsDetailViewController ()
@@ -211,13 +209,11 @@
 
 - (void)clickInfoButton
 {    
-    NewsInfoViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newsInfoView"];
-    [vc configureWithNews:news];
-    vc.myparent = self;
+    newsInfo = [self.storyboard instantiateViewControllerWithIdentifier:@"newsInfoView"];
+    [newsInfo configureWithNews:news];
+    newsInfo.myparent = self;
     
-    [self presentSemiView:vc.view];
-    //[self presentViewController:vc animated:YES completion:^(void){}];
-
+    [self presentSemiView:newsInfo.view];
 }
 
 - (void)configureNavBar {
@@ -502,6 +498,27 @@
 - (void)dismissMySemiModalView
 {
     [self dismissSemiModalViewWithCompletion:nil];
+}
+
+- (void)semiModalViewCopyLink
+{
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    [pb setString:newsInfo.url];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newsInfo.view.window animated:YES];
+    
+    // Configure for text only and offset down
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = @"已复制到剪贴板";
+    hud.margin = 10.f;
+    hud.yOffset = 150.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:3];
+}
+
+- (void)semiModalViewOpenInSafari
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: newsInfo.url]];
 }
 
 @end

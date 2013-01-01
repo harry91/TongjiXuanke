@@ -12,7 +12,7 @@
 #import "NewsLoaderProtocal.h"
 #import <Parse/Parse.h>
 #import "UserStudyModel.h"
-
+#import "NewsFeedProtocal.h"
 @interface Brain : NSObject<NewsLoaderProtocal>
 {
     BOOL hasAPNSResubscribed;
@@ -29,6 +29,8 @@
 - (void)refresh;
 
 - (void)requestedNewsWithCategoryIndex:(int)index url:(NSString*)url;
+
+- (id<NewsFeedProtocal>) instanceOfCategoryAtIndex:(int)index;
 
 @property (nonatomic,readonly) BOOL refreshing;
 

@@ -15,6 +15,7 @@
 @interface NewsInfoViewController : UIViewController
 {
     News *news;
+    //NSString *url;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -25,11 +26,12 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @property (weak, nonatomic) NewsDetailViewController *myparent;
+@property (weak, nonatomic) IBOutlet UILabel *reloginNotifierLabel;
+@property (weak, nonatomic) IBOutlet UIButton *copylinkBtn;
+@property (weak, nonatomic) IBOutlet UIButton *openInSafariBtn;
 
+@property (retain,nonatomic) NSString* url;
 - (void)configureWithNews:(News *)news;
 
-- (IBAction)donePressed:(id)sender;
-
--(IBAction)copyLink:(id)sender;
 
 @end

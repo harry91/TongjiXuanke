@@ -418,6 +418,14 @@
 }
 
 
+-(NSString*)safariLink:(News*)aNews
+{
+    NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
+    urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:aNews.url];
+    
+    return urlToGo;
+}
+
 #pragma mark For login modal
 -(void)LoginSuccess
 {

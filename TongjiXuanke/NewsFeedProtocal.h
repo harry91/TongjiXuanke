@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class News;
 @protocol NewsFeedProtocal <NSObject>
 
 
@@ -22,5 +23,8 @@
 -(NSString*)idForNewsIndex:(int)index;
 -(NSDate*)timeForNewsIndex:(int)index;
 -(NSString*)catagoryForNews;
+
+-(NSString*)safariLink:(News*)aNews;
+
 
 @end
