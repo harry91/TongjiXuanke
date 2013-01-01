@@ -21,5 +21,7 @@
 @property (strong, nonatomic) IBOutlet NSArray *headers;
 
 -(IBAction)settingClicked:(id)sender;
+-(IBAction)searchClicked:(id)sender;
+
 
 @end

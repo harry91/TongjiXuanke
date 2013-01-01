@@ -12,6 +12,7 @@
 #import "SettingTableViewController.h"
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import "SearchViewController.h"
 
 @interface SideViewController ()
 
@@ -101,8 +102,17 @@
         controller.centerController = mainView;
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
         }
-//        [NSThread sleepForTimeInterval:(300+arc4random()%700)/1000000.0]; // mimic delay... not really necessary
     ];
+}
+
+-(IBAction)searchClicked:(id)sender
+{
+    [self.viewDeckController closeLeftViewBouncing:^(IIViewDeckController *controller) {
+        SearchViewController* mainView = [self.storyboard instantiateViewControllerWithIdentifier:@"searchView"];
+        controller.centerController = mainView;
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    }
+     ];
 }
 
 

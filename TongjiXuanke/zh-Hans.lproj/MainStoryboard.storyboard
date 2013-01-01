@@ -76,6 +76,32 @@
             </objects>
             <point key="canvasLocation" x="1703" y="-1279"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="DIi-P6-sM4">
+            <objects>
+                <viewController id="rTg-fq-wcz" customClass="SearchViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R2b-Zj-oZp">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="1aS-7m-Do2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zMh-OT-tfp"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="mainView" destination="1aS-7m-Do2" id="UeY-wj-ApY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qrx-cv-Csp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="-1291"/>
+        </scene>
         <!--Navigation Controller - 通知-->
         <scene sceneID="yUD-hy-Ik8">
             <objects>
@@ -164,6 +190,23 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="settingClicked:" destination="x4u-nK-Opo" eventType="touchUpInside" id="MB0-by-x2O"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XqK-GF-mW5">
+                                                <rect key="frame" x="95" y="0.0" width="59" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                                <state key="normal" title="搜索" backgroundImage="nav_bar_btn_finish.png">
+                                                    <color key="titleColor" red="0.99607849120000003" green="0.99215692280000001" blue="0.99215692280000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" backgroundImage="nav_bar_btn_finish_hl.png"/>
+                                                <state key="highlighted" backgroundImage="nav_bar_btn_finish_hl.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchClicked:" destination="x4u-nK-Opo" eventType="touchUpInside" id="dO6-Ua-GyM"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -704,7 +747,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="jba-8t-iFP" appends="YES" id="k8Y-P5-0xK"/>
+                                    <outletCollection property="gestureRecognizers" destination="3L7-1S-TvQ" appends="YES" id="3lA-n6-1VD"/>
                                 </connections>
                             </webView>
                             <webView contentMode="scaleToFill" id="Hay-H0-0j0" userLabel="pure text">
@@ -730,6 +773,11 @@
                 <swipeGestureRecognizer direction="right" id="jba-8t-iFP">
                     <connections>
                         <action selector="swipedLeft:" destination="5gv-Z3-dwC" id="vfS-uy-DIP"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="3L7-1S-TvQ">
+                    <connections>
+                        <action selector="swipedLeft:" destination="5gv-Z3-dwC" id="IKw-7z-bCS"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -799,6 +847,23 @@
             </objects>
             <point key="canvasLocation" x="900" y="-130"/>
         </scene>
+        <!--Navigation Controller - 通知-->
+        <scene sceneID="Qap-KK-icO">
+            <objects>
+                <navigationController storyboardIdentifier="searchView" definesPresentationContext="YES" id="cmJ-zf-Zjs" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="通知" id="y3V-41-mZ0"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QKs-jI-Q9f">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rTg-fq-wcz" kind="relationship" relationship="rootViewController" id="ycg-DP-CeJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="65B-9o-rct" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2073" y="-1291"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg.png" width="320" height="480"/>
@@ -820,95 +885,6 @@
         <image name="sideTopBar.png" width="320" height="45"/>
         <image name="slideNumberBG.png" width="40" height="18"/>
     </resources>
-    <classes>
-        <class className="CategorySelectionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorySelectionViewController.h"/>
-        </class>
-        <class className="HelpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HelpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissPressed:"/>
-                <relationship kind="outlet" name="blurView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="logo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="noticeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="studentNumberTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NewsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NewsDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="swipedLeft:"/>
-                <relationship kind="outlet" name="original_webview" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="puretext_webview" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NewsInfoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="copylinkBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="doneBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="openInSafariBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="reloginNotifierLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NewsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noDataPlaceHolder" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SettingTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoCleanCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="autoCleanTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="categoryCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="onlyWIFIdownloadSwtich" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="rateMeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="suggestionCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tellFriendCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SideViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SideViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="settingClicked:"/>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellInfos" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="headers" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
