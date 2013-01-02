@@ -24,6 +24,7 @@
 #import "NSNotificationCenter+Xuanke.h"
 #import "HelpViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UINavigationBar+DropShadow.h"
 
 @interface NewsTableViewController ()
 
@@ -74,6 +75,8 @@
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
 
+    [self.navigationController.navigationBar dropShadowWithOffset:CGSizeMake(0, 2) radius:0.2 color:[UIColor blackColor] opacity:0.7];
+    
 }
 
 - (void) showLeft
@@ -274,7 +277,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     //[[SettingModal instance] finishTourialWithProgress:0];
     if([[SettingModal instance] needHelp] != -1)
     {

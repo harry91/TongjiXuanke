@@ -16,6 +16,7 @@
 #import "NSNotificationCenter+Xuanke.h"
 #import "ReachabilityChecker.h"
 #import "UIViewController+KNSemiModal.h"
+#import "UINavigationBar+DropShadow.h"
 
 @interface NewsDetailViewController ()
 
@@ -250,6 +251,7 @@
     [fav_button addTarget:self action:@selector(clickFavButton) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+    //self.navigationController.navigationBar.clipsToBounds = NO;
     
 }
 
@@ -261,6 +263,12 @@
     [self matchFavoratebuttonApperaence:favorated];
     
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.navigationController.navigationBar dropShadowWithOffset:CGSizeMake(0, 2) radius:0.2 color:[UIColor blackColor] opacity:0.7];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

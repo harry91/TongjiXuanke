@@ -13,8 +13,9 @@
 #import "IIViewDeckController.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "DataOperator.h"
+#import "UINavigationBar+DropShadow.h"
 
-#define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过选课网上的通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
+#define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
 
 @interface SettingTableViewController ()
 
@@ -82,6 +83,8 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
 
+    self.navigationController.navigationBar.clipsToBounds = NO;
+    [self.navigationController.navigationBar dropShadowWithOffset:CGSizeMake(0, 2) radius:0.2 color:[UIColor blackColor] opacity:0.7];
 }
 
 - (void) showLeft

@@ -33,6 +33,7 @@
 		E43BB569169371E20052E82D /* search_bar_BG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E43BB565169371E10052E82D /* search_bar_BG@2x.png */; };
 		E43BB5881693792D0052E82D /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E43BB5861693792D0052E82D /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E43BB58B16937D4E0052E82D /* SearchCategorySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43BB58A16937D4E0052E82D /* SearchCategorySelectionViewController.m */; };
+		E45E92721693AB5D00A24098 /* UINavigationBar+DropShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = E45E92711693AB5D00A24098 /* UINavigationBar+DropShadow.m */; };
 		E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC1D166FD77200ED370A /* Parse.framework */; };
 		E466BC21166FD83C00ED370A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC20166FD83C00ED370A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E466BC23166FD84B00ED370A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC22166FD84B00ED370A /* CoreLocation.framework */; };
@@ -222,6 +223,8 @@
 		E43BB58A16937D4E0052E82D /* SearchCategorySelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCategorySelectionViewController.m; sourceTree = "<group>"; };
 		E44B080C16456ABA0050FB18 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.storyboard"; sourceTree = "<group>"; };
 		E44B080E16456ABA0050FB18 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		E45E92701693AB5D00A24098 /* UINavigationBar+DropShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+DropShadow.h"; sourceTree = "<group>"; };
+		E45E92711693AB5D00A24098 /* UINavigationBar+DropShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+DropShadow.m"; sourceTree = "<group>"; };
 		E466BC1D166FD77200ED370A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		E466BC20166FD83C00ED370A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E466BC22166FD84B00ED370A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -993,6 +996,8 @@
 				E484AF8C16928A8100BA2E7F /* UIImage+Opacity.m */,
 				E484AF8D16928A8100BA2E7F /* UILabel+Addition.h */,
 				E484AF8E16928A8100BA2E7F /* UILabel+Addition.m */,
+				E45E92701693AB5D00A24098 /* UINavigationBar+DropShadow.h */,
+				E45E92711693AB5D00A24098 /* UINavigationBar+DropShadow.m */,
 			);
 			name = Category;
 			path = TongjiXuanke/Category;
@@ -1327,6 +1332,7 @@
 				E43BB55C169366CD0052E82D /* SearchViewController.m in Sources */,
 				E43BB5881693792D0052E82D /* PopoverView.m in Sources */,
 				E43BB58B16937D4E0052E82D /* SearchCategorySelectionViewController.m in Sources */,
+				E45E92721693AB5D00A24098 /* UINavigationBar+DropShadow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "UILabel+Addition.h"
 #import "DataOperator.h"
 #import "NewsDetailViewController.h"
+#import "UINavigationBar+DropShadow.h"
 
 @implementation SearchViewController
 
@@ -37,7 +38,6 @@
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"搜索全部"];
     
     self.navigationItem.titleView = titleLabel;
-    
 }
 
 - (void)viewDidLoad
@@ -65,6 +65,18 @@
 -(void) showCategorySelector
 {
     [PopoverView showPopoverAtPoint:CGPointMake(10,32) inView:self.view withContentView:categorySelection.view delegate:self];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.clipsToBounds = YES;
+    [self.navigationController.navigationBar dropShadowWithOffset:CGSizeMake(0, 0) radius:0.1 color:[UIColor blackColor] opacity:0.0];
+
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBar.clipsToBounds = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -108,6 +120,9 @@
     }
     
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_search.png"] forBarMetrics:UIBarMetricsDefault];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
