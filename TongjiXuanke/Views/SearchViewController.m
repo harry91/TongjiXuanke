@@ -258,12 +258,12 @@
 
 // Optional.
 - (BOOL) searchControllerShouldPerformBlankSearchOnLoad:(JCAutocompletingSearchViewController*)searchController {
-    return YES;
+    return NO;
 }
 
 // Optional.
 - (BOOL) searchController:(JCAutocompletingSearchViewController*)searchController shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+    return NO;
 }
 
 #pragma mark - PopoverViewDelegate Methods
