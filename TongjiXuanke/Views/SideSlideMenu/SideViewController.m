@@ -162,12 +162,12 @@
 	NSObject *headerText = _headers[section];
 	UIView *headerView = nil;
 	if (headerText != [NSNull null]) {
-		headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.height, 21.0f)];
+		headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.height, 24.0f)];
 		CAGradientLayer *gradient = [CAGradientLayer layer];
 		gradient.frame = headerView.bounds;
 		gradient.colors = @[
-        (id)[UIColor colorWithRed:(67.0f/255.0f) green:(70.0f/255.0f) blue:(76.0f/255.0f) alpha:1.0f].CGColor,
-        (id)[UIColor colorWithRed:(66.0f/255.0f) green:(62.0f/255.0f) blue:(71.0f/255.0f) alpha:1.0f].CGColor,
+        (id)[UIColor colorWithRed:(67.0f/255.0f) green:(77.0f/255.0f) blue:(86.0f/255.0f) alpha:0.4f].CGColor,
+        (id)[UIColor colorWithRed:(61.0f/255.0f) green:(71.0f/255.0f) blue:(78.0f/255.0f) alpha:0.7f].CGColor,
 		];
 		[headerView.layer insertSublayer:gradient atIndex:0];
 		
