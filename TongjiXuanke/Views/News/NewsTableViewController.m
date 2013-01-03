@@ -44,6 +44,13 @@
 
 #pragma mark - Helper Methods
 
+
+- (void)editBtnPressed
+{
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+}
+
+
 - (void)configureNavBar
 {
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"全部"];
@@ -59,20 +66,40 @@
     
     self.navigationItem.titleView = titleLabel;
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-    UIImage *icon = [UIImage imageNamed:@"nav_menu_icon.png"];
-    [button setImage:icon forState:UIControlStateNormal];
-    [button setImage:icon forState:UIControlStateHighlighted];
+    {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+        UIImage *icon = [UIImage imageNamed:@"nav_menu_icon.png"];
+        [button setImage:icon forState:UIControlStateNormal];
+        [button setImage:icon forState:UIControlStateHighlighted];
+        
+        [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+        
+        [button addTarget:self action:@selector(showLeft) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *result = [[UIBarButtonItem alloc] initWithCustomView:button];
+        
+        self.navigationItem.leftBarButtonItem = result;
+    }
     
-    [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+    {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+        UIImage *icon = [UIImage imageNamed:@"edit_check.png"];
+                
+        [button setBackgroundImage:icon forState:UIControlStateNormal];
+                
+        [button addTarget:self action:@selector(editBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *result = [[UIBarButtonItem alloc] initWithCustomView:button];
+        
+        self.navigationItem.rightBarButtonItem = result;
+    }
     
-    [button addTarget:self action:@selector(showLeft) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *result = [[UIBarButtonItem alloc] initWithCustomView:button];
     
-    self.navigationItem.leftBarButtonItem = result;
-
+    
+    
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
 
     [self.navigationController.navigationBar dropShadowWithOffset:CGSizeMake(0, 2) radius:0.2 color:[UIColor blackColor] opacity:0.7];
