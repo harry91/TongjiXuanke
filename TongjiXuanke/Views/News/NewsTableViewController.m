@@ -58,9 +58,9 @@
         [markAsRead addTarget:self action:@selector(markAsReadPressed) forControlEvents:UIControlEventTouchUpInside];
         [selectAll addTarget:self action:@selector(selectAllCells) forControlEvents:UIControlEventTouchUpInside];
         
-        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
-        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
-        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_disabled.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateDisabled];
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button.png"] stretchableImageWithLeftCapWidth:4.0 topCapHeight:4.0] forState:UIControlStateNormal];
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_pressed.png"] stretchableImageWithLeftCapWidth:4.0 topCapHeight:4.0] forState:UIControlStateHighlighted];
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_disabled.png"] stretchableImageWithLeftCapWidth:4.0 topCapHeight:4.0] forState:UIControlStateDisabled];
         
         [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
         [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
