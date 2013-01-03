@@ -154,23 +154,41 @@
     }
     
     [dataStorage saveContext];
+    
+    if([self tableView:self.tableView numberOfRowsInSection:0] == 0)
+    {
+        [self endEditing];
+        [self updateNoDataPlaceHolder];
+    }
 }
 
 #pragma mark - Helper Methods
+
+- (void)endEditing
+{
+    [self hideFooter];
+    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.tableView setEditing:NO animated:YES];
+}
+
+- (void)startEditing
+{
+    [self showFooter];
+    [self updateFooter];
+    [editButton setTitle:@"完成" forState:UIControlStateNormal];
+    [self.tableView setEditing:YES animated:YES];
+}
 
 - (void)editBtnPressed
 {
     if(self.tableView.editing)//done
     {
-        [self hideFooter];
+        [self endEditing];
     }
     else//start editing
     {
-        [self showFooter];
-        [self updateFooter];
+        [self startEditing];
     }
-    
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
 
@@ -206,16 +224,23 @@
     }
     
     {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-        UIImage *icon = [UIImage imageNamed:@"edit_check.png"];
-                
-        [button setBackgroundImage:icon forState:UIControlStateNormal];
-                
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+        [button setTitle:@"编辑" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8f] forState:UIControlStateHighlighted];
+        [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        button.titleLabel.shadowOffset = CGSizeMake(0, 1);
+        [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
+        
         [button addTarget:self action:@selector(editBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *result = [[UIBarButtonItem alloc] initWithCustomView:button];
         
         self.navigationItem.rightBarButtonItem = result;
+        
+        editButton = button;
     }
     
     
@@ -409,6 +434,9 @@
     [self updateNoDataPlaceHolder];
     
     [NSNotificationCenter registerFoundPersenalInfoInNewsNotificationWithSelector:@selector(importantNewsNeedToShow:) target:self];
+    
+    self.viewDeckController.delegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -424,6 +452,11 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.viewDeckController.delegate = nil;
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -444,11 +477,6 @@
         vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentModalViewController:vc animated:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    self.viewDeckController.panningMode = IIViewDeckNoPanning;
 }
 
 
@@ -571,7 +599,9 @@
 {
     if(tableView.isEditing)
     {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NewsCell *cell = (NewsCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [cell setChecked:NO];
+
         [self updateFooter];
     }
 }
@@ -580,7 +610,8 @@
 {
     if(tableView.isEditing)
     {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NewsCell *cell = (NewsCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [cell setChecked:YES];
         [self updateFooter];
     }
     else
@@ -736,6 +767,16 @@
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
     [self updateNoDataPlaceHolder];
+}
+
+#pragma mark - IIViewDeckControllerDelegate Methods
+- (BOOL)viewDeckControllerWillOpenLeftView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated
+{
+    if(self.tableView.isEditing)
+    {
+        [self endEditing];
+    }
+    return YES;
 }
 
 #pragma mark - News Loader

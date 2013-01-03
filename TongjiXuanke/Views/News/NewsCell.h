@@ -18,5 +18,8 @@
 //@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIImageView *favIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *cellAccessory;
+@property (weak, nonatomic) IBOutlet UIImageView *checkState;
+
+- (void)setChecked:(BOOL)value;
 
 @end

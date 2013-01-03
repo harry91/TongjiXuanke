@@ -48,6 +48,8 @@
             frame = self.catagory.frame;
             frame.origin.x = 38;
             self.catagory.frame = frame;
+            
+            self.checkState.alpha = 1;
         }];
     }
     else
@@ -70,22 +72,15 @@
             frame.origin.x = 23;
             self.catagory.frame = frame;
 
+            self.checkState.alpha = 0;
+            self.checkState.highlighted = NO;
         }];
     }
 }
 
-//This prevent from identying when editing
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//{
-//    NSLog(@"observed value for kp %@ changed: %@",keyPath,change);
-//    if ( [keyPath isEqual:@"frame"] && object == self.contentView )
-//    {
-//        CGRect newFrame = self.contentView.frame;
-//        CGRect oldFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-//        NSLog(@"frame old: %@  new: %@",NSStringFromCGRect(oldFrame),NSStringFromCGRect(newFrame));
-//        
-//        if ( newFrame.origin.x != 0 ) self.contentView.frame = oldFrame;
-//    }
-//}
+- (void)setChecked:(BOOL)value
+{
+    self.checkState.highlighted = value;
+}
 
 @end

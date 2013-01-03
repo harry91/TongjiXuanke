@@ -614,6 +614,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="fav_star.png" id="42H-2h-gxe">
                                             <rect key="frame" x="2" y="30" width="19" height="19"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" image="notchecked.png" highlightedImage="checked.png" highlighted="YES" id="QIr-bB-nYR">
+                                            <rect key="frame" x="4" y="23" width="29" height="29"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -621,6 +624,7 @@
                                     <outlet property="briefContent" destination="6co-bv-Lxf" id="zDd-6Q-VMJ"/>
                                     <outlet property="catagory" destination="h8u-mF-LjD" id="zy6-ua-u7O"/>
                                     <outlet property="cellAccessory" destination="0FJ-VN-fYL" id="Dyx-Nx-yrw"/>
+                                    <outlet property="checkState" destination="QIr-bB-nYR" id="JAi-IZ-hhM"/>
                                     <outlet property="dateandtime" destination="715-TK-y16" id="1wY-HJ-fJw"/>
                                     <outlet property="favIndicator" destination="42H-2h-gxe" id="rg2-PM-FL8"/>
                                     <outlet property="title" destination="OFo-S4-SAz" id="h5z-Z3-IDN"/>
@@ -789,7 +793,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HHT-eG-yHl">
-                                <rect key="frame" x="12" y="3" width="127" height="38"/>
+                                <rect key="frame" x="12" y="4" width="127" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="删除" backgroundImage="toolbar_distructive_landscape_button.png">
@@ -801,7 +805,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zuX-rS-7Q2">
-                                <rect key="frame" x="180" y="3" width="127" height="38"/>
+                                <rect key="frame" x="180" y="4" width="127" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="标记为已读" backgroundImage="toolbar_button_landscape.png">
@@ -963,6 +967,7 @@
         <image name="bg.png" width="320" height="480"/>
         <image name="cellAccessory.png" width="8" height="11"/>
         <image name="cellUnread.png" width="13" height="13"/>
+        <image name="checked.png" width="29" height="29"/>
         <image name="fav_star.png" width="19" height="19"/>
         <image name="footer_bg.png" width="320" height="44"/>
         <image name="guide1.png" width="300" height="400"/>
@@ -976,6 +981,7 @@
         <image name="nav_bar_bg.png" width="320" height="45"/>
         <image name="nav_bar_btn_finish.png" width="60" height="44"/>
         <image name="nav_bar_btn_finish_hl.png" width="60" height="44"/>
+        <image name="notchecked.png" width="29" height="29"/>
         <image name="setting_selected.png" width="32" height="34"/>
         <image name="setting_unselected.png" width="32" height="34"/>
         <image name="sideBarBGTextile.png" width="64" height="64"/>

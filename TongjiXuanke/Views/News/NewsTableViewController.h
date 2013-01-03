@@ -21,7 +21,7 @@
 @class SSEModel;
 
 
-@interface NewsTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
+@interface NewsTableViewController : UITableViewController<IIViewDeckControllerDelegate,NSFetchedResultsControllerDelegate>
 {
     MyDataStorage *dataStorage;
     MBProgressHUD *HUD;
@@ -31,6 +31,8 @@
     
     News* importantNewsTempStore;
     UIViewController *footer;
+    
+    UIButton *editButton;
 }
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
