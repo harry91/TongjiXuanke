@@ -64,6 +64,7 @@
 
 -(void) showCategorySelector
 {
+    [searchController.searchBar resignFirstResponder];
     [PopoverView showPopoverAtPoint:CGPointMake(10,32) inView:self.view withContentView:categorySelection.view delegate:self];
 }
 
