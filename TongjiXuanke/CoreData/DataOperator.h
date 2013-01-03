@@ -22,4 +22,6 @@
 
 -(void)cleanUpExpireNews;
 
+- (NSString*)allFilterClause;
+
 @end

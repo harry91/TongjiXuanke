@@ -25,6 +25,7 @@
 #import "HelpViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UINavigationBar+DropShadow.h"
+#import "DataOperator.h"
 
 @interface NewsTableViewController ()
 
@@ -140,6 +141,14 @@
 }
 
 - (void)deletePressed
+{
+    UIActionSheet* actionSheet;
+    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+- (void)realDelete
 {
     NSArray* cellsToDelete = [self.tableView indexPathsForSelectedRows];
     
@@ -635,24 +644,7 @@
 
 - (NSString*)allFilterClause
 {
-    NSMutableString *str = [@"" mutableCopy];
-    NSMutableArray *arr = [@[] mutableCopy];
-    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
-    {
-        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
-        {
-            NSString * s = [NSString stringWithFormat:@" category.name == \"%@\" ",[[SettingModal instance] nameForCategoryAtIndex:i]];
-            
-            [arr addObject:s];
-        }
-    }
-    for(int i = 0; i < arr.count; i++)
-    {
-        [str appendString:arr[i]];
-        if(i+1 != arr.count)
-            [str appendString:@"OR"];
-    }
-    return str;
+    return [[DataOperator instance] allFilterClause];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -694,7 +686,7 @@
     
     if(!simplePredicate)
     {
-        simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"not (title == \"snow\") and %@",[self allFilterClause]]];
+        simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(not (title == \"snow\")) and (%@)",[self allFilterClause]]];
     }
     [fetchRequest setPredicate:simplePredicate];
     
@@ -802,5 +794,17 @@
     }
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            [self realDelete];
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 @end

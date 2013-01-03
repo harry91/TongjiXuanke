@@ -21,7 +21,7 @@
 @class SSEModel;
 
 
-@interface NewsTableViewController : UITableViewController<IIViewDeckControllerDelegate,NSFetchedResultsControllerDelegate>
+@interface NewsTableViewController : UITableViewController<IIViewDeckControllerDelegate,NSFetchedResultsControllerDelegate,UIActionSheetDelegate>
 {
     MyDataStorage *dataStorage;
     MBProgressHUD *HUD;

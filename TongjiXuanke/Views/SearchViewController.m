@@ -154,6 +154,10 @@
         [fetchRequest setEntity:
          [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
         
+        NSPredicate *simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(not (title == \"snow\")) and (%@)",[[DataOperator instance] allFilterClause]]];
+     
+        [fetchRequest setPredicate:simplePredicate];
+        
         NSError *error;
         NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
         
@@ -167,7 +171,7 @@
         News *item;
         for(item in matching)
         {
-            if(item.content && ![item.title isEqualToString:@"snow"])
+            if(item.content)
                 [list addObject:item];
         }
         
@@ -228,13 +232,15 @@
                 [matchedItems addObject:item];
             }
         }
-
         
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            resultsHandler(matchedItems);
+            if([query isEqualToString:searchController.searchBar.text])
+                resultsHandler(matchedItems);
         });
+
+        
     });
 }
 

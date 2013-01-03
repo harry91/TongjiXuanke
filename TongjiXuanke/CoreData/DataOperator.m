@@ -189,5 +189,26 @@ DataOperator* _dataOperatorInstance = nil;
     [[MyDataStorage instance] saveContext];
 }
 
+- (NSString*)allFilterClause
+{
+    NSMutableString *str = [@"" mutableCopy];
+    NSMutableArray *arr = [@[] mutableCopy];
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
+    {
+        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
+        {
+            NSString * s = [NSString stringWithFormat:@" category.name == \"%@\" ",[[SettingModal instance] nameForCategoryAtIndex:i]];
+            
+            [arr addObject:s];
+        }
+    }
+    for(int i = 0; i < arr.count; i++)
+    {
+        [str appendString:arr[i]];
+        if(i+1 != arr.count)
+            [str appendString:@"OR"];
+    }
+    return str;
+}
 
 @end
