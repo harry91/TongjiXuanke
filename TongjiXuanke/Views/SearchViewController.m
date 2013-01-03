@@ -242,7 +242,7 @@
     [searchController.searchBar resignFirstResponder];
 }
 
-- (void) searchController:(JCAutocompletingSearchViewController*)searchController
+- (void) searchController:(JCAutocompletingSearchViewController*)aSearchController
                 tableView:(UITableView*)tableView
            selectedResult:(id)result {
     News *item = result;
@@ -250,6 +250,10 @@
     NewsDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
     
     [vc configureWithNews:item];
+    if(searchController.searchBar.text && ![searchController.searchBar.text isEqualToString:@""])
+    {
+        vc.highlightText = searchController.searchBar.text;
+    }
     
     NSLog(@"%@",self.navigationController);
     

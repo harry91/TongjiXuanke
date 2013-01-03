@@ -42,6 +42,9 @@
 		E45E92881693BD6200A24098 /* Search_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45E92841693BD6200A24098 /* Search_selected@2x.png */; };
 		E45E92891693BD6200A24098 /* Search_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = E45E92851693BD6200A24098 /* Search_unselected.png */; };
 		E45E928A1693BD6200A24098 /* Search_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45E92861693BD6200A24098 /* Search_unselected@2x.png */; };
+		E45E92991695FD1900A24098 /* UIWebView+HighlightWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45E92981695FD1900A24098 /* UIWebView+HighlightWebView.m */; };
+		E45E929C1695FD6200A24098 /* HighlightWebview.js in Sources */ = {isa = PBXBuildFile; fileRef = E45E929B1695FD6200A24098 /* HighlightWebview.js */; };
+		E45E929D1695FE5400A24098 /* HighlightWebview.js in Resources */ = {isa = PBXBuildFile; fileRef = E45E929B1695FD6200A24098 /* HighlightWebview.js */; };
 		E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC1D166FD77200ED370A /* Parse.framework */; };
 		E466BC21166FD83C00ED370A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC20166FD83C00ED370A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E466BC23166FD84B00ED370A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC22166FD84B00ED370A /* CoreLocation.framework */; };
@@ -241,6 +244,9 @@
 		E45E92841693BD6200A24098 /* Search_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search_selected@2x.png"; sourceTree = "<group>"; };
 		E45E92851693BD6200A24098 /* Search_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Search_unselected.png; sourceTree = "<group>"; };
 		E45E92861693BD6200A24098 /* Search_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search_unselected@2x.png"; sourceTree = "<group>"; };
+		E45E92971695FD1900A24098 /* UIWebView+HighlightWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HighlightWebView.h"; sourceTree = "<group>"; };
+		E45E92981695FD1900A24098 /* UIWebView+HighlightWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HighlightWebView.m"; sourceTree = "<group>"; };
+		E45E929B1695FD6200A24098 /* HighlightWebview.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = HighlightWebview.js; sourceTree = "<group>"; };
 		E466BC1D166FD77200ED370A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		E466BC20166FD83C00ED370A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E466BC22166FD84B00ED370A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -1014,6 +1020,9 @@
 				E484AF8E16928A8100BA2E7F /* UILabel+Addition.m */,
 				E45E92701693AB5D00A24098 /* UINavigationBar+DropShadow.h */,
 				E45E92711693AB5D00A24098 /* UINavigationBar+DropShadow.m */,
+				E45E92971695FD1900A24098 /* UIWebView+HighlightWebView.h */,
+				E45E92981695FD1900A24098 /* UIWebView+HighlightWebView.m */,
+				E45E929B1695FD6200A24098 /* HighlightWebview.js */,
 			);
 			name = Category;
 			path = TongjiXuanke/Category;
@@ -1197,6 +1206,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E45E929D1695FE5400A24098 /* HighlightWebview.js in Resources */,
 				E4378FD91628D620008A85DF /* InfoPlist.strings in Resources */,
 				E4378FE81628D620008A85DF /* MainStoryboard.storyboard in Resources */,
 				E4177A2116485A260035B080 /* Default.png in Resources */,
@@ -1365,6 +1375,8 @@
 				E43BB5881693792D0052E82D /* PopoverView.m in Sources */,
 				E43BB58B16937D4E0052E82D /* SearchCategorySelectionViewController.m in Sources */,
 				E45E92721693AB5D00A24098 /* UINavigationBar+DropShadow.m in Sources */,
+				E45E92991695FD1900A24098 /* UIWebView+HighlightWebView.m in Sources */,
+				E45E929C1695FD6200A24098 /* HighlightWebview.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

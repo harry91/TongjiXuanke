@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;
 
 @property (strong,nonatomic) NSURL *baseURL;
+@property (strong,nonatomic) NSString *highlightText;
 
 - (void)configureWithNews:(News *)news;
 
