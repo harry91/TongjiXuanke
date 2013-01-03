@@ -30,6 +30,7 @@
     BOOL _reloading;
     
     News* importantNewsTempStore;
+    UIViewController *footer;
 }
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;

@@ -776,6 +776,52 @@
             </objects>
             <point key="canvasLocation" x="2818" y="-573"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="n1P-aY-SGt">
+            <objects>
+                <viewController storyboardIdentifier="footer" autoresizesArchivedViewToFullSize="NO" id="mcc-hs-aAP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mvZ-gq-ioq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="footer_bg.png" id="37j-LZ-qnk">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HHT-eG-yHl">
+                                <rect key="frame" x="12" y="3" width="127" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="删除" backgroundImage="toolbar_distructive_landscape_button.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zuX-rS-7Q2">
+                                <rect key="frame" x="180" y="3" width="127" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="标记为已读" backgroundImage="toolbar_button_landscape.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fft-G5-DFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2818" y="-175"/>
+        </scene>
         <!--News Detail View Controller-->
         <scene sceneID="wNe-Vg-jDk">
             <objects>
@@ -918,6 +964,7 @@
         <image name="cellAccessory.png" width="8" height="11"/>
         <image name="cellUnread.png" width="13" height="13"/>
         <image name="fav_star.png" width="19" height="19"/>
+        <image name="footer_bg.png" width="320" height="44"/>
         <image name="guide1.png" width="300" height="400"/>
         <image name="guide2.png" width="300" height="400"/>
         <image name="guide3.png" width="300" height="400"/>
@@ -933,112 +980,9 @@
         <image name="setting_unselected.png" width="32" height="34"/>
         <image name="sideBarBGTextile.png" width="64" height="64"/>
         <image name="sideTopBar.png" width="320" height="45"/>
+        <image name="toolbar_button_landscape.png" width="22" height="25"/>
+        <image name="toolbar_distructive_landscape_button.png" width="22" height="25"/>
     </resources>
-    <classes>
-        <class className="CategorySelectionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategorySelectionViewController.h"/>
-        </class>
-        <class className="HelpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HelpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissPressed:"/>
-                <relationship kind="outlet" name="blurView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="inputBG" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="logo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="noticeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="studentNumberTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="NewsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="briefContent" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="catagory" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="cellAccessory" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="dateandtime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="favIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unreadIndicator" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NewsDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="swipedLeft:"/>
-                <relationship kind="outlet" name="original_webview" candidateClass="UIWebView"/>
-                <relationship kind="outlet" name="puretext_webview" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NewsInfoViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsInfoViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="copylinkBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="departmentLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="doneBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="openInSafariBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="reloginNotifierLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NewsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewsTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noDataPlaceHolder" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SearchCategorySelectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchCategorySelectionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellInfos" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="headers" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SettingTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="autoCleanCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="autoCleanTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="categoryCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="onlyWIFIdownloadSwtich" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="rateMeCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="suggestionCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tellFriendCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SideViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SideViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="searchClicked:"/>
-                <relationship kind="action" name="settingClicked:"/>
-                <relationship kind="outlet" name="background" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="cellInfos" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="headers" candidateClass="NSArray"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

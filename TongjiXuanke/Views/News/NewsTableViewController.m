@@ -42,11 +42,134 @@
     return self;
 }
 
-#pragma mark - Helper Methods
 
+#pragma mark - Footer Methods
+- (void)showFooter
+{
+    if(!footer)
+    {
+        footer = [self.storyboard instantiateViewControllerWithIdentifier:@"footer"];
+        UIButton *delete = (UIButton*) [footer.view viewWithTag:1];
+        UIButton *markAsRead = (UIButton*) [footer.view viewWithTag:2];
+    
+        [delete addTarget:self action:@selector(deletePressed) forControlEvents:UIControlEventTouchUpInside];
+        [markAsRead addTarget:self action:@selector(markAsReadPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
+        [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_disabled.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateDisabled];
+        
+        [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
+        [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
+        [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_disabled.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateDisabled];
+        
+        footer.view.frame = CGRectMake(0, self.view.window.frame.size.height , 320, 44);
+        
+        [self.view.window addSubview:footer.view];
+        
+        
+        
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^(){
+        footer.view.frame = CGRectMake(0, self.view.window.frame.size.height - 44 , 320, 44);
+        
+        CGRect frame = self.tableView.frame;
+        frame.size.height -= 44;
+        self.tableView.frame = frame;
+    }];
+}
+
+- (void)hideFooter
+{
+    [UIView animateWithDuration:0.2 animations:^(){
+        footer.view.frame = CGRectMake(0, self.view.window.frame.size.height  , 320, 44);
+        
+        CGRect frame = self.tableView.frame;
+        frame.size.height += 44;
+        self.tableView.frame = frame;
+    }];
+}
+
+- (void)updateFooter
+{
+    NSArray* cellsToDelete = [self.tableView indexPathsForSelectedRows];
+    UIButton *delete = (UIButton*) [footer.view viewWithTag:1];
+    UIButton *markAsRead = (UIButton*) [footer.view viewWithTag:2];
+    NSString *delText;
+    NSString *markAsReadText;
+    
+    if (cellsToDelete.count == 0) {
+        delete.enabled = NO;
+        markAsRead.enabled = NO;
+        
+        delText = @"删除";
+        markAsReadText = @"标记为已读";
+    }
+    else
+    {
+        delete.enabled = YES;
+        markAsRead.enabled = YES;
+        
+        delText = [NSString stringWithFormat:@"删除(%d)",cellsToDelete.count];
+        markAsReadText = [NSString stringWithFormat:@"标记为已读(%d)",cellsToDelete.count];
+        
+    }
+    [delete setTitle:delText forState:UIControlStateNormal];
+    [delete setTitle:delText forState:UIControlStateHighlighted];
+    [delete setTitle:delText forState:UIControlStateDisabled];
+    [markAsRead setTitle:markAsReadText forState:UIControlStateNormal];
+    [markAsRead setTitle:markAsReadText forState:UIControlStateHighlighted];
+    [markAsRead setTitle:markAsReadText forState:UIControlStateDisabled];
+}
+
+
+#pragma mark - 
+
+- (void)markAsReadPressed
+{
+    NSArray* cellsToDelete = [self.tableView indexPathsForSelectedRows];
+    
+    for(NSIndexPath *path in cellsToDelete)
+    {
+        News *news = [_fetchedResultsController objectAtIndexPath:path];
+        news.haveread = @YES;
+    }
+    [dataStorage saveContext];
+    [UIApplication presentToast:@"已标记为已读"];
+}
+
+- (void)deletePressed
+{
+    NSArray* cellsToDelete = [self.tableView indexPathsForSelectedRows];
+    
+    for(NSIndexPath *path in cellsToDelete)
+    {
+        News *newsToDelete = [_fetchedResultsController objectAtIndexPath:path];
+        newsToDelete.title = @"snow";
+        newsToDelete.favorated = @NO;
+        newsToDelete.date = nil;
+        newsToDelete.content = @"snow";
+        newsToDelete.briefcontent = @"snow";
+    }
+    
+    [dataStorage saveContext];
+}
+
+#pragma mark - Helper Methods
 
 - (void)editBtnPressed
 {
+    if(self.tableView.editing)//done
+    {
+        [self hideFooter];
+    }
+    else//start editing
+    {
+        [self showFooter];
+        [self updateFooter];
+    }
+    
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
@@ -388,7 +511,7 @@
     shouldContinueLoading = NO;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)selectedCellAtIndexPath:(NSIndexPath *)indexPath
 {
     News *news = [_fetchedResultsController objectAtIndexPath:indexPath];
     
@@ -401,17 +524,17 @@
                                                    selector: @selector(cancelDownload)
                                                    userInfo: nil
                                                     repeats: NO];
-
+            
             dispatch_async(kBgQueue, ^{
                 int categoryIndex = [[SettingModal instance] indexOfCategoryWithName:news.category.name];
                 [[Brain instance] requestedNewsWithCategoryIndex:categoryIndex url:news.url];
-                                shouldContinueLoading = YES;
+                shouldContinueLoading = YES;
                 while((!news.content) && shouldContinueLoading)
                 {
                     sleep(1);
                     NSLog(@"waiting for content...");
                 }
-                    
+                
                 if(news.content)
                 {
                     [timer invalidate];
@@ -424,7 +547,7 @@
                     [MBProgressHUD hideHUDForView:self.view.window animated:YES];
                     [UIApplication presentToast:@"网络超时"];
                     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-
+                    
                 }
             });
             HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
@@ -442,15 +565,38 @@
     {
         [self pushToDetailViewWithNews:news];
     }
-     
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.isEditing)
+    {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [self updateFooter];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView.isEditing)
+    {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [self updateFooter];
+    }
+    else
+    {
+        [self selectedCellAtIndexPath:indexPath];
+        
+    }
+}
+
+
+- (BOOL) tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    return NO;
+}
+
 
 
 #pragma mark - NSFetchResultDelegate
@@ -495,7 +641,7 @@
 //    }
     if([[SettingModal instance].currentHeader isEqualToString:@"列表"] && ![[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all in a category
     {
-        NSString *simplePredicateFormat = [NSString stringWithFormat:@"category.name == \"%@\"",[SettingModal instance].currentCategory];
+        NSString *simplePredicateFormat = [NSString stringWithFormat:@"not (title == \"snow\") and category.name == \"%@\"",[SettingModal instance].currentCategory];
         simplePredicate = [NSPredicate predicateWithFormat:simplePredicateFormat];
     }
     if([[SettingModal instance].currentHeader isEqualToString:@"收藏"] && [[SettingModal instance].currentCategory isEqualToString:@"全部"])// show all favorated.
@@ -517,7 +663,7 @@
     
     if(!simplePredicate)
     {
-        simplePredicate = [NSPredicate predicateWithFormat:[self allFilterClause]];
+        simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"not (title == \"snow\") and %@",[self allFilterClause]]];
     }
     [fetchRequest setPredicate:simplePredicate];
     
@@ -593,38 +739,7 @@
 }
 
 #pragma mark - News Loader
-//-(void)finishedLoading:(NSString*)category
-//{
-//    [self stopLoading];
-//}
-//
-//-(void)errorLoading:(NSError*)error
-//{
-//    if([error.domain isEqualToString:@"AccountOrPwdInvalid"])
-//    {
-//        UIAlertView *alert =
-//        [[UIAlertView alloc] initWithTitle: @"账号验证失败"
-//                                   message: @"您是不是更改过密码？"
-//                                  delegate: self
-//                         cancelButtonTitle: @"重试"
-//                         otherButtonTitles: nil];
-//        [alert show];
-//        
-//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//        //[self performSegueWithIdentifier:@"backToLogin" sender:self];
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//    else if([error.domain isEqualToString:@"NSURLErrorDomain"])
-//    {
-//        [self stopLoading];
-//        [UIApplication presentToast:error.localizedDescription];
-//    }
-//}
 
-
-#pragma mark -
 
 -(void)stopLoading
 {

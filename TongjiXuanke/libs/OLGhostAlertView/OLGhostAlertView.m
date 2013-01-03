@@ -210,7 +210,7 @@
     CGFloat bottomMargin;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        bottomMargin = 25;
+        bottomMargin = 64;
     } else {
         bottomMargin = 50;
     }

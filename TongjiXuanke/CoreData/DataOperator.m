@@ -87,7 +87,7 @@ DataOperator* _dataOperatorInstance = nil;
         }
         if(found)
         {
-            if(newsToInsert.content)
+            if(newsToInsert.content && ![item.title isEqualToString:@"snow"])
             {
                 if(![newsToInsert.content isEqualToString:item.content])//update content;
                 {

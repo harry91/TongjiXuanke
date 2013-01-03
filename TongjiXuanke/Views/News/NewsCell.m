@@ -22,7 +22,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    [self.contentView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionOld context:nil];
+    //[self.contentView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionOld context:nil];
 
     // Configure the view for the selected state
 }
@@ -75,17 +75,17 @@
 }
 
 //This prevent from identying when editing
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    NSLog(@"observed value for kp %@ changed: %@",keyPath,change);
-    if ( [keyPath isEqual:@"frame"] && object == self.contentView )
-    {
-        CGRect newFrame = self.contentView.frame;
-        CGRect oldFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
-        NSLog(@"frame old: %@  new: %@",NSStringFromCGRect(oldFrame),NSStringFromCGRect(newFrame));
-        
-        if ( newFrame.origin.x != 0 ) self.contentView.frame = oldFrame;
-    }
-}
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    NSLog(@"observed value for kp %@ changed: %@",keyPath,change);
+//    if ( [keyPath isEqual:@"frame"] && object == self.contentView )
+//    {
+//        CGRect newFrame = self.contentView.frame;
+//        CGRect oldFrame = [[change objectForKey:NSKeyValueChangeOldKey] CGRectValue];
+//        NSLog(@"frame old: %@  new: %@",NSStringFromCGRect(oldFrame),NSStringFromCGRect(newFrame));
+//        
+//        if ( newFrame.origin.x != 0 ) self.contentView.frame = oldFrame;
+//    }
+//}
 
 @end

@@ -167,7 +167,7 @@
         News *item;
         for(item in matching)
         {
-            if(item.content)
+            if(item.content && ![item.title isEqualToString:@"snow"])
                 [list addObject:item];
         }
         
