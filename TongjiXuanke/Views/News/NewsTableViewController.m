@@ -52,9 +52,11 @@
         footer = [self.storyboard instantiateViewControllerWithIdentifier:@"footer"];
         UIButton *delete = (UIButton*) [footer.view viewWithTag:1];
         UIButton *markAsRead = (UIButton*) [footer.view viewWithTag:2];
-    
+        UIButton *selectAll = (UIButton*) [footer.view viewWithTag:3];
+        
         [delete addTarget:self action:@selector(deletePressed) forControlEvents:UIControlEventTouchUpInside];
         [markAsRead addTarget:self action:@selector(markAsReadPressed) forControlEvents:UIControlEventTouchUpInside];
+        [selectAll addTarget:self action:@selector(selectAllCells) forControlEvents:UIControlEventTouchUpInside];
         
         [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
         [delete setBackgroundImage:[[UIImage imageNamed:@"toolbar_distructive_landscape_button_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
@@ -63,6 +65,11 @@
         [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
         [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
         [markAsRead setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_disabled.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateDisabled];
+        
+        [selectAll setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateNormal];
+        [selectAll setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_pressed.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateHighlighted];
+        [selectAll setBackgroundImage:[[UIImage imageNamed:@"toolbar_button_landscape_disabled.png"] stretchableImageWithLeftCapWidth:3.0 topCapHeight:3.0] forState:UIControlStateDisabled];
+        
         
         footer.view.frame = CGRectMake(0, self.view.window.frame.size.height , 320, 44);
         
@@ -126,6 +133,18 @@
 
 
 #pragma mark - 
+
+- (void)selectAllCells
+{
+    for (NSInteger s = 0; s < self.tableView.numberOfSections; s++) {
+        for (NSInteger r = 0; r < [self.tableView numberOfRowsInSection:s]; r++) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:r inSection:s]
+                                        animated:NO
+                                  scrollPosition:UITableViewScrollPositionNone];
+            [self tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:r inSection:s]];
+        }
+    }
+}
 
 - (void)markAsReadPressed
 {
@@ -339,7 +358,23 @@
     UIImageView *unselectedView = [[UIImageView alloc] initWithImage:unselectedImage];
     
     [cell setBackgroundView:unselectedView];
-
+    
+    if(self.tableView.isEditing)
+    {
+        NSArray *arr = [self.tableView indexPathsForSelectedRows];
+        BOOL result = NO;
+        for(NSIndexPath *path in arr)
+        {
+            if(path.row == indexPath.row && path.section == indexPath.section)
+            {
+                result = YES;
+                break;
+            }
+        }
+        if(result)
+           [cell setChecked:YES];
+    }
+    
 }
 
 
