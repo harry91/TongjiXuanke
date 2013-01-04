@@ -103,7 +103,7 @@
     int count = 0;
     for(News* news in match)
     {
-        NSLog(@"News:%@",news.title);
+        //NSLog(@"News:%@",news.title);
         if([news.haveread isEqualToNumber:@NO] || news.haveread == nil)
         {
             count++;
