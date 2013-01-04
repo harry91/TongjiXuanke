@@ -253,7 +253,7 @@ SettingModal* _settinginstance;
 
 -(NSString*)password
 {
-    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];;
+    NSString *pwd = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
     if (pwd) {
         pwd = [NSString stringByDecryptString:pwd];
     }
@@ -270,6 +270,34 @@ SettingModal* _settinginstance;
 }
 
 
+
+-(NSArray*)searchHistory
+{
+    return [[NSUserDefaults standardUserDefaults] arrayForKey:@"searchHistory"];
+}
+
+-(void)didSearch:(NSString*)str
+{
+    if(str == nil || [str isEqualToString:@""])
+        return;
+    NSMutableArray *arr = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"searchHistory"] mutableCopy];
+    if(!arr)
+        arr = [@[] mutableCopy];
+    
+    for (NSString* s in arr)
+    {
+        if([s isEqualToString:str])
+            return;
+    }
+    
+    if(arr.count == 10)
+        [arr removeObjectAtIndex:9];
+    [arr insertObject:str atIndex:0];
+    [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"searchHistory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 -(void)doLogoutCleanUp
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
@@ -277,6 +305,7 @@ SettingModal* _settinginstance;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"studentName"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"department"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"major"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"searchHistory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

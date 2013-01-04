@@ -49,6 +49,12 @@
 
 -(void)doLogoutCleanUp;
 
+
+-(NSArray*)searchHistory;
+-(void)didSearch:(NSString*)str;
+
+
+
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
 

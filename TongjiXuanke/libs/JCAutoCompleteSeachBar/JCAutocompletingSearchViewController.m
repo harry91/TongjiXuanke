@@ -4,6 +4,7 @@
 #import "News.h"
 #import "NSString+TimeConvertion.h"
 #import "Category.h"
+#import "SettingModal.h"
 
 @interface JCAutocompletingSearchViewController ()
 
@@ -45,7 +46,10 @@
        && [self.delegate searchControllerShouldPerformBlankSearchOnLoad:self]) {
     [self searchBar:self.searchBar textDidChange:@""];
   }
-
+    
+    [self initNoDataPlaceHolder];
+    
+    [self updateNoDataPlaceHolder];
 }
 
 - (void) setSearchBarLeftView:(UIView*)view
@@ -189,6 +193,8 @@
       [self setLoading:NO];
     }
   }];
+    
+    [self updateNoDataPlaceHolder];
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar*)searchBar {
@@ -197,6 +203,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
+    [[SettingModal instance] didSearch:searchBar.text];
 }
 
 
@@ -225,6 +232,7 @@
                       tableView:self.resultsTableView
                  selectedResult:[self.results objectAtIndex:row]];
     
+    [[SettingModal instance] didSearch:self.searchBar.text];
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
 }
 
@@ -280,6 +288,160 @@
       return Nil;
     }
   }
+}
+
+- (void)updateNoDataPlaceHolder
+{
+    if([self tableView:self.resultsTableView numberOfRowsInSection:0] == 0)
+    {
+        self.noDataPlaceHolder.hidden = NO;
+    }
+    else
+    {
+        self.noDataPlaceHolder.hidden = YES;
+    }
+}
+
+- (void)initNoDataPlaceHolder
+{
+    self.noDataPlaceHolder = [[UIView alloc] init];
+    self.noDataPlaceHolder.frame = self.resultsTableView.frame;
+    self.noDataPlaceHolder.backgroundColor = [UIColor clearColor];
+    
+    HotKeyWordsView *keywordView = [[HotKeyWordsView alloc]initWithFrame:CGRectMake(0, -44, 320, 500)];
+    [self.noDataPlaceHolder addSubview:keywordView];
+    keywordView.delegate = self;
+    keywordView.tag = 4001;
+    
+    
+    //NSMutableArray *keywordArray = [@[] mutableCopy];
+    
+    NSMutableArray *personalArray = [@[] mutableCopy];
+    [personalArray addObject:[SettingModal instance].studentID];
+    if([SettingModal instance].hasStudentProfileSet)
+    {
+        [personalArray addObject:[SettingModal instance].studentName];
+    }
+    NSDictionary *personal = @{@"name":@"  个人",@"words" : personalArray};
+    
+    
+    NSArray *historyArray = [[SettingModal instance] searchHistory];
+    if(!historyArray)
+        historyArray = @[];
+    NSDictionary *history = @{@"name":@"  历史",@"words" : historyArray};
+    
+    
+    NSArray *keywordArray = @[personal,history];
+    
+    [keywordView setKeyWords:keywordArray];
+    
+    [self.resultsTableView addSubview:self.noDataPlaceHolder];
+}
+
+#pragma mark- KeyWordDelegate
+- (void)selectOnKeyWord:(NSString *)word
+{
+    self.searchBar.text = word;
+    [self searchBar:self.searchBar textDidChange:word];
+}
+@end
+
+
+#pragma mark -
+#pragma mark HotkeyWords
+
+#define MARGIN 10
+#define TOPMARGIN 44
+
+@implementation HotKeyWordsView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor colorWithRed:240./256 green:240./256 blue:240./256 alpha:1.f];
+        
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 200, 20)];
+        textLabel.backgroundColor = [UIColor clearColor];
+        textLabel.text = @"猜你会搜：";
+        textLabel.textColor = [UIColor colorWithRed:90./256 green:90./256 blue:90./256 alpha:1];
+        textLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        textLabel.shadowColor = [UIColor whiteColor];
+        textLabel.shadowOffset = CGSizeMake(0, 1);
+        [self addSubview:textLabel];
+        
+    }
+    return self;
+}
+
+
+
+- (void)setKeyWords:(NSArray *)words
+{
+    int i = 0;
+    CGRect frameOfLastButton = CGRectZero;
+    float lastCategoryY = TOPMARGIN;
+    
+    for(NSDictionary *dict in words)
+    {
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, lastCategoryY+25 , 70, 20)];
+        label.text = [dict objectForKey:@"name"];
+        label.textColor = [UIColor colorWithRed:149./256 green:149./256 blue:149./256 alpha:1];
+        label.shadowColor = [UIColor whiteColor];
+        label.shadowOffset = CGSizeMake(0, 1);
+        [self addSubview:label];
+        label.backgroundColor = [UIColor clearColor];
+        [label setFont:[UIFont fontWithName:@"GillSans" size:16]];
+        
+        int j = 0;
+        for (NSString *word in [dict objectForKey:@"words"])
+        {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button setTitle:word forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRed:66./256 green:116./256 blue:205./256 alpha:1] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont fontWithName:@"GillSans" size:14];
+            [button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            button.titleLabel.shadowOffset = CGSizeMake(0, 1);
+            CGSize size = [word sizeWithFont:[UIFont systemFontOfSize:14]];
+            
+            
+            if(j!=0)
+            {
+                button.frame = CGRectMake(frameOfLastButton.origin.x + frameOfLastButton.size.width + MARGIN, frameOfLastButton.origin.y , size.width, size.height);
+                
+                if(button.frame.size.width + button.frame.origin.x > 320)
+                {
+                    button.frame = CGRectMake(70, frameOfLastButton.origin.y + 20, size.width, size.height);
+                }
+            }
+            else
+            {
+                button.frame = CGRectMake(70, label.frame.origin.y , size.width, size.height);
+            }
+                
+            [self addSubview:button];
+            
+            [button addTarget:self action:@selector(buttonPress:) forControlEvents:UIControlEventTouchUpInside];
+            
+            j++;
+            frameOfLastButton = button.frame;
+
+            lastCategoryY = button.frame.size.height + button.frame.origin.y;
+        }
+        
+        i++;
+        frameOfLastButton = CGRectZero;
+    }
+    
+}
+
+- (void)buttonPress:(UIButton*)sender
+{
+    if ([self.delegate respondsToSelector:@selector(selectOnKeyWord:)])
+    {
+        [self.delegate selectOnKeyWord:sender.titleLabel.text];
+    }
 }
 
 @end
