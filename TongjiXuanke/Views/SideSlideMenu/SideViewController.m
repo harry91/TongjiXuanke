@@ -13,6 +13,8 @@
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
 #import "SearchViewController.h"
+#import "UIImage+Opacity.h"
+#import "DataOperator.h"
 
 @interface SideViewController ()
 
@@ -61,22 +63,108 @@
     [self.tableView reloadData];
 }
 
+
+- (NSArray*)listOfItemInCategory:(NSString*)category
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    // Create the fetch request
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    
+    NSString* categoryFilterString;
+    if([category isEqualToString:@"全部"])
+    {
+        categoryFilterString = [[DataOperator instance] allFilterClause];
+    }
+    else
+    {
+        categoryFilterString = [NSString stringWithFormat:@" category.name == \"%@\" ",category];
+    }
+    
+    NSPredicate *simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(not (title == \"snow\")) and (%@)",categoryFilterString]];
+    
+    [fetchRequest setPredicate:simplePredicate];
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    return matching;
+}
+
+- (int)numberOfUnreadMessageInCategory:(NSString*)category
+{
+    NSArray *match = [self listOfItemInCategory:category];
+    int count = 0;
+    for(News* news in match)
+    {
+        NSLog(@"News:%@",news.title);
+        if([news.haveread isEqualToNumber:@NO] || news.haveread == nil)
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+- (int)numberOfFavoritedMessageInCategory:(NSString*)category
+{
+    NSArray *match = [self listOfItemInCategory:category];
+    int count = 0;
+    for(News* news in match)
+    {
+        if([news.favorated isEqualToNumber:@YES])
+        {
+            count++;
+        }
+    }
+    return count;}
+
+- (NSString*)badgeTextFromNumber:(int)i
+{
+    if(i < 100)
+        return [NSString stringWithFormat:@"%d",i];
+    else
+        return @"99+";
+}
+
 - (void)generateCellInfo
 {
-    UIImage *clearImage = [UIImage imageWithColor:[UIColor clearColor]];
-    NSMutableArray *categorys = [@[@{@"image": clearImage, @"text": NSLocalizedString(@"全部", @"")}] mutableCopy];
+    NSMutableArray *listHeader,*favHeader;
+    
+    listHeader = [@[@{@"badge": [self badgeTextFromNumber:[self numberOfUnreadMessageInCategory:@"全部"]],@"text": NSLocalizedString(@"全部", @"")}] mutableCopy];
     
     for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
     {
         if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
         {
             NSMutableDictionary *category = [@{} mutableCopy];
-            category[@"image"] = clearImage;
             category[@"text"] = [[SettingModal instance] nameForCategoryAtIndex:i];
-            [categorys addObject:category];
+            category[@"badge"] = [self badgeTextFromNumber:[self numberOfUnreadMessageInCategory:category[@"text"]]];
+            [listHeader addObject:category];
         }
     }
-    NSArray *cellInfos = [NSArray arrayWithObjects:categorys, categorys,nil];
+    
+    
+    favHeader = [@[@{@"badge": [self badgeTextFromNumber:[self numberOfFavoritedMessageInCategory:@"全部"]],@"text": NSLocalizedString(@"全部", @"")}] mutableCopy];
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
+    {
+        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
+        {
+            NSMutableDictionary *category = [@{} mutableCopy];
+            category[@"text"] = [[SettingModal instance] nameForCategoryAtIndex:i];
+            category[@"badge"] = [self badgeTextFromNumber:[self numberOfFavoritedMessageInCategory:category[@"text"]]];
+            [favHeader addObject:category];
+        }
+    }
+    
+    
+    NSArray *cellInfos = [NSArray arrayWithObjects:listHeader, favHeader,nil];
     self.cellInfos = cellInfos;
 }
 
@@ -142,14 +230,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"GHMenuCell";
-    GHMenuCell *cell = (GHMenuCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[GHMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    GHMenuCell *cell = [tableView
+                      dequeueReusableCellWithIdentifier:@"sideCell"];
+
+    UIImage *bg = [[UIImage imageNamed:@"sideBarSelection.png"] imageByApplyingAlpha:0.5];
+    UIImageView *bgView = [[UIImageView alloc] initWithImage:bg];
+    
+    cell.selectedBackgroundView = bgView;
+
+    
+    
 	NSDictionary *info = self.cellInfos[indexPath.section][indexPath.row];
-	cell.textLabel.text = info[@"text"];
-	cell.imageView.image = info[@"image"];
+	cell.nameLabel.text  = info[@"text"];
+	cell.countBadge.text = info[@"badge"];
+    if([cell.countBadge.text isEqualToString:@"0"])
+        cell.countBadge.hidden = YES;
+    else
+        cell.countBadge.hidden = NO;
     return cell;
 }
 

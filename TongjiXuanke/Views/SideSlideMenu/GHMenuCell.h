@@ -6,8 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LKBadgeView.h"
 
 @interface GHMenuCell : UITableViewCell
-@property (strong,nonatomic) NSNumber *count;
+@property (weak, nonatomic) IBOutlet LKBadgeView *countBadge;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 
 @end

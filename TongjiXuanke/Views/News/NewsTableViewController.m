@@ -258,7 +258,7 @@
         [button setTitleColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8f] forState:UIControlStateHighlighted];
         [button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-        button.titleLabel.shadowOffset = CGSizeMake(0, 1);
+        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
         [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish.png"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"nav_bar_btn_finish_hl.png"] forState:UIControlStateHighlighted];
         
@@ -558,6 +558,7 @@
                              dequeueReusableCellWithIdentifier:@"newsCell"];
 
     [self configureCell:cell atIndexPath:indexPath];
+    
     
     return cell;
 }

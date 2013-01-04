@@ -177,6 +177,8 @@
     [self matchFavoratebuttonApperaence:favorated];
     
     [[MyDataStorage instance] saveContext];
+    
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 
