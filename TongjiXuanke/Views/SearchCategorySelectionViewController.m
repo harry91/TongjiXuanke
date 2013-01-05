@@ -125,6 +125,7 @@
     
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
+    [self.delegate categoryDidChangeWithHeader:self.currentHeader andCategory:self.currentCategory];
 }
 
 

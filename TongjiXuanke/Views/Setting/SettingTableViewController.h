@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "ActionSheetPicker.h"
+#import "CMActionSheet.h"
 
-@interface SettingTableViewController : UITableViewController<MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate>
-{
-    UIActionSheet *shareActionSheet;
-    UIActionSheet *logoutActionSheet;
-}
+@interface SettingTableViewController : UITableViewController<MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITableViewCell *categoryCell;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;

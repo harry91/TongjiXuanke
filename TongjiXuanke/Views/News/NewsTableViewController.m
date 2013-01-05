@@ -26,6 +26,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UINavigationBar+DropShadow.h"
 #import "DataOperator.h"
+#import "CMActionSheet.h"
 
 @interface NewsTableViewController ()
 
@@ -163,11 +164,21 @@
 
 - (void)deletePressed
 {
-    UIActionSheet* actionSheet;
-    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil];
+    CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
+    //actionSheet.title = @"Test Action sheet";
     
-    [actionSheet showInView:self.view];
-    [NSNotificationCenter postCategoryChangedNotification];
+    // Customize
+    [actionSheet addButtonWithTitle:@"删除" type:CMActionSheetButtonTypeRed block:^{
+        [self realDelete];
+    }];
+    [actionSheet addSeparator];
+    [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
+        NSLog(@"Dismiss action sheet with \"Close Button\"");
+    }];
+    
+    // Present
+    [actionSheet present];
+    
 }
 
 - (void)realDelete
@@ -191,6 +202,9 @@
         [self endEditing];
         [self updateNoDataPlaceHolder];
     }
+    
+    [self updateFooter];
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 #pragma mark - Helper Methods
@@ -833,17 +847,5 @@
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (buttonIndex) {
-        case 0:
-        {
-            [self realDelete];
-            break;
-        }
-        default:
-            break;
-    }
-}
 
 @end

@@ -112,11 +112,24 @@
 #pragma mark - Account Methods
 - (void)logout
 {
-    UIActionSheet* actionSheet;
-    actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil];
+    CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
+    //actionSheet.title = @"Test Action sheet";
     
-    logoutActionSheet = actionSheet;
-    [actionSheet showInView:self.view];
+    // Customize
+    [actionSheet addButtonWithTitle:@"退出登陆" type:CMActionSheetButtonTypeRed block:^{
+        [[SettingModal instance] doLogoutCleanUp];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        NSLog(@"Logout");
+    }];
+    [actionSheet addSeparator];
+    [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
+        NSLog(@"Dismiss action sheet with \"Close Button\"");
+        [self cleanTableSelection];
+    }];
+    
+    // Present
+    [actionSheet present];    
 }
 
 -(void)downloadSwitchChanged:(id)sender
@@ -218,20 +231,51 @@
 
 -(void)tellFriend
 {
-    UIActionSheet* actionSheet;
     if([SocialShareModal socialShareAvailable])
     {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享",@"微博分享", nil];
+        CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
+        //actionSheet.title = @"Test Action sheet";
+        
+        // Customize
+        [actionSheet addButtonWithTitle:@"短信分享" type:CMActionSheetButtonTypeWhite block:^{
+            [self shareByMessage];
+        }];
+        [actionSheet addButtonWithTitle:@"邮件分享" type:CMActionSheetButtonTypeWhite block:^{
+            [self shareByMail];
+        }];
+        [actionSheet addButtonWithTitle:@"微博分享" type:CMActionSheetButtonTypeWhite block:^{
+            if([SocialShareModal socialShareAvailable])
+                [self shareByWeibo];
+        }];
+        [actionSheet addSeparator];
+        [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
+            NSLog(@"Dismiss action sheet with \"Close Button\"");
+        }];
+        
+        // Present
+        [actionSheet present];
+        
     }
     else
     {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"短信分享", @"邮件分享", nil];
+        CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
+        //actionSheet.title = @"Test Action sheet";
+        
+        // Customize
+        [actionSheet addButtonWithTitle:@"短信分享" type:CMActionSheetButtonTypeWhite block:^{
+            [self shareByMessage];
+        }];
+        [actionSheet addButtonWithTitle:@"邮件分享" type:CMActionSheetButtonTypeWhite block:^{
+            [self shareByMail];
+        }];
+        [actionSheet addSeparator];
+        [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
+            NSLog(@"Dismiss action sheet with \"Close Button\"");
+        }];
+        
+        // Present
+        [actionSheet present];
     }
-    //UITabBar* tabBar = self.viewDeckController.centerController.tabBarController.tabBar;
-    shareActionSheet = actionSheet;
-    [actionSheet showInView:self.view];
-//  [actionSheet showFromTabBar:tabBar];
-    
     [self cleanTableSelection];
 }
 
@@ -452,56 +496,6 @@
         [picker setMessageBody:infoText isHTML:YES];
         [self presentModalViewController:picker animated:YES];
     }
-}
-
-#pragma mark - UIActionSheetDelegate
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(actionSheet == shareActionSheet)
-    {
-        switch (buttonIndex) {
-            case 0:
-            {
-                [self shareByMessage];
-                
-                break;
-            }
-            case 1:
-            {
-                [self shareByMail];
-                
-                break;
-            }
-            case 2:
-            {
-                if([SocialShareModal socialShareAvailable])
-                    [self shareByWeibo];
-                
-                break;
-            }
-            default:
-                break;
-        }
-    }
-    if(actionSheet == logoutActionSheet)
-    {
-        switch (buttonIndex) {
-            case 0:
-            {
-                [[SettingModal instance] doLogoutCleanUp];
-                [self dismissViewControllerAnimated:YES completion:nil];
-
-                NSLog(@"Logout");
-                break;
-            }
-            default:
-                break;
-        }
-    }
-    
-    [self cleanTableSelection];
 }
 
 

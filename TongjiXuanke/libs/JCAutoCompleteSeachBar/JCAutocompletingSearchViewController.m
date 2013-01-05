@@ -163,7 +163,7 @@
 
 - (void)redoSearch
 {
-    [self setSearchBarTextAndPerformSearch:[self.searchBar.text copy]];
+    [self setSearchBarTextAndPerformSearch:self.searchBar.text ? self.searchBar.text : @""];
 }
 
 #pragma mark - UISearchBarDelegate Implementation

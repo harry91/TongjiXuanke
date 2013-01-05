@@ -53,8 +53,11 @@
     
     
     categorySelection = [self.storyboard instantiateViewControllerWithIdentifier:@"searchCategorySelection"];
+    categorySelection.delegate = self;
     
     self.viewDeckController.delegate = self;
+    
+    [self possibleItems];
 }
 
 - (void) showLeft
@@ -277,8 +280,10 @@
     return NO;
 }
 
-#pragma mark - PopoverViewDelegate Methods
-- (void)popoverViewDidDismiss:(PopoverView *)popoverView {
+#pragma mark - SearchCategoryListener Methods
+
+- (void)categoryDidChangeWithHeader:(NSString*)header andCategory:(NSString*)category
+{
     UILabel *titleLabel = [UILabel getNavBarTitleLabel:@"搜索全部"];
     if(categorySelection.currentCategory)
     {
@@ -294,7 +299,9 @@
     self.navigationItem.titleView = titleLabel;
     
     [searchController redoSearch];
+
 }
+
 
 #pragma mark - IIViewDeckControllerDelegate Methods
 - (BOOL)viewDeckControllerWillOpenLeftView:(IIViewDeckController*)viewDeckController animated:(BOOL)animated

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SearchCategoryListener <NSObject>
+
+- (void)categoryDidChangeWithHeader:(NSString*)header andCategory:(NSString*)category;
+
+@end
+
 @interface SearchCategorySelectionViewController : UIViewController
 {
     NSIndexPath *currentIndexPath;
@@ -20,5 +26,6 @@
 @property (nonatomic,strong) NSString* currentCategory;
 @property (nonatomic,strong) NSString* currentHeader;
 
+@property (nonatomic,retain) id<SearchCategoryListener> delegate;
 
 @end
