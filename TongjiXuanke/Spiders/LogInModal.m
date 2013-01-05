@@ -54,7 +54,6 @@
     NSString *currentURL = _webView.request.URL.absoluteString;
     
     NSLog(@"start loading: %@",currentURL);
-    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
