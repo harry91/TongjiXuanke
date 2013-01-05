@@ -157,6 +157,8 @@
     }
     [dataStorage saveContext];
     [UIApplication presentToast:@"已标记为已读"];
+    
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 - (void)deletePressed
@@ -165,6 +167,7 @@
     actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil];
     
     [actionSheet showInView:self.view];
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 - (void)realDelete
