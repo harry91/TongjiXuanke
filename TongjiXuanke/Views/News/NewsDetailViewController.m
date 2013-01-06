@@ -91,6 +91,7 @@
     
     news.haveread = [[NSNumber alloc] initWithBool:YES];
     [[MyDataStorage instance] saveContext];
+    [NSNotificationCenter postCategoryChangedNotification];
     [self configureNavBar];
     
 }
