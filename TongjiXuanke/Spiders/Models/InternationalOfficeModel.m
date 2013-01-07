@@ -33,20 +33,17 @@
 {
     for(int i = 0; i <[self totalNewsCount]; i++)
     {
-        if([self shouldSaveThisNewsWithThisDate:[self timeForNewsIndex:i]])
-        {
-            FakeNews *news = [[FakeNews alloc] init];
-            news.title = [self titleForNewsIndex:i];
-            
-            news.briefcontent = nil;
-            
-            news.content = nil;
-            news.date = [self timeForNewsIndex:i];
-            news.favorated = NO;
-            news.haveread = NO;
-            news.url = [self idForNewsIndex:i];
-            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
-        }
+        FakeNews *news = [[FakeNews alloc] init];
+        news.title = [self titleForNewsIndex:i];
+        
+        news.briefcontent = nil;
+        
+        news.content = nil;
+        news.date = [self timeForNewsIndex:i];
+        news.favorated = NO;
+        news.haveread = NO;
+        news.url = [self idForNewsIndex:i];
+        [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
     }
 }
 
@@ -236,10 +233,14 @@
         briefContent =  [briefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
         news.briefcontent = briefContent;
-        
-        //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
+        if(![self shouldSaveThisNewsWithThisDate:news.date])
+        {
+            news.title = @"snow";
+            news.content = @"snow";
+            news.briefcontent = @"snow";
+        }
         [[MyDataStorage instance] saveContext];
-        
+        //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
     }
     @catch (NSException *exception) {
         NSLog(@"caught in od with news urld: %@, %@", news.url, exception);

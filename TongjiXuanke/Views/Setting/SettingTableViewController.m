@@ -53,9 +53,13 @@
     self.categoryLabel.text = [NSString stringWithFormat:@"已选择%d个",[[SettingModal instance] subscribledCount]];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [self configureData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
 }
 
@@ -154,6 +158,7 @@
     [[SettingModal instance] setAutoCleanInterval:month];
     [[DataOperator instance] cleanUpExpireNews];
     [self cleanTableSelection];
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 - (void)autoCleanShowPicker

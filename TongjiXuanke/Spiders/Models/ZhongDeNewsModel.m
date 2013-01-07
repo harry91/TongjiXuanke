@@ -37,24 +37,27 @@
 {
     for(int i = 0; i <[self totalNewsCount]; i++)
     {
-        FakeNews *news = [[FakeNews alloc] init];
-        news.title = [self titleForNewsIndex:i];
-        
-        news.briefcontent = nil;
-        
-        MWFeedItem *item = parsedItems[i];
-        if (item) {
-            // Process
-            NSString *itemTitle = item.summary;
-            news.briefcontent = [itemTitle stringByConvertingHTMLToPlainText];
-            news.content = item.summary;
+        if([self shouldSaveThisNewsWithThisDate:[self timeForNewsIndex:i]])
+        {
+            FakeNews *news = [[FakeNews alloc] init];
+            news.title = [self titleForNewsIndex:i];
+            
+            news.briefcontent = nil;
+            
+            MWFeedItem *item = parsedItems[i];
+            if (item) {
+                // Process
+                NSString *itemTitle = item.summary;
+                news.briefcontent = [itemTitle stringByConvertingHTMLToPlainText];
+                news.content = item.summary;
+            }
+            
+            news.date = [self timeForNewsIndex:i];
+            news.favorated = NO;
+            news.haveread = NO;
+            news.url = [self idForNewsIndex:i];
+            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
         }
-        
-        news.date = [self timeForNewsIndex:i];
-        news.favorated = NO;
-        news.haveread = NO;
-        news.url = [self idForNewsIndex:i];
-        [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
     }
 }
 
