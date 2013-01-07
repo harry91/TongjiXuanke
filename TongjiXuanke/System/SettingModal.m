@@ -27,8 +27,8 @@ SettingModal* _settinginstance;
         @{@"id" : @3 , @"name" : @"软件学院",  @"class" : @"SSEModel" ,@"baseURL" : @"http://sse.tongji.edu.cn/Notice/" , @"serverrss" : @NO },
         @{@"id" : @4 , @"name" : @"土木小站",  @"class" : @"TumuXiaozhanModel" ,@"baseURL" : @"http://sbhhbs.com/" , @"serverrss" : @YES },
         @{@"id" : @5 , @"name" : @"建筑与城市规划",  @"class" : @"CAUPNewsModel" ,@"baseURL" : @"http://old.tongji-caup.org/" , @"serverrss" : @NO },
-        @{@"id" : @6 , @"name" : @"外事办",  @"class" : @"InternationalOfficeModel" ,@"baseURL" : @"http://www.tongji-uni.com/" , @"serverrss" : @NO }
-        
+        @{@"id" : @6 , @"name" : @"外事办",  @"class" : @"InternationalOfficeModel" ,@"baseURL" : @"http://www.tongji-uni.com/" , @"serverrss" : @NO },
+        @{@"id" : @7 , @"name" : @"中德工程学院",  @"class" : @"ZhongDeNewsModel" ,@"baseURL" : @"http://cdhawjw.blog.163.com/" , @"serverrss" : @NO }
 #ifndef __OPTIMIZE__
 ,@{@"id" : @999 , @"name" : @"测试",  @"class" : @"ServerRSSNewsModel" ,@"baseURL" : @"http://sbhhbs.com/" , @"serverrss" : @YES }
 #endif

@@ -86,6 +86,7 @@
 		E45E92D5169635E400A24098 /* notchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = E45E92D1169635E300A24098 /* notchecked.png */; };
 		E45E92D6169635E400A24098 /* notchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E45E92D2169635E400A24098 /* notchecked@2x.png */; };
 		E45E92DE169731C200A24098 /* LKBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E45E92DD169731C200A24098 /* LKBadgeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E46521C2169B282800DD771F /* ZhongDeNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E46521C1169B282800DD771F /* ZhongDeNewsModel.m */; };
 		E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC1D166FD77200ED370A /* Parse.framework */; };
 		E466BC21166FD83C00ED370A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC20166FD83C00ED370A /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E466BC23166FD84B00ED370A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC22166FD84B00ED370A /* CoreLocation.framework */; };
@@ -332,6 +333,8 @@
 		E45E92D2169635E400A24098 /* notchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notchecked@2x.png"; sourceTree = "<group>"; };
 		E45E92DC169731C200A24098 /* LKBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKBadgeView.h; sourceTree = "<group>"; };
 		E45E92DD169731C200A24098 /* LKBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKBadgeView.m; sourceTree = "<group>"; };
+		E46521C0169B282800DD771F /* ZhongDeNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhongDeNewsModel.h; sourceTree = "<group>"; };
+		E46521C1169B282800DD771F /* ZhongDeNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhongDeNewsModel.m; sourceTree = "<group>"; };
 		E466BC1D166FD77200ED370A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		E466BC20166FD83C00ED370A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E466BC22166FD84B00ED370A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -1043,6 +1046,8 @@
 				E484AF311692898300BA2E7F /* ServerRSSNewsModel.m */,
 				E484AF321692898300BA2E7F /* SSEModel.h */,
 				E484AF331692898300BA2E7F /* SSEModel.m */,
+				E46521C0169B282800DD771F /* ZhongDeNewsModel.h */,
+				E46521C1169B282800DD771F /* ZhongDeNewsModel.m */,
 				E484AF341692898300BA2E7F /* SystemNewsModel.h */,
 				E484AF351692898300BA2E7F /* SystemNewsModel.m */,
 				E484AF361692898300BA2E7F /* TumuXiaozhanModel.h */,
@@ -1579,6 +1584,7 @@
 				E45E92DE169731C200A24098 /* LKBadgeView.m in Sources */,
 				E410FC68169870CB001D985E /* CMActionSheet.m in Sources */,
 				E410FC69169870CB001D985E /* CMRotatableModalViewController.m in Sources */,
+				E46521C2169B282800DD771F /* ZhongDeNewsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
