@@ -8,16 +8,9 @@
 
 #import "DummyNewsModel.h"
 #import "NewsFeedProtocal.h"
-#import "NewsLoaderProtocal.h"
+#import "MWFeedParser.h"
+#import "ServerRSSNewsModel.h"
 
-@interface InternationalOfficeModel : DummyNewsModel<UIWebViewDelegate,NewsFeedProtocal>
-{
-    NSMutableArray *dict;
-    UIWebView *webview;
-    NSString *tempContent;
-    NSString *tempBriefContent;
-    BOOL isgetting;
-    NSString *curl;
-    NSMutableArray *urlToRetireve;
-}
+@interface InternationalOfficeModel : ServerRSSNewsModel<MWFeedParserDelegate,NewsFeedProtocal>
+
 @end

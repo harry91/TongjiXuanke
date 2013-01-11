@@ -80,10 +80,16 @@
 }
 
 #pragma mark News Feed Protocal
+
+-(NSString*)rssURL
+{
+    return [@"http://sbhhbs.com/tjtzzzd/rss/index.php?feed=rss&c=" stringByAppendingString:categoryOnServer];
+}
+
 -(void)realStart
 {
     [[UIApplication sharedApplication] showNetworkIndicator];
-    NSString *url = [@"http://sbhhbs.com/tjtzzzd/rss/index.php?feed=rss&c=" stringByAppendingString:categoryOnServer];
+    NSString *url = [self rssURL];
     
     NSURL *feedURL = [NSURL URLWithString:url];
     feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
