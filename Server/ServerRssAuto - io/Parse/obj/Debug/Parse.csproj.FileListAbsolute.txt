@@ -1,0 +1,7 @@
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\bin\Debug\Parse.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\bin\Debug\Parse.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\bin\Debug\Newtonsoft.Json.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\bin\Debug\Newtonsoft.Json.xml
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\obj\Debug\Parse.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\obj\Debug\Parse.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\Parse\obj\Debug\Parse.pdb

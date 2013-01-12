@@ -5,3 +5,5 @@ C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86
 C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.csproj.GenerateResource.Cache
 C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.exe
 C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - caup\ServerRssAuto\obj\x86\Release\ServerRssAuto.exe
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - caup\ServerRssAuto\obj\x86\Release\ServerRssAuto.pdb

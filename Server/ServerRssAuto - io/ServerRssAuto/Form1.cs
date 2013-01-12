@@ -9,16 +9,20 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using Parse;
+using System.Collections;
+
 
 namespace ServerRssAuto
 {
     public partial class Form1 : Form
     {
-
+        ParseClient parseEngine;
         Server server;
         private static string url = "http://www.tongji-uni.com/newslist.aspx?intclass=1";
         RSSFeedGenerator gen;
         System.Timers.Timer timer;
+        string cate = "外事办";
 
         struct NSRange
         {
@@ -53,7 +57,7 @@ namespace ServerRssAuto
             //-------------------------------------------------
             // here is set values for header information for the RSS feed
             //-------------------------------------------------
-            gen.Title = "外事办";
+            gen.Title = cate;
             gen.Description = "";
             gen.LastBuildDate = DateTime.Now;
             gen.Link = "http://sbhhbs.com";
@@ -72,29 +76,60 @@ namespace ServerRssAuto
             MatchCollection mc = qariRegex.Matches(source);
             foreach (Match match in mc)
             {
-                string id = match.Groups[1].Value;
+                string newsid = match.Groups[1].Value;
                 string title = match.Groups[2].Value;
                 string date = match.Groups[3].Value;
 
 
-                WebClient client = new WebClient();
-                client.Encoding = Encoding.UTF8;
-                String subURL = "http://www.tongji-uni.com/newsshow.aspx?sn=" + id;
-                string downloadString = client.DownloadString(subURL);
-                NSRange start = rangeOfStr(downloadString, "<table cellpadding=\"0\" cellspacing=\"2\" border=\"0\" width=\"100%\" class=\"wh\">");
-                NSRange end = rangeOfStr(downloadString, "<P><div align=right><a href=\"default.aspx\">【返回】</a></div></P>");
-                string content = downloadString.Substring(start.location, end.location - start.location)+"</td></tr></table>";
+                string content = "";
+                var objList = parseEngine.GetObjectsWithQuery("RSS", new { url = newsid });
+                bool cateresult = false;
+                if (objList != null && objList.Length > 0)
+                {
+                    foreach (var obj in objList)
+                    {
+                       
+                        if (cate.Equals(obj["category"]))
+                        {
+                            cateresult = true;
+                            break;
+                        }
+                    }
+                    if(cateresult)
+                        System.Console.WriteLine("Old item:" + title);
+                }
+                if(!cateresult)
+                {
+                    WebClient client = new WebClient();
+                    client.Encoding = Encoding.UTF8;
+                    String subURL = "http://www.tongji-uni.com/newsshow.aspx?sn=" + newsid;
+                    string downloadString = client.DownloadString(subURL);
+                    NSRange start = rangeOfStr(downloadString, "<table cellpadding=\"0\" cellspacing=\"2\" border=\"0\" width=\"100%\" class=\"wh\">");
+                    NSRange end = rangeOfStr(downloadString, "<P><div align=right><a href=\"default.aspx\">【返回】</a></div></P>");
+                    content = downloadString.Substring(start.location, end.location - start.location) + "</td></tr></table>";
+                
+                    var testObject = new Parse.ParseObject("RSS");
+                    testObject["category"] = cate;
+                    testObject["url"] = newsid;
+                    testObject["title"] = title;
+                    testObject["newsTime"] = DateTime.Parse(date).ToString();
+                    testObject["content"] = saveTextToParse(content);
+                    //Create a new object
+                    testObject = parseEngine.CreateObject(testObject);
+                    System.Console.WriteLine("New item:" + title);
+                }
+                
 
                 gen.WriteItem(
                                title,
-                               id,
+                               newsid,
                                "",
                                "sbhhbs",
                                "",
                                "",
                                "",
                                DateTime.Parse(date),
-                               content,
+                               "",
                                "",
                                "",
                                "");
@@ -172,15 +207,43 @@ namespace ServerRssAuto
         public void theout(object source,System.Timers.ElapsedEventArgs e)
         {
             work();
-        }  
+        }
+
+        string saveTextToParse(string str)
+        {
+            ArrayList al = new ArrayList();
+            int limitSize = 1024 * 24;
+            while (str.Length > limitSize)
+            {
+                string firstPart = str.Substring(0, limitSize);
+                str = str.Substring(limitSize);
+                al.Add(firstPart);
+            }
+            al.Add(str);
+            string result = "";
+            foreach (string s in al)
+            {
+                var testObject = new Parse.ParseObject("TextDB");
+                testObject["text"] = s;
+                //Create a new object
+                testObject = parseEngine.CreateObject(testObject);
+                result += testObject.objectId + ",";
+            }
+            return result;
+        }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+            parseEngine = new ParseClient("fHKruOIrAtqIDOOOWHMUrvhk0dOwjplFOCjdL6CL", "93zxFQDtpRxaw6Y9moOyegqKqTTU8N3GBe42Je9n");
+
             server = new Server();
             Server.content = "";
             server.start();
 
-            timer = new System.Timers.Timer(1000 * 60 * 10);
+            timer = new System.Timers.Timer(1000 * 60 * 20);
             timer.Elapsed +=
 new System.Timers.ElapsedEventHandler(theout);
             //到达时间的时候执行事件；   
