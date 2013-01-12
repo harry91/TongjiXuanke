@@ -18,6 +18,7 @@
 #import "SettingModal.h"
 #import "UIApplication+Toast.h"
 #import "NSString+URLRequest.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) //1
 
@@ -66,6 +67,7 @@
             [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
         }
     }
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 

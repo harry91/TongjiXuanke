@@ -100,8 +100,7 @@ DataOperator* _dataOperatorInstance = nil;
                     [[MyDataStorage instance] saveContext];
                     [self checkForPersonalInfo:item];
                     
-                    [NSNotificationCenter postCategoryChangedNotification];
-                }
+                    }
             }
             return;
         }
@@ -123,7 +122,6 @@ DataOperator* _dataOperatorInstance = nil;
 
     [[MyDataStorage instance] saveContext];
     
-    [NSNotificationCenter postCategoryChangedNotification];
     [self checkForPersonalInfo:news];
 }
 

@@ -17,6 +17,7 @@
 #import "DataOperator.h"
 #import "SettingModal.h"
 #import "UIApplication+Toast.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation ServerRSSNewsModel
 
@@ -58,6 +59,7 @@
             [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
         }
     }
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 -(void)start

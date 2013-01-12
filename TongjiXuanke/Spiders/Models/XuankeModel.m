@@ -16,6 +16,7 @@
 #import "SettingModal.h"
 #import "NSString+EncryptAndDecrypt.h"
 #import "UIApplication+Toast.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation XuankeModel
 
@@ -125,6 +126,7 @@
             [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
         }
     }
+    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 
