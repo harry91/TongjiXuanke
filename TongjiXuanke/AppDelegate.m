@@ -42,7 +42,7 @@
 //    [[UISegmentedControl appearance] setBackgroundImage:transparentImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 //    [[UISegmentedControl appearance] setDividerImage:transparentImage forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
-    [[UISegmentedControl appearance] setTintColor:[UIColor colorWithRed:75/255.0 green:165/255.0 blue:245/255.0 alpha:0.4]];
+    [[UISegmentedControl appearance] setTintColor:[UIColor colorWithRed:75/255.0 green:165/255.0 blue:245/255.0 alpha:0.0]];
     
 //    [[UITabBar appearance] setBackgroundImage:[UIImage imageNamed:@"tabbarBG.png"]];
 //    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"selectedIndicator.png"]];

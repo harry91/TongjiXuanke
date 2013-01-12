@@ -13,7 +13,6 @@
 @interface ServerRSSNewsModel : DummyNewsModel<NewsFeedProtocal,MWFeedParserDelegate>
 {
     MWFeedParser *feedParser;
-	NSMutableArray *parsedItems;
     NSString *categoryOnServer;
 }
 

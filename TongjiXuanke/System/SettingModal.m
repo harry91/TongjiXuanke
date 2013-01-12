@@ -138,7 +138,7 @@ SettingModal* _settinginstance;
 
 -(BOOL)setSubscribleCategoryAtIndex:(int)index to:(BOOL)value
 {
-    BOOL result;
+    //BOOL result;
     if(value)
     {
         if(![self hasSubscribleCategoryAtIndex:index])
@@ -159,15 +159,19 @@ SettingModal* _settinginstance;
     [[NSUserDefaults standardUserDefaults] setObject:subscribledIndex forKey:@"selectedCategoryArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    if(value)
-    {
-        result = [APNSManager subscribleCategory:[self serverIDForCategoryAtIndex:index]];
-    }
-    else
-    {
-        result = [APNSManager desubscribleCategory:[self serverIDForCategoryAtIndex:index]];
-    }
-    return result;
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    
+    dispatch_async(kBgQueue, ^{
+        if(value)
+        {
+            [APNSManager subscribleCategory:[self serverIDForCategoryAtIndex:index]];
+        }
+        else
+        {
+           [APNSManager desubscribleCategory:[self serverIDForCategoryAtIndex:index]];
+        }
+    });
+    return YES;//Buggy to always return true
 }
 
 

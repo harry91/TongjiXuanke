@@ -163,11 +163,7 @@
     
     cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
-#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-
-    dispatch_async(kBgQueue, ^{
-        [[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected];
-    });
+    [[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if([[SettingModal instance] subscribledCount] == 0)
