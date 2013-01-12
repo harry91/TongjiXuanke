@@ -25,9 +25,39 @@
 {
     if(self = [super init])
     {
+        parsedItems = [[NSMutableArray alloc] init];
         categoryOnServer = @"test";
     }
     return self;
+}
+
+
+-(void)save
+{
+    for(int i = 0; i <[self totalNewsCount]; i++)
+    {
+        if([self shouldSaveThisNewsWithThisDate:[self timeForNewsIndex:i]])
+        {
+            FakeNews *news = [[FakeNews alloc] init];
+            news.title = [self titleForNewsIndex:i];
+            
+            news.briefcontent = nil;
+            
+            MWFeedItem *item = parsedItems[i];
+            if (item) {
+                // Process
+                NSString *itemTitle = item.summary;
+                news.briefcontent = [itemTitle stringByConvertingHTMLToPlainText];
+                news.content = item.summary;
+            }
+            
+            news.date = [self timeForNewsIndex:i];
+            news.favorated = NO;
+            news.haveread = NO;
+            news.url = [self idForNewsIndex:i];
+            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
+        }
+    }
 }
 
 -(void)start
@@ -36,6 +66,17 @@
     {
         [self realStart];
     }
+}
+
+-(BOOL)retreiveDetailForUrl:(NSString*)url
+{
+    return YES;
+}
+
+
+-(void)retreiveDetails
+{
+    
 }
 
 #pragma mark News Feed Protocal
@@ -58,6 +99,51 @@
     [feedParser parse];
 }
 
+
+-(int)totalNewsCount
+{
+    return parsedItems.count;
+}
+
+-(NSString*)titleForNewsIndex:(int)index
+{
+    MWFeedItem *item = parsedItems[index];
+	if (item) {
+		// Process
+		NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
+        return itemTitle;
+    }
+    return nil;
+}
+
+-(NSString*)contentForNewsIndex:(int)index
+{
+    return nil;
+}
+
+-(NSString*)idForNewsIndex:(int)index
+{
+    MWFeedItem *item = parsedItems[index];
+	if (item) {
+		// Process
+		NSString *itemID = item.link;
+        return itemID;
+    }
+    return nil;
+}
+
+-(NSDate*)timeForNewsIndex:(int)index
+{
+    MWFeedItem *item = parsedItems[index];
+	if (item) {
+		// Process
+		NSDate *itemDate = item.date;
+        return itemDate;
+    }
+    return nil;
+}
+
+
 #pragma mark -
 #pragma mark MWFeedParserDelegate
 
@@ -71,32 +157,12 @@
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
 	NSLog(@"Parsed Feed Item: “%@”", item.title);
-	if (item)
-    {
-        if([self shouldSaveThisNewsWithThisDate:item.date])
-        {
-            FakeNews *news = [[FakeNews alloc] init];
-            news.title = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
-            
-            NSString *itemSummary = item.summary;
-            itemSummary =  [itemSummary stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-            itemSummary =  [itemSummary stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-            itemSummary =  [itemSummary stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            news.briefcontent = [itemSummary stringByConvertingHTMLToPlainText];
-            
-            news.content = item.summary;
-            
-            news.date = item.date;
-            news.favorated = NO;
-            news.haveread = NO;
-            news.url = item.link;
-            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
-        }
-    }
+	if (item) [parsedItems addObject:item];
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
+    [self save];
     [self.delegate finishedLoadingInCategory:self.categoryIndex];
     lastUpdateEnd = [NSDate date];
     [[UIApplication sharedApplication] hideNetworkIndicator];
@@ -104,6 +170,15 @@
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
 	NSLog(@"Finished Parsing With Error: %@", error);
+    if (parsedItems.count == 0) {
+        NSLog(@"RSS:%@ Failed",parser.url);
+        [self.delegate errorLoading:error inCategory:self.categoryIndex];
+    } else {
+        NSLog(@"RSS:%@ partly Failed",parser.url);
+        // Failed but some items parsed, so show and inform of error
+        [self save];
+        [self.delegate finishedLoadingInCategory:self.categoryIndex];
+    }
     [[UIApplication sharedApplication] hideNetworkIndicator];
 }
 

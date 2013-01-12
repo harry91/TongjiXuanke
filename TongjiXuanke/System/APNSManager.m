@@ -28,47 +28,10 @@ NSString *host = @"www.sbhhbs.com";
     appName = @"pushdemo";
 	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
-	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    
 	// Set the defaults to disabled unless we find otherwise...
-	NSString *pushBadge = @"disabled";
-	NSString *pushAlert = @"disabled";
-	NSString *pushSound = @"disabled";
-    
-	// Check what Registered Types are turned on. This is a bit tricky since if two are enabled, and one is off, it will return a number 2... not telling you which
-	// one is actually disabled. So we are literally checking to see if rnTypes matches what is turned on, instead of by number. The "tricky" part is that the
-	// single notification types will only match if they are the ONLY one enabled.  Likewise, when we are checking for a pair of notifications, it will only be
-	// true if those two notifications are on.  This is why the code is written this way
-	if(rntypes == UIRemoteNotificationTypeBadge){
-		pushBadge = @"enabled";
-	}
-	else if(rntypes == UIRemoteNotificationTypeAlert){
-		pushAlert = @"enabled";
-	}
-	else if(rntypes == UIRemoteNotificationTypeSound){
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)){
-		pushBadge = @"enabled";
-		pushAlert = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)){
-		pushBadge = @"enabled";
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)){
-		pushAlert = @"enabled";
-		pushSound = @"enabled";
-	}
-	else if(rntypes == ( UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)){
-		pushBadge = @"enabled";
-		pushAlert = @"enabled";
-		pushSound = @"enabled";
-	}
-    pushBadge = @"enabled";
-    pushAlert = @"enabled";
-    pushSound = @"enabled";
+	NSString *pushBadge = @"enabled";
+	NSString *pushAlert = @"enabled";
+	NSString *pushSound = @"enabled";
     
 	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
 	UIDevice *dev = [UIDevice currentDevice];
