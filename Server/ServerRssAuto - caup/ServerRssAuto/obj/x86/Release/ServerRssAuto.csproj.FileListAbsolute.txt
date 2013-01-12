@@ -1,0 +1,7 @@
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\bin\Release\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\bin\Release\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.csproj.GenerateResource.Cache
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Release\ServerRssAuto.pdb

@@ -1,0 +1,23 @@
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto - international office\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
