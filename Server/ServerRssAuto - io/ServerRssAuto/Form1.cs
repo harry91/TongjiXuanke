@@ -23,6 +23,7 @@ namespace ServerRssAuto
         RSSFeedGenerator gen;
         System.Timers.Timer timer;
         string cate = "外事办";
+        int port = 7779;
 
         struct NSRange
         {
@@ -112,7 +113,7 @@ namespace ServerRssAuto
                     testObject["category"] = cate;
                     testObject["url"] = newsid;
                     testObject["title"] = title;
-                    testObject["newsTime"] = DateTime.Parse(date).ToString();
+                    testObject["newsTime"] = String.Format("{0:yyyy-MM-dd HH-mm-ss}", DateTime.Parse(date));
                     testObject["content"] = saveTextToParse(content);
                     //Create a new object
                     testObject = parseEngine.CreateObject(testObject);
@@ -236,10 +237,10 @@ namespace ServerRssAuto
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            label2.Text = cate;
             parseEngine = new ParseClient("fHKruOIrAtqIDOOOWHMUrvhk0dOwjplFOCjdL6CL", "93zxFQDtpRxaw6Y9moOyegqKqTTU8N3GBe42Je9n");
 
-            server = new Server();
+            server = new Server(port);
             Server.content = "";
             server.start();
 

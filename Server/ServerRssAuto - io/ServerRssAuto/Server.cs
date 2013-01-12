@@ -16,9 +16,10 @@ namespace ServerRssAuto
     {
         public static string content;
         private HttpListener listener;
-
-        public Server()
+        int port;
+        public Server(int aport)
         {
+            port = aport;
             content = "";
             this.listener = new HttpListener();
         }
@@ -45,7 +46,8 @@ namespace ServerRssAuto
 
         private void realStart()
         {
-            this.listener.Prefixes.Add("http://*:7779/");
+            string addr = "http://*:" + port + "/";
+            this.listener.Prefixes.Add(addr);
             this.listener.Start();
             Console.WriteLine("Listening");
             try
