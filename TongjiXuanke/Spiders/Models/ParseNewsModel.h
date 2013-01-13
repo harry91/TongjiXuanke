@@ -16,5 +16,6 @@
     NSString *curl;
     NSMutableArray *urlToRetireve;
     NSString *serverCategory;
+    __block NSString* parseTextContent;
 }
 @end

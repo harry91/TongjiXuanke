@@ -59,7 +59,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"RSS"];
     [query whereKey:@"category" equalTo:serverCategory];
-    query.limit = 32;
+    query.limit = 50;
     [query orderByDescending:@"newsTime"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *list, NSError *error) {
         for (PFObject *aNews in list) {
@@ -131,20 +131,10 @@
     return content;
 }
 
--(BOOL)retreiveDetailForUrlLocal:(NSString*)url
+-(void)finishRetrievingDataForUrl:(NSString*)url
 {
-    [[UIApplication sharedApplication] showNetworkIndicator];
-    
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"RSS"];
-    [query whereKey:@"category" equalTo:serverCategory];
-    [query whereKey:@"url" equalTo:url];
-    query.limit = 1;
-    NSArray* itemList = [query findObjects];
-    if(itemList.count == 0)
-        return NO;
-    NSString* content = [self fullTextForPFObject:[itemList lastObject]];
-    
+    if([parseTextContent isEqualToString:@""])
+        return;
     
     NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
     
@@ -175,12 +165,30 @@
         }
     }
     
-    news.content = content;
-    news.briefcontent = [content stringByConvertingHTMLToPlainText];
+    news.content = parseTextContent;
+    news.briefcontent = [parseTextContent stringByConvertingHTMLToPlainText];
     
-    [[UIApplication sharedApplication] hideNetworkIndicator];
     
     [self retreivingTherad];
+}
+
+-(BOOL)retreiveDetailForUrlLocal:(NSString*)url
+{
+    [[UIApplication sharedApplication] showNetworkIndicator];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFQuery *query = [PFQuery queryWithClassName:@"RSS"];
+        [query whereKey:@"category" equalTo:serverCategory];
+        [query whereKey:@"url" equalTo:url];
+        query.limit = 1;
+        NSArray* itemList = [query findObjects];
+        if(itemList.count == 0)
+            parseTextContent = @"";
+        parseTextContent = [self fullTextForPFObject:[itemList lastObject]];
+        [[UIApplication sharedApplication] hideNetworkIndicator];
+        
+        [self performSelectorOnMainThread:@selector(finishRetrievingDataForUrl:) withObject:curl waitUntilDone:NO];
+    });
     
     return YES;
 }
