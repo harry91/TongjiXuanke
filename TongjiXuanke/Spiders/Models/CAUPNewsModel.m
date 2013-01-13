@@ -7,17 +7,17 @@
 //
 
 #import "CAUPNewsModel.h"
-#import "UIApplication+Toast.h"
-#import "FakeNews.h"
 #import "DataOperator.h"
-#import "NSString+URLRequest.h"
-#import "NSString+HTML.h"
 
 @implementation CAUPNewsModel
 
--(NSString*)rssURL
+-(id)init
 {
-    return @"http://sbhhbs.com:7778/";
+    if(self = [super init])
+    {
+        serverCategory = @"建筑与城市规划";
+    }
+    return self;
 }
 
 -(NSString*)safariLink:(News*)aNews

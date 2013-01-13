@@ -96,6 +96,7 @@
 		E466BC2B166FD8A300ED370A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC2A166FD8A300ED370A /* CFNetwork.framework */; };
 		E466BC2D166FD8CA00ED370A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC2C166FD8CA00ED370A /* Security.framework */; };
 		E466BC3C166FFC1800ED370A /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E466BC3B166FFC1800ED370A /* QuickLook.framework */; };
+		E478FE3E16A23275004E4FA0 /* ParseNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E478FE3D16A23274004E4FA0 /* ParseNewsModel.m */; };
 		E48119CB1663CF69005032E6 /* Icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CA1663CF69005032E6 /* Icon57.png */; };
 		E48119CD1663CF77005032E6 /* Icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = E48119CC1663CF77005032E6 /* Icon114.png */; };
 		E484ADFD1692588700BA2E7F /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E484ADFC1692588700BA2E7F /* CoreImage.framework */; };
@@ -344,6 +345,8 @@
 		E466BC2A166FD8A300ED370A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E466BC2C166FD8CA00ED370A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E466BC3B166FFC1800ED370A /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		E478FE3C16A23274004E4FA0 /* ParseNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseNewsModel.h; sourceTree = "<group>"; };
+		E478FE3D16A23274004E4FA0 /* ParseNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseNewsModel.m; sourceTree = "<group>"; };
 		E48119CA1663CF69005032E6 /* Icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon57.png; path = ../Icon57.png; sourceTree = "<group>"; };
 		E48119CC1663CF77005032E6 /* Icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon114.png; path = ../Icon114.png; sourceTree = "<group>"; };
 		E484ADFC1692588700BA2E7F /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
@@ -1038,6 +1041,8 @@
 			children = (
 				E484AF2A1692898300BA2E7F /* CAUPNewsModel.h */,
 				E484AF2B1692898300BA2E7F /* CAUPNewsModel.m */,
+				E478FE3C16A23274004E4FA0 /* ParseNewsModel.h */,
+				E478FE3D16A23274004E4FA0 /* ParseNewsModel.m */,
 				E484AF2C1692898300BA2E7F /* DummyNewsModel.h */,
 				E484AF2D1692898300BA2E7F /* DummyNewsModel.m */,
 				E484AF2E1692898300BA2E7F /* InternationalOfficeModel.h */,
@@ -1585,6 +1590,7 @@
 				E410FC68169870CB001D985E /* CMActionSheet.m in Sources */,
 				E410FC69169870CB001D985E /* CMRotatableModalViewController.m in Sources */,
 				E46521C2169B282800DD771F /* ZhongDeNewsModel.m in Sources */,
+				E478FE3E16A23275004E4FA0 /* ParseNewsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

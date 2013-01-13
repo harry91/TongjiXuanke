@@ -8,9 +8,9 @@
 
 #import "DummyNewsModel.h"
 #import "NewsFeedProtocal.h"
-#import "MWFeedParser.h"
-#import "ServerRSSNewsModel.h"
+#import "ParseNewsModel.h"
 
-@interface InternationalOfficeModel : ServerRSSNewsModel<MWFeedParserDelegate,NewsFeedProtocal>
+
+@interface InternationalOfficeModel : ParseNewsModel<NewsFeedProtocal>
 
 @end

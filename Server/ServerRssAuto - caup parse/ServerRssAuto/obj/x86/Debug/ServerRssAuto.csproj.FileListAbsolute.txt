@@ -1,0 +1,49 @@
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+C:\Users\Song\Desktop\ServerRssAuto - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+C:\Users\Song\Desktop\ServerRssAuto - caup\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\ServerRssAuto.exe.config
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\Newtonsoft.Json.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\Newtonsoft.Json.xml
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\Parse.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io\ServerRssAuto\bin\Debug\Parse.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.exe.config
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.exe
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.exe
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\ServerRssAuto.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\Parse.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\Newtonsoft.Json.dll
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\Parse.pdb
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\bin\Debug\Newtonsoft.Json.xml
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Form1.resources
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.Properties.Resources.resources
+\\psf\Home\Desktop\TongjiXuanke\Server\ServerRssAuto - io - 副本\ServerRssAuto\obj\x86\Debug\ServerRssAuto.csproj.GenerateResource.Cache

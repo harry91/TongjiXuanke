@@ -8,10 +8,8 @@
 
 #import "DummyNewsModel.h"
 #import "NewsFeedProtocal.h"
-#import "MWFeedParser.h"
-#import "ServerRSSNewsModel.h"
+#import "ParseNewsModel.h"
 
-@interface CAUPNewsModel : ServerRSSNewsModel<MWFeedParserDelegate,NewsFeedProtocal>
-
+@interface CAUPNewsModel : ParseNewsModel<NewsFeedProtocal>
 
 @end

@@ -11,12 +11,13 @@
 
 @implementation InternationalOfficeModel
 
-
-#pragma mark News Feed Protocal
-
--(NSString*)rssURL
+-(id)init
 {
-    return @"http://sbhhbs.com:7779/";
+    if(self = [super init])
+    {
+        serverCategory = @"外事办";
+    }
+    return self;
 }
 
 -(NSString*)safariLink:(News*)aNews
