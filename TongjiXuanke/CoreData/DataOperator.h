@@ -16,8 +16,6 @@
 
 +(DataOperator*)instance;
 
--(Category*)distinctCategory:(NSString*)categoryTitle;
-
 -(void)distinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle;
 
 -(void)cleanUpExpireNews;

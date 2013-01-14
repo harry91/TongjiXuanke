@@ -11,6 +11,7 @@
 #import "APNSManager.h"
 #import "Brain.h"
 #import "Crittercism.h"
+#import "MyDataStorage.h"
 
 @implementation AppDelegate
 
@@ -69,15 +70,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Crittercism enableWithAppID: @"50e1d58af716967858000007"];
+
     [self initUserDefault];
     
     [self customizeAppearance];
     
-    
     [Parse setApplicationId:@"fHKruOIrAtqIDOOOWHMUrvhk0dOwjplFOCjdL6CL"
                   clientKey:@"ektKKdJ3PznuAyqBicBc6JuLA5Jj0fF3Nlzv1hps"];
-    [Crittercism enableWithAppID: @"50e1d58af716967858000007"];
-    
+      
     [[Brain instance] refresh];
     
     

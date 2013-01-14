@@ -27,6 +27,15 @@ MyDataStorage* _datainstance;
     return _datainstance;
 }
 
+- (id)init
+{
+    if(self = [super init])
+    {
+        holder = self.persistentStoreCoordinator;
+    }
+    return self;
+}
+
 - (void)saveContext
 {
     NSError *error = nil;
