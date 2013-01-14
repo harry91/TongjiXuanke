@@ -63,13 +63,6 @@
     [NSNotificationCenter postCategoryChangedNotification];
 }
 
--(void)start
-{
-    if(![feedParser isParsing])
-    {
-        [self realStart];
-    }
-}
 
 -(BOOL)retreiveDetailForUrl:(NSString*)url
 {
@@ -98,8 +91,9 @@
     feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
     feedParser.delegate = self;
     feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-    feedParser.connectionType = ConnectionTypeAsynchronously;
-    [feedParser parse];
+    feedParser.connectionType = ConnectionTypeSynchronously;
+    [feedParser performSelectorInBackground:@selector(parse) withObject:nil];
+    //[feedParser parse];
 }
 
 

@@ -23,4 +23,6 @@
 -(News*)newsForURL:(NSString*)url;
 -(NSString*)concreateForBreif:(NSString*)briefContentToSave;
 
+-(void)resetTimer;
+
 @end

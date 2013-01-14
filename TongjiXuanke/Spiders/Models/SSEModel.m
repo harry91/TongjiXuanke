@@ -112,13 +112,7 @@
     
     
     NSString *briefContent = [news.content  stringByConvertingHTMLToPlainText];
-    
-    briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-    briefContent =  [briefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-    //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
-    briefContent =  [briefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    news.briefcontent = briefContent;
+    news.briefcontent = [self concreateForBreif:briefContent];
     
     //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
     [[MyDataStorage instance] saveContext];

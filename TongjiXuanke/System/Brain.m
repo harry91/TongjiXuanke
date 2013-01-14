@@ -143,6 +143,26 @@ Brain* _brainInstance = nil;
     _refreshing = YES;
 }
 
+- (void)resetTimer
+{
+    if(![[ReachabilityChecker instance] hasInternetAccess])
+    {
+        return;
+    }
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    if(![ud objectForKey:@"password"])
+    {
+        return;
+    }
+    
+    SettingModal *instance = [SettingModal instance];
+    for (int i = 0; i < [instance numberOfCategory]; i++)
+    {
+        DummyNewsModel *anFeed = classArray[i];
+        [anFeed resetTimer];
+    }
+}
 
 - (void)requestedNewsWithCategoryIndex:(int)index url:(NSString*)url
 {

@@ -34,4 +34,6 @@
 
 @property (nonatomic,readonly) BOOL refreshing;
 
+- (void)resetTimer;
+
 @end

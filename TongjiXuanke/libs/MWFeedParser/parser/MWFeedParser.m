@@ -340,9 +340,10 @@
 		// Set state and notify delegate
 		parsing = NO;
 		parsingComplete = YES;
-		if ([delegate respondsToSelector:@selector(feedParserDidFinish:)])
-			[delegate feedParserDidFinish:self];
-		
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            if ([delegate respondsToSelector:@selector(feedParserDidFinish:)])
+                [delegate feedParserDidFinish:self];
+        });
 		// Reset
 		[self reset];
 		

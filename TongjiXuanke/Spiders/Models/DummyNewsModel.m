@@ -12,6 +12,12 @@
 #import "DataOperator.h"
 
 @implementation DummyNewsModel
+-(void)resetTimer
+{
+    lastUpdateEnd = nil;
+    lastUpdateStart = nil;
+}
+
 -(void)start
 {
     if(lastUpdateEnd)
@@ -19,7 +25,7 @@
         NSDate *now = [NSDate date];
         double deltaSeconds = fabs([lastUpdateEnd timeIntervalSinceDate:now]);
         double deltaMinutes = deltaSeconds / 60.0f;
-        if(deltaMinutes < 20)
+        if(deltaMinutes < 10)
         {
             [self performSelector:@selector(OhYeah) withObject:nil afterDelay:1];
             return;

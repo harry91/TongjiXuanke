@@ -125,7 +125,9 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
 #if !TARGET_IPHONE_SIMULATOR
-    
+    [[Brain instance] resetTimer];
+    [[Brain instance] refresh];
+
 	NSLog(@"remote notification: %@",[userInfo description]);
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
     
@@ -167,6 +169,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[Brain instance] resetTimer];
     [[Brain instance] refresh];
     [APNSManager cleanBadge];
 }
