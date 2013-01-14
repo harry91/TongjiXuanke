@@ -145,7 +145,7 @@
     
     news.content = parseTextContent;
     news.briefcontent = briefContentToSave == nil ? [parseTextContent stringByConvertingHTMLToPlainText] : briefContentToSave;
-    
+    news.briefcontent = [self concreateForBreif:news.briefcontent];
     [[MyDataStorage instance] saveContext];
     [self retreivingTherad];
 }

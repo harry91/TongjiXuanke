@@ -48,7 +48,8 @@
             if (item) {
                 // Process
                 NSString *itemTitle = item.summary;
-                news.briefcontent = [itemTitle stringByConvertingHTMLToPlainText];
+                news.briefcontent = [self concreateForBreif:[itemTitle stringByConvertingHTMLToPlainText]];
+                
                 news.content = item.summary;
             }
             

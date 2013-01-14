@@ -144,6 +144,17 @@
     return YES;
 }
 
+-(NSString*)concreateForBreif:(NSString*)briefContentToSave
+{
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+    //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
+    briefContentToSave =  [briefContentToSave stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @" " withString:@""];
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @" " withString:@""];
+    return briefContentToSave;
+}
+
 -(News*)newsForURL:(NSString*)url
 {
     NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];

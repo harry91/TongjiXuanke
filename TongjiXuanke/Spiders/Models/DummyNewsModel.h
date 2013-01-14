@@ -21,4 +21,6 @@
 
 -(BOOL)shouldSaveThisNewsWithThisDate:(NSDate*)date;
 -(News*)newsForURL:(NSString*)url;
+-(NSString*)concreateForBreif:(NSString*)briefContentToSave;
+
 @end

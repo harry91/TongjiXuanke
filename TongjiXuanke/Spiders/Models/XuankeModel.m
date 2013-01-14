@@ -31,20 +31,18 @@
     News* news = [self newsForURL:url];
     
     parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:@"<link rel=\"stylesheet\" href=\"/tj_public/css/main.css\">" withString:@""];
-    parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:@"<input type=\"button\" class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
-    briefContentToSave = [parseTextContent stringByConvertingHTMLToPlainText];
-    NSRange fromThisPosition = [briefContentToSave rangeOfString:@"document.form2.submit();"];
-    briefContentToSave = [briefContentToSave substringFromIndex:fromThisPosition.location+fromThisPosition.length + 2];
-    briefContentToSave  = [briefContentToSave stringByReplacingOccurrencesOfString:news.title withString:@""];
+    parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:@"<input type=button class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
+    briefContentToSave = parseTextContent;
+    
+    NSRange fromThisPosition = [briefContentToSave rangeOfString:@"</font></h2></td>"];
+    briefContentToSave = [briefContentToSave substringFromIndex:fromThisPosition.location+fromThisPosition.length];
+    briefContentToSave = [briefContentToSave stringByConvertingHTMLToPlainText];
+    NSLog(@"replacing title:%@",news.title);
+    
     NSRange start = [parseTextContent rangeOfString:@"<script>"];
     NSRange end = [parseTextContent rangeOfString:@"</script>"];
     NSString *script = [parseTextContent substringWithRange:NSMakeRange(start.location,end.location - start.location + end.length)];
     parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:script withString:@""];
-    
-    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-    //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
-    briefContentToSave =  [briefContentToSave stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     [super finishRetrievingDataForUrl:url];
     briefContentToSave = nil;
