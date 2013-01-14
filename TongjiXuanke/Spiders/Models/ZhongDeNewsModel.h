@@ -9,11 +9,9 @@
 #import "DummyNewsModel.h"
 #import "NewsFeedProtocal.h"
 #import "MWFeedParser.h"
+#import "ServerRSSNewsModel.h"
 
-@interface ZhongDeNewsModel : DummyNewsModel<NewsFeedProtocal,MWFeedParserDelegate>
-{
-    MWFeedParser *feedParser;
-	NSMutableArray *parsedItems;
-}
+@interface ZhongDeNewsModel : ServerRSSNewsModel<NewsFeedProtocal,MWFeedParserDelegate>
+
 
 @end
