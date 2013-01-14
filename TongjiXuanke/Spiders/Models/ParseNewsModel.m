@@ -25,6 +25,8 @@
         urlToRetireve = [@[] mutableCopy];
 
         serverCategory = @"";
+        
+        queryLimit = 50;
     }
     return self;
 }
@@ -59,7 +61,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"RSS"];
     [query whereKey:@"category" equalTo:serverCategory];
-    query.limit = 50;
+    query.limit = queryLimit;
     [query orderByDescending:@"newsTime"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *list, NSError *error) {
         for (PFObject *aNews in list) {
@@ -131,44 +133,20 @@
     return content;
 }
 
+
+
 -(void)finishRetrievingDataForUrl:(NSString*)url
 {
     if([parseTextContent isEqualToString:@""])
         return;
     
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", url]];
-    
-    // make sure the results are sorted as well
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    News *news;
-    if(matching.count > 0)
-    {
-        for(News *item in matching)
-        {
-            if([item.category.name isEqualToString:[self catagoryForNews]])
-            {
-                news = item;
-                break;
-            }
-        }
-    }
+    News *news = [self newsForURL:url];
+
     
     news.content = parseTextContent;
-    news.briefcontent = [parseTextContent stringByConvertingHTMLToPlainText];
+    news.briefcontent = briefContentToSave == nil ? [parseTextContent stringByConvertingHTMLToPlainText] : briefContentToSave;
     
-    
+    [[MyDataStorage instance] saveContext];
     [self retreivingTherad];
 }
 

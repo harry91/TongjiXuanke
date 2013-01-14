@@ -98,34 +98,7 @@
 
 - (void)finishRetreiving:(NSString *)aUrl
 {
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", aUrl]];
-    
-    // make sure the results are sorted as well
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    News *news;
-    if(matching.count > 0)
-    {
-        for(News *item in matching)
-        {
-            if([item.category.name isEqualToString:[self catagoryForNews]])
-            {
-                news = item;
-                break;
-            }
-        }
-    }
+    News* news = [self newsForURL:aUrl];
     
     NSRange start = [tempContent rangeOfString:@"<div id=\"content\" class=\"content\">"];
     

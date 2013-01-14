@@ -20,5 +20,5 @@
 @property (nonatomic) id<NewsLoaderProtocal> delegate;
 
 -(BOOL)shouldSaveThisNewsWithThisDate:(NSDate*)date;
-
+-(News*)newsForURL:(NSString*)url;
 @end

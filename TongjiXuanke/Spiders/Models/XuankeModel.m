@@ -7,16 +7,8 @@
 //
 
 #import "XuankeModel.h"
-#import "MyDataStorage.h"
-#import "News.h"
-#import "Category.h"
-#import "ReachabilityChecker.h"
-#import "SettingModal.h"
 #import "DataOperator.h"
-#import "SettingModal.h"
-#import "NSString+EncryptAndDecrypt.h"
-#import "UIApplication+Toast.h"
-#import "NSNotificationCenter+Xuanke.h"
+#import "NSString+HTML.h"
 
 @implementation XuankeModel
 
@@ -24,399 +16,38 @@
 {
     if(self = [super init])
     {
-        _listView = [[UIWebView alloc] init];
-        _detailView = [[UIWebView alloc] init];
-        
-        _listView.delegate = self;
-        _detailView.delegate = self;
-        
-        NSString *username = [SettingModal instance].studentID;
-        NSString *pwd = [SettingModal instance].password;
-        
-        self.userName = username;
-        self.password = pwd;
-        
-        dict = [@[] mutableCopy];
-        
-        isRetreivingThreadRunning = NO;
-        detailGetting = NO;
-        urlToRetireve = [@[] mutableCopy];
-        
-        loginModal = [[LogInModal alloc] init];
-        loginModal.delegate = self;
-        
-        logined = NO;
+        serverCategory = @"选课网";
+        queryLimit = 500;
     }
     return self;
 }
 
 
--(void)login
+-(void)finishRetrievingDataForUrl:(NSString*)url
 {
-    loginModal.userName = self.userName;
-    loginModal.password = self.password;
-    [loginModal start];
-}
-
--(void)retrieveList
-{
-    [[UIApplication sharedApplication] showNetworkIndicator];
-    [_listView loadRequest:[@"http://xuanke.tongji.edu.cn/tj_login/index_main.jsp" convertToURLRequest]];
-}
-
--(BOOL)parseResult:(NSString*)result
-{
-    dict = [[NSMutableArray alloc] init];
-    if([result rangeOfString:@"showNotice"].length <= 0)
-    {
-        return NO;
-    }
-    NSMutableString *str = [result mutableCopy];
-    NSRange range;
-    
-    @try {
-        while(1)
-        {
-            range = [str rangeOfString:@"onclick=\"showNotice('"];
-            if(range.length <= 0)
-                break;
-            NSString *newsID = [str substringWithRange:NSMakeRange(range.location+range.length, 14)];
-            str = [[str substringFromIndex:range.location+range.length] mutableCopy];
-            range = [str rangeOfString:@"onclick=\"showNotice('"];
-            NSRange r1,r2;
-            r1 = [str rangeOfString:@"<font color=\"green\">\n"];
-            r2 = [str rangeOfString:@"\n</font>\n"];
-            
-            NSString *newsTitle = [str substringWithRange:NSMakeRange(r1.length+r1.location, r2.location)];
-            r1 = [newsTitle rangeOfString:@"."];
-            r2 = [newsTitle rangeOfString:@"\n"];
-            
-            newsTitle = [newsTitle substringWithRange:NSMakeRange(r1.location + 1, r2.location - 2)];
-            str = [[str substringFromIndex:r1.location] mutableCopy];
-            
-            NSDictionary *item = @{@"ID":newsID, @"Title":newsTitle};
-            [dict addObject:item];
-        }
-    }
-    @catch (NSException *exception) {
-        NSLog(@"XuankeModel Caught %@",exception);
-    }
-    @finally {
-        
-    }
-    //NSLog(@"%@",dict);
-    return YES;
-}
-
-
--(void)save
-{
-    for(int i = 0; i <[self totalNewsCount]; i++)
-    {
-        if([self shouldSaveThisNewsWithThisDate:[self timeForNewsIndex:i]])
-        {
-            FakeNews *news = [[FakeNews alloc] init];
-            news.title = [self titleForNewsIndex:i];
-            news.briefcontent = nil;
-            news.content = nil;
-            news.date = [self timeForNewsIndex:i];
-            news.favorated = NO;
-            news.haveread = NO;
-            news.url = [self idForNewsIndex:i];
-            [[DataOperator instance] distinctSave:news inCategory:[self catagoryForNews]];
-        }
-    }
-    [NSNotificationCenter postCategoryChangedNotification];
-}
-
-
-#pragma mark UIWebView delegate
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    NSString *currentURL = webView.request.URL.absoluteString;
-    
-    NSLog(@"Finish loading: %@",currentURL);
-    
-    if(webView == _listView)
-    {
-        _content = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-        NSLog(@"content: %@",_content);
-        
-        if([self parseResult:_content])
-        {
-            [self save];
-            [self.delegate finishedLoadingInCategory:self.categoryIndex];
-            [[UIApplication sharedApplication] hideNetworkIndicator];
-            lastUpdateEnd = [NSDate date];
-            tryTime = 0;
-        }
-        else
-        {
-            if(tryTime < 3)
-            {
-                [self login];
-                logined = NO;
-            }
-            else
-            {
-                NSError *error = [[NSError alloc] initWithDomain:@"UnknownFormat" code:0 userInfo:nil];
-                [self.delegate errorLoading:error inCategory:self.categoryIndex];
-                [[UIApplication sharedApplication] hideNetworkIndicator];
-            }
-            tryTime++;
-        }
-    }
-    else if(webView == _detailView)
-    {
-        tempContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
-        tempBriefContent = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText;"];
-        detailGetting = NO;
-        [[UIApplication sharedApplication] hideNetworkIndicator];
-        
-        @try {
-            NSString *url = [currentURL substringWithRange:NSMakeRange(58, 14)];
-            [self finishRetreiving:url];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    NSLog(@"%@",error);
-    if(detailGetting)
-    {
-        detailGetting = NO;
-        //[self retreivingTherad];
-    }
-    else [self.delegate errorLoading:error inCategory:self.categoryIndex];
-}
-
-
-#pragma mark NewsFeedProtocal delegate
-
--(void)realStart
-{
-    if(!logined)
-        [self login];
-    else
-        [self retrieveList];
-}
-
-
--(void)addURLtoRetirve:(NSString*)url
-{
-    [urlToRetireve addObject:url];
-    if(!isRetreivingThreadRunning)
-    {
-        [self performSelectorInBackground:@selector(retreivingTherad) withObject:nil];
-    }
-}
-
-
--(void)retreivingTherad
-{
-    
-    NSLog(@"URL TO GO %@",urlToRetireve);
-    if(urlToRetireve.count <= 0)
-    {
-        isRetreivingThreadRunning = NO;
+    if([parseTextContent isEqualToString:@""])
         return;
-    }
-    isRetreivingThreadRunning = YES;
-    while(![loginModal loggedIn])
-    {
-        sleep(1);
-        NSLog(@"Xuanke retreiving thread waiting...");
-    }
     
-    NSString *url = urlToRetireve[0];
-    [urlToRetireve removeObjectAtIndex:0];
-    [self performSelectorOnMainThread:@selector(retreiveDetailForUrlLocal:) withObject:url waitUntilDone:YES];
-}
-
--(BOOL)retreiveDetailForUrl:(NSString*)url
-{
-    [urlToRetireve insertObject:url atIndex:0];
-    if(!isRetreivingThreadRunning)
-    {
-        [self retreivingTherad];
-    }
-    return YES;///TODO bug.....
-}
-
-- (void)finishRetreiving:(NSString *)aUrl
-{
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    News* news = [self newsForURL:url];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", aUrl]];
+    parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:@"<link rel=\"stylesheet\" href=\"/tj_public/css/main.css\">" withString:@""];
+    parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:@"<input type=\"button\" class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
+    briefContentToSave = [parseTextContent stringByConvertingHTMLToPlainText];
+    NSRange fromThisPosition = [briefContentToSave rangeOfString:@"document.form2.submit();"];
+    briefContentToSave = [briefContentToSave substringFromIndex:fromThisPosition.location+fromThisPosition.length + 2];
+    briefContentToSave  = [briefContentToSave stringByReplacingOccurrencesOfString:news.title withString:@""];
+    NSRange start = [parseTextContent rangeOfString:@"<script>"];
+    NSRange end = [parseTextContent rangeOfString:@"</script>"];
+    NSString *script = [parseTextContent substringWithRange:NSMakeRange(start.location,end.location - start.location + end.length)];
+    parseTextContent = [parseTextContent stringByReplacingOccurrencesOfString:script withString:@""];
     
-    // make sure the results are sorted as well
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+    briefContentToSave =  [briefContentToSave stringByReplacingOccurrencesOfString: @"\n" withString:@""];
+    //briefContent =  [briefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
+    briefContentToSave =  [briefContentToSave stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    News *news;
-    if(matching.count > 0)
-    {
-        for(News *item in matching)
-        {
-            if([item.category.name isEqualToString:[self catagoryForNews]])
-            {
-                news = item;
-                break;
-            }
-        }
-    }
-    
-    tempContent = [tempContent stringByReplacingOccurrencesOfString:@"<link rel=\"stylesheet\" href=\"/tj_public/css/main.css\">" withString:@""];
-    //newsString = [newsString stringByReplacingOccurrencesOfString:news.title withString:@""];
-    tempContent = [tempContent stringByReplacingOccurrencesOfString:@"<input type=\"button\" class=\"INPUT_button\" value=\"关闭\" onclick=\"window.close()\">" withString:@""];
-    news.content = tempContent;
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\r" withString:@""];
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: @"\n" withString:@""];
-    tempBriefContent =  [tempBriefContent stringByReplacingOccurrencesOfString: news.title withString:@""];
-    tempBriefContent =  [tempBriefContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    
-    if([tempBriefContent rangeOfString:@"发送日期:"].location != NSNotFound)
-    {
-        NSRange range = [tempBriefContent rangeOfString:@"发送日期:"];
-        NSString *remaining = [tempBriefContent substringFromIndex:range.location + range.length];
-        while([remaining  rangeOfString:@"发送日期:"].location != NSNotFound)
-        {
-            NSRange range = [remaining rangeOfString:@"发送日期:"];
-            remaining = [remaining substringFromIndex:range.location + range.length];
-        }
-        remaining = [remaining substringToIndex:10];
-        NSLog(@"Remaining: %@",remaining);
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd"];
-        NSDate *myDate = [df dateFromString: remaining];
-        if(myDate)
-            news.date = myDate;
-    }
-    
-    
-    //tempBriefContent = [tempBriefContent substringFromIndex:news.title.length];
-    news.briefcontent = tempBriefContent;
-    //NSLog(@"URL:%@ Content:%@",url,tempBriefContent);
-    [[MyDataStorage instance] saveContext];
-    detailGetting = NO;
-    [self retreivingTherad];
-}
-
--(BOOL)retreiveDetailForUrlLocal:(NSString*)url
-{
-    if(detailGetting == YES)
-    {
-        return NO;
-    }
-    
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
-                              initWithKey:@"date" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"url == %@", url]];
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    for(News* item in matching)
-    {
-        if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
-        {
-            detailGetting = YES;
-            
-            NSString *urlToGo = @"http://xuanke.tongji.edu.cn/tj_public/jsp/tongzhi.jsp?id='URL'";
-            urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:url];
-            
-            [[UIApplication sharedApplication] showNetworkIndicator];
-            [_detailView loadRequest:[urlToGo convertToURLRequest]];
-            
-            return YES;//TODO bug
-        }
-    }
-
-    return NO;
-}
-
-
--(void)retreiveDetails
-{
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
-                              initWithKey:@"date" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    //[fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(category == %@)", [self catagoryForNews]]];
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    for(News* item in matching)
-    {
-        //NSLog(@"%@",item);
-        if(item.content == nil && [item.category.name isEqualToString:[self catagoryForNews]])
-        {
-            [self addURLtoRetirve:item.url];
-        }
-    }
-}
-
--(int)totalNewsCount
-{
-    return dict.count;
-}
-
--(NSString*)titleForNewsIndex:(int)index
-{
-    return dict[index][@"Title"];
-}
-
--(NSString*)contentForNewsIndex:(int)index
-{
-    return nil;
-    ///TODO
-}
-
--(NSString*)idForNewsIndex:(int)index
-{
-    return dict[index][@"ID"];
-}
-
-
--(NSDate*)timeForNewsIndex:(int)index
-{
-    NSString *dateStr = dict[index][@"ID"];
-    dateStr = [dateStr substringWithRange:NSMakeRange(0,8)];
-    
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyyMMdd"];
-    NSDate *myDate = [df dateFromString: dateStr];
-    
-    return myDate;
+    [super finishRetrievingDataForUrl:url];
+    briefContentToSave = nil;
 }
 
 
@@ -426,18 +57,6 @@
     urlToGo = [urlToGo stringByReplacingOccurrencesOfString:@"URL" withString:aNews.url];
     
     return urlToGo;
-}
-
-#pragma mark For login modal
--(void)LoginSuccess
-{
-    logined = YES;
-    [self retrieveList];
-}
-
--(void)LoginFailWithError:(NSError*)error
-{
-    
 }
 
 

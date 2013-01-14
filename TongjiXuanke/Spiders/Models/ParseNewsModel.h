@@ -17,5 +17,10 @@
     NSMutableArray *urlToRetireve;
     NSString *serverCategory;
     __block NSString* parseTextContent;
+    
+    NSString* briefContentToSave;
+    int queryLimit;
 }
+-(void)finishRetrievingDataForUrl:(NSString*)url;
+
 @end

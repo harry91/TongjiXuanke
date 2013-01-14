@@ -9,6 +9,7 @@
 #import "DummyNewsModel.h"
 #import "SettingModal.h"
 #import "SettingModal.h"
+#import "DataOperator.h"
 
 @implementation DummyNewsModel
 -(void)start
@@ -143,5 +144,36 @@
     return YES;
 }
 
-
+-(News*)newsForURL:(NSString*)url
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", url]];
+    
+    // make sure the results are sorted as well
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    News *news = nil;
+    if(matching.count > 0)
+    {
+        for(News *item in matching)
+        {
+            if([item.category.name isEqualToString:[self catagoryForNews]])
+            {
+                news = item;
+                break;
+            }
+        }
+    }
+    return news;
+}
 @end
