@@ -32,9 +32,11 @@ MyDataStorage* _datainstance;
     if(self = [super init])
     {
         holder = self.persistentStoreCoordinator;
+        
     }
     return self;
 }
+
 
 - (void)saveContext
 {

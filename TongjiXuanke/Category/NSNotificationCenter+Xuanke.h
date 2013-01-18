@@ -18,6 +18,9 @@
 + (void)postCategoryChangedNotification;
 + (void)registerCategoryChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 
++ (void)postCountChangedNotification;
++ (void)registerCountChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
+
 + (void)postFoundPersenalInfoInNewsNotification:(News*)news;
 + (void)registerFoundPersenalInfoInNewsNotificationWithSelector:(SEL)aSelector target:(id)aTarget;
 

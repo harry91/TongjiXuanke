@@ -58,8 +58,14 @@ DataOperator* _dataOperatorInstance = nil;
     return category;
 }
 
+- (void)myManagedObjectContextDidSaveNotificationHander:(NSNotification *)notification
+{
+    // since we are in a background thread, we should merge our changes on the main
+    // thread to get updates in `NSFetchedResultsController`, etc.
+    [[MyDataStorage instance].managedObjectContext  performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:NO];
+}
 
--(void)distinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle
+-(void)multiThreadDistinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle
 {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
@@ -74,7 +80,7 @@ DataOperator* _dataOperatorInstance = nil;
              [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
             [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", newsToInsert.url]];
             
-            // make sure the results are sorted as well
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myManagedObjectContextDidSaveNotificationHander:) name:NSManagedObjectContextDidSaveNotification object:context];
             
             NSError *error;
             NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
@@ -97,6 +103,7 @@ DataOperator* _dataOperatorInstance = nil;
                 }
                 if(found)
                 {
+                    [[SettingModal instance] increaseUnreadCountInCategory:categoryTitle];
                     if(newsToInsert.content && ![item.title isEqualToString:@"snow"])
                     {
                         if(![newsToInsert.content isEqualToString:item.content])//update content;
@@ -109,13 +116,13 @@ DataOperator* _dataOperatorInstance = nil;
                             item.haveread = NO;
                             [context save:&error];
                             [self checkForPersonalInfo:item];
-                            
                         }
                     }
                     return;
                 }
             }
-            
+            [[SettingModal instance] increaseUnreadCountInCategory:categoryTitle];
+
             News *news = [NSEntityDescription
                           insertNewObjectForEntityForName:@"News"
                           inManagedObjectContext:context];
@@ -136,13 +143,85 @@ DataOperator* _dataOperatorInstance = nil;
                     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                     abort();
-                } 
+                }
             }
-            
             [self checkForPersonalInfo:news];
         }
         
     });
+}
+
+
+-(void)distinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle
+{
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    // Create the fetch request
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", newsToInsert.url]];
+    
+    
+    // make sure the results are sorted as well
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    if(matching.count > 0)
+    {
+        BOOL found = NO;
+        News *item;
+        for(item in matching)
+        {
+            if([item.category.name isEqualToString:categoryTitle])
+            {
+                found = YES;
+                break;
+            }
+        }
+        if(found)
+        {
+            if(newsToInsert.content && ![item.title isEqualToString:@"snow"])
+            {
+                if(![newsToInsert.content isEqualToString:item.content])//update content;
+                {
+                    item.content = newsToInsert.content;
+                    item.briefcontent = newsToInsert.briefcontent;
+                    item.date = newsToInsert.date;
+                    item.title = newsToInsert.title;
+                    item.favorated = NO;
+                    item.haveread = NO;
+                    [[MyDataStorage instance] saveContext];
+                    [self checkForPersonalInfo:item];
+                    
+                }
+            }
+            return;
+        }
+    }
+    
+    News *news = [NSEntityDescription
+                  insertNewObjectForEntityForName:@"News"
+                  inManagedObjectContext:context];
+    
+    
+    news.category = [self distinctCategory:categoryTitle inContext:context];
+    news.title = newsToInsert.title;
+    news.briefcontent = newsToInsert.briefcontent;
+    news.content = newsToInsert.content;
+    news.date = newsToInsert.date;
+    news.favorated = newsToInsert.favorated;
+    news.haveread = newsToInsert.haveread;
+    news.url = newsToInsert.url;
+    
+    [[MyDataStorage instance] saveContext];
+    
+    [self checkForPersonalInfo:news];
 }
 
 

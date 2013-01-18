@@ -186,11 +186,22 @@
 
 - (void)clickBackButton
 {
+    if(havereadChanged)
+    {
+        [[SettingModal instance] decreaseUnreadCountInCategory:news.category.name];
+    }
+    if([news.favorated boolValue] != original_fav_state)
+    {
+        if(original_fav_state)//now NO
+        {
+            [[SettingModal instance] decreaseFavedCountInCategory:news.category.name];
+        }
+        else
+            [[SettingModal instance] increaseFavedCountInCategory:news.category.name];
+    }
     if([news.favorated boolValue] != original_fav_state || havereadChanged)
     {
         [[MyDataStorage instance] saveContext];
-        
-        [NSNotificationCenter postCategoryChangedNotification];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

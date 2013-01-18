@@ -41,6 +41,8 @@
     
     [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(categoryChanged) target:self];
     
+    [NSNotificationCenter registerCountChangedNotificationWithSelector:@selector(countChanged) target:self];
+    
     NSArray *headers = @[
     //@"设置",
     @"列表",
@@ -59,71 +61,27 @@
 
 - (void)categoryChanged
 {
+    [[SettingModal instance] cleanCountingCache];
+    [self generateCellInfo];
+    [self.tableView reloadData];
+}
+
+- (void)countChanged
+{
     [self generateCellInfo];
     [self.tableView reloadData];
 }
 
 
-- (NSArray*)listOfItemInCategory:(NSString*)category
-{
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    // Create the fetch request
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    
-    NSString* categoryFilterString;
-    if([category isEqualToString:@"全部"])
-    {
-        categoryFilterString = [[DataOperator instance] allFilterClause];
-    }
-    else
-    {
-        categoryFilterString = [NSString stringWithFormat:@" category.name == \"%@\" ",category];
-    }
-    
-    NSPredicate *simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(not (title == \"snow\")) and (%@)",categoryFilterString]];
-    
-    [fetchRequest setPredicate:simplePredicate];
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
-    {
-        NSLog(@"Error: %@",[error description]);
-    }
-    return matching;
-}
-
 - (int)numberOfUnreadMessageInCategory:(NSString*)category
 {
-    NSArray *match = [self listOfItemInCategory:category];
-    int count = 0;
-    for(News* news in match)
-    {
-        //NSLog(@"News:%@",news.title);
-        if([news.haveread isEqualToNumber:@NO] || news.haveread == nil)
-        {
-            count++;
-        }
-    }
-    return count;
+    return [[SettingModal instance] unreadCountInCategory:category];
 }
 
 - (int)numberOfFavoritedMessageInCategory:(NSString*)category
 {
-    NSArray *match = [self listOfItemInCategory:category];
-    int count = 0;
-    for(News* news in match)
-    {
-        if([news.favorated isEqualToNumber:@YES])
-        {
-            count++;
-        }
-    }
-    return count;}
+    return [[SettingModal instance] favedCountInCategory:category];
+}
 
 - (NSString*)badgeTextFromNumber:(int)i
 {

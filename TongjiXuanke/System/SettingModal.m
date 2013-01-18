@@ -11,6 +11,11 @@
 #import "NSString+EncryptAndDecrypt.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "NSString+EncryptAndDecrypt.h"
+#import "MyDataStorage.h"
+#import "News.h"
+#import "Category.h"
+#import "DataOperator.h"
+#import "NSNotificationCenter+Xuanke.h"
 
 @implementation SettingModal
 
@@ -35,7 +40,6 @@ SettingModal* _settinginstance;
         ];
         
         subscribledIndex = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"selectedCategoryArray"] mutableCopy];
-        
     }
     return self;
 }
@@ -314,4 +318,188 @@ SettingModal* _settinginstance;
 }
 
 
+#pragma  mark
+
+- (void)initCountingSystem
+{
+    countingSystem = [@[] mutableCopy];
+    int totalFav,totalUnread;
+    totalFav = 0;
+    totalUnread = 0;
+    for(int i = 0; i < [self numberOfCategory]; i++)
+    {
+        NSMutableDictionary *category = [@{} mutableCopy];
+        category[@"text"] = [self nameForCategoryAtIndex:i];
+        int unread = [self numberOfUnreadMessageInCategory:category[@"text"]];
+        totalUnread += unread;
+        category[@"unread"] = [NSNumber numberWithInt:unread];
+        int fav = [self numberOfFavoritedMessageInCategory:category[@"text"]];
+        totalFav += fav;
+        category[@"fav"] = [NSNumber numberWithInt:fav];
+        [countingSystem addObject:category];
+    }
+    
+    NSMutableDictionary *category = [@{} mutableCopy];
+    category[@"text"] = @"全部";
+    category[@"unread"] = [NSNumber numberWithInt:totalUnread];
+    category[@"fav"] = [NSNumber numberWithInt:totalFav];
+    [countingSystem addObject:category];
+}
+
+- (NSArray*)listOfItem
+{
+    if(allNewsCache)
+        return allNewsCache;
+    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+    
+    // Create the fetch request
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:
+     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+    
+    NSString* categoryFilterString = [[DataOperator instance] allFilterClause];
+    
+    
+    NSPredicate *simplePredicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"(not (title == \"snow\")) and (%@)",categoryFilterString]];
+    
+    [fetchRequest setPredicate:simplePredicate];
+    
+    NSError *error;
+    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if(!matching)
+    {
+        NSLog(@"Error: %@",[error description]);
+    }
+    allNewsCache = matching;
+    return matching;
+}
+
+- (int)numberOfUnreadMessageInCategory:(NSString*)category
+{
+    NSArray *match = [self listOfItem];
+    int count = 0;
+    for(News* news in match)
+    {
+        //NSLog(@"News:%@",news.title);
+        if([news.category.name isEqualToString:category] && ([news.haveread isEqualToNumber:@NO] || news.haveread == nil))
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+- (int)numberOfFavoritedMessageInCategory:(NSString*)category
+{
+    NSArray *match = [self listOfItem];
+    int count = 0;
+    for(News* news in match)
+    {
+        if([news.category.name isEqualToString:category] && [news.favorated isEqualToNumber:@YES])
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+
+-(int)unreadCountInCategory:(NSString*)str
+{
+    if(!countingSystem)
+        [self initCountingSystem];
+    for(NSDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str])
+        {
+            return [dict[@"unread"] integerValue];
+        }
+    }
+    return 0;
+}
+
+-(void)increaseUnreadCountInCategory:(NSString*)str
+{
+    if([str isEqualToString:@"全部"])
+        return;
+    if(!countingSystem)
+        [self initCountingSystem];
+    for(NSMutableDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str] || [dict[@"text"] isEqualToString:@"全部"] )
+        {
+            dict[@"unread"] = [NSNumber numberWithInt:[dict[@"unread"] integerValue]+1];
+        }
+    }
+    [NSNotificationCenter postCountChangedNotification];
+}
+-(void)decreaseUnreadCountInCategory:(NSString*)str
+{
+    if([str isEqualToString:@"全部"])
+        return;
+    if(!countingSystem)
+        [self initCountingSystem];
+    for(NSMutableDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str] || [dict[@"text"] isEqualToString:@"全部"] )
+        {
+            int count = [dict[@"unread"] integerValue]-1;
+            dict[@"unread"] = [NSNumber numberWithInt:count >= 0 ? count : 0];
+        }
+    }
+    [NSNotificationCenter postCountChangedNotification];
+}
+
+-(int)favedCountInCategory:(NSString*)str
+{
+    if(!countingSystem)
+        [self initCountingSystem];
+    for(NSDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str])
+        {
+            return [dict[@"fav"] integerValue];
+        }
+    }
+    return 0;
+}
+
+-(void)increaseFavedCountInCategory:(NSString*)str
+{
+    if(!countingSystem)
+        [self initCountingSystem];
+    if([str isEqualToString:@"全部"])
+        return;
+    for(NSMutableDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str] || [dict[@"text"] isEqualToString:@"全部"] )
+        {
+            dict[@"fav"] = [NSNumber numberWithInt:[dict[@"fav"] integerValue]+1];
+        }
+    }
+    [NSNotificationCenter postCountChangedNotification];
+}
+-(void)decreaseFavedCountInCategory:(NSString*)str
+{
+    if(!countingSystem)
+        [self initCountingSystem];
+    if([str isEqualToString:@"全部"])
+        return;
+    for(NSMutableDictionary* dict in countingSystem)
+    {
+        if([dict[@"text"] isEqualToString:str] || [dict[@"text"] isEqualToString:@"全部"] )
+        {
+            int count = [dict[@"fav"] integerValue]-1;
+            dict[@"fav"] = [NSNumber numberWithInt:count >= 0 ? count : 0];
+        }
+    }
+    [NSNotificationCenter postCountChangedNotification];
+}
+
+-(void)cleanCountingCache
+{
+    allNewsCache = nil;
+    countingSystem = nil;
+}
 @end

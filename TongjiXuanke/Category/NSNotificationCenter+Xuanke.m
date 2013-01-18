@@ -12,7 +12,7 @@
 #define kUserCheckFailNotification @"kUserCheckFailNotification"
 #define kCategoryChangedNotification @"kCategoryChangedNotification"
 #define kFoundPersenalInfoInNews @"kFoundPersenalInfoInNews"
-
+#define kCountChangedNotification @"kCountChangedNotification"
 
 @implementation NSNotificationCenter (Xuanke)
 + (void)postAllUpdateDoneNotification
@@ -56,6 +56,19 @@
                  object:nil];
 }
 
++ (void)postCountChangedNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCategoryChangedNotification object:nil userInfo:nil];
+    
+}
+
++ (void)registerCountChangedNotificationWithSelector:(SEL)aSelector target:(id)aTarget
+{
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:aTarget selector:aSelector
+                   name:kCountChangedNotification
+                 object:nil];
+}
 
 + (void)postFoundPersenalInfoInNewsNotification:(News*)news;
 {

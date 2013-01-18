@@ -12,6 +12,9 @@
 {
     NSArray *categorys;
     NSMutableArray *subscribledIndex;
+    
+    NSArray* allNewsCache;
+    NSMutableArray *countingSystem;
 }
 
 +(SettingModal*)instance;
@@ -38,6 +41,17 @@
 -(int)needHelp;//return the starting help page -1 for no
 -(void)finishTourialWithProgress:(int)progress;
 
+
+-(int)unreadCountInCategory:(NSString*)str;
+//-(void)setUnreadCountInCategory:(NSString*)str;
+-(void)increaseUnreadCountInCategory:(NSString*)str;
+-(void)decreaseUnreadCountInCategory:(NSString*)str;
+
+-(int)favedCountInCategory:(NSString*)str;
+//-(void)setFavedCountInCategory:(NSString*)str;
+-(void)increaseFavedCountInCategory:(NSString*)str;
+-(void)decreaseFavedCountInCategory:(NSString*)str;
+-(void)cleanCountingCache;
 
 -(BOOL)hasStudentProfileSet;
 
