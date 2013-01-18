@@ -74,7 +74,6 @@ DataOperator* _dataOperatorInstance = nil;
              [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
             [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", newsToInsert.url]];
             
-            
             // make sure the results are sorted as well
             
             NSError *error;

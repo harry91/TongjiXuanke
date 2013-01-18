@@ -68,6 +68,7 @@
     self.original_webview.delegate = self;
     self.puretext_webview.delegate = self;
     
+    original_fav_state = [news.favorated boolValue];
     NSString* articleViewString = news.content;
     NSString* webViewString = articleViewString;
     if([[SettingModal instance] isCategoryAtIndexServerRSS:[[SettingModal instance] indexOfCategoryWithName:news.category.name]])
@@ -89,9 +90,12 @@
     [self.original_webview loadHTMLString:webViewString baseURL:self.baseURL];
     [self.puretext_webview loadHTMLString:articleViewString baseURL:self.baseURL];
     
-    news.haveread = [[NSNumber alloc] initWithBool:YES];
-    [[MyDataStorage instance] saveContext];
-    [NSNotificationCenter postCategoryChangedNotification];
+    havereadChanged = NO;
+    if(![news.haveread boolValue])
+    {
+        news.haveread = [[NSNumber alloc] initWithBool:YES];
+        havereadChanged = YES;
+    }
     [self configureNavBar];
     
 }
@@ -176,16 +180,18 @@
     news.favorated = [NSNumber numberWithBool:!favorated];
     favorated =! favorated;
     [self matchFavoratebuttonApperaence:favorated];
-    
-    [[MyDataStorage instance] saveContext];
-    
-    [NSNotificationCenter postCategoryChangedNotification];
 }
 
 
 
 - (void)clickBackButton
 {
+    if([news.favorated boolValue] != original_fav_state || havereadChanged)
+    {
+        [[MyDataStorage instance] saveContext];
+        
+        [NSNotificationCenter postCategoryChangedNotification];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

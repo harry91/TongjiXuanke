@@ -11,5 +11,6 @@
 @interface CategorySelectionViewController : UITableViewController
 {
     UIBarButtonItem *backButton;
+    NSMutableArray *selectArray;
 }
 @end

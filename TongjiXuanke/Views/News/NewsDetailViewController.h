@@ -32,6 +32,9 @@
     BOOL shouldWaitingForDownload;
     
     NewsInfoViewController *newsInfo;
+    
+    BOOL original_fav_state;
+    BOOL havereadChanged;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *original_webview;
 @property (weak, nonatomic) IBOutlet UIWebView *puretext_webview;

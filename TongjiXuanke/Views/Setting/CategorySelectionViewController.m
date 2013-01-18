@@ -35,6 +35,18 @@
 
     [self configureNavBar];
     
+    selectArray = [@[] mutableCopy];
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
+    {
+        if([[SettingModal instance] hasSubscribleCategoryAtIndex:i])
+        {
+            [selectArray addObject:@YES];
+        }
+        else
+        {
+            [selectArray addObject:@NO];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -51,6 +63,11 @@
 
 - (void)clickBackButton
 {
+    for(int i = 0; i < [[SettingModal instance] numberOfCategory]; i++)
+    {
+        [[SettingModal instance] setSubscribleCategoryAtIndex:i to:[selectArray[i] boolValue]];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -133,7 +150,7 @@
         cell = [tableView
                 dequeueReusableCellWithIdentifier:@"categoryCell"];
         
-        cell.accessoryType = [[SettingModal instance] hasSubscribleCategoryAtIndex:indexPath.row] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        cell.accessoryType = [selectArray[indexPath.row] boolValue] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         
         UILabel *label = (UILabel *) [cell viewWithTag:1];
         label.text = [[SettingModal instance] nameForCategoryAtIndex:indexPath.row];
@@ -163,10 +180,20 @@
     
     cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     
-    [[SettingModal instance] setSubscribleCategoryAtIndex:indexPath.row to:selected];
+    selectArray[indexPath.row] = [NSNumber numberWithBool:selected];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if([[SettingModal instance] subscribledCount] == 0)
+    
+    int selectedCount = 0;
+    for(NSNumber *num in selectArray)
+    {
+        if([num boolValue])
+        {
+            selectedCount++;
+        }
+    }
+    
+    if(selectedCount == 0)
     {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = YES;
