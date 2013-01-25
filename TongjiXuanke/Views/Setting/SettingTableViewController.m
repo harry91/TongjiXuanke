@@ -14,6 +14,7 @@
 #import "NSNotificationCenter+Xuanke.h"
 #import "DataOperator.h"
 #import "UINavigationBar+DropShadow.h"
+#import <ShareSDK/ShareSDK.h>
 
 #define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
 
@@ -236,56 +237,34 @@
 
 -(void)tellFriend
 {
+    CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
+    //actionSheet.title = @"Test Action sheet";
+    
+    // Customize
+    [actionSheet addButtonWithTitle:@"短信分享" type:CMActionSheetButtonTypeWhite block:^{
+        [self shareByMessage];
+    }];
+    [actionSheet addButtonWithTitle:@"邮件分享" type:CMActionSheetButtonTypeWhite block:^{
+        [self shareByMail];
+    }];
     if([SocialShareModal socialShareAvailable])
     {
-        CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
-        //actionSheet.title = @"Test Action sheet";
-        
-        // Customize
-        [actionSheet addButtonWithTitle:@"短信分享" type:CMActionSheetButtonTypeWhite block:^{
-            [self shareByMessage];
-        }];
-        [actionSheet addButtonWithTitle:@"邮件分享" type:CMActionSheetButtonTypeWhite block:^{
-            [self shareByMail];
-        }];
         [actionSheet addButtonWithTitle:@"微博分享" type:CMActionSheetButtonTypeWhite block:^{
-            if([SocialShareModal socialShareAvailable])
-                [self shareByWeibo];
+            [self shareByWeibo];
         }];
-        [actionSheet addSeparator];
-        [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
-            NSLog(@"Dismiss action sheet with \"Close Button\"");
-        }];
-        
-        // Present
-        [actionSheet present];
-        
     }
-    else
-    {
-        CMActionSheet *actionSheet = [[CMActionSheet alloc] init];
-        //actionSheet.title = @"Test Action sheet";
-        
-        // Customize
-        [actionSheet addButtonWithTitle:@"短信分享" type:CMActionSheetButtonTypeWhite block:^{
-            [self shareByMessage];
-        }];
-        [actionSheet addButtonWithTitle:@"邮件分享" type:CMActionSheetButtonTypeWhite block:^{
-            [self shareByMail];
-        }];
-        [actionSheet addSeparator];
-        [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
-            NSLog(@"Dismiss action sheet with \"Close Button\"");
-        }];
-        
-        // Present
-        [actionSheet present];
-    }
+    [actionSheet addButtonWithTitle:@"更多" type:CMActionSheetButtonTypeWhite block:^{
+        [self shareByMore];
+    }];
+    [actionSheet addSeparator];
+    [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
+        NSLog(@"Dismiss action sheet with \"Close Button\"");
+    }];
+    
+    // Present
+    [actionSheet present];
     [self cleanTableSelection];
 }
-
-
-
 
 
 #pragma mark - Table view delegate
@@ -446,6 +425,45 @@
 
 
 #pragma mark - Share methods
+
+- (void)shareByMore
+{
+    id<ISSPublishContent> publishContent = [ShareSDK publishContent:RECOMMAND_TEXT
+                                                     defaultContent:@""
+                                                              image:[UIImage imageNamed:@"ads.png"]
+                                                       imageQuality:0.8
+                                                          mediaType:SSPublishContentMediaTypeNews
+                                                              title:@"推荐你使用通知早知道"
+                                                                url:nil
+                                                       musicFileUrl:nil
+                                                            extInfo:nil
+                                                           fileData:nil];
+    
+    NSArray* shareList;
+    if(![SocialShareModal socialShareAvailable])
+        shareList = @[[NSNumber numberWithInteger:ShareTypeQQ],[NSNumber numberWithInteger:ShareTypeQQSpace],[NSNumber numberWithInteger:ShareTypeRenren],[NSNumber numberWithInteger:ShareTypeSinaWeibo],[NSNumber numberWithInteger:ShareTypeWeixiSession],[NSNumber numberWithInteger:ShareTypeCopy]];
+    else
+        shareList = @[[NSNumber numberWithInteger:ShareTypeQQ],[NSNumber numberWithInteger:ShareTypeQQSpace],[NSNumber numberWithInteger:ShareTypeRenren],[NSNumber numberWithInteger:ShareTypeWeixiSession],[NSNumber numberWithInteger:ShareTypeCopy]];
+    
+    [ShareSDK showShareActionSheet:self
+                         shareList:shareList
+                           content:publishContent
+                     statusBarTips:YES
+                   oneKeyShareList:[NSArray defaultOneKeyShareList]
+                    shareViewStyle:ShareViewStyleSimple
+                    shareViewTitle:@"内容分享"
+                            result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSPublishContentStateSuccess)
+                                {
+                                    NSLog(@"发送成功");
+                                }
+                                else
+                                {
+                                    NSLog(@"发送失败");
+                                }
+                            }];
+}
+
 - (void)shareByWeibo
 {
     SocialShareModal *socialModal = [[SocialShareModal alloc] init];
@@ -454,7 +472,7 @@
     
     UIImage *image = [UIImage imageNamed:@"ads.png"];
     socialModal.postImageList = @[image];
-    [socialModal sendWeiboMessage];
+    [socialModal sendWeiboMessage];    
 }
 
 - (void)shareByMessage
