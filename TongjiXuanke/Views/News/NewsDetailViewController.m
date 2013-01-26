@@ -61,14 +61,9 @@
     
 }
 
-- (void)viewDidLoad
+
+- (void)configureContent
 {
-    [super viewDidLoad];
-    
-    self.original_webview.delegate = self;
-    self.puretext_webview.delegate = self;
-    
-    original_fav_state = [news.favorated boolValue];
     NSString* articleViewString = news.content;
     NSString* webViewString = articleViewString;
     if([[SettingModal instance] isCategoryAtIndexServerRSS:[[SettingModal instance] indexOfCategoryWithName:news.category.name]])
@@ -89,6 +84,16 @@
     
     [self.original_webview loadHTMLString:webViewString baseURL:self.baseURL];
     [self.puretext_webview loadHTMLString:articleViewString baseURL:self.baseURL];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.original_webview.delegate = self;
+    self.puretext_webview.delegate = self;
+    
+    original_fav_state = [news.favorated boolValue];
     
     havereadChanged = NO;
     if(![news.haveread boolValue])
@@ -97,7 +102,7 @@
         havereadChanged = YES;
     }
     [self configureNavBar];
-    
+    [self performSelector:@selector(configureContent) withObject:nil afterDelay:0.2];
 }
 
 
