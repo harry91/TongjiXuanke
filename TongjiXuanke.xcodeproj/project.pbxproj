@@ -1722,6 +1722,8 @@
 		E4378FEF1628D620008A85DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Boheng Song (57A72U5VT9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Boheng Song (57A72U5VT9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1743,6 +1745,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "90777464-A421-450E-BC6F-945B4E7626EF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90777464-A421-450E-BC6F-945B4E7626EF";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
