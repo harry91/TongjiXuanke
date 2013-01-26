@@ -15,6 +15,8 @@
 #import "DataOperator.h"
 #import "UINavigationBar+DropShadow.h"
 #import <ShareSDK/ShareSDK.h>
+#import <QQApi/QQApi.h>
+#import "WXApi.h"
 
 #define RECOMMAND_TEXT @"我刚刚用了同济通知早知道，再也不用担心错过通知啦。特有通知推送和离线查看功能，推荐你也来用。下载地址: http://sbhhbs.com/tzzzd_dl.php"
 
@@ -253,9 +255,9 @@
             [self shareByWeibo];
         }];
     }
-    [actionSheet addButtonWithTitle:@"更多" type:CMActionSheetButtonTypeWhite block:^{
-        [self shareByMore];
-    }];
+//    [actionSheet addButtonWithTitle:@"更多" type:CMActionSheetButtonTypeWhite block:^{
+//        [self shareByMore];
+//    }];
     [actionSheet addSeparator];
     [actionSheet addButtonWithTitle:@"取消" type:CMActionSheetButtonTypeGray block:^{
         NSLog(@"Dismiss action sheet with \"Close Button\"");
@@ -434,16 +436,34 @@
                                                        imageQuality:0.8
                                                           mediaType:SSPublishContentMediaTypeNews
                                                               title:@"推荐你使用通知早知道"
-                                                                url:nil
+                                                                url:@"http://sbhhbs.com/tzzzd_dl.php"
                                                        musicFileUrl:nil
                                                             extInfo:nil
                                                            fileData:nil];
     
-    NSArray* shareList;
+    NSMutableArray* shareList = [@[] mutableCopy];
+    
+    //if([QQApi isQQInstalled])
+    {
+    //    [shareList addObject:[NSNumber numberWithInteger:ShareTypeQQ]];
+    }
+    [shareList addObject:[NSNumber numberWithInteger:ShareTypeQQSpace]];
+    [shareList addObject:[NSNumber numberWithInteger:ShareTypeRenren]];
     if(![SocialShareModal socialShareAvailable])
-        shareList = @[[NSNumber numberWithInteger:ShareTypeQQ],[NSNumber numberWithInteger:ShareTypeQQSpace],[NSNumber numberWithInteger:ShareTypeRenren],[NSNumber numberWithInteger:ShareTypeSinaWeibo],[NSNumber numberWithInteger:ShareTypeWeixiSession],[NSNumber numberWithInteger:ShareTypeCopy]];
-    else
-        shareList = @[[NSNumber numberWithInteger:ShareTypeQQ],[NSNumber numberWithInteger:ShareTypeQQSpace],[NSNumber numberWithInteger:ShareTypeRenren],[NSNumber numberWithInteger:ShareTypeWeixiSession],[NSNumber numberWithInteger:ShareTypeCopy]];
+        [shareList addObject:[NSNumber numberWithInteger:ShareTypeSinaWeibo]];
+    
+    //if([WXApi isWXAppInstalled])
+    {
+    //    [shareList addObject:[NSNumber numberWithInteger:ShareTypeWeixiSession]];
+    }
+    //[shareList addObject:[NSNumber numberWithInteger:ShareTypeWeixiTimeline]];
+    //[shareList addObject:[NSNumber numberWithInteger:ShareTypeGooglePlus]];
+    //[shareList addObject:[NSNumber numberWithInteger:ShareTypeEvernote]];
+    
+    
+    [shareList addObject:[NSNumber numberWithInteger:ShareTypeCopy]];
+
+    
     
     [ShareSDK showShareActionSheet:self
                          shareList:shareList
