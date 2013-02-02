@@ -128,6 +128,8 @@
         PFQuery *query = [PFQuery queryWithClassName:@"TextDB"];
         PFObject *textObj = [query getObjectWithId:textID];
         NSString *text = [textObj objectForKey:@"text"];
+        if(!text)
+            return @"";
         [content appendString:text];
     }
     return content;

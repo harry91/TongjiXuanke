@@ -1714,6 +1714,8 @@
 		E4378FF01628D620008A85DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Boheng Song";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Boheng Song";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1735,6 +1737,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "661F5DF9-103B-4807-A58E-E1D2219DC6BA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "661F5DF9-103B-4807-A58E-E1D2219DC6BA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
