@@ -12,7 +12,7 @@
 #import "Brain.h"
 #import "Crittercism.h"
 #import "MyDataStorage.h"
-#import <ShareSDK/ShareSDK.h>
+//#import <ShareSDK/ShareSDK.h>
 
 @implementation AppDelegate
 
@@ -73,7 +73,7 @@
 {
     [Crittercism enableWithAppID: @"50e1d58af716967858000007"];
 
-    [ShareSDK registerApp:@"50fcda8e"];
+    //[ShareSDK registerApp:@"50fcda8e"];
     
     [self initUserDefault];
     
@@ -152,15 +152,15 @@
 }
 
 #pragma mark Share Callback
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [ShareSDK handleOpenURL:url wxDelegate:self];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return  [ShareSDK handleOpenURL:url wxDelegate:self];
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    return [ShareSDK handleOpenURL:url wxDelegate:self];
+//}
+//
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    return  [ShareSDK handleOpenURL:url wxDelegate:self];
+//}
 
 
 
