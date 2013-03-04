@@ -9,6 +9,7 @@
 #import "APNSManager.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "SettingModal.h"
+#import <Parse/Parse.h>
 
 @implementation APNSManager
 
@@ -74,6 +75,7 @@ NSString *host = @"www.sbhhbs.com";
 	urlString = [urlString stringByAppendingString:pushAlert];
 	urlString = [urlString stringByAppendingString:@"&pushsound="];
 	urlString = [urlString stringByAppendingString:pushSound];
+    
     
 	// Register the Device Data
 	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
