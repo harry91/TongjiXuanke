@@ -1694,6 +1694,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TongjiXuanke/TongjiXuanke-Prefix.pch";
 				INFOPLIST_FILE = "TongjiXuanke/TongjiXuanke-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
@@ -1705,8 +1706,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90777464-A421-450E-BC6F-945B4E7626EF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "90777464-A421-450E-BC6F-945B4E7626EF";
+				PROVISIONING_PROFILE = "3765EC73-9850-42FC-8C7E-A8ABBD4374D2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3765EC73-9850-42FC-8C7E-A8ABBD4374D2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1726,6 +1727,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TongjiXuanke/TongjiXuanke-Prefix.pch";
 				INFOPLIST_FILE = "TongjiXuanke/TongjiXuanke-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Add-ons/GoogleAnalyticsiOS_2.0beta3/Library\"",
