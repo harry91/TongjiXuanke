@@ -20,11 +20,15 @@
     NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-86400]; //86400 is the seconds in a day
     NSDate * refDate = myDate; // your reference date
     
-    // 10 first characters of description is the calendar date:
-    NSString * todayString = [[today description] substringToIndex:10];
-    NSString * yesterdayString = [[yesterday description] substringToIndex:10];
-    NSString * refDateString = [[refDate description] substringToIndex:10];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *tz = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:tz];
+
+    NSString * todayString = [dateFormatter stringFromDate:today];
+    NSString * yesterdayString = [dateFormatter stringFromDate:yesterday];
+    NSString * refDateString = [dateFormatter stringFromDate:refDate];
     NSString* result;
     
     if ([refDateString isEqualToString:todayString])

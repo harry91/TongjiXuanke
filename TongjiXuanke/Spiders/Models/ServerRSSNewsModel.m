@@ -135,6 +135,8 @@
 	if (item) {
 		// Process
 		NSDate *itemDate = item.date;
+        //time zone adjust
+        itemDate = [NSDate dateWithTimeInterval:-8*3600 sinceDate:itemDate];
         return itemDate;
     }
     return nil;

@@ -69,6 +69,8 @@
             
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSTimeZone *tz = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+            [df setTimeZone:tz];
             NSDate *myDate = [df dateFromString: date];
             
             NSString* newsURL = [aNews objectForKey:@"url"];
