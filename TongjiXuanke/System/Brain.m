@@ -33,6 +33,15 @@ Brain* _brainInstance = nil;
         [NSNotificationCenter registerCategoryChangedNotificationWithSelector:@selector(configureClasses) target:self];
         
         userStudy = [UserStudyModel instance];
+        
+        if([[SettingModal instance] hasStudentProfileSet])
+        {
+            loginModel = [[LogInModal alloc] init];
+            loginModel.password = [SettingModal instance].password;
+            loginModel.userName = [SettingModal instance].studentID;
+            loginModel.delegate = nil;
+            [loginModel start];
+        }
     }
     return self;
 }
@@ -154,6 +163,15 @@ Brain* _brainInstance = nil;
     if(![ud objectForKey:@"password"])
     {
         return;
+    }
+    
+    if([[SettingModal instance] hasStudentProfileSet])
+    {
+        loginModel = [[LogInModal alloc] init];
+        loginModel.password = [SettingModal instance].password;
+        loginModel.userName = [SettingModal instance].studentID;
+        loginModel.delegate = nil;
+        [loginModel start];
     }
     
     SettingModal *instance = [SettingModal instance];

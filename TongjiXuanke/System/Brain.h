@@ -13,12 +13,15 @@
 #import <Parse/Parse.h>
 #import "UserStudyModel.h"
 #import "NewsFeedProtocal.h"
+#import "LogInModal.h"
+
 @interface Brain : NSObject<NewsLoaderProtocal>
 {
     BOOL hasAPNSResubscribed;
     NSMutableArray *classArray;
     NSMutableArray *updateArray;
     UserStudyModel *userStudy;
+    LogInModal *loginModel;
 }
 + (Brain*)instance;
 
