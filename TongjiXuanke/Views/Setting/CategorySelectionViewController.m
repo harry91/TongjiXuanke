@@ -134,7 +134,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"没有你想要的信息？请反馈给我们";
+    return @"没有你想要的信息？想让你们的社团或者组织出现在这里？请反馈给我们^^";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
