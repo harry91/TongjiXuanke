@@ -485,6 +485,7 @@
     [self dataInit];
     
     [[Brain instance] APNSStart];
+    [[Brain instance] refresh];
     
     [NSNotificationCenter registerUserCheckFailNotificationWithSelector:@selector(wrongPassCode) target:self];
     

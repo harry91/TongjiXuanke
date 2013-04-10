@@ -83,7 +83,7 @@
                   clientKey:@"ektKKdJ3PznuAyqBicBc6JuLA5Jj0fF3Nlzv1hps"];
       
     //[[Brain instance] refresh];
-    [[Brain instance] performSelector:@selector(refresh) withObject:nil afterDelay:0.5];
+    //[[Brain instance] performSelector:@selector(refresh) withObject:nil afterDelay:0.5];
     
     return YES;
 }

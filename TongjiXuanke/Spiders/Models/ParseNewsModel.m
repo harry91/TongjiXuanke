@@ -77,7 +77,7 @@
             NSString* title = [aNews objectForKey:@"title"];
             
             
-            NSDictionary *item = @{@"url":newsURL, @"title":title, @"date": myDate};
+            NSDictionary *item = @{@"url":newsURL, @"title":title, @"date": myDate,@"obj":aNews};
             [dict addObject:item];
             
         }
@@ -159,14 +159,19 @@
     [[UIApplication sharedApplication] showNetworkIndicator];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        PFQuery *query = [PFQuery queryWithClassName:@"RSS"];
-        [query whereKey:@"category" equalTo:serverCategory];
-        [query whereKey:@"url" equalTo:url];
-        query.limit = 1;
-        NSArray* itemList = [query findObjects];
-        if(itemList.count == 0)
+        PFObject *item = nil;
+        for(NSDictionary *d in dict)
+        {
+            PFObject *testItem = d[@"obj"];
+            if([[testItem objectForKey:@"url"] isEqualToString:url])
+            {
+                item = testItem;
+                break;
+            }
+        }
+        if(!item)
             parseTextContent = @"";
-        parseTextContent = [self fullTextForPFObject:[itemList lastObject]];
+        parseTextContent = [self fullTextForPFObject:item];
         [[UIApplication sharedApplication] hideNetworkIndicator];
         
         [self performSelectorOnMainThread:@selector(finishRetrievingDataForUrl:) withObject:curl waitUntilDone:NO];

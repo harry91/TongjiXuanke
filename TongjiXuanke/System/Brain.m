@@ -146,7 +146,8 @@ Brain* _brainInstance = nil;
         DummyNewsModel *anFeed = classArray[i];
         anFeed.categoryIndex = i;
         anFeed.delegate = self;
-        [anFeed start];
+        //[anFeed start];
+        [anFeed performSelectorInBackground:@selector(start) withObject:nil];
         updateArray[i] = @"updating";
     }
     _refreshing = YES;

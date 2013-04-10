@@ -92,8 +92,8 @@
     feedParser.delegate = self;
     feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
     feedParser.connectionType = ConnectionTypeSynchronously;
-    [feedParser performSelectorInBackground:@selector(parse) withObject:nil];
-    //[feedParser parse];
+    //[feedParser performSelectorInBackground:@selector(parse) withObject:nil];
+    [feedParser parse];
 }
 
 
