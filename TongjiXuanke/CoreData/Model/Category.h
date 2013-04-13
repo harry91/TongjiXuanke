@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <IAThreadSafeCoreData/IAThreadSafeManagedObject.h>
 
 @class News;
 
-@interface Category : NSManagedObject
+@interface Category : IAThreadSafeManagedObject
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *news;

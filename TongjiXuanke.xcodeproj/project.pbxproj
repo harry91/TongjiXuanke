@@ -232,6 +232,7 @@
 		E484B01316928B6000BA2E7F /* slideNumberBG.png in Resources */ = {isa = PBXBuildFile; fileRef = E484AFD816928B6000BA2E7F /* slideNumberBG.png */; };
 		E484B01416928B6000BA2E7F /* slideNumberBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E484AFD916928B6000BA2E7F /* slideNumberBG@2x.png */; };
 		E4920CE916B1259300413598 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E4920CE816B1259300413598 /* libicucore.dylib */; };
+		E4983ECE17198F450055A0E7 /* IAThreadSafeCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4983ECD17198F450055A0E7 /* IAThreadSafeCoreData.framework */; };
 		E49B73F816467D1100CE4324 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49B73F716467D1100CE4324 /* MessageUI.framework */; };
 		E49B73FE1646899D00CE4324 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E49B73FD1646899D00CE4324 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E4AFCD041630256300358B1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4AFCD031630256300358B1B /* QuartzCore.framework */; };
@@ -557,6 +558,7 @@
 		E484AFD816928B6000BA2E7F /* slideNumberBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slideNumberBG.png; sourceTree = "<group>"; };
 		E484AFD916928B6000BA2E7F /* slideNumberBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slideNumberBG@2x.png"; sourceTree = "<group>"; };
 		E4920CE816B1259300413598 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		E4983ECD17198F450055A0E7 /* IAThreadSafeCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IAThreadSafeCoreData.framework; sourceTree = "<group>"; };
 		E49B73F716467D1100CE4324 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E49B73FD1646899D00CE4324 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		E4AFCD031630256300358B1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -593,6 +595,7 @@
 				E466BC1E166FD77200ED370A /* Parse.framework in Frameworks */,
 				E484AEFA1692896500BA2E7F /* libCrittercism_v3_4_6.a in Frameworks */,
 				E484AF0C1692896500BA2E7F /* Parse.framework in Frameworks */,
+				E4983ECE17198F450055A0E7 /* IAThreadSafeCoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +644,7 @@
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
+				E4983ECD17198F450055A0E7 /* IAThreadSafeCoreData.framework */,
 				E484AEA11692896500BA2E7F /* libs */,
 				E484AF7C16928A8100BA2E7F /* Category */,
 				E4379003162B38A6008A85DF /* Resource */,

@@ -9,6 +9,8 @@
 #import "DataOperator.h"
 #import "SettingModal.h"
 #import "NSNotificationCenter+Xuanke.h"
+#import <IAThreadSafeCoreData/IAThreadSafeManagedObject.h>
+#import <IAThreadSafeCoreData/IAThreadSafeContext.h>
 
 @implementation DataOperator
 
@@ -71,7 +73,7 @@ DataOperator* _dataOperatorInstance = nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
     
         @synchronized(self) {
-            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+            NSManagedObjectContext *context = [[IAThreadSafeContext alloc] init];
             [context setPersistentStoreCoordinator:[MyDataStorage instance].persistentStoreCoordinator];
             
             // Create the fetch request
@@ -154,74 +156,79 @@ DataOperator* _dataOperatorInstance = nil;
 
 -(void)distinctSave:(FakeNews*)newsToInsert inCategory:(NSString*)categoryTitle
 {
-    NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
-    
-    // Create the fetch request
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:
-     [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", newsToInsert.url]];
-    
-    
-    // make sure the results are sorted as well
-    
-    NSError *error;
-    NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if(!matching)
+    //[self multiThreadDistinctSave:newsToInsert inCategory:categoryTitle];
+    //return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^()
     {
-        NSLog(@"Error: %@",[error description]);
-    }
-    if(matching.count > 0)
-    {
-        BOOL found = NO;
-        News *item;
-        for(item in matching)
+        NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
+        
+        // Create the fetch request
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:
+         [NSEntityDescription entityForName:@"News" inManagedObjectContext:context]];
+        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"(url == %@)", newsToInsert.url]];
+        
+        
+        // make sure the results are sorted as well
+        
+        NSError *error;
+        NSArray *matching = [context executeFetchRequest:fetchRequest error:&error];
+        
+        if(!matching)
         {
-            if([item.category.name isEqualToString:categoryTitle])
-            {
-                found = YES;
-                break;
-            }
+            NSLog(@"Error: %@",[error description]);
         }
-        if(found)
+        if(matching.count > 0)
         {
-            if(newsToInsert.content && ![item.title isEqualToString:@"snow"])
+            BOOL found = NO;
+            News *item;
+            for(item in matching)
             {
-                if(![newsToInsert.content isEqualToString:item.content])//update content;
+                if([item.category.name isEqualToString:categoryTitle])
                 {
-                    item.content = newsToInsert.content;
-                    item.briefcontent = newsToInsert.briefcontent;
-                    item.date = newsToInsert.date;
-                    item.title = newsToInsert.title;
-                    item.favorated = NO;
-                    item.haveread = NO;
-                    [[MyDataStorage instance] saveContext];
-                    [self checkForPersonalInfo:item];
-                    
+                    found = YES;
+                    break;
                 }
             }
-            return;
+            if(found)
+            {
+                if(newsToInsert.content && ![item.title isEqualToString:@"snow"])
+                {
+                    if(![newsToInsert.content isEqualToString:item.content])//update content;
+                    {
+                        item.content = newsToInsert.content;
+                        item.briefcontent = newsToInsert.briefcontent;
+                        item.date = newsToInsert.date;
+                        item.title = newsToInsert.title;
+                        item.favorated = NO;
+                        item.haveread = NO;
+                        [[MyDataStorage instance] saveContext];
+                        [self checkForPersonalInfo:item];
+                        
+                    }
+                }
+                return;
+            }
         }
-    }
-    
-    News *news = [NSEntityDescription
-                  insertNewObjectForEntityForName:@"News"
-                  inManagedObjectContext:context];
-    
-    
-    news.category = [self distinctCategory:categoryTitle inContext:context];
-    news.title = newsToInsert.title;
-    news.briefcontent = newsToInsert.briefcontent;
-    news.content = newsToInsert.content;
-    news.date = newsToInsert.date;
-    news.favorated = newsToInsert.favorated;
-    news.haveread = newsToInsert.haveread;
-    news.url = newsToInsert.url;
-    
-    [[MyDataStorage instance] saveContext];
-    
-    [self checkForPersonalInfo:news];
+        
+        News *news = [NSEntityDescription
+                      insertNewObjectForEntityForName:@"News"
+                      inManagedObjectContext:context];
+        
+        
+        news.category = [self distinctCategory:categoryTitle inContext:context];
+        news.title = newsToInsert.title;
+        news.briefcontent = newsToInsert.briefcontent;
+        news.content = newsToInsert.content;
+        news.date = newsToInsert.date;
+        news.favorated = newsToInsert.favorated;
+        news.haveread = newsToInsert.haveread;
+        news.url = newsToInsert.url;
+        
+        [[MyDataStorage instance] saveContext];
+        
+        [self checkForPersonalInfo:news];
+    });
 }
 
 

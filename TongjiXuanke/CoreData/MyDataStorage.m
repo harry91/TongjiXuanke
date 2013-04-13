@@ -9,6 +9,8 @@
 #import "MyDataStorage.h"
 #import "News.h"
 #import "Category.h"
+#import <IAThreadSafeCoreData/IAThreadSafeManagedObject.h>
+#import <IAThreadSafeCoreData/IAThreadSafeContext.h>
 
 @implementation MyDataStorage
 
@@ -47,7 +49,7 @@ MyDataStorage* _datainstance;
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+            //abort();
         } 
     }
 }
@@ -65,7 +67,7 @@ MyDataStorage* _datainstance;
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        __managedObjectContext = [[NSManagedObjectContext alloc] init];
+        __managedObjectContext = [[IAThreadSafeContext alloc] init];
         [__managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return __managedObjectContext;
