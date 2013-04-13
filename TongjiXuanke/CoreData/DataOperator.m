@@ -158,7 +158,7 @@ DataOperator* _dataOperatorInstance = nil;
 {
     //[self multiThreadDistinctSave:newsToInsert inCategory:categoryTitle];
     //return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^()
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^()
     {
         NSManagedObjectContext *context = [[MyDataStorage instance] managedObjectContext];
         
@@ -228,7 +228,8 @@ DataOperator* _dataOperatorInstance = nil;
         [[MyDataStorage instance] saveContext];
         
         [self checkForPersonalInfo:news];
-    });
+    }
+    //);
 }
 
 

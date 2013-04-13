@@ -644,7 +644,6 @@
 		E4378FBF1628D61F008A85DF = {
 			isa = PBXGroup;
 			children = (
-				E4983ECD17198F450055A0E7 /* IAThreadSafeCoreData.framework */,
 				E484AEA11692896500BA2E7F /* libs */,
 				E484AF7C16928A8100BA2E7F /* Category */,
 				E4379003162B38A6008A85DF /* Resource */,
@@ -665,6 +664,7 @@
 		E4378FCD1628D620008A85DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4983ECD17198F450055A0E7 /* IAThreadSafeCoreData.framework */,
 				E4920CE816B1259300413598 /* libicucore.dylib */,
 				E484ADFE1692589A00BA2E7F /* Accelerate.framework */,
 				E484ADFC1692588700BA2E7F /* CoreImage.framework */,
